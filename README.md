@@ -18,7 +18,7 @@ Built on top of **Epic Expressions** cloud infrastructure, this project delivers
 - **Design System:** Dark tech theme (deep slate & obsidian surfaces with electric blue and emerald accents)
 - **Typography:** `Plus Jakarta Sans` & `JetBrains Mono`
 - **Effects:** High-contrast responsive layout, glassmorphism (`backdrop-filter`), and CSS micro-interactions
-- **Form Handling:** Client-side validation and interactive state handling for lead capture
+- **Form Handling:** Integrated with Web3Forms API for instant email delivery and proposal lead capture
 
 ---
 
