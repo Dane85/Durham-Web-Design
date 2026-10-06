@@ -1,0 +1,19 @@
+# Operating System Files
+.DS_Store
+Thumbs.db
+
+# Editor & IDE Directories
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Environment Variables & Credentials
+.env
+.env.local
+*.pem
+*.key
+
+# Logs & Temporary Files
+*.log
+scratch/
