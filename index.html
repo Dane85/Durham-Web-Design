@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -50,39 +50,53 @@
       scroll-behavior: smooth;
     }
 
+    html, body {
+      overflow-x: hidden;
+      max-width: 100vw;
+      width: 100%;
+    }
+
     body {
       background-color: var(--bg-primary);
       color: var(--text-main);
       font-family: var(--font-sans);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
       position: relative;
     }
 
     /* Ambient Background Glow */
+    .ambient-glow-wrapper {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      pointer-events: none;
+      z-index: -1;
+    }
+
     .ambient-glow-1 {
       position: absolute;
       top: -150px;
       left: 50%;
       transform: translateX(-50%);
-      width: 850px;
+      width: min(850px, 100vw);
       height: 600px;
       background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(16, 185, 129, 0.05) 50%, transparent 75%);
       filter: blur(80px);
-      z-index: -1;
       pointer-events: none;
     }
 
     .ambient-glow-2 {
       position: absolute;
       top: 1800px;
-      right: -200px;
-      width: 700px;
+      right: 0;
+      width: min(700px, 100vw);
       height: 700px;
       background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
       filter: blur(90px);
-      z-index: -1;
       pointer-events: none;
     }
 
@@ -446,6 +460,11 @@
     /* ==========================================================================
        3. COMPARISON TABLE: LEGACY VS DURHAM WEB DESIGN
        ========================================================================== */
+    .comparison-table-desktop {
+      display: block;
+      width: 100%;
+    }
+
     .table-container {
       background: var(--bg-card);
       border-radius: 18px;
@@ -459,7 +478,12 @@
       width: 100%;
       border-collapse: collapse;
       text-align: left;
-      min-width: 650px;
+    }
+
+    @media (min-width: 769px) {
+      .comparison-table {
+        min-width: 650px;
+      }
     }
 
     .comparison-table th, 
@@ -511,6 +535,104 @@
       color: var(--accent-emerald);
       font-weight: 600;
       font-size: 0.9rem;
+    }
+
+    /* Mobile Comparison Cards Stack */
+    .comparison-cards-mobile {
+      display: none;
+    }
+
+    .comp-card-mobile {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 20px 18px;
+      backdrop-filter: var(--glass-filter);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      transition: var(--transition-smooth);
+    }
+
+    .comp-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+      padding-bottom: 10px;
+    }
+
+    .comp-feature-name {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: #ffffff;
+      letter-spacing: -0.01em;
+    }
+
+    .comp-feature-badge {
+      font-size: 0.72rem;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      color: var(--accent-blue);
+      background: rgba(56, 189, 248, 0.1);
+      padding: 3px 9px;
+      border-radius: 6px;
+      border: 1px solid rgba(56, 189, 248, 0.2);
+    }
+
+    .comp-row {
+      border-radius: 12px;
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .comp-row-legacy {
+      background: rgba(244, 63, 94, 0.05);
+      border: 1px solid rgba(244, 63, 94, 0.18);
+    }
+
+    .comp-row-dwd {
+      background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(16, 185, 129, 0.08) 100%);
+      border: 1px solid var(--border-bright);
+      box-shadow: 0 0 18px rgba(56, 189, 248, 0.08);
+    }
+
+    .comp-label-bad {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--danger);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .comp-text-bad {
+      font-size: 0.88rem;
+      color: #cbd5e1;
+      line-height: 1.45;
+    }
+
+    .comp-label-good {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--accent-emerald);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .comp-text-good {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.45;
     }
 
     /* ==========================================================================
@@ -1044,12 +1166,22 @@
       .form-wrapper {
         padding: 30px 20px;
       }
-      .table-container {
-        margin: 0 -4px;
-        border-radius: 12px;
+      .comparison-table-desktop {
+        display: none !important;
       }
-      .table-scroll-hint {
+      .comparison-cards-mobile {
         display: flex !important;
+        flex-direction: column;
+        gap: 16px;
+        width: 100%;
+      }
+      .ambient-glow-1 {
+        width: 100vw;
+        height: 350px;
+        filter: blur(60px);
+      }
+      .ambient-glow-2 {
+        display: none !important;
       }
     }
 
@@ -1290,8 +1422,10 @@
 <body>
 
   <!-- Ambient Glow Backgrounds -->
-  <div class="ambient-glow-1"></div>
-  <div class="ambient-glow-2"></div>
+  <div class="ambient-glow-wrapper">
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+  </div>
 
   <!-- 1. STICKY HEADER -->
   <header>
@@ -1435,48 +1569,150 @@
         </p>
       </div>
 
-      <div class="table-container">
-        <table class="comparison-table">
-          <thead>
-            <tr>
-              <th>Feature / Standard</th>
-              <th>Typical Legacy / Shared Hosting</th>
-              <th class="highlight-col">The Durham Web Design Standard</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Page Load Velocity</strong></td>
-              <td><span class="tag-bad">✕ Sluggish 4+ second loads</span> (losing 40% of mobile visitors)</td>
-              <td class="highlight-col"><span class="tag-good">✓ Sub-second load times</span> (Google Core Web Vitals optimized)</td>
-            </tr>
-            <tr>
-              <td><strong>Server Infrastructure</strong></td>
-              <td><span class="tag-bad">✕ Crowded shared servers</span> (noisy neighbors & slow CPU)</td>
-              <td class="highlight-col"><span class="tag-good">✓ Dedicated Cloud VPS</span> with NVMe drives & Toronto CDN edge</td>
-            </tr>
-            <tr>
-              <td><strong>Code & CMS Architecture</strong></td>
-              <td><span class="tag-bad">✕ 35+ unvetted WordPress plugins</span> prone to conflicts & hacks</td>
-              <td class="highlight-col"><span class="tag-good">✓ Custom lightweight code</span>, zero bloat, ironclad security</td>
-            </tr>
-            <tr>
-              <td><strong>Backups & Disaster Recovery</strong></td>
-              <td><span class="tag-bad">✕ No automatic backups</span> or steep restoration fees</td>
-              <td class="highlight-col"><span class="tag-good">✓ Automated daily offsite backups</span> & point-in-time recovery</td>
-            </tr>
-            <tr>
-              <td><strong>Support & Accountability</strong></td>
-              <td><span class="tag-bad">✕ Overseas tier-1 support</span> with 48-hour ticket queues</td>
-              <td class="highlight-col"><span class="tag-good">✓ Direct Durham-based engineers</span>, local phone & email support</td>
-            </tr>
-            <tr>
-              <td><strong>Pricing Transparency</strong></td>
-              <td><span class="tag-bad">✕ US Dollar conversion surprises</span> & 300% renewal spikes</td>
-              <td class="highlight-col"><span class="tag-good">✓ Fixed Canadian Dollars (CAD)</span> + clear Ontario HST breakdown</td>
-            </tr>
-          </tbody>
-        </table>
+      <!-- Desktop Comparison Table (Visible >= 769px) -->
+      <div class="comparison-table-desktop">
+        <div class="table-container">
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Feature / Standard</th>
+                <th>Typical Legacy / Shared Hosting</th>
+                <th class="highlight-col">The Durham Web Design Standard</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Page Load Velocity</strong></td>
+                <td><span class="tag-bad">✕ Sluggish 4+ second loads</span> (losing 40% of mobile visitors)</td>
+                <td class="highlight-col"><span class="tag-good">✓ Sub-second load times</span> (Google Core Web Vitals optimized)</td>
+              </tr>
+              <tr>
+                <td><strong>Server Infrastructure</strong></td>
+                <td><span class="tag-bad">✕ Crowded shared servers</span> (noisy neighbors & slow CPU)</td>
+                <td class="highlight-col"><span class="tag-good">✓ Dedicated Cloud VPS</span> with NVMe drives & Toronto CDN edge</td>
+              </tr>
+              <tr>
+                <td><strong>Code & CMS Architecture</strong></td>
+                <td><span class="tag-bad">✕ 35+ unvetted WordPress plugins</span> prone to conflicts & hacks</td>
+                <td class="highlight-col"><span class="tag-good">✓ Custom lightweight code</span>, zero bloat, ironclad security</td>
+              </tr>
+              <tr>
+                <td><strong>Backups & Disaster Recovery</strong></td>
+                <td><span class="tag-bad">✕ No automatic backups</span> or steep restoration fees</td>
+                <td class="highlight-col"><span class="tag-good">✓ Automated daily offsite backups</span> & point-in-time recovery</td>
+              </tr>
+              <tr>
+                <td><strong>Support & Accountability</strong></td>
+                <td><span class="tag-bad">✕ Overseas tier-1 support</span> with 48-hour ticket queues</td>
+                <td class="highlight-col"><span class="tag-good">✓ Direct Durham-based engineers</span>, local phone & email support</td>
+              </tr>
+              <tr>
+                <td><strong>Pricing Transparency</strong></td>
+                <td><span class="tag-bad">✕ US Dollar conversion surprises</span> & 300% renewal spikes</td>
+                <td class="highlight-col"><span class="tag-good">✓ Fixed Canadian Dollars (CAD)</span> + clear Ontario HST breakdown</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Mobile Comparison Cards Stack (Visible <= 768px) -->
+      <div class="comparison-cards-mobile">
+        <!-- 1. Page Load Velocity -->
+        <div class="comp-card-mobile">
+          <div class="comp-card-header">
+            <span class="comp-feature-name">Page Load Velocity</span>
+            <span class="comp-feature-badge">SPEED</span>
+          </div>
+          <div class="comp-row comp-row-legacy">
+            <div class="comp-label-bad">✕ Typical Shared Hosting</div>
+            <div class="comp-text-bad">Sluggish 4+ second loads (losing 40% of mobile visitors)</div>
+          </div>
+          <div class="comp-row comp-row-dwd">
+            <div class="comp-label-good">✓ The Durham Web Design Standard</div>
+            <div class="comp-text-good">Sub-second load times (Google Core Web Vitals optimized)</div>
+          </div>
+        </div>
+
+        <!-- 2. Server Infrastructure -->
+        <div class="comp-card-mobile">
+          <div class="comp-card-header">
+            <span class="comp-feature-name">Server Infrastructure</span>
+            <span class="comp-feature-badge">HOSTING</span>
+          </div>
+          <div class="comp-row comp-row-legacy">
+            <div class="comp-label-bad">✕ Typical Shared Hosting</div>
+            <div class="comp-text-bad">Crowded shared servers (noisy neighbors & slow CPU)</div>
+          </div>
+          <div class="comp-row comp-row-dwd">
+            <div class="comp-label-good">✓ The Durham Web Design Standard</div>
+            <div class="comp-text-good">Dedicated Cloud VPS with NVMe drives & Toronto CDN edge</div>
+          </div>
+        </div>
+
+        <!-- 3. Code & CMS Architecture -->
+        <div class="comp-card-mobile">
+          <div class="comp-card-header">
+            <span class="comp-feature-name">Code & CMS Architecture</span>
+            <span class="comp-feature-badge">CODEBASE</span>
+          </div>
+          <div class="comp-row comp-row-legacy">
+            <div class="comp-label-bad">✕ Typical Shared Hosting</div>
+            <div class="comp-text-bad">35+ unvetted WordPress plugins prone to conflicts & hacks</div>
+          </div>
+          <div class="comp-row comp-row-dwd">
+            <div class="comp-label-good">✓ The Durham Web Design Standard</div>
+            <div class="comp-text-good">Custom lightweight code, zero bloat, ironclad security</div>
+          </div>
+        </div>
+
+        <!-- 4. Backups & Disaster Recovery -->
+        <div class="comp-card-mobile">
+          <div class="comp-card-header">
+            <span class="comp-feature-name">Backups & Disaster Recovery</span>
+            <span class="comp-feature-badge">SECURITY</span>
+          </div>
+          <div class="comp-row comp-row-legacy">
+            <div class="comp-label-bad">✕ Typical Shared Hosting</div>
+            <div class="comp-text-bad">No automatic backups or steep restoration fees</div>
+          </div>
+          <div class="comp-row comp-row-dwd">
+            <div class="comp-label-good">✓ The Durham Web Design Standard</div>
+            <div class="comp-text-good">Automated daily offsite backups & point-in-time recovery</div>
+          </div>
+        </div>
+
+        <!-- 5. Support & Accountability -->
+        <div class="comp-card-mobile">
+          <div class="comp-card-header">
+            <span class="comp-feature-name">Support & Accountability</span>
+            <span class="comp-feature-badge">SUPPORT</span>
+          </div>
+          <div class="comp-row comp-row-legacy">
+            <div class="comp-label-bad">✕ Typical Shared Hosting</div>
+            <div class="comp-text-bad">Overseas tier-1 support with 48-hour ticket queues</div>
+          </div>
+          <div class="comp-row comp-row-dwd">
+            <div class="comp-label-good">✓ The Durham Web Design Standard</div>
+            <div class="comp-text-good">Direct Durham-based engineers, local phone & email support</div>
+          </div>
+        </div>
+
+        <!-- 6. Pricing Transparency -->
+        <div class="comp-card-mobile">
+          <div class="comp-card-header">
+            <span class="comp-feature-name">Pricing Transparency</span>
+            <span class="comp-feature-badge">PRICING</span>
+          </div>
+          <div class="comp-row comp-row-legacy">
+            <div class="comp-label-bad">✕ Typical Shared Hosting</div>
+            <div class="comp-text-bad">US Dollar conversion surprises & 300% renewal spikes</div>
+          </div>
+          <div class="comp-row comp-row-dwd">
+            <div class="comp-label-good">✓ The Durham Web Design Standard</div>
+            <div class="comp-text-good">Fixed Canadian Dollars (CAD) + clear Ontario HST breakdown</div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
