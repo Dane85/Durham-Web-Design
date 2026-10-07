@@ -1111,6 +1111,24 @@
       to { transform: translateY(0); opacity: 1; }
     }
 
+       /* Sidebar Backdrop on Mobile */
+    .sidebar-backdrop {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.7);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      z-index: 45;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+    .sidebar-backdrop.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
     /* Responsive Adjustments */
     @media (max-width: 1200px) {
       .kpi-grid { grid-template-columns: repeat(3, 1fr); }
@@ -1118,26 +1136,205 @@
       .toolbar-quicklinks { justify-content: flex-start; }
     }
 
-    @media (max-width: 900px) {
+    @media (max-width: 960px) {
       .sidebar {
         transform: translateX(-100%);
+        width: 280px;
+        box-shadow: 10px 0 35px rgba(0, 0, 0, 0.85);
       }
       .sidebar.open {
         transform: translateX(0);
+      }
+      .sidebar-backdrop {
+        display: block;
       }
       .main-wrapper {
         margin-left: 0;
       }
       .mobile-menu-btn {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 40px;
+        min-width: 40px;
       }
-      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
-      .view-content { padding: 20px; gap: 24px; }
-      .top-header { padding: 0 20px; }
+      .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
+      .view-content { padding: 20px 16px; gap: 24px; }
+      .top-header { padding: 0 16px; }
+    }
+
+    @media (max-width: 768px) {
+      .time-indicator {
+        display: none !important;
+      }
+      .top-header {
+        height: 64px;
+        padding: 0 14px;
+      }
+      .header-breadcrumb {
+        font-size: 12.5px;
+      }
+      .breadcrumb-root,
+      .breadcrumb-sep {
+        display: none;
+      }
+      .section-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+      }
+      .pipeline-controls {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        gap: 10px;
+      }
+      .search-input-wrap {
+        width: 100%;
+      }
+      .search-input {
+        width: 100% !important;
+      }
+      .search-input:focus {
+        width: 100% !important;
+      }
+      .toolbar-section {
+        padding: 18px 16px;
+        border-radius: var(--radius-lg);
+      }
+      .toolbar-grid {
+        gap: 18px;
+      }
+      .command-pills {
+        flex-direction: column;
+        width: 100%;
+      }
+      .cmd-pill {
+        width: 100%;
+        justify-content: space-between;
+        min-height: 44px;
+        padding: 10px 14px;
+      }
+      .toolbar-quicklinks {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        width: 100%;
+      }
+      .toolbar-quicklinks .btn {
+        width: 100%;
+        justify-content: center;
+        min-height: 38px;
+      }
+      /* Kanban Mobile Snapping */
+      .kanban-board {
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        gap: 12px;
+        padding-bottom: 16px;
+      }
+      .kanban-col {
+        scroll-snap-align: center;
+        min-width: 285px;
+        width: 82vw;
+        max-width: 320px;
+        min-height: 460px;
+      }
+      .kanban-card {
+        padding: 14px;
+      }
+      .card-bottom .card-action-btns button {
+        min-height: 36px;
+        min-width: 36px;
+        padding: 6px 12px;
+      }
+      .lead-section {
+        padding: 18px 14px;
+      }
     }
 
     @media (max-width: 600px) {
-      .kpi-grid { grid-template-columns: 1fr; }
+      .kpi-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+      }
+      .kpi-card {
+        padding: 14px 12px;
+      }
+      .kpi-card:nth-child(5) {
+        grid-column: span 2;
+      }
+      .kpi-value {
+        font-size: 19px;
+        margin-bottom: 4px;
+      }
+      .kpi-label {
+        font-size: 10.5px;
+      }
+      .kpi-icon-wrap {
+        width: 28px;
+        height: 28px;
+      }
+      .kpi-subtext {
+        font-size: 11px;
+        flex-wrap: wrap;
+        gap: 4px;
+      }
+      /* Modal Mobile Tuning */
+      .modal-box {
+        max-width: 100%;
+        margin: 10px;
+        border-radius: var(--radius-lg);
+      }
+      .modal-header {
+        padding: 16px 18px;
+      }
+      .modal-body {
+        padding: 16px 18px;
+        gap: 14px;
+        max-height: 70vh;
+      }
+      .modal-footer {
+        padding: 14px 18px;
+      }
+      /* Ensure iOS does not auto-zoom on input focus */
+      .form-control {
+        font-size: 16px !important;
+        min-height: 46px;
+      }
+      .toast-container {
+        left: 14px;
+        right: 14px;
+        bottom: 14px;
+      }
+      .toast {
+        width: 100%;
+        justify-content: center;
+      }
+      .stage-filter-tabs {
+        -webkit-overflow-scrolling: touch;
+      }
+      .stage-tab {
+        padding: 7px 12px;
+        font-size: 11.5px;
+        min-height: 36px;
+      }
+    }
+
+    @media (max-width: 440px) {
+      .top-header {
+        padding: 0 10px;
+      }
+      .header-right {
+        gap: 6px;
+      }
+      .header-right .btn-sm {
+        padding: 6px 8px;
+        font-size: 11px;
+      }
+      .toolbar-quicklinks {
+        grid-template-columns: 1fr;
+      }
     }
   </style>
 </head>
@@ -2254,6 +2451,14 @@
       document.querySelectorAll(".stage-tab").forEach(tab => tab.classList.remove("active"));
       if (btn) btn.classList.add("active");
       renderPipeline();
+
+      // On mobile, scroll to target Kanban column if a specific stage was chosen
+      if (stage !== 'all' && window.innerWidth < 960) {
+        const col = document.querySelector(`.kanban-col[data-stage="${stage}"]`);
+        if (col) {
+          col.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }
+      }
     }
 
     /* Filter Projects on Search */
@@ -2512,7 +2717,7 @@
       }, 3500);
     }
 
-    /* Navigation & Section Jump */
+        /* Navigation & Section Jump */
     function switchNav(section) {
       document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
       event.currentTarget.classList.add("active");
@@ -2531,12 +2736,27 @@
         document.getElementById("headerTitle").innerText = "VPS & Deployments";
       }
 
-      // Close mobile drawer if open
+      // Close mobile drawer and backdrop if open
       document.getElementById("sidebar").classList.remove("open");
+      const backdrop = document.getElementById("sidebarBackdrop");
+      if (backdrop) backdrop.classList.remove("active");
+      document.body.classList.remove("no-scroll");
     }
 
     function toggleSidebar() {
-      document.getElementById("sidebar").classList.toggle("open");
+      const sidebar = document.getElementById("sidebar");
+      const backdrop = document.getElementById("sidebarBackdrop");
+      const isOpen = sidebar.classList.contains("open");
+
+      if (isOpen) {
+        sidebar.classList.remove("open");
+        if (backdrop) backdrop.classList.remove("active");
+        document.body.classList.remove("no-scroll");
+      } else {
+        sidebar.classList.add("open");
+        if (backdrop) backdrop.classList.add("active");
+        document.body.classList.add("no-scroll");
+      }
     }
 
     /* Live Timestamp */
