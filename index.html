@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Durham Web Design | High-Performance Websites for Durham Region Businesses</title>
   <meta name="description" content="Ultra-fast, modern websites engineered to grow businesses across Oshawa, Whitby, Ajax, Pickering, and Bowmanville. Dedicated Canadian cloud hosting with transparent CAD pricing.">
@@ -96,8 +99,8 @@
     header {
       position: sticky;
       top: 0;
-      z-index: 100;
-      background: rgba(9, 13, 22, 0.85);
+      z-index: 10000;
+      background: rgba(9, 13, 22, 0.95);
       backdrop-filter: var(--glass-filter);
       -webkit-backdrop-filter: var(--glass-filter);
       border-bottom: 1px solid var(--border-subtle);
@@ -904,7 +907,7 @@
       opacity: 0;
       pointer-events: none;
       transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 99;
+      z-index: 9999;
       box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(56, 189, 248, 0.15);
       max-height: calc(100vh - 76px);
       overflow-y: auto;
@@ -965,7 +968,7 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity 0.3s ease;
-      z-index: 98;
+      z-index: 9998;
     }
 
     .mobile-backdrop.active {
@@ -1320,24 +1323,25 @@
       </nav>
     </div>
 
-    <!-- Mobile Navigation Drawer -->
-    <div class="mobile-drawer" id="mobileDrawer">
-      <ul class="mobile-nav-links">
-        <li><a href="#services" onclick="closeMobileNav()"><span>Services</span> <span>&rarr;</span></a></li>
-        <li><a href="#comparison" onclick="closeMobileNav()"><span>Why Us</span> <span>&rarr;</span></a></li>
-        <li><a href="#pricing" onclick="closeMobileNav()"><span>Pricing (CAD)</span> <span>&rarr;</span></a></li>
-        <li><a href="#regional" onclick="closeMobileNav()"><span>Durham Footprint</span> <span>&rarr;</span></a></li>
-        <li><a href="#contact" onclick="closeMobileNav()"><span>Contact &amp; Proposals</span> <span>&rarr;</span></a></li>
-      </ul>
-      <div class="mobile-drawer-footer">
-        <a href="#contact" class="btn btn-primary btn-full" onclick="closeMobileNav()">Request a Custom Proposal &rarr;</a>
-        <div style="font-size: 0.78rem; color: var(--accent-blue); text-align: center; font-family: var(--font-mono);">
-          ⚡ Dedicated Canadian Cloud Hosting &bull; Sub-Second GTA Ping
-        </div>
+    </header>
+
+  <!-- Mobile Navigation Drawer (Moved outside header for position:fixed accuracy) -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <ul class="mobile-nav-links">
+      <li><a href="#services" onclick="closeMobileNav()"><span>Services</span> <span>&rarr;</span></a></li>
+      <li><a href="#comparison" onclick="closeMobileNav()"><span>Why Us</span> <span>&rarr;</span></a></li>
+      <li><a href="#pricing" onclick="closeMobileNav()"><span>Pricing (CAD)</span> <span>&rarr;</span></a></li>
+      <li><a href="#regional" onclick="closeMobileNav()"><span>Durham Footprint</span> <span>&rarr;</span></a></li>
+      <li><a href="#contact" onclick="closeMobileNav()"><span>Contact &amp; Proposals</span> <span>&rarr;</span></a></li>
+    </ul>
+    <div class="mobile-drawer-footer">
+      <a href="#contact" class="btn btn-primary btn-full" onclick="closeMobileNav()">Request a Custom Proposal &rarr;</a>
+      <div style="font-size: 0.78rem; color: var(--accent-blue); text-align: center; font-family: var(--font-mono);">
+        ⚡ Dedicated Canadian Cloud Hosting &bull; Sub-Second GTA Ping
       </div>
     </div>
-    <div class="mobile-backdrop" id="mobileBackdrop" onclick="closeMobileNav()"></div>
-  </header>
+  </div>
+  <div class="mobile-backdrop" id="mobileBackdrop" onclick="closeMobileNav()"></div>
 
   <!-- 2. HERO SECTION -->
   <section class="hero">
