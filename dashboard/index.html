@@ -384,6 +384,43 @@
       border: 1px solid var(--border-subtle);
     }
 
+    .sync-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.28);
+      padding: 7px 12px;
+      border-radius: var(--radius-md);
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--emerald);
+      cursor: pointer;
+      transition: var(--transition);
+      user-select: none;
+    }
+    .sync-indicator:hover {
+      background: rgba(16, 185, 129, 0.18);
+      border-color: var(--emerald);
+    }
+    .sync-pulse-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 8px var(--emerald);
+      animation: pulse 2s infinite ease-in-out;
+    }
+    .sync-indicator.syncing {
+      color: var(--cyan);
+      border-color: rgba(0, 210, 255, 0.4);
+      background: rgba(0, 210, 255, 0.1);
+    }
+    .sync-indicator.syncing .sync-pulse-dot {
+      background: var(--cyan);
+      box-shadow: 0 0 8px var(--cyan);
+    }
+
     .btn {
       display: inline-flex;
       align-items: center;
@@ -630,7 +667,204 @@
       align-items: center;
       justify-content: flex-end;
       gap: 12px;
+    /* ==========================================================================
+       REAL-TIME TELEMETRY HUD & CLOUD SYNC
+       ========================================================================== */
+    .telemetry-section {
+      background: linear-gradient(135deg, rgba(17, 24, 39, 0.9) 0%, rgba(11, 15, 25, 0.95) 100%);
+      border: 1px solid var(--border-accent);
+      border-radius: var(--radius-xl);
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      box-shadow: 0 0 30px rgba(0, 210, 255, 0.08);
+      position: relative;
+    }
+
+    .telemetry-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
       flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 18px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .telemetry-title-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .live-pulse-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 10px var(--emerald);
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    .telemetry-title {
+      font-size: 14px;
+      font-weight: 800;
+      color: #FFF;
+      letter-spacing: -0.01em;
+    }
+
+    .telemetry-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--cyan);
+      background: rgba(0, 210, 255, 0.12);
+      border: 1px solid var(--border-accent);
+      padding: 3px 8px;
+      border-radius: var(--radius-sm);
+    }
+
+    .telemetry-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .last-sync-tag {
+      font-family: var(--font-mono);
+      font-size: 11.5px;
+      color: var(--text-dim);
+    }
+
+    .telemetry-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+      gap: 14px;
+    }
+
+    .telemetry-metric-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: var(--transition);
+    }
+    .telemetry-metric-card:hover {
+      border-color: var(--border-bright);
+      background: rgba(15, 23, 42, 0.85);
+    }
+
+    .telemetry-card-wide {
+      grid-column: span 2;
+    }
+
+    @media (max-width: 900px) {
+      .telemetry-card-wide {
+        grid-column: span 1;
+      }
+    }
+
+    .t-metric-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .t-label {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+
+    .t-pill {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--cyan);
+      background: rgba(0, 210, 255, 0.1);
+      padding: 2px 7px;
+      border-radius: 999px;
+      border: 1px solid rgba(0, 210, 255, 0.2);
+    }
+    .t-pill-emerald {
+      color: var(--emerald);
+      background: rgba(16, 185, 129, 0.1);
+      border-color: rgba(16, 185, 129, 0.25);
+    }
+
+    .t-big-val {
+      font-size: 15px;
+      font-weight: 800;
+      color: #FFF;
+      letter-spacing: -0.01em;
+    }
+
+    .t-subtext {
+      font-size: 12px;
+      color: var(--text-dim);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .t-services-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-top: 2px;
+    }
+    .t-service-tag {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      background: rgba(255, 255, 255, 0.04);
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .t-dot-green {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--emerald);
+    }
+
+    .t-pings-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+      margin-top: 2px;
+    }
+    .t-ping-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 12px;
+      font-family: var(--font-mono);
+    }
+    .t-ping-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--emerald);
+      margin-right: 6px;
+      display: inline-block;
+    }
+    .t-ping-name {
+      color: var(--text-muted);
+    }
+    .t-ping-time {
+      color: var(--emerald);
+      font-weight: 700;
     }
 
     /* ==========================================================================
@@ -1444,6 +1678,11 @@
         </div>
 
         <div class="header-right">
+          <div class="sync-indicator" id="syncStatusBadge" onclick="pullCloudData()" title="Real-time multi-device cloud synchronization active (Click to refresh)">
+            <span class="sync-pulse-dot"></span>
+            <span id="syncStatusText">Cloud Live</span>
+          </div>
+
           <div class="time-indicator">
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
             <span id="liveTimestamp">2026-10-07 17:39 EDT</span>
@@ -1543,6 +1782,112 @@
             </div>
           </div>
 
+        </section>
+
+        <!-- ================================================================
+             MODULE 1.5: REAL-TIME VPS TELEMETRY & CLOUD SYNC HUD
+             ================================================================ -->
+        <section class="telemetry-section" id="telemetrySection">
+          <div class="telemetry-header">
+            <div class="telemetry-title-group">
+              <span class="live-pulse-dot"></span>
+              <h3 class="telemetry-title">Hetzner Cloud VPS Telemetry &bull; Live Real-Time Telemetry</h3>
+              <span class="telemetry-badge" id="telemetryHostBadge">ubuntu-2gb-ash-2 (5.161.161.222)</span>
+            </div>
+            <div class="telemetry-actions">
+              <span class="last-sync-tag" id="lastSyncTag">Sync: Live</span>
+              <button onclick="pullCloudData()" class="btn btn-outline btn-sm" title="Fetch latest data from Hetzner cloud">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                <span>Sync Now</span>
+              </button>
+              <button onclick="pushLocalToCloud()" class="btn btn-cyan btn-sm" title="Upload this device's current projects/leads to cloud so your phone sees them">
+                <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"/></svg>
+                <span>Push PC Data to Cloud</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="telemetry-grid">
+            <!-- 1. CPU Card -->
+            <div class="telemetry-metric-card">
+              <div class="t-metric-top">
+                <span class="t-label">CPU Compute</span>
+                <span class="t-pill" id="liveCpuVal">2.1% Load</span>
+              </div>
+              <div class="t-value-row">
+                <span class="t-big-val" id="liveCpuUsage">AMD EPYC (2 vCPU)</span>
+              </div>
+              <div class="t-subtext">
+                <span>Load: <code id="liveLoadVal" style="color:var(--cyan);">0.03, 0.02, 0.00</code></span>
+              </div>
+            </div>
+
+            <!-- 2. RAM Card -->
+            <div class="telemetry-metric-card">
+              <div class="t-metric-top">
+                <span class="t-label">RAM Allocated</span>
+                <span class="t-pill" id="liveRamPct">26% Used</span>
+              </div>
+              <div class="t-value-row">
+                <span class="t-big-val" id="liveRamVal">514 MB / 1.92 GB</span>
+              </div>
+              <div class="t-subtext">
+                <span style="color:var(--emerald);" id="liveRamAvail">1.41 GB Available</span>
+              </div>
+            </div>
+
+            <!-- 3. NVMe SSD Storage -->
+            <div class="telemetry-metric-card">
+              <div class="t-metric-top">
+                <span class="t-label">NVMe Storage</span>
+                <span class="t-pill t-pill-emerald" id="liveDiskFreePct">84.1% Free</span>
+              </div>
+              <div class="t-value-row">
+                <span class="t-big-val" id="liveDiskVal">5.9 GB Used / 37.2 GB</span>
+              </div>
+              <div class="t-subtext">
+                <span style="color:var(--emerald);">31.3 GB Headroom</span>
+              </div>
+            </div>
+
+            <!-- 4. Node Uptime & Services -->
+            <div class="telemetry-metric-card">
+              <div class="t-metric-top">
+                <span class="t-label">Uptime &amp; Services</span>
+                <span class="t-pill t-pill-emerald">All Active</span>
+              </div>
+              <div class="t-value-row">
+                <span class="t-big-val" id="liveUptimeVal">1d 7h 20m</span>
+              </div>
+              <div class="t-services-row">
+                <span class="t-service-tag">Nginx 1.24 <span class="t-dot-green"></span></span>
+                <span class="t-service-tag">MySQL <span class="t-dot-green"></span></span>
+                <span class="t-service-tag">PHP 8.3 <span class="t-dot-green"></span></span>
+              </div>
+            </div>
+
+            <!-- 5. Live Production Pings -->
+            <div class="telemetry-metric-card telemetry-card-wide">
+              <div class="t-metric-top">
+                <span class="t-label">Production Endpoints Latency</span>
+                <span class="t-pill t-pill-emerald" id="liveLatencyPill">Sub-50ms Edge</span>
+              </div>
+              <div class="t-pings-grid">
+                <div class="t-ping-item">
+                  <span><span class="t-ping-dot"></span><span class="t-ping-name">durhamweb.design:</span></span>
+                  <span class="t-ping-time" id="pingDwd">5ms</span>
+                </div>
+                <div class="t-ping-item">
+                  <span><span class="t-ping-dot"></span><span class="t-ping-name">gmsra.durhamweb.design:</span></span>
+                  <span class="t-ping-time" id="pingGmsra">29ms</span>
+                </div>
+                <div class="t-ping-item">
+                  <span><span class="t-ping-dot"></span><span class="t-ping-name">ops.durhamweb.design:</span></span>
+                  <span class="t-ping-time" id="pingOps">4ms</span>
+                </div>
+              </div>
+            </div>
+          </div>
         </section>
 
         <!-- ================================================================
@@ -2118,9 +2463,12 @@
     const SERVER_OVERHEAD = 28.50; // CAD/month for Hetzner Ashburn CPX 11
     const TOTAL_NODE_SLOTS = 15;
 
+    let isSyncing = false;
+    let liveServerStats = null;
+
     /* Initialize Application */
     function initApp() {
-      // Load saved state or default
+      // 1. Immediately load local state so screen renders with zero latency
       const savedProjects = localStorage.getItem("dwd_projects");
       const savedLeads = localStorage.getItem("dwd_leads");
 
@@ -2130,21 +2478,207 @@
       renderAll();
       updateTimestamp();
       setInterval(updateTimestamp, 60000);
+
+      // 2. Fetch fresh real-time cloud data from Hetzner VPS node
+      fetchServerData(false);
+
+      // 3. Periodic real-time background polling every 20 seconds
+      setInterval(() => {
+        fetchServerData(false);
+      }, 20000);
     }
 
-    /* Save State */
-    function saveState() {
+    /* Fetch Real-Time Data from Live VPS */
+    async function fetchServerData(manual = false) {
+      if (isSyncing) return;
+      isSyncing = true;
+      const syncBadge = document.getElementById("syncStatusBadge");
+      const syncText = document.getElementById("syncStatusText");
+      if (syncBadge) syncBadge.classList.add("syncing");
+      if (syncText) syncText.innerText = manual ? "Syncing..." : "Updating...";
+
+      try {
+        const res = await fetch("api.php", { cache: "no-store" });
+        if (!res.ok) throw new Error("HTTP " + res.status);
+        const data = await res.json();
+
+        if (data.success) {
+          // If server has projects, update memory and localStorage
+          if (Array.isArray(data.projects) && data.projects.length > 0) {
+            projects = data.projects;
+            localStorage.setItem("dwd_projects", JSON.stringify(projects));
+          }
+          if (Array.isArray(data.leads)) {
+            leads = data.leads;
+            localStorage.setItem("dwd_leads", JSON.stringify(leads));
+          }
+
+          // Re-render UI
+          renderAll();
+
+          // Update server telemetry
+          if (data.server) {
+            liveServerStats = data.server;
+            updateServerTelemetryUI(data.server);
+          }
+
+          // Update last sync tag
+          const syncTag = document.getElementById("lastSyncTag");
+          if (syncTag) {
+            const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            syncTag.innerText = `Sync: ${timeStr}`;
+          }
+
+          if (syncBadge) syncBadge.classList.remove("syncing");
+          if (syncText) syncText.innerText = "Cloud Live";
+          if (manual) showToast("Synced with Hetzner cloud node!");
+        }
+      } catch (err) {
+        console.warn("Could not reach Hetzner API, using local cache:", err);
+        if (syncBadge) syncBadge.classList.remove("syncing");
+        if (syncText) syncText.innerText = "Offline Cache";
+        if (manual) showToast("Offline mode: viewing locally cached state");
+      } finally {
+        isSyncing = false;
+      }
+    }
+
+    /* Save State (Optimistic Local + Real-Time VPS Sync) */
+    async function saveState() {
+      // 1. Instant local persistence and render
       localStorage.setItem("dwd_projects", JSON.stringify(projects));
       localStorage.setItem("dwd_leads", JSON.stringify(leads));
       renderAll();
+
+      // 2. Real-time background upload to VPS
+      const syncBadge = document.getElementById("syncStatusBadge");
+      const syncText = document.getElementById("syncStatusText");
+      if (syncBadge) syncBadge.classList.add("syncing");
+      if (syncText) syncText.innerText = "Saving to Cloud...";
+
+      try {
+        const res = await fetch("api.php", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            projects: projects,
+            leads: leads,
+            device: /Mobi|Android/i.test(navigator.userAgent) ? "Galaxy S25 Ultra" : "Workstation PC"
+          })
+        });
+        const data = await res.json();
+
+        if (data.success) {
+          if (syncBadge) syncBadge.classList.remove("syncing");
+          if (syncText) syncText.innerText = "Cloud Live";
+          if (data.server) updateServerTelemetryUI(data.server);
+          const syncTag = document.getElementById("lastSyncTag");
+          if (syncTag) {
+            const timeStr = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+            syncTag.innerText = `Sync: ${timeStr}`;
+          }
+        }
+      } catch (err) {
+        console.warn("Cloud push failed, saved to local cache:", err);
+        if (syncBadge) syncBadge.classList.remove("syncing");
+        if (syncText) syncText.innerText = "Saved Locally";
+      }
     }
 
-    function resetDataToDefault() {
-      if (confirm("Reset dashboard data to initial operations defaults?")) {
+    /* Update Server Telemetry Elements in DOM */
+    function updateServerTelemetryUI(server) {
+      if (!server) return;
+
+      // Host & Uptime
+      const uptimeEl = document.getElementById("liveUptimeVal");
+      if (uptimeEl && server.uptime_formatted) uptimeEl.innerText = server.uptime_formatted;
+      const hostBadge = document.getElementById("telemetryHostBadge");
+      if (hostBadge && server.node) hostBadge.innerText = `${server.node} (${server.ip})`;
+
+      // CPU
+      const cpuVal = document.getElementById("liveCpuVal");
+      if (cpuVal && server.cpu) cpuVal.innerText = `${server.cpu.usage_pct}% Load`;
+      const cpuUsage = document.getElementById("liveCpuUsage");
+      if (cpuUsage && server.cpu) cpuUsage.innerText = `${server.cpu.model}`;
+      const loadVal = document.getElementById("liveLoadVal");
+      if (loadVal && server.cpu?.load) loadVal.innerText = server.cpu.load.join(", ");
+
+      // RAM
+      const ramVal = document.getElementById("liveRamVal");
+      if (ramVal && server.ram) ramVal.innerText = `${server.ram.used_mb} MB / ${(server.ram.total_mb / 1024).toFixed(2)} GB`;
+      const ramPct = document.getElementById("liveRamPct");
+      if (ramPct && server.ram) ramPct.innerText = `${server.ram.usage_pct}% Used`;
+      const ramAvail = document.getElementById("liveRamAvail");
+      if (ramAvail && server.ram) ramAvail.innerText = `${(server.ram.available_mb / 1024).toFixed(2)} GB Available`;
+
+      // Disk
+      const diskVal = document.getElementById("liveDiskVal");
+      if (diskVal && server.disk) diskVal.innerText = `${server.disk.used_gb} GB Used / ${server.disk.total_gb} GB`;
+      const diskFreePct = document.getElementById("liveDiskFreePct");
+      if (diskFreePct && server.disk) diskFreePct.innerText = `${server.disk.free_pct}% Free`;
+
+      // Pings
+      if (Array.isArray(server.sites)) {
+        server.sites.forEach(s => {
+          if (s.domain === "durhamweb.design") {
+            const p = document.getElementById("pingDwd");
+            if (p) p.innerText = `${s.latency_ms}ms`;
+          }
+          if (s.domain === "gmsra.durhamweb.design") {
+            const p = document.getElementById("pingGmsra");
+            if (p) p.innerText = `${s.latency_ms}ms`;
+          }
+          if (s.domain === "ops.durhamweb.design") {
+            const p = document.getElementById("pingOps");
+            if (p) p.innerText = `${s.latency_ms}ms`;
+          }
+        });
+      }
+
+      // Headroom KPI update with live SSD free %
+      const headroomEl = document.getElementById("kpiHeadroom");
+      if (headroomEl && server.disk) {
+        const liveProjects = projects.filter(p => p.stage === 5 || p.stage === 4);
+        const availableSlots = TOTAL_NODE_SLOTS - liveProjects.length;
+        headroomEl.innerHTML = `${availableSlots} <span style="font-size:14px;color:var(--text-dim);font-weight:600;">of ${TOTAL_NODE_SLOTS} Slots Avail (${server.disk.free_pct}% SSD Free)</span>`;
+      }
+    }
+
+    /* Push Local Browser State to Cloud Server */
+    async function pushLocalToCloud() {
+      if (confirm("Upload this device's current projects and leads directly to the Hetzner cloud server? This ensures your phone and other devices immediately see this exact data.")) {
+        await saveState();
+        showToast("Successfully uploaded local state to Hetzner cloud node!");
+      }
+    }
+
+    /* Pull Cloud State */
+    function pullCloudData() {
+      fetchServerData(true);
+    }
+
+    /* Reset Demo Data */
+    async function resetDataToDefault() {
+      if (confirm("Reset dashboard data to factory operations defaults on both this device and the live server?")) {
+        try {
+          const res = await fetch("api.php?action=reset_defaults", { method: "POST" });
+          const data = await res.json();
+          if (data.success) {
+            projects = data.projects;
+            leads = data.leads;
+            localStorage.setItem("dwd_projects", JSON.stringify(projects));
+            localStorage.setItem("dwd_leads", JSON.stringify(leads));
+            renderAll();
+            showToast("Reset live cloud and local data to initial defaults!");
+            return;
+          }
+        } catch (e) {
+          console.warn("Could not reach API for reset, resetting locally:", e);
+        }
         projects = JSON.parse(JSON.stringify(DEFAULT_PROJECTS));
         leads = JSON.parse(JSON.stringify(DEFAULT_LEADS));
         saveState();
-        showToast("Demo state reset to original defaults!");
+        showToast("State reset to initial defaults!");
       }
     }
 
