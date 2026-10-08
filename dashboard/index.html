@@ -134,6 +134,25 @@
       border-bottom: 1px solid var(--border-subtle);
     }
 
+    .sidebar-close-btn {
+      display: none;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-dim);
+      font-size: 22px;
+      line-height: 1;
+      cursor: pointer;
+      padding: 6px 10px;
+      margin-left: auto;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+    .sidebar-close-btn:hover {
+      color: #FFF;
+      border-color: var(--cyan);
+      background: rgba(0, 210, 255, 0.1);
+    }
+
     .brand-logo-img {
       width: 38px;
       height: 38px;
@@ -667,6 +686,8 @@
       align-items: center;
       justify-content: flex-end;
       gap: 12px;
+    }
+
     /* ==========================================================================
        REAL-TIME TELEMETRY HUD & CLOUD SYNC
        ========================================================================== */
@@ -1398,6 +1419,9 @@
         min-height: 40px;
         min-width: 40px;
       }
+      .sidebar-close-btn {
+        display: block;
+      }
       .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
       .view-content { padding: 20px 16px; gap: 24px; }
       .top-header { padding: 0 16px; }
@@ -1494,6 +1518,47 @@
     }
 
     @media (max-width: 600px) {
+      .top-header {
+        height: auto;
+        min-height: 60px;
+        padding: 8px 12px;
+      }
+      .header-right {
+        gap: 6px;
+      }
+      .header-right .btn-sm {
+        padding: 6px 10px;
+        min-height: 36px;
+      }
+      .header-right .btn-sm .btn-label {
+        display: none;
+      }
+      .sync-indicator {
+        padding: 4px 8px;
+        font-size: 11px;
+      }
+      .telemetry-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+      }
+      .telemetry-title-group {
+        flex-wrap: wrap;
+        width: 100%;
+      }
+      .telemetry-actions {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .telemetry-actions .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .telemetry-grid {
+        grid-template-columns: 1fr;
+      }
       .kpi-grid {
         grid-template-columns: repeat(2, 1fr);
         gap: 10px;
@@ -1592,6 +1657,7 @@
           <h1>Durham Web Design</h1>
           <p>Epic Expressions Ops</p>
         </div>
+        <button class="sidebar-close-btn" onclick="toggleSidebar()" aria-label="Close Sidebar">&times;</button>
       </div>
 
       <nav class="sidebar-nav">
@@ -1688,14 +1754,14 @@
             <span id="liveTimestamp">2026-10-07 17:39 EDT</span>
           </div>
 
-          <button class="btn btn-outline btn-sm" onclick="openSimulateLeadModal()">
+          <button class="btn btn-outline btn-sm" onclick="openSimulateLeadModal()" title="Simulate Inbound Web3Forms Lead">
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
-            <span>Simulate Lead</span>
+            <span class="btn-label">Simulate Lead</span>
           </button>
 
-          <button class="btn btn-cyan btn-sm" onclick="openProjectModal()">
+          <button class="btn btn-cyan btn-sm" onclick="openProjectModal()" title="Add Client Project to Pipeline">
             <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
-            <span>New Project</span>
+            <span class="btn-label">New Project</span>
           </button>
         </div>
       </header>
