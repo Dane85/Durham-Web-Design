@@ -945,6 +945,34 @@
       border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
 
+    .footer-links {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-links li {
+      margin: 0;
+      padding: 0;
+    }
+
+    .footer-links a {
+      color: #94A3B8;
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s ease, text-shadow 0.2s ease;
+    }
+
+    .footer-links a:hover {
+      color: #00D2FF;
+      text-shadow: 0 0 10px rgba(0, 210, 255, 0.45);
+    }
+
     .footer-bottom {
       padding-top: 24px;
       display: flex;
@@ -1325,6 +1353,9 @@
         align-items: flex-start;
         gap: 16px;
       }
+      .footer-links {
+        gap: 12px 18px;
+      }
       .footer-bottom {
         flex-direction: column;
         align-items: flex-start;
@@ -1467,6 +1498,7 @@
       <li><a href="#pricing" onclick="closeMobileNav()"><span>Pricing (CAD)</span> <span>&rarr;</span></a></li>
       <li><a href="#regional" onclick="closeMobileNav()"><span>Durham Footprint</span> <span>&rarr;</span></a></li>
       <li><a href="#contact" onclick="closeMobileNav()"><span>Contact &amp; Proposals</span> <span>&rarr;</span></a></li>
+      <li><a href="https://billing.stripe.com/p/login/dRm3cveMn0wIfMi17rd7q00" target="_blank" rel="noopener noreferrer" onclick="closeMobileNav()"><span>Client Billing Portal</span> <span>&rarr;</span></a></li>
     </ul>
     <div class="mobile-drawer-footer">
       <a href="#contact" class="btn btn-primary btn-full" onclick="closeMobileNav()">Request a Custom Proposal &rarr;</a>
@@ -1997,6 +2029,14 @@
           <img src="assets/images/logo.png" alt="Durham Web Design Logo" class="brand-logo-img" width="44" height="44">
           <span>Durham Web Design</span>
         </a>
+        <ul class="footer-links">
+          <li><a href="#services">Services</a></li>
+          <li><a href="#comparison">Why Us</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#regional">Footprint</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="https://billing.stripe.com/p/login/dRm3cveMn0wIfMi17rd7q00" target="_blank" rel="noopener noreferrer">Client Billing Portal</a></li>
+        </ul>
         <div style="color: var(--text-muted); font-size: 0.9rem;">
           Specialized in high-conversion web development & managed cloud infrastructure across Durham Region, ON.
         </div>
