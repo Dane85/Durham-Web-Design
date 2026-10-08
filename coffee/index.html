@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="refresh" content="0; url=https://buy.stripe.com/dRm3cveMn0wIfMi17rd7q00">
+  <title>Buy the Engineer a Coffee &bull; Durham Web Design</title>
+  <link rel="canonical" href="https://durhamweb.design/coffee">
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/images/logo.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+  <script>
+    // Immediate JavaScript Redirect Fallback
+    window.location.replace("https://buy.stripe.com/dRm3cveMn0wIfMi17rd7q00");
+  </script>
+  <style>
+    :root {
+      --bg-primary: #090d16;
+      --bg-card: rgba(17, 24, 39, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.1);
+      --border-cyan: rgba(0, 210, 255, 0.4);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent-cyan: #00d2ff;
+      --accent-blue: #38bdf8;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    /* Ambient background gradient glow */
+    .ambient-glow {
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(0, 210, 255, 0.15) 0%, rgba(56, 189, 248, 0.05) 50%, transparent 70%);
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .redirect-card {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 460px;
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 20px;
+      padding: 40px 32px;
+      text-align: center;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6), 0 0 30px rgba(0, 210, 255, 0.08);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      animation: fadeIn 0.4s ease-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .brand-emblem {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 64px;
+      height: 64px;
+      margin-bottom: 20px;
+      border-radius: 16px;
+      background: rgba(15, 23, 42, 0.9);
+      border: 1px solid var(--border-cyan);
+      box-shadow: 0 0 20px rgba(0, 210, 255, 0.25);
+    }
+
+    .brand-emblem img {
+      width: 44px;
+      height: 44px;
+      object-fit: contain;
+    }
+
+    .coffee-icon-badge {
+      font-size: 2rem;
+      margin-bottom: 12px;
+      display: block;
+      animation: float 2s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-4px); }
+    }
+
+    h1 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+      letter-spacing: -0.02em;
+    }
+
+    .status-text {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+      line-height: 1.55;
+      margin-bottom: 28px;
+    }
+
+    .spinner-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      color: var(--accent-cyan);
+      font-family: var(--font-mono);
+      font-size: 0.85rem;
+    }
+
+    .spinner {
+      width: 18px;
+      height: 18px;
+      border: 2px solid rgba(0, 210, 255, 0.2);
+      border-top-color: var(--accent-cyan);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    .redirect-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 13px 24px;
+      font-size: 0.95rem;
+      font-weight: 600;
+      border-radius: 9999px;
+      background: linear-gradient(135deg, #00d2ff 0%, #0077ff 100%);
+      color: #040914;
+      text-decoration: none;
+      box-shadow: 0 4px 20px rgba(0, 210, 255, 0.35);
+      transition: all 0.2s ease;
+    }
+
+    .redirect-btn:hover {
+      box-shadow: 0 6px 25px rgba(0, 210, 255, 0.55);
+      transform: translateY(-2px);
+      filter: brightness(1.1);
+    }
+
+    .fallback-note {
+      margin-top: 18px;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+    }
+
+    .fallback-note a {
+      color: var(--accent-cyan);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      font-weight: 500;
+      transition: color 0.15s ease;
+    }
+
+    .fallback-note a:hover {
+      color: #fff;
+    }
+
+    .security-badge {
+      margin-top: 28px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-subtle);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.78rem;
+      color: #64748b;
+      font-family: var(--font-mono);
+    }
+
+    .security-badge span.dot {
+      color: #10b981;
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-glow"></div>
+
+  <main class="redirect-card">
+    <div class="brand-emblem">
+      <img src="/assets/images/logo.png" alt="Durham Web Design Logo" width="44" height="44" onerror="this.src='../assets/images/logo.png'">
+    </div>
+
+    <span class="coffee-icon-badge">☕</span>
+    <h1>Buy the Engineer a Coffee</h1>
+    
+    <div class="spinner-wrapper">
+      <div class="spinner"></div>
+      <span>Redirecting to secure Stripe checkout...</span>
+    </div>
+
+    <p class="status-text">
+      Redirecting to secure Stripe checkout... If you are not redirected automatically, <a href="https://buy.stripe.com/dRm3cveMn0wIfMi17rd7q00" style="color: var(--accent-cyan); font-weight: 600;">click here</a>.
+    </p>
+
+    <a href="https://buy.stripe.com/dRm3cveMn0wIfMi17rd7q00" class="redirect-btn" id="stripeRedirectLink" rel="noopener noreferrer">
+      <span>Proceed to Stripe Checkout &rarr;</span>
+    </a>
+
+    <p class="fallback-note">
+      Stuck? <a href="https://buy.stripe.com/dRm3cveMn0wIfMi17rd7q00" rel="noopener noreferrer">Click here to pay directly</a>.
+    </p>
+
+    <div class="security-badge">
+      <span class="dot">&bull;</span>
+      <span>256-Bit SSL Encrypted &bull; Powered by Stripe</span>
+    </div>
+  </main>
+</body>
+</html>

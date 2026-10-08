@@ -973,6 +973,51 @@
       text-shadow: 0 0 10px rgba(0, 210, 255, 0.45);
     }
 
+    .footer-appreciation {
+      margin: 28px 0 24px;
+      padding: 18px 22px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      background: rgba(15, 23, 42, 0.45);
+      backdrop-filter: var(--glass-filter);
+      -webkit-backdrop-filter: var(--glass-filter);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .appreciation-text {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+      font-weight: 500;
+    }
+
+    .coffee-pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 9999px;
+      background: rgba(30, 41, 59, 0.8);
+      color: #e2e8f0;
+      border: 1px solid rgba(51, 65, 85, 0.85);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    }
+
+    .coffee-pill-btn:hover {
+      background: rgba(51, 65, 85, 0.9);
+      color: #22d3ee;
+      border-color: rgba(6, 182, 212, 0.45);
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.25);
+      transform: translateY(-1px);
+    }
+
     .footer-bottom {
       padding-top: 24px;
       display: flex;
@@ -1356,6 +1401,12 @@
       .footer-links {
         gap: 12px 18px;
       }
+      .footer-appreciation {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 14px;
+        padding: 16px;
+      }
       .footer-bottom {
         flex-direction: column;
         align-items: flex-start;
@@ -1499,6 +1550,7 @@
       <li><a href="#regional" onclick="closeMobileNav()"><span>Durham Footprint</span> <span>&rarr;</span></a></li>
       <li><a href="#contact" onclick="closeMobileNav()"><span>Contact &amp; Proposals</span> <span>&rarr;</span></a></li>
       <li><a href="https://billing.stripe.com/p/login/dRm3cveMn0wIfMi17rd7q00" target="_blank" rel="noopener noreferrer" onclick="closeMobileNav()"><span>Client Billing Portal</span> <span>&rarr;</span></a></li>
+      <li><a href="https://buy.stripe.com/dRm3cveMn0wIfMi17rd7q00" target="_blank" rel="noopener noreferrer" onclick="closeMobileNav()"><span>☕ Buy the Engineer a Coffee</span> <span>&rarr;</span></a></li>
     </ul>
     <div class="mobile-drawer-footer">
       <a href="#contact" class="btn btn-primary btn-full" onclick="closeMobileNav()">Request a Custom Proposal &rarr;</a>
@@ -2040,6 +2092,13 @@
         <div style="color: var(--text-muted); font-size: 0.9rem;">
           Specialized in high-conversion web development & managed cloud infrastructure across Durham Region, ON.
         </div>
+      </div>
+
+      <div class="footer-appreciation">
+        <span class="appreciation-text">Did our free advice or speed audit help you out?</span>
+        <a href="https://buy.stripe.com/dRm3cveMn0wIfMi17rd7q00" target="_blank" rel="noopener noreferrer" class="coffee-pill-btn inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full bg-slate-800/80 hover:bg-slate-700/90 text-slate-200 hover:text-cyan-400 border border-slate-700 hover:border-cyan-500/40 transition-all duration-200 shadow-sm">
+          <span>☕</span> <span>Buy the Engineer a Coffee</span>
+        </a>
       </div>
 
       <div class="footer-bottom">
