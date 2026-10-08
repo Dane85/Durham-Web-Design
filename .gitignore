@@ -17,3 +17,7 @@ Thumbs.db
 # Logs & Temporary Files
 *.log
 scratch/
+
+dashboard/data/
+data/
+
