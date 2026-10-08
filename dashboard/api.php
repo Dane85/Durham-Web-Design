@@ -143,6 +143,49 @@ function getServerStats() {
         ],
         'services' => $services,
         'sites' => $healthResults,
+        'git' => (function() {
+            $gitInfo = [];
+            $repoConfigs = [
+                'durham' => [
+                    'name' => 'Durham Web Design (Flagship & HUD)',
+                    'path' => '/var/www/durhamwebdesign',
+                    'alt_path' => dirname(__DIR__),
+                    'repo' => 'Dane85/Durham-Web-Design',
+                    'branch' => 'main',
+                    'github_url' => 'https://github.com/Dane85/Durham-Web-Design'
+                ],
+                'gmsra' => [
+                    'name' => 'GMSRA Salaried Retirees',
+                    'path' => '/var/www/gmsra',
+                    'alt_path' => dirname(dirname(__DIR__)) . '/GMSRA',
+                    'repo' => 'Dane85/gmsra',
+                    'branch' => 'main',
+                    'github_url' => 'https://github.com/Dane85/gmsra'
+                ]
+            ];
+            foreach ($repoConfigs as $key => $r) {
+                $targetPath = is_dir($r['path']) ? $r['path'] : ($r['alt_path'] ?? '');
+                if ($targetPath && is_dir($targetPath)) {
+                    $logOutput = @shell_exec("git -C " . escapeshellarg($targetPath) . " log -1 --pretty=format:'%h|%s|%an|%cr|%cd|%H' 2>/dev/null");
+                    if ($logOutput) {
+                        $parts = explode('|', trim($logOutput));
+                        $gitInfo[$key] = [
+                            'name' => $r['name'],
+                            'repo' => $r['repo'],
+                            'branch' => $r['branch'],
+                            'hash' => $parts[0] ?? '',
+                            'message' => $parts[1] ?? '',
+                            'author' => $parts[2] ?? '',
+                            'relative_time' => $parts[3] ?? '',
+                            'date' => $parts[4] ?? '',
+                            'full_hash' => $parts[5] ?? '',
+                            'commit_url' => $r['github_url'] . '/commit/' . ($parts[0] ?? '')
+                        ];
+                    }
+                }
+            }
+            return $gitInfo;
+        })(),
         'timestamp' => date('Y-m-d H:i:s T')
     ];
 }

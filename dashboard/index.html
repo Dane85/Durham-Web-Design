@@ -889,6 +889,86 @@
       font-weight: 700;
     }
 
+    .telemetry-card-full {
+      grid-column: 1 / -1;
+    }
+    .git-commits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .git-commit-box {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      transition: var(--transition);
+    }
+    .git-commit-box:hover {
+      border-color: var(--border-accent);
+      background: rgba(0, 210, 255, 0.04);
+      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35);
+    }
+    .git-commit-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+    .git-repo-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .git-hash-badge {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--cyan);
+      background: rgba(0, 210, 255, 0.12);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+      padding: 2px 7px;
+      border-radius: 4px;
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    .git-hash-badge:hover {
+      background: rgba(0, 210, 255, 0.25);
+      box-shadow: 0 0 10px var(--cyan-glow);
+      color: #fff;
+    }
+    .git-commit-msg {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+      line-height: 1.45;
+      word-break: break-word;
+    }
+    .git-commit-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 7px;
+      font-size: 11px;
+      color: var(--text-dim);
+      font-family: var(--font-mono);
+    }
+    .git-meta-dot {
+      color: rgba(255, 255, 255, 0.2);
+    }
+    .git-deploy-tag {
+      color: var(--emerald);
+      font-weight: 600;
+    }
+
     /* ==========================================================================
        MODULE 2: PROJECT PIPELINE (KANBAN & TABLE)
        ========================================================================== */
@@ -1960,6 +2040,64 @@
                 </div>
               </div>
             </div>
+
+            <!-- 6. Most Recent Git Commits & Live Deployment Status -->
+            <div class="telemetry-metric-card telemetry-card-full" id="gitCommitsCard">
+              <div class="t-metric-top">
+                <span class="t-label">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="vertical-align:-2px;margin-right:4px;"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                  Latest Production Commits &bull; Deployment Activity
+                </span>
+                <span class="t-pill t-pill-cyan" id="gitStatusPill">Live Synced &bull; main</span>
+              </div>
+              <div class="git-commits-grid">
+                <!-- Durham Web Design Commit Box -->
+                <div class="git-commit-box">
+                  <div class="git-commit-header">
+                    <span class="git-repo-tag">
+                      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+                      Dane85/Durham-Web-Design:main
+                    </span>
+                    <a href="https://github.com/Dane85/Durham-Web-Design/commit/0ea6854" id="dwdCommitHash" target="_blank" rel="noopener" class="git-hash-badge" title="View commit on GitHub">
+                      0ea6854
+                    </a>
+                  </div>
+                  <div class="git-commit-msg" id="dwdCommitMsg">
+                    feat(billing): add Client Billing Portal link to website footer and Stripe Billing to ops dashboard toolbar
+                  </div>
+                  <div class="git-commit-meta">
+                    <span id="dwdCommitAuthor">👤 Dane</span>
+                    <span class="git-meta-dot">•</span>
+                    <span id="dwdCommitTime">🕒 Just now</span>
+                    <span class="git-meta-dot">•</span>
+                    <span class="git-deploy-tag">✓ Deployed to Ashburn Node</span>
+                  </div>
+                </div>
+
+                <!-- GMSRA Client Site Commit Box -->
+                <div class="git-commit-box">
+                  <div class="git-commit-header">
+                    <span class="git-repo-tag">
+                      <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 00-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0020 4.77 5.07 5.07 0 0019.91 1S18.73.65 16 2.48a13.38 13.38 0 00-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 005 4.77a5.44 5.44 0 00-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 009 18.13V22"/></svg>
+                      Dane85/gmsra:main
+                    </span>
+                    <a href="https://github.com/Dane85/gmsra/commit/1be2368" id="gmsraCommitHash" target="_blank" rel="noopener" class="git-hash-badge" title="View commit on GitHub">
+                      1be2368
+                    </a>
+                  </div>
+                  <div class="git-commit-msg" id="gmsraCommitMsg">
+                    chore(db): sync local.sql with 15-photo golf tournament gallery
+                  </div>
+                  <div class="git-commit-meta">
+                    <span id="gmsraCommitAuthor">👤 Dane</span>
+                    <span class="git-meta-dot">•</span>
+                    <span id="gmsraCommitTime">🕒 2 hours ago</span>
+                    <span class="git-meta-dot">•</span>
+                    <span class="git-deploy-tag">✓ Deployed to Ashburn Node</span>
+                  </div>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
 
@@ -2718,6 +2856,38 @@
         const liveProjects = projects.filter(p => p.stage === 5 || p.stage === 4);
         const availableSlots = TOTAL_NODE_SLOTS - liveProjects.length;
         headroomEl.innerHTML = `${availableSlots} <span style="font-size:14px;color:var(--text-dim);font-weight:600;">of ${TOTAL_NODE_SLOTS} Slots Avail (${server.disk.free_pct}% SSD Free)</span>`;
+      }
+
+      // Live Git Commits Telemetry
+      if (server.git) {
+        if (server.git.durham) {
+          const g = server.git.durham;
+          const hashEl = document.getElementById("dwdCommitHash");
+          if (hashEl) {
+            hashEl.innerText = g.hash;
+            if (g.commit_url) hashEl.href = g.commit_url;
+          }
+          const msgEl = document.getElementById("dwdCommitMsg");
+          if (msgEl) msgEl.innerText = g.message;
+          const authorEl = document.getElementById("dwdCommitAuthor");
+          if (authorEl) authorEl.innerText = `👤 ${g.author}`;
+          const timeEl = document.getElementById("dwdCommitTime");
+          if (timeEl) timeEl.innerText = `🕒 ${g.relative_time || g.date}`;
+        }
+        if (server.git.gmsra) {
+          const g = server.git.gmsra;
+          const hashEl = document.getElementById("gmsraCommitHash");
+          if (hashEl) {
+            hashEl.innerText = g.hash;
+            if (g.commit_url) hashEl.href = g.commit_url;
+          }
+          const msgEl = document.getElementById("gmsraCommitMsg");
+          if (msgEl) msgEl.innerText = g.message;
+          const authorEl = document.getElementById("gmsraCommitAuthor");
+          if (authorEl) authorEl.innerText = `👤 ${g.author}`;
+          const timeEl = document.getElementById("gmsraCommitTime");
+          if (timeEl) timeEl.innerText = `🕒 ${g.relative_time || g.date}`;
+        }
       }
     }
 
