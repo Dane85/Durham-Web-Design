@@ -1018,6 +1018,37 @@
       transform: translateY(-1px);
     }
 
+    .appreciation-actions {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .google-review-pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 18px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      border-radius: 9999px;
+      background: rgba(30, 41, 59, 0.8);
+      color: #e2e8f0;
+      border: 1px solid rgba(51, 65, 85, 0.85);
+      text-decoration: none;
+      transition: all 0.2s ease;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+    }
+
+    .google-review-pill-btn:hover {
+      background: rgba(51, 65, 85, 0.9);
+      color: #fbbc04;
+      border-color: rgba(251, 188, 4, 0.45);
+      box-shadow: 0 0 15px rgba(251, 188, 4, 0.25);
+      transform: translateY(-1px);
+    }
+
     .footer-bottom {
       padding-top: 24px;
       display: flex;
@@ -1407,6 +1438,15 @@
         gap: 14px;
         padding: 16px;
       }
+      .appreciation-actions {
+        width: 100%;
+        flex-direction: column;
+        align-items: stretch;
+      }
+      .appreciation-actions a {
+        justify-content: center;
+        width: 100%;
+      }
       .footer-bottom {
         flex-direction: column;
         align-items: flex-start;
@@ -1460,6 +1500,20 @@
       gap: 7px;
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
       backdrop-filter: blur(8px);
+    }
+
+    .trust-item-link {
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+    }
+
+    .trust-item-link:hover {
+      border-color: rgba(251, 188, 4, 0.45);
+      background: rgba(30, 41, 59, 0.9);
+      color: #fff;
+      transform: translateY(-1px);
+      box-shadow: 0 0 15px rgba(251, 188, 4, 0.25);
     }
 
     .browser-header-top {
@@ -1550,6 +1604,7 @@
       <li><a href="#regional" onclick="closeMobileNav()"><span>Durham Footprint</span> <span>&rarr;</span></a></li>
       <li><a href="#contact" onclick="closeMobileNav()"><span>Contact &amp; Proposals</span> <span>&rarr;</span></a></li>
       <li><a href="https://billing.stripe.com/p/login/dRm3cveMn0wIfMi17rd7q00" target="_blank" rel="noopener noreferrer" onclick="closeMobileNav()"><span>Client Billing Portal</span> <span>&rarr;</span></a></li>
+      <li><a href="https://g.page/r/CSfgP1VMcxkOEBM/review" target="_blank" rel="noopener noreferrer" onclick="closeMobileNav()"><span>⭐ Google Reviews</span> <span>&rarr;</span></a></li>
       <li><a href="https://buy.stripe.com/dRm3cveMn0wIfMi17rd7q00" target="_blank" rel="noopener noreferrer" onclick="closeMobileNav()"><span>☕ Buy the Engineer a Coffee</span> <span>&rarr;</span></a></li>
     </ul>
     <div class="mobile-drawer-footer">
@@ -1587,6 +1642,10 @@
 
       <!-- Centered Sleek Trust Badges -->
       <div class="trust-badges">
+        <a href="https://g.page/r/CSfgP1VMcxkOEBM/review" target="_blank" rel="noopener noreferrer" class="trust-item trust-item-link" title="Review Durham Web Design on Google">
+          <span style="color: #fbbc04; letter-spacing: 1px;">★★★★★</span>
+          <span>5.0 Google Reviews</span>
+        </a>
         <div class="trust-item">
           <span>🍁</span>
           <span>100% Canadian Operated</span>
@@ -2064,9 +2123,14 @@
         <div id="formSuccess" class="form-success">
           <div class="form-success-icon">✓</div>
           <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 8px;">Proposal Request Received!</h3>
-          <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 24px;">
+          <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 16px;">
             Thank you! A senior specialist from Durham Web Design will review your details and send a personalized CAD proposal within 24 business hours.
           </p>
+          <div style="margin-bottom: 24px; padding: 12px 18px; border-radius: 10px; background: rgba(251, 188, 4, 0.08); border: 1px solid rgba(251, 188, 4, 0.25); display: inline-flex; align-items: center; gap: 10px;">
+            <span style="color: #fbbc04; font-size: 1.1rem;">★★★★★</span>
+            <span style="font-size: 0.9rem; color: #cbd5e1;">Past client? <a href="https://g.page/r/CSfgP1VMcxkOEBM/review" target="_blank" rel="noopener noreferrer" style="color: #fbbc04; font-weight: 600; text-decoration: underline;">Review Durham Web Design on Google &rarr;</a></span>
+          </div>
+          <br>
           <button class="btn btn-secondary" onclick="resetForm()">Submit Another Inquiry</button>
         </div>
       </div>
@@ -2088,6 +2152,7 @@
           <li><a href="#regional">Footprint</a></li>
           <li><a href="#contact">Contact</a></li>
           <li><a href="https://billing.stripe.com/p/login/dRm3cveMn0wIfMi17rd7q00" target="_blank" rel="noopener noreferrer">Client Billing Portal</a></li>
+          <li><a href="https://g.page/r/CSfgP1VMcxkOEBM/review" target="_blank" rel="noopener noreferrer">⭐ Google Reviews</a></li>
         </ul>
         <div style="color: var(--text-muted); font-size: 0.9rem;">
           Specialized in high-conversion web development & managed cloud infrastructure across Durham Region, ON.
@@ -2095,10 +2160,15 @@
       </div>
 
       <div class="footer-appreciation">
-        <span class="appreciation-text">Did our free advice or speed audit help you out?</span>
-        <a href="https://buy.stripe.com/dRm3cveMn0wIfMi17rd7q00" target="_blank" rel="noopener noreferrer" class="coffee-pill-btn inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full bg-slate-800/80 hover:bg-slate-700/90 text-slate-200 hover:text-cyan-400 border border-slate-700 hover:border-cyan-500/40 transition-all duration-200 shadow-sm">
-          <span>☕</span> <span>Buy the Engineer a Coffee</span>
-        </a>
+        <span class="appreciation-text">Did our free advice, audit, or bespoke design help your business?</span>
+        <div class="appreciation-actions">
+          <a href="https://g.page/r/CSfgP1VMcxkOEBM/review" target="_blank" rel="noopener noreferrer" class="google-review-pill-btn inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full bg-slate-800/80 hover:bg-slate-700/90 text-slate-200 hover:text-amber-400 border border-slate-700 hover:border-amber-500/40 transition-all duration-200 shadow-sm" title="Leave a 5-star Google Review">
+            <span style="color: #fbbc04;">★</span> <span>Review Us on Google</span>
+          </a>
+          <a href="https://buy.stripe.com/dRm3cveMn0wIfMi17rd7q00" target="_blank" rel="noopener noreferrer" class="coffee-pill-btn inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full bg-slate-800/80 hover:bg-slate-700/90 text-slate-200 hover:text-cyan-400 border border-slate-700 hover:border-cyan-500/40 transition-all duration-200 shadow-sm" title="Tip the engineer via Stripe">
+            <span>☕</span> <span>Buy the Engineer a Coffee</span>
+          </a>
+        </div>
       </div>
 
       <div class="footer-bottom">
