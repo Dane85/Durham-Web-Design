@@ -1602,7 +1602,9 @@
       width: 100%;
     }
     .view-panel.active {
-      display: block;
+      display: flex !important;
+      flex-direction: column;
+      gap: 28px;
       opacity: 1;
       transform: translateY(0);
     }
@@ -1776,20 +1778,21 @@
 
     /* Sidebar Backdrop on Mobile */
     .sidebar-backdrop {
-      display: none;
+      display: none !important;
       position: fixed;
       inset: 0;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(0, 0, 0, 0.75);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
-      z-index: 48;
+      z-index: 85;
       opacity: 0;
-      transition: opacity 0.3s ease;
       pointer-events: none;
+      transition: opacity 0.25s ease;
     }
     .sidebar-backdrop.active {
-      opacity: 1;
-      pointer-events: auto;
+      display: block !important;
+      opacity: 1 !important;
+      pointer-events: auto !important;
     }
 
     /* Responsive Adjustments */
@@ -1804,12 +1807,10 @@
         transform: translateX(-100%);
         width: 280px;
         box-shadow: 10px 0 35px rgba(0, 0, 0, 0.85);
+        z-index: 90;
       }
       .sidebar.open {
         transform: translateX(0);
-      }
-      .sidebar-backdrop {
-        display: block;
       }
       .main-wrapper {
         margin-left: 0;
@@ -1831,8 +1832,8 @@
       .mobile-view-tabs {
         display: flex;
         position: sticky;
-        top: 64px;
-        z-index: 38;
+        top: var(--header-height, 64px);
+        z-index: 55;
         background: rgba(11, 15, 25, 0.96);
         backdrop-filter: blur(20px);
         -webkit-backdrop-filter: blur(20px);
@@ -2291,8 +2292,27 @@
               <span class="hud-status-message" id="hudStatusMsg">All system resources within healthy operational parameters.</span>
             </div>
           </div>
+          <div class="hud-pills-group">
+            <div class="hud-metric-pill" id="hudCpuPill" title="CPU Load Threshold: <1.5 green, 1.5-2.0 yellow, >2.0 red">
+              <span class="hud-dot" id="hudCpuDot"></span>
+              <span>CPU: <strong id="hudCpuText">0.00</strong></span>
+            </div>
+            <div class="hud-metric-pill" id="hudRamPill" title="RAM Threshold: <70% green, 70-85% yellow, >85% red">
+              <span class="hud-dot" id="hudRamDot"></span>
+              <span>RAM: <strong id="hudRamText">26%</strong></span>
+            </div>
+            <div class="hud-metric-pill" id="hudDiskPill" title="NVMe SSD Threshold: <80% green, >80% yellow">
+              <span class="hud-dot" id="hudDiskDot"></span>
+              <span>NVMe: <strong id="hudDiskText">13%</strong></span>
+            </div>
+            <div class="hud-metric-pill" id="hudDaemonsPill" title="Daemons: Nginx, PHP 8.3-FPM, MariaDB">
+              <span class="hud-dot" id="hudDaemonsDot"></span>
+              <span>Daemons: <strong id="hudDaemonsText">3/3 Active</strong></span>
+            </div>
+          </div>
+        </div>
 
-<!-- ================================================================
+        <!-- ================================================================
              MODULE 1: TOP KPI SUMMARY BAR
              ================================================================ -->
         <section class="kpi-grid">
@@ -3251,6 +3271,11 @@
       updateTimestamp();
       setInterval(updateTimestamp, 60000);
 
+      // Initialize view from URL hash if present, or default to overview
+      const hashView = window.location.hash.replace('#', '');
+      const validViews = ['overview', 'pipeline', 'leads', 'server'];
+      switchNav(validViews.includes(hashView) ? hashView : 'overview');
+
       // 2. Fetch fresh real-time cloud data from Hetzner VPS node
       fetchServerData(false);
 
@@ -4149,6 +4174,8 @@
 
             /* Modular View Switching Logic (data-view) */
     function switchNav(viewName) {
+      if (!viewName) viewName = 'overview';
+
       // 1. Update sidebar active class
       document.querySelectorAll(".sidebar .nav-item").forEach(el => el.classList.remove("active"));
       const activeSide = document.querySelector(`.sidebar .nav-item[data-target="${viewName}"]`);
@@ -4167,7 +4194,7 @@
 
       const targetPanel = document.getElementById(`view-${viewName}`);
       if (targetPanel) {
-        targetPanel.style.display = "block";
+        targetPanel.style.display = "flex";
         setTimeout(() => targetPanel.classList.add("active"), 10);
       }
 
@@ -4190,6 +4217,11 @@
       if (sidebar) sidebar.classList.remove("open");
       if (backdrop) backdrop.classList.remove("active");
       document.body.classList.remove("no-scroll");
+
+      // 7. Update URL hash without scrolling jump
+      if (window.history && window.history.replaceState) {
+        window.history.replaceState(null, '', '#' + viewName);
+      }
     }
 
     function toggleSidebar() {
