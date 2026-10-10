@@ -1586,7 +1586,195 @@
       to { transform: translateY(0); opacity: 1; }
     }
 
-       /* Sidebar Backdrop on Mobile */
+    body.no-scroll {
+      overflow: hidden !important;
+      touch-action: none;
+    }
+
+    /* ==========================================================================
+       MODULAR TABBED VIEW ARCHITECTURE (data-view)
+       ========================================================================== */
+    .view-panel {
+      display: none;
+      opacity: 0;
+      transform: translateY(6px);
+      transition: opacity 0.2s cubic-bezier(0.16, 1, 0.3, 1), transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      width: 100%;
+    }
+    .view-panel.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Mobile Segmented Tab Bar */
+    .mobile-view-tabs {
+      display: none;
+    }
+
+    /* Lead Stats & 1-Tap Mobile Actions */
+    .lead-stats-bar {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+    .lead-stat-card {
+      background: rgba(17, 24, 39, 0.7);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      padding: 12px 14px;
+      backdrop-filter: blur(8px);
+    }
+    .lead-stat-label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 4px;
+    }
+    .lead-stat-val {
+      font-size: 18px;
+      font-weight: 800;
+      color: #FFF;
+    }
+    .lead-quick-taps {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 4px;
+    }
+    .lead-tap-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      text-decoration: none;
+      transition: var(--transition);
+      min-height: 32px;
+    }
+    .lead-tap-call {
+      background: rgba(16, 185, 129, 0.15);
+      color: var(--emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+    }
+    .lead-tap-call:hover {
+      background: rgba(16, 185, 129, 0.3);
+      color: #FFF;
+    }
+    .lead-tap-mail {
+      background: rgba(0, 210, 255, 0.15);
+      color: var(--cyan);
+      border: 1px solid rgba(0, 210, 255, 0.3);
+    }
+    .lead-tap-mail:hover {
+      background: rgba(0, 210, 255, 0.3);
+      color: #FFF;
+    }
+
+    /* Activity Stream Section in Overview */
+    .activity-stream-section {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-xl);
+      padding: 24px;
+      backdrop-filter: blur(12px);
+      margin-top: 24px;
+    }
+    .activity-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    @media (max-width: 860px) {
+      .activity-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+    .activity-card {
+      background: rgba(11, 15, 25, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: var(--radius-lg);
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+    .activity-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 10px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 12px;
+    }
+    .activity-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+      padding: 6px 0;
+    }
+    .activity-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      margin-top: 5px;
+      flex-shrink: 0;
+    }
+    .dot-cyan { background: var(--cyan); box-shadow: 0 0 8px var(--cyan); }
+    .dot-emerald { background: var(--emerald); box-shadow: 0 0 8px var(--emerald); }
+    .activity-content { flex: 1; min-width: 0; }
+    .activity-title {
+      font-size: 13px;
+      font-weight: 700;
+      color: #FFF;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .activity-desc {
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-top: 3px;
+      line-height: 1.4;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .activity-meta {
+      font-size: 11px;
+      color: var(--text-dim);
+      margin-top: 4px;
+      font-family: var(--font-mono);
+    }
+    .activity-services-list {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .service-status-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 10px;
+      background: rgba(255, 255, 255, 0.02);
+      border-radius: var(--radius-sm);
+      font-size: 12px;
+    }
+    .activity-card-footer {
+      display: flex;
+      gap: 8px;
+      margin-top: auto;
+      padding-top: 10px;
+      border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Sidebar Backdrop on Mobile */
     .sidebar-backdrop {
       display: none;
       position: fixed;
@@ -1594,7 +1782,7 @@
       background: rgba(0, 0, 0, 0.7);
       backdrop-filter: blur(6px);
       -webkit-backdrop-filter: blur(6px);
-      z-index: 45;
+      z-index: 48;
       opacity: 0;
       transition: opacity 0.3s ease;
       pointer-events: none;
@@ -1630,15 +1818,67 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        min-height: 40px;
-        min-width: 40px;
+        min-height: 48px;
+        min-width: 48px;
       }
       .sidebar-close-btn {
-        display: block;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-height: 44px;
+        min-width: 44px;
+      }
+      .mobile-view-tabs {
+        display: flex;
+        position: sticky;
+        top: 64px;
+        z-index: 38;
+        background: rgba(11, 15, 25, 0.96);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-bottom: 1px solid var(--border-subtle);
+        padding: 8px 16px;
+        gap: 8px;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+      }
+      .mobile-tab-btn {
+        flex: 1;
+        min-width: 80px;
+        min-height: 48px;
+        padding: 10px 14px;
+        border-radius: var(--radius-md);
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        color: var(--text-muted);
+        font-family: var(--font-sans);
+        font-size: 13px;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        cursor: pointer;
+        transition: var(--transition);
+        white-space: nowrap;
+        -webkit-tap-highlight-color: transparent;
+      }
+      .mobile-tab-btn:hover {
+        color: #FFFFFF;
+        background: rgba(255, 255, 255, 0.08);
+      }
+      .mobile-tab-btn.active {
+        color: var(--cyan);
+        background: rgba(0, 210, 255, 0.15);
+        border-color: rgba(0, 210, 255, 0.45);
+        box-shadow: 0 0 16px rgba(0, 210, 255, 0.28);
+        font-weight: 700;
       }
       .kpi-grid { grid-template-columns: repeat(2, 1fr); gap: 14px; }
       .view-content { padding: 20px 16px; gap: 24px; }
-      .top-header { padding: 0 16px; }
+      .top-header { padding: 0 16px; position: sticky; top: 0; z-index: 50; }
     }
 
     @media (max-width: 768px) {
@@ -1773,31 +2013,51 @@
       .telemetry-grid {
         grid-template-columns: 1fr;
       }
+      .mobile-view-tabs {
+        top: 60px;
+        padding: 6px 10px;
+        gap: 6px;
+      }
+      .mobile-tab-btn {
+        min-height: 48px;
+        padding: 8px 6px;
+        font-size: 12px;
+        gap: 4px;
+      }
       .kpi-grid {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
       }
       .kpi-card {
-        padding: 14px 12px;
+        padding: 14px 12px !important;
+        background: rgba(17, 24, 39, 0.95) !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
       }
       .kpi-card:nth-child(5) {
-        grid-column: span 2;
+        grid-column: span 2 !important;
       }
       .kpi-value {
-        font-size: 19px;
-        margin-bottom: 4px;
+        font-size: 19px !important;
+        font-weight: 800 !important;
+        letter-spacing: -0.02em !important;
+        color: #FFFFFF !important;
+        white-space: nowrap !important;
+        overflow: hidden !important;
+        text-overflow: ellipsis !important;
       }
       .kpi-label {
-        font-size: 10.5px;
+        font-size: 11px !important;
+        font-weight: 700 !important;
+        color: var(--text-muted) !important;
       }
       .kpi-icon-wrap {
         width: 28px;
         height: 28px;
       }
       .kpi-subtext {
-        font-size: 11px;
-        flex-wrap: wrap;
-        gap: 4px;
+        font-size: 11px !important;
+        flex-wrap: wrap !important;
+        gap: 4px !important;
       }
       /* Modal Mobile Tuning */
       .modal-box {
@@ -1876,14 +2136,14 @@
 
       <nav class="sidebar-nav">
         <span class="nav-label">Core Modules</span>
-        <a class="nav-item active" onclick="switchNav('overview')">
+        <a class="nav-item active" data-target="overview" onclick="switchNav('overview')">
           <span class="nav-icon">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
           </span>
           <span>Operations Hub</span>
         </a>
 
-        <a class="nav-item" onclick="switchNav('pipeline')">
+        <a class="nav-item" data-target="pipeline" onclick="switchNav('pipeline')">
           <span class="nav-icon">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
           </span>
@@ -1891,7 +2151,7 @@
           <span class="badge" id="sidebarPipelineCount">5</span>
         </a>
 
-        <a class="nav-item" onclick="switchNav('leads')">
+        <a class="nav-item" data-target="leads" onclick="switchNav('leads')">
           <span class="nav-icon">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
           </span>
@@ -1899,7 +2159,7 @@
           <span class="badge" id="sidebarLeadsCount">3</span>
         </a>
 
-        <a class="nav-item" onclick="switchNav('server')">
+        <a class="nav-item" data-target="server" onclick="switchNav('server')">
           <span class="nav-icon">
             <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/></svg>
           </span>
@@ -1949,6 +2209,9 @@
       </div>
     </aside>
 
+    <!-- Mobile Sidebar Backdrop -->
+    <div class="sidebar-backdrop" id="sidebarBackdrop" onclick="toggleSidebar()"></div>
+
     <!-- ====================================================================
          MAIN CONTENT AREA
          ==================================================================== -->
@@ -1957,13 +2220,13 @@
       <!-- Top Sticky Header -->
       <header class="top-header">
         <div class="header-left">
-          <button class="mobile-menu-btn" onclick="toggleSidebar()">
+          <button class="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Toggle Navigation Drawer">
             <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
           </button>
-          <div class="header-breadcrumb">
+          <div class="header-breadcrumb" onclick="switchNav('overview')" style="cursor:pointer;" title="Go to Operations Hub">
             <span class="breadcrumb-root">Epic Expressions</span>
             <span class="breadcrumb-sep">/</span>
-            <span class="breadcrumb-current" id="headerTitle">Operations Dashboard</span>
+            <span class="breadcrumb-current" id="headerTitle">Operations Hub</span>
           </div>
         </div>
 
@@ -1990,10 +2253,34 @@
         </div>
       </header>
 
+      <!-- Sticky Mobile Segmented Tab Bar (Screens <= 960px) -->
+      <nav class="mobile-view-tabs" aria-label="Mobile Navigation">
+        <button class="mobile-tab-btn active" data-target="overview" onclick="switchNav('overview')">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+          <span>Overview</span>
+        </button>
+        <button class="mobile-tab-btn" data-target="pipeline" onclick="switchNav('pipeline')">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
+          <span>Pipeline</span>
+        </button>
+        <button class="mobile-tab-btn" data-target="leads" onclick="switchNav('leads')">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4"/></svg>
+          <span>Leads</span>
+        </button>
+        <button class="mobile-tab-btn" data-target="server" onclick="switchNav('server')">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2m-2-4h.01M17 16h.01"/></svg>
+          <span>Server</span>
+        </button>
+      </nav>
+
       <!-- View Container -->
       <div class="view-content">
 
         <!-- ================================================================
+             VIEW 1: OPERATIONS HUB (view-overview)
+             ================================================================ -->
+        <div class="view-panel active" id="view-overview">
+<!-- ================================================================
              MODULE 0.9: SERVER ALERT HUD
              ================================================================ -->
         <div class="server-alert-hud" id="serverAlertHud">
@@ -2004,27 +2291,8 @@
               <span class="hud-status-message" id="hudStatusMsg">All system resources within healthy operational parameters.</span>
             </div>
           </div>
-          <div class="hud-pills-group">
-            <div class="hud-metric-pill" id="hudCpuPill" title="CPU Load Threshold: <1.5 green, 1.5-2.0 yellow, >2.0 red">
-              <span class="hud-dot" id="hudCpuDot"></span>
-              <span>CPU: <strong id="hudCpuText">0.00</strong></span>
-            </div>
-            <div class="hud-metric-pill" id="hudRamPill" title="RAM Threshold: <70% green, 70-85% yellow, >85% red">
-              <span class="hud-dot" id="hudRamDot"></span>
-              <span>RAM: <strong id="hudRamText">26%</strong></span>
-            </div>
-            <div class="hud-metric-pill" id="hudDiskPill" title="NVMe SSD Threshold: <80% green, >80% yellow">
-              <span class="hud-dot" id="hudDiskDot"></span>
-              <span>NVMe: <strong id="hudDiskText">13%</strong></span>
-            </div>
-            <div class="hud-metric-pill" id="hudDaemonsPill" title="Daemons: Nginx, PHP 8.3-FPM, MariaDB">
-              <span class="hud-dot" id="hudDaemonsDot"></span>
-              <span>Daemons: <strong id="hudDaemonsText">3/3 Active</strong></span>
-            </div>
-          </div>
-        </div>
 
-        <!-- ================================================================
+<!-- ================================================================
              MODULE 1: TOP KPI SUMMARY BAR
              ================================================================ -->
         <section class="kpi-grid">
@@ -2105,7 +2373,383 @@
 
         </section>
 
+<!-- ================================================================
+             MODULE 4: QUICK-ACTION DEPLOYMENT & SERVER TOOLBAR
+             ================================================================ -->
+        <section class="toolbar-section">
+          <div class="toolbar-grid">
+            <div class="toolbar-commands">
+              <div class="toolbar-title-wrap">
+                <svg width="18" height="18" fill="none" stroke="var(--cyan)" stroke-width="2" viewBox="0 0 24 24"><path d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                <h3 style="font-size:14px;font-weight:800;letter-spacing:-0.01em;">Quick-Action VPS Commands (Click to Copy)</h3>
+                <span class="toolbar-badge">ubuntu-2gb-ash-2</span>
+              </div>
+              
+              <div class="command-pills">
+                <div class="cmd-pill" onclick="copyCommand('deploy-site durham', this)">
+                  <code>deploy-site durham</code>
+                  <span class="cmd-desc">— Sync agency flagship</span>
+                  <svg class="cmd-copy-icon" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                </div>
+
+                <div class="cmd-pill" onclick="copyCommand('deploy-site gmsra', this)">
+                  <code>deploy-site gmsra</code>
+                  <span class="cmd-desc">— Sync GMSRA theme &amp; reload PHP</span>
+                  <svg class="cmd-copy-icon" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                </div>
+
+                <div class="cmd-pill" onclick="copyCommand('deploy-site ops', this)">
+                  <code>deploy-site ops</code>
+                  <span class="cmd-desc">— Sync ops dashboard</span>
+                  <svg class="cmd-copy-icon" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                </div>
+
+                <div class="cmd-pill" onclick="copyCommand('deploy-site all', this)">
+                  <code>deploy-site all</code>
+                  <span class="cmd-desc">— Full node synchronization</span>
+                  <svg class="cmd-copy-icon" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                </div>
+              </div>
+            </div>
+
+            <div class="toolbar-quicklinks">
+              <a href="https://console.hetzner.cloud/" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
+                <span>Hetzner Cloud Console</span>
+              </a>
+
+              <a href="https://billing.stripe.com/p/login/dRm3cveMn0wIfMi17rd7q00" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" title="Open Stripe Customer Billing Portal">
+                <span>💳 Stripe Billing</span>
+              </a>
+
+              <a href="https://g.page/r/CSfgP1VMcxkOEBM/review" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" title="Open Google Review Page">
+                <span style="color: #fbbc04;">★</span>
+                <span>Google Reviews</span>
+              </a>
+
+              <button onclick="openDriveInfoModal()" class="btn btn-outline btn-sm">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+                <span>Google Drive Ops Hub</span>
+              </button>
+
+              <button onclick="resetDataToDefault()" class="btn btn-outline btn-sm" title="Restore standard default data">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                <span>Reset Demo</span>
+              </button>
+            </div>
+          </div>
+        </section>
+
         <!-- ================================================================
+             MODULE: RECENT ACTIVITY & LIVE DEPLOYMENT STREAM
+             ================================================================ -->
+        <section class="activity-stream-section">
+          <div class="section-header" style="margin-bottom: 16px;">
+            <div class="section-title">
+              <svg width="20" height="20" fill="none" stroke="var(--cyan)" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+              <div>
+                <h3 style="font-size:15px;font-weight:800;letter-spacing:-0.01em;color:#FFF;">Recent Activity &amp; Live Deployment Stream</h3>
+                <p style="font-size:12px;color:var(--text-dim);">Real-time feed of server deployments, lead intakes, and node events</p>
+              </div>
+            </div>
+            <button onclick="switchNav('server')" class="btn btn-outline btn-sm">
+              <span>View Full Node Telemetry &rarr;</span>
+            </button>
+          </div>
+          <div class="activity-grid">
+            <div class="activity-card">
+              <div class="activity-card-header">
+                <span style="font-weight:700;color:var(--cyan);text-transform:uppercase;letter-spacing:0.05em;display:flex;align-items:center;gap:6px;">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                  Latest Production Git Deploys
+                </span>
+                <span class="t-pill t-pill-cyan" style="font-size:10px;">Ashburn Node</span>
+              </div>
+              <div class="activity-item">
+                <span class="activity-dot dot-cyan"></span>
+                <div class="activity-content">
+                  <div class="activity-title">
+                    <span>Durham Web Design</span>
+                    <code id="overviewDwdHash" style="font-size:11px;color:var(--cyan);background:rgba(0,210,255,0.1);padding:1px 5px;border-radius:4px;">0ea6854</code>
+                  </div>
+                  <div class="activity-desc" id="overviewDwdMsg">feat(billing): add Client Billing Portal link to website footer</div>
+                  <div class="activity-meta" id="overviewDwdMeta">👤 Dane • Just now • ✓ Deployed</div>
+                </div>
+              </div>
+              <div class="activity-item">
+                <span class="activity-dot dot-emerald"></span>
+                <div class="activity-content">
+                  <div class="activity-title">
+                    <span>GMSRA Client Theme</span>
+                    <code id="overviewGmsraHash" style="font-size:11px;color:var(--emerald);background:rgba(16,185,129,0.1);padding:1px 5px;border-radius:4px;">59338dd</code>
+                  </div>
+                  <div class="activity-desc" id="overviewGmsraMsg">feat(analytics): integrate GA4 tracking &amp; conversion telemetry</div>
+                  <div class="activity-meta" id="overviewGmsraMeta">👤 Dane • Deployed • ✓ Verified 200 OK</div>
+                </div>
+              </div>
+            </div>
+            <div class="activity-card">
+              <div class="activity-card-header">
+                <span style="font-weight:700;color:var(--emerald);text-transform:uppercase;letter-spacing:0.05em;display:flex;align-items:center;gap:6px;">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M5 12a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v4a2 2 0 01-2 2M5 12a2 2 0 00-2 2v4a2 2 0 002 2h14a2 2 0 002-2v-4a2 2 0 00-2-2"/></svg>
+                  Active Services &amp; Health Checks
+                </span>
+                <span class="t-pill t-pill-emerald" style="font-size:10px;">100% Operational</span>
+              </div>
+              <div class="activity-services-list">
+                <div class="service-status-row">
+                  <span style="color:var(--text-main);font-weight:600;">Nginx 1.24 Web Server</span>
+                  <span style="color:var(--emerald);font-family:var(--font-mono);font-size:11px;display:flex;align-items:center;gap:4px;"><span class="t-dot-green"></span>Active / FastCGI</span>
+                </div>
+                <div class="service-status-row">
+                  <span style="color:var(--text-main);font-weight:600;">PHP 8.3-FPM Pool</span>
+                  <span style="color:var(--emerald);font-family:var(--font-mono);font-size:11px;display:flex;align-items:center;gap:4px;"><span class="t-dot-green"></span>Active / OPcache ON</span>
+                </div>
+                <div class="service-status-row">
+                  <span style="color:var(--text-main);font-weight:600;">MariaDB Database</span>
+                  <span style="color:var(--emerald);font-family:var(--font-mono);font-size:11px;display:flex;align-items:center;gap:4px;"><span class="t-dot-green"></span>Active / 15 Connections</span>
+                </div>
+              </div>
+              <div class="activity-card-footer">
+                <button onclick="copyCommand('deploy-site all', this)" class="btn btn-outline btn-sm" style="flex:1;justify-content:center;">
+                  <span>Copy Node Sync Command</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        </div>
+
+        <!-- ================================================================
+             VIEW 2: PROJECT PIPELINE (view-pipeline)
+             ================================================================ -->
+        <div class="view-panel" id="view-pipeline" style="display: none;">
+<!-- ================================================================
+             MODULE 2: PROJECT PIPELINE (KANBAN & DATA TABLE)
+             ================================================================ -->
+        <section class="pipeline-section" id="pipelineSection">
+          
+          <div class="section-header">
+            <div class="section-title">
+              <svg width="22" height="22" fill="none" stroke="var(--cyan)" stroke-width="2" viewBox="0 0 24 24"><path d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
+              <h2>Client &amp; Project Pipeline</h2>
+            </div>
+
+            <div class="pipeline-controls">
+              <div class="search-input-wrap">
+                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+                <input type="text" class="search-input" id="projectSearchInput" placeholder="Search projects, repos..." oninput="filterProjects()">
+              </div>
+
+              <div class="view-toggle-wrap">
+                <button class="view-toggle-btn active" id="btnKanbanView" onclick="setViewMode('kanban')">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
+                  <span>Kanban</span>
+                </button>
+                <button class="view-toggle-btn" id="btnTableView" onclick="setViewMode('table')">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  <span>Table</span>
+                </button>
+              </div>
+
+              <button class="btn btn-cyan btn-sm" onclick="openProjectModal()">
+                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+                <span>Add Client</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Stage Filter Pills -->
+          <div class="stage-filter-tabs">
+            <button class="stage-tab active" onclick="setStageFilter('all', this)">
+              <span>All Stages</span>
+              <span class="badge" id="pillCountAll">5</span>
+            </button>
+            <button class="stage-tab" onclick="setStageFilter('1', this)">
+              <span style="color:var(--rose);">●</span>
+              <span>1: Lead / Audit</span>
+              <span class="badge" id="pillCount1">1</span>
+            </button>
+            <button class="stage-tab" onclick="setStageFilter('2', this)">
+              <span style="color:var(--amber);">●</span>
+              <span>2: Proposal &amp; Deposit</span>
+              <span class="badge" id="pillCount2">1</span>
+            </button>
+            <button class="stage-tab" onclick="setStageFilter('3', this)">
+              <span style="color:var(--purple);">●</span>
+              <span>3: In Development</span>
+              <span class="badge" id="pillCount3">1</span>
+            </button>
+            <button class="stage-tab" onclick="setStageFilter('4', this)">
+              <span style="color:var(--cyan);">●</span>
+              <span>4: Staging &amp; Review</span>
+              <span class="badge" id="pillCount4">1</span>
+            </button>
+            <button class="stage-tab" onclick="setStageFilter('5', this)">
+              <span style="color:var(--emerald);">●</span>
+              <span>5: Live &amp; Care Plan</span>
+              <span class="badge" id="pillCount5">1</span>
+            </button>
+          </div>
+
+          <!-- KANBAN BOARD CONTAINER -->
+          <div class="kanban-board" id="kanbanBoard">
+            
+            <!-- Column 1: Lead / Audit -->
+            <div class="kanban-col" data-stage="1">
+              <div class="kanban-col-header">
+                <div class="col-title-group">
+                  <div class="col-dot" style="background:var(--rose);box-shadow:0 0 8px var(--rose);"></div>
+                  <span class="col-title">1. Lead / Audit</span>
+                </div>
+                <span class="col-count" id="countCol1">0</span>
+              </div>
+              <div class="kanban-cards-wrap" id="cardsCol1"></div>
+            </div>
+
+            <!-- Column 2: Proposal & Deposit -->
+            <div class="kanban-col" data-stage="2">
+              <div class="kanban-col-header">
+                <div class="col-title-group">
+                  <div class="col-dot" style="background:var(--amber);box-shadow:0 0 8px var(--amber);"></div>
+                  <span class="col-title">2. Proposal &amp; Deposit</span>
+                </div>
+                <span class="col-count" id="countCol2">0</span>
+              </div>
+              <div class="kanban-cards-wrap" id="cardsCol2"></div>
+            </div>
+
+            <!-- Column 3: In Development -->
+            <div class="kanban-col" data-stage="3">
+              <div class="kanban-col-header">
+                <div class="col-title-group">
+                  <div class="col-dot" style="background:var(--purple);box-shadow:0 0 8px var(--purple);"></div>
+                  <span class="col-title">3. In Development</span>
+                </div>
+                <span class="col-count" id="countCol3">0</span>
+              </div>
+              <div class="kanban-cards-wrap" id="cardsCol3"></div>
+            </div>
+
+            <!-- Column 4: Staging & Review -->
+            <div class="kanban-col" data-stage="4">
+              <div class="kanban-col-header">
+                <div class="col-title-group">
+                  <div class="col-dot" style="background:var(--cyan);box-shadow:0 0 8px var(--cyan);"></div>
+                  <span class="col-title">4. Staging &amp; Review</span>
+                </div>
+                <span class="col-count" id="countCol4">0</span>
+              </div>
+              <div class="kanban-cards-wrap" id="cardsCol4"></div>
+            </div>
+
+            <!-- Column 5: Live & Care Plan -->
+            <div class="kanban-col" data-stage="5">
+              <div class="kanban-col-header">
+                <div class="col-title-group">
+                  <div class="col-dot" style="background:var(--emerald);box-shadow:0 0 8px var(--emerald);"></div>
+                  <span class="col-title">5. Live &amp; Care Plan</span>
+                </div>
+                <span class="col-count" id="countCol5">0</span>
+              </div>
+              <div class="kanban-cards-wrap" id="cardsCol5"></div>
+            </div>
+
+          </div>
+
+          <!-- DATA TABLE VIEW CONTAINER -->
+          <div class="table-view-container" id="tableViewContainer">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Client / Project</th>
+                  <th>Current Stage</th>
+                  <th>Domain / URL Target</th>
+                  <th>Repository / Dev Path</th>
+                  <th>Pricing / Retainer</th>
+                  <th>Live Telemetry</th>
+                  <th style="text-align:right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="projectsTableBody">
+                <!-- Injected via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+
+        </section>
+        </div>
+
+        <!-- ================================================================
+             VIEW 3: INBOUND LEADS (view-leads)
+             ================================================================ -->
+        <div class="view-panel" id="view-leads" style="display: none;">
+<!-- ================================================================
+             MODULE 5: INBOUND LEAD INTAKE SIMULATOR & LOG
+             ================================================================ -->
+        <section class="lead-section" id="leadsSection">
+          <div class="section-header">
+            <div class="section-title">
+              <svg width="22" height="22" fill="none" stroke="var(--cyan)" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+              <div>
+                <h2>Inbound Lead Intake Log</h2>
+                <p style="font-size:12.5px;color:var(--text-dim);">Live lead submissions received via Web3Forms endpoint &bull; 1-click convert into Pipeline</p>
+              </div>
+            </div>
+
+            <button class="btn btn-cyan btn-sm" onclick="openSimulateLeadModal()">
+              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
+              <span>Simulate Web3Forms Lead</span>
+            </button>
+          </div>
+
+          
+          <!-- Lead Stats Bar -->
+          <div class="lead-stats-bar">
+            <div class="lead-stat-card">
+              <div class="lead-stat-label">Total Submissions</div>
+              <div class="lead-stat-val" id="leadsStatTotal">3</div>
+            </div>
+            <div class="lead-stat-card">
+              <div class="lead-stat-label">New This Week</div>
+              <div class="lead-stat-val" style="color:var(--cyan);" id="leadsStatNew">3</div>
+            </div>
+            <div class="lead-stat-card">
+              <div class="lead-stat-label">Avg Response Time</div>
+              <div class="lead-stat-val" style="color:var(--emerald);">Sub-15m</div>
+            </div>
+            <div class="lead-stat-card">
+              <div class="lead-stat-label">Pipeline Conversion</div>
+              <div class="lead-stat-val" style="color:var(--purple);" id="leadsStatConv">100%</div>
+            </div>
+          </div>
+
+          <div class="lead-table-wrap">
+            <table class="data-table">
+              <thead>
+                <tr>
+                  <th>Prospect / Business</th>
+                  <th>Contact Details</th>
+                  <th>Package / Project Scope</th>
+                  <th>Submission Timestamp</th>
+                  <th>Ingestion Channel</th>
+                  <th style="text-align:right;">Actions</th>
+                </tr>
+              </thead>
+              <tbody id="leadsTableBody">
+                <!-- Injected via JavaScript -->
+              </tbody>
+            </table>
+          </div>
+        </section>
+        </div>
+
+        <!-- ================================================================
+             VIEW 4: VPS DEEP TELEMETRY & NODES (view-server)
+             ================================================================ -->
+        <div class="view-panel" id="view-server" style="display: none;">
+<!-- ================================================================
              MODULE 1.5: REAL-TIME VPS TELEMETRY & CLOUD SYNC HUD
              ================================================================ -->
         <section class="telemetry-section" id="telemetrySection">
@@ -2268,268 +2912,8 @@
             </div>
           </div>
         </section>
+        </div>
 
-        <!-- ================================================================
-             MODULE 4: QUICK-ACTION DEPLOYMENT & SERVER TOOLBAR
-             ================================================================ -->
-        <section class="toolbar-section">
-          <div class="toolbar-grid">
-            <div class="toolbar-commands">
-              <div class="toolbar-title-wrap">
-                <svg width="18" height="18" fill="none" stroke="var(--cyan)" stroke-width="2" viewBox="0 0 24 24"><path d="M8 9l3 3-3 3m5 0h3M5 20h14a2 2 0 002-2V6a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                <h3 style="font-size:14px;font-weight:800;letter-spacing:-0.01em;">Quick-Action VPS Commands (Click to Copy)</h3>
-                <span class="toolbar-badge">ubuntu-2gb-ash-2</span>
-              </div>
-              
-              <div class="command-pills">
-                <div class="cmd-pill" onclick="copyCommand('deploy-site durham', this)">
-                  <code>deploy-site durham</code>
-                  <span class="cmd-desc">— Sync agency flagship</span>
-                  <svg class="cmd-copy-icon" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-                </div>
-
-                <div class="cmd-pill" onclick="copyCommand('deploy-site gmsra', this)">
-                  <code>deploy-site gmsra</code>
-                  <span class="cmd-desc">— Sync GMSRA theme &amp; reload PHP</span>
-                  <svg class="cmd-copy-icon" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-                </div>
-
-                <div class="cmd-pill" onclick="copyCommand('deploy-site ops', this)">
-                  <code>deploy-site ops</code>
-                  <span class="cmd-desc">— Sync ops dashboard</span>
-                  <svg class="cmd-copy-icon" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-                </div>
-
-                <div class="cmd-pill" onclick="copyCommand('deploy-site all', this)">
-                  <code>deploy-site all</code>
-                  <span class="cmd-desc">— Full node synchronization</span>
-                  <svg class="cmd-copy-icon" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-                </div>
-              </div>
-            </div>
-
-            <div class="toolbar-quicklinks">
-              <a href="https://console.hetzner.cloud/" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 15a4 4 0 004 4h9a5 5 0 10-.1-9.999 5.002 5.002 0 00-9.78 2.096A4.001 4.001 0 003 15z"/></svg>
-                <span>Hetzner Cloud Console</span>
-              </a>
-
-              <a href="https://billing.stripe.com/p/login/dRm3cveMn0wIfMi17rd7q00" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" title="Open Stripe Customer Billing Portal">
-                <span>💳 Stripe Billing</span>
-              </a>
-
-              <a href="https://g.page/r/CSfgP1VMcxkOEBM/review" target="_blank" rel="noopener noreferrer" class="btn btn-outline btn-sm" title="Open Google Review Page">
-                <span style="color: #fbbc04;">★</span>
-                <span>Google Reviews</span>
-              </a>
-
-              <button onclick="openDriveInfoModal()" class="btn btn-outline btn-sm">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
-                <span>Google Drive Ops Hub</span>
-              </button>
-
-              <button onclick="resetDataToDefault()" class="btn btn-outline btn-sm" title="Restore standard default data">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
-                <span>Reset Demo</span>
-              </button>
-            </div>
-          </div>
-        </section>
-
-        <!-- ================================================================
-             MODULE 2: PROJECT PIPELINE (KANBAN & DATA TABLE)
-             ================================================================ -->
-        <section class="pipeline-section" id="pipelineSection">
-          
-          <div class="section-header">
-            <div class="section-title">
-              <svg width="22" height="22" fill="none" stroke="var(--cyan)" stroke-width="2" viewBox="0 0 24 24"><path d="M9 17V7m0 10a2 2 0 01-2 2H5a2 2 0 01-2-2V7a2 2 0 012-2h2a2 2 0 012 2m0 10a2 2 0 002 2h2a2 2 0 002-2M9 7a2 2 0 012-2h2a2 2 0 012 2m0 10V7m0 10a2 2 0 002 2h2a2 2 0 002-2V7a2 2 0 00-2-2h-2a2 2 0 00-2 2"/></svg>
-              <h2>Client &amp; Project Pipeline</h2>
-            </div>
-
-            <div class="pipeline-controls">
-              <div class="search-input-wrap">
-                <svg fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
-                <input type="text" class="search-input" id="projectSearchInput" placeholder="Search projects, repos..." oninput="filterProjects()">
-              </div>
-
-              <div class="view-toggle-wrap">
-                <button class="view-toggle-btn active" id="btnKanbanView" onclick="setViewMode('kanban')">
-                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
-                  <span>Kanban</span>
-                </button>
-                <button class="view-toggle-btn" id="btnTableView" onclick="setViewMode('table')">
-                  <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 10h18M3 14h18m-9-4v8m-7 0h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
-                  <span>Table</span>
-                </button>
-              </div>
-
-              <button class="btn btn-cyan btn-sm" onclick="openProjectModal()">
-                <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
-                <span>Add Client</span>
-              </button>
-            </div>
-          </div>
-
-          <!-- Stage Filter Pills -->
-          <div class="stage-filter-tabs">
-            <button class="stage-tab active" onclick="setStageFilter('all', this)">
-              <span>All Stages</span>
-              <span class="badge" id="pillCountAll">5</span>
-            </button>
-            <button class="stage-tab" onclick="setStageFilter('1', this)">
-              <span style="color:var(--rose);">●</span>
-              <span>1: Lead / Audit</span>
-              <span class="badge" id="pillCount1">1</span>
-            </button>
-            <button class="stage-tab" onclick="setStageFilter('2', this)">
-              <span style="color:var(--amber);">●</span>
-              <span>2: Proposal &amp; Deposit</span>
-              <span class="badge" id="pillCount2">1</span>
-            </button>
-            <button class="stage-tab" onclick="setStageFilter('3', this)">
-              <span style="color:var(--purple);">●</span>
-              <span>3: In Development</span>
-              <span class="badge" id="pillCount3">1</span>
-            </button>
-            <button class="stage-tab" onclick="setStageFilter('4', this)">
-              <span style="color:var(--cyan);">●</span>
-              <span>4: Staging &amp; Review</span>
-              <span class="badge" id="pillCount4">1</span>
-            </button>
-            <button class="stage-tab" onclick="setStageFilter('5', this)">
-              <span style="color:var(--emerald);">●</span>
-              <span>5: Live &amp; Care Plan</span>
-              <span class="badge" id="pillCount5">1</span>
-            </button>
-          </div>
-
-          <!-- KANBAN BOARD CONTAINER -->
-          <div class="kanban-board" id="kanbanBoard">
-            
-            <!-- Column 1: Lead / Audit -->
-            <div class="kanban-col" data-stage="1">
-              <div class="kanban-col-header">
-                <div class="col-title-group">
-                  <div class="col-dot" style="background:var(--rose);box-shadow:0 0 8px var(--rose);"></div>
-                  <span class="col-title">1. Lead / Audit</span>
-                </div>
-                <span class="col-count" id="countCol1">0</span>
-              </div>
-              <div class="kanban-cards-wrap" id="cardsCol1"></div>
-            </div>
-
-            <!-- Column 2: Proposal & Deposit -->
-            <div class="kanban-col" data-stage="2">
-              <div class="kanban-col-header">
-                <div class="col-title-group">
-                  <div class="col-dot" style="background:var(--amber);box-shadow:0 0 8px var(--amber);"></div>
-                  <span class="col-title">2. Proposal &amp; Deposit</span>
-                </div>
-                <span class="col-count" id="countCol2">0</span>
-              </div>
-              <div class="kanban-cards-wrap" id="cardsCol2"></div>
-            </div>
-
-            <!-- Column 3: In Development -->
-            <div class="kanban-col" data-stage="3">
-              <div class="kanban-col-header">
-                <div class="col-title-group">
-                  <div class="col-dot" style="background:var(--purple);box-shadow:0 0 8px var(--purple);"></div>
-                  <span class="col-title">3. In Development</span>
-                </div>
-                <span class="col-count" id="countCol3">0</span>
-              </div>
-              <div class="kanban-cards-wrap" id="cardsCol3"></div>
-            </div>
-
-            <!-- Column 4: Staging & Review -->
-            <div class="kanban-col" data-stage="4">
-              <div class="kanban-col-header">
-                <div class="col-title-group">
-                  <div class="col-dot" style="background:var(--cyan);box-shadow:0 0 8px var(--cyan);"></div>
-                  <span class="col-title">4. Staging &amp; Review</span>
-                </div>
-                <span class="col-count" id="countCol4">0</span>
-              </div>
-              <div class="kanban-cards-wrap" id="cardsCol4"></div>
-            </div>
-
-            <!-- Column 5: Live & Care Plan -->
-            <div class="kanban-col" data-stage="5">
-              <div class="kanban-col-header">
-                <div class="col-title-group">
-                  <div class="col-dot" style="background:var(--emerald);box-shadow:0 0 8px var(--emerald);"></div>
-                  <span class="col-title">5. Live &amp; Care Plan</span>
-                </div>
-                <span class="col-count" id="countCol5">0</span>
-              </div>
-              <div class="kanban-cards-wrap" id="cardsCol5"></div>
-            </div>
-
-          </div>
-
-          <!-- DATA TABLE VIEW CONTAINER -->
-          <div class="table-view-container" id="tableViewContainer">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Client / Project</th>
-                  <th>Current Stage</th>
-                  <th>Domain / URL Target</th>
-                  <th>Repository / Dev Path</th>
-                  <th>Pricing / Retainer</th>
-                  <th>Live Telemetry</th>
-                  <th style="text-align:right;">Actions</th>
-                </tr>
-              </thead>
-              <tbody id="projectsTableBody">
-                <!-- Injected via JavaScript -->
-              </tbody>
-            </table>
-          </div>
-
-        </section>
-
-        <!-- ================================================================
-             MODULE 5: INBOUND LEAD INTAKE SIMULATOR & LOG
-             ================================================================ -->
-        <section class="lead-section" id="leadsSection">
-          <div class="section-header">
-            <div class="section-title">
-              <svg width="22" height="22" fill="none" stroke="var(--cyan)" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-              <div>
-                <h2>Inbound Lead Intake Log</h2>
-                <p style="font-size:12.5px;color:var(--text-dim);">Live lead submissions received via Web3Forms endpoint &bull; 1-click convert into Pipeline</p>
-              </div>
-            </div>
-
-            <button class="btn btn-cyan btn-sm" onclick="openSimulateLeadModal()">
-              <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 4v16m8-8H4"/></svg>
-              <span>Simulate Web3Forms Lead</span>
-            </button>
-          </div>
-
-          <div class="lead-table-wrap">
-            <table class="data-table">
-              <thead>
-                <tr>
-                  <th>Prospect / Business</th>
-                  <th>Contact Details</th>
-                  <th>Package / Project Scope</th>
-                  <th>Submission Timestamp</th>
-                  <th>Ingestion Channel</th>
-                  <th style="text-align:right;">Actions</th>
-                </tr>
-              </thead>
-              <tbody id="leadsTableBody">
-                <!-- Injected via JavaScript -->
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <!-- Footer Notice -->
         <footer style="display:flex;align-items:center;justify-content:space-between;padding:16px 0;border-top:1px solid var(--border-subtle);font-size:12px;color:var(--text-dim);">
           <div>
             <span>Epic Expressions Cloud Infrastructure &bull; Durham Web Design &bull; Hetzner Ashburn Node</span>
@@ -3012,7 +3396,7 @@
             const p = document.getElementById("pingDwd");
             if (p) p.innerText = `${s.latency_ms}ms`;
           }
-          if (s.domain === "gmsra.durhamweb.design") {
+          if (s.domain === "gmsra.durhamweb.design" || s.domain === "gmsalariedretirees.com") {
             const p = document.getElementById("pingGmsra");
             if (p) p.innerText = `${s.latency_ms}ms`;
           }
@@ -3105,6 +3489,13 @@
           if (authorEl) authorEl.innerText = `👤 ${g.author}`;
           const timeEl = document.getElementById("dwdCommitTime");
           if (timeEl) timeEl.innerText = `🕒 ${g.relative_time || g.date}`;
+
+          const ovHash = document.getElementById("overviewDwdHash");
+          if (ovHash) ovHash.innerText = g.hash;
+          const ovMsg = document.getElementById("overviewDwdMsg");
+          if (ovMsg) ovMsg.innerText = g.message;
+          const ovMeta = document.getElementById("overviewDwdMeta");
+          if (ovMeta) ovMeta.innerText = `👤 ${g.author} • ${g.relative_time || g.date} • ✓ Deployed`;
         }
         if (server.git.gmsra) {
           const g = server.git.gmsra;
@@ -3119,6 +3510,13 @@
           if (authorEl) authorEl.innerText = `👤 ${g.author}`;
           const timeEl = document.getElementById("gmsraCommitTime");
           if (timeEl) timeEl.innerText = `🕒 ${g.relative_time || g.date}`;
+
+          const ovHash = document.getElementById("overviewGmsraHash");
+          if (ovHash) ovHash.innerText = g.hash;
+          const ovMsg = document.getElementById("overviewGmsraMsg");
+          if (ovMsg) ovMsg.innerText = g.message;
+          const ovMeta = document.getElementById("overviewGmsraMeta");
+          if (ovMeta) ovMeta.innerText = `👤 ${g.author} • ${g.relative_time || g.date} • ✓ Deployed`;
         }
       }
     }
@@ -3419,7 +3817,14 @@
     /* Render Inbound Leads Table */
     function renderLeads() {
       const tbody = document.getElementById("leadsTableBody");
-      document.getElementById("sidebarLeadsCount").innerText = leads.length;
+      const totalCount = leads.length;
+      const countEl = document.getElementById("sidebarLeadsCount");
+      if (countEl) countEl.innerText = totalCount;
+
+      const statTotal = document.getElementById("leadsStatTotal");
+      if (statTotal) statTotal.innerText = totalCount;
+      const statNew = document.getElementById("leadsStatNew");
+      if (statNew) statNew.innerText = totalCount;
 
       if (!tbody) return;
 
@@ -3428,7 +3833,9 @@
         return;
       }
 
-      tbody.innerHTML = leads.map(l => `
+      tbody.innerHTML = leads.map(l => {
+        const cleanPhone = (l.phone || "").replace(/[^0-9+]/g, '');
+        return `
         <tr>
           <td>
             <div style="font-weight:700;color:#FFF;">${l.name}</div>
@@ -3437,6 +3844,10 @@
           <td>
             <div><a href="mailto:${l.email}" style="color:var(--cyan);text-decoration:none;">${l.email}</a></div>
             <div style="font-size:11px;color:var(--text-dim);font-family:var(--font-mono);">${l.phone}</div>
+            <div class="lead-quick-taps">
+              ${cleanPhone ? `<a href="tel:${cleanPhone}" class="lead-tap-btn lead-tap-call" title="Call prospect directly"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>Call</a>` : ''}
+              ${l.email ? `<a href="mailto:${l.email}" class="lead-tap-btn lead-tap-mail" title="Email prospect"><svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>Email</a>` : ''}
+            </div>
           </td>
           <td>
             <div style="font-weight:600;color:#FFF;">${l.pkg}</div>
@@ -3455,7 +3866,7 @@
             <button class="btn btn-outline btn-sm" style="color:var(--rose);margin-left:6px;" onclick="deleteLead('${l.id}')">&times;</button>
           </td>
         </tr>
-      `).join("");
+      `}).join("");
     }
 
     function renderAll() {
@@ -3565,8 +3976,8 @@
       saveState();
 
       showToast(`Converted "${newProj.name}" into Pipeline Stage 1!`);
-      // Scroll to pipeline
-      document.getElementById("pipelineSection").scrollIntoView({ behavior: 'smooth' });
+      // Switch view to pipeline cleanly
+      switchNav('pipeline');
     }
 
     /* Modals Control */
@@ -3692,8 +4103,8 @@
       saveState();
       showToast(`Inbound lead from "${business}" received via Web3Forms!`);
 
-      // Scroll to leads section
-      document.getElementById("leadsSection").scrollIntoView({ behavior: 'smooth' });
+      // Switch view to leads cleanly
+      switchNav('leads');
     }
 
     /* Google Drive Info Modal */
@@ -3736,28 +4147,47 @@
       }, 3500);
     }
 
-        /* Navigation & Section Jump */
-    function switchNav(section) {
-      document.querySelectorAll(".nav-item").forEach(item => item.classList.remove("active"));
-      event.currentTarget.classList.add("active");
+            /* Modular View Switching Logic (data-view) */
+    function switchNav(viewName) {
+      // 1. Update sidebar active class
+      document.querySelectorAll(".sidebar .nav-item").forEach(el => el.classList.remove("active"));
+      const activeSide = document.querySelector(`.sidebar .nav-item[data-target="${viewName}"]`);
+      if (activeSide) activeSide.classList.add("active");
 
-      if (section === 'overview') {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-        document.getElementById("headerTitle").innerText = "Operations Dashboard";
-      } else if (section === 'pipeline') {
-        document.getElementById("pipelineSection").scrollIntoView({ behavior: 'smooth' });
-        document.getElementById("headerTitle").innerText = "Client Pipeline";
-      } else if (section === 'leads') {
-        document.getElementById("leadsSection").scrollIntoView({ behavior: 'smooth' });
-        document.getElementById("headerTitle").innerText = "Inbound Leads";
-      } else if (section === 'server') {
-        document.querySelector(".toolbar-section").scrollIntoView({ behavior: 'smooth' });
-        document.getElementById("headerTitle").innerText = "VPS & Deployments";
+      // 2. Update mobile segmented tabs
+      document.querySelectorAll(".mobile-tab-btn").forEach(el => el.classList.remove("active"));
+      const activeTab = document.querySelector(`.mobile-tab-btn[data-target="${viewName}"]`);
+      if (activeTab) activeTab.classList.add("active");
+
+      // 3. Switch view panels with smooth fade
+      document.querySelectorAll(".view-panel").forEach(panel => {
+        panel.style.display = "none";
+        panel.classList.remove("active");
+      });
+
+      const targetPanel = document.getElementById(`view-${viewName}`);
+      if (targetPanel) {
+        targetPanel.style.display = "block";
+        setTimeout(() => targetPanel.classList.add("active"), 10);
       }
 
-      // Close mobile drawer and backdrop if open
-      document.getElementById("sidebar").classList.remove("open");
+      // 4. Update Header Title dynamically
+      const titles = {
+        overview: "Operations Hub",
+        pipeline: "Client Pipeline",
+        leads: "Inbound Leads",
+        server: "Server Telemetry & Nodes"
+      };
+      const titleEl = document.getElementById("headerTitle");
+      if (titleEl) titleEl.innerText = titles[viewName] || "Operations Dashboard";
+
+      // 5. Always reset scroll cleanly to top of view
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      // 6. Close mobile drawer & backdrop
+      const sidebar = document.getElementById("sidebar");
       const backdrop = document.getElementById("sidebarBackdrop");
+      if (sidebar) sidebar.classList.remove("open");
       if (backdrop) backdrop.classList.remove("active");
       document.body.classList.remove("no-scroll");
     }
