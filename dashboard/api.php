@@ -76,7 +76,7 @@ function getServerStats() {
     // 6. Fast Health Checks for Hosted Production Sites
     $sites = [
         ['name' => 'Durham Web Design Flagship', 'domain' => 'durhamweb.design', 'url' => 'https://durhamweb.design'],
-        ['name' => 'GMSRA Salaried Retirees', 'domain' => 'gmsra.durhamweb.design', 'url' => 'https://gmsra.durhamweb.design'],
+        ['name' => 'GMSRA Salaried Retirees', 'domain' => 'gmsalariedretirees.com', 'url' => 'https://gmsalariedretirees.com'],
         ['name' => 'Operations Cloud Dashboard', 'domain' => 'ops.durhamweb.design', 'url' => 'https://ops.durhamweb.design']
     ];
 
