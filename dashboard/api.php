@@ -114,6 +114,91 @@ function getServerStats() {
         ];
     }
 
+    // 7. Comprehensive Server Alert HUD Evaluation
+    // RAM (<70% green, 70-85% yellow, >85% red)
+    $ramAlert = 'green';
+    if ($memUsedPct > 85) {
+        $ramAlert = 'red';
+    } elseif ($memUsedPct >= 70) {
+        $ramAlert = 'yellow';
+    }
+
+    // CPU load (<1.5 green, 1.5-2.0 yellow, >2.0 red)
+    $cpuAlert = 'green';
+    $cpu1min = $load[0];
+    if ($cpu1min > 2.0) {
+        $cpuAlert = 'red';
+    } elseif ($cpu1min >= 1.5) {
+        $cpuAlert = 'yellow';
+    }
+
+    // NVMe disk (<80% green, >80% yellow)
+    $diskAlert = 'green';
+    if ($diskUsedPct > 80) {
+        $diskAlert = 'yellow';
+    }
+
+    // Daemon states (nginx, php, mysql)
+    $daemonAlert = 'green';
+    $inactiveServices = [];
+    foreach ($services as $sName => $sState) {
+        if ($sState !== 'active' && $sState !== 'running') {
+            $daemonAlert = 'red';
+            $inactiveServices[] = $sName;
+        }
+    }
+
+    // Overall Alert Level
+    $overallAlert = 'green';
+    if ($ramAlert === 'red' || $cpuAlert === 'red' || $daemonAlert === 'red') {
+        $overallAlert = 'red';
+    } elseif ($ramAlert === 'yellow' || $cpuAlert === 'yellow' || $diskAlert === 'yellow') {
+        $overallAlert = 'yellow';
+    }
+
+    $alertMessages = [];
+    if ($cpuAlert === 'red') $alertMessages[] = "Critical CPU Load: {$cpu1min} exceeds 2.0 limit";
+    elseif ($cpuAlert === 'yellow') $alertMessages[] = "Elevated CPU Load: {$cpu1min} (Threshold: 1.5 - 2.0)";
+
+    if ($ramAlert === 'red') $alertMessages[] = "Critical RAM: {$memUsedPct}% exceeds 85% safety margin";
+    elseif ($ramAlert === 'yellow') $alertMessages[] = "Elevated RAM: {$memUsedPct}% (Threshold: 70% - 85%)";
+
+    if ($diskAlert === 'yellow') $alertMessages[] = "Disk Storage Warning: {$diskUsedPct}% exceeds 80% threshold";
+
+    if ($daemonAlert === 'red') $alertMessages[] = "Core Daemon Outage: " . implode(', ', $inactiveServices) . " inactive";
+
+    if (empty($alertMessages)) {
+        $alertMessages[] = "All system resources within healthy operational parameters.";
+    }
+
+    $alertsData = [
+        'overall' => $overallAlert,
+        'level' => $overallAlert,
+        'status_text' => $overallAlert === 'green' ? 'SYSTEM NOMINAL' : ($overallAlert === 'yellow' ? 'WARNING' : 'CRITICAL ALERT'),
+        'cpu' => [
+            'level' => $cpuAlert,
+            'value' => $cpu1min,
+            'threshold' => '<1.5 green, 1.5-2.0 yellow, >2.0 red'
+        ],
+        'ram' => [
+            'level' => $ramAlert,
+            'value_pct' => $memUsedPct,
+            'threshold' => '<70% green, 70-85% yellow, >85% red'
+        ],
+        'disk' => [
+            'level' => $diskAlert,
+            'value_pct' => $diskUsedPct,
+            'threshold' => '<80% green, >80% yellow'
+        ],
+        'daemons' => [
+            'level' => $daemonAlert,
+            'inactive' => $inactiveServices,
+            'services' => $services
+        ],
+        'messages' => $alertMessages,
+        'has_alerts' => $overallAlert !== 'green'
+    ];
+
     return [
         'node' => 'ubuntu-2gb-ash-2',
         'provider' => 'Hetzner Cloud (Ashburn, VA CPX 11)',
@@ -142,6 +227,7 @@ function getServerStats() {
             'used_pct' => $diskUsedPct
         ],
         'services' => $services,
+        'alerts' => $alertsData,
         'sites' => $healthResults,
         'git' => (function() {
             $gitInfo = [];

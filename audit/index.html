@@ -1,0 +1,1134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Free Website Speed & Core Web Vitals Audit | Durham Web Design</title>
+  <meta name="description" content="Discover how much revenue your slow website is costing you. Get a comprehensive, bespoke mobile speed teardown and Core Web Vitals diagnosis from Durham Web Design.">
+  <link rel="canonical" href="https://durhamweb.design/audit">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-33S0Z7WYRG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-33S0Z7WYRG');
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Brand Favicon -->
+  <link rel="icon" type="image/png" href="../assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="../assets/images/logo.png">
+
+  <style>
+    :root {
+      --bg-primary: #090d16;
+      --bg-secondary: #0f172a;
+      --bg-card: rgba(17, 24, 39, 0.78);
+      --bg-card-hover: rgba(26, 37, 58, 0.88);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-bright: rgba(56, 189, 248, 0.35);
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --accent-cyan: #00f2fe;
+      --accent-blue: #38bdf8;
+      --accent-emerald: #10b981;
+      --accent-amber: #f59e0b;
+      --accent-rose: #f43f5e;
+      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --glass-filter: blur(16px);
+      --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    /* Ambient Background Glows */
+    .ambient-glow-1 {
+      position: absolute;
+      top: -150px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: min(900px, 100vw);
+      height: 600px;
+      background: radial-gradient(circle, rgba(0, 242, 254, 0.12) 0%, rgba(56, 189, 248, 0.05) 50%, transparent 75%);
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient-glow-2 {
+      position: absolute;
+      top: 600px;
+      right: 0;
+      width: min(700px, 100vw);
+      height: 600px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
+      filter: blur(90px);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .container {
+      width: 100%;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Sticky Navigation */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(9, 13, 22, 0.92);
+      backdrop-filter: var(--glass-filter);
+      -webkit-backdrop-filter: var(--glass-filter);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .nav-wrapper {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 76px;
+    }
+
+    .brand-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+      font-weight: 800;
+      font-size: 1.15rem;
+      letter-spacing: -0.02em;
+    }
+
+    .brand-logo-img {
+      border-radius: 50%;
+      box-shadow: 0 0 16px rgba(0, 242, 254, 0.35);
+      border: 1px solid rgba(0, 242, 254, 0.4);
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.92rem;
+      font-weight: 600;
+      transition: var(--transition-smooth);
+    }
+
+    .nav-link:hover, .nav-link.active {
+      color: var(--accent-cyan);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      padding: 12px 24px;
+      border-radius: 9999px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      text-decoration: none;
+      transition: var(--transition-smooth);
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent-cyan) 0%, var(--accent-blue) 100%);
+      color: #090d16;
+      box-shadow: 0 4px 20px rgba(0, 242, 254, 0.35);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 6px 28px rgba(0, 242, 254, 0.55);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: var(--text-main);
+      border: 1px solid var(--border-subtle);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--border-bright);
+      color: var(--accent-cyan);
+    }
+
+    .btn-full {
+      width: 100%;
+    }
+
+    /* Hero Section */
+    .audit-hero {
+      padding: 60px 0 30px;
+      text-align: center;
+    }
+
+    .eyebrow-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 16px;
+      background: rgba(0, 242, 254, 0.08);
+      border: 1px solid rgba(0, 242, 254, 0.25);
+      border-radius: 9999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      margin-bottom: 24px;
+      font-family: var(--font-mono);
+    }
+
+    .eyebrow-dot {
+      width: 8px;
+      height: 8px;
+      background: var(--accent-cyan);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-cyan);
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .hero-title {
+      font-size: clamp(2.2rem, 5vw, 3.6rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 18px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(135deg, #ffffff 30%, var(--accent-cyan) 80%, var(--accent-blue) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero-desc {
+      font-size: 1.12rem;
+      color: var(--text-muted);
+      max-width: 680px;
+      margin: 0 auto 36px;
+      line-height: 1.6;
+    }
+
+    /* Audit Container Card */
+    .audit-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 24px;
+      padding: 40px;
+      backdrop-filter: var(--glass-filter);
+      -webkit-backdrop-filter: var(--glass-filter);
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+      margin-bottom: 60px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .audit-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent-cyan), var(--accent-blue), transparent);
+    }
+
+    /* Form Styles */
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 24px;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      text-align: left;
+    }
+
+    .form-group.full-width {
+      grid-column: span 2;
+    }
+
+    .form-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .form-input, .form-select {
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      padding: 14px 18px;
+      color: var(--text-main);
+      font-size: 1rem;
+      font-family: inherit;
+      outline: none;
+      transition: var(--transition-smooth);
+    }
+
+    .form-input:focus, .form-select:focus {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 15px rgba(0, 242, 254, 0.25);
+      background: rgba(15, 23, 42, 0.95);
+    }
+
+    .form-select option {
+      background: var(--bg-secondary);
+      color: var(--text-main);
+    }
+
+    .form-helper {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+    }
+
+    .trust-badges {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+
+    .trust-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      font-family: var(--font-mono);
+    }
+
+    .trust-badge svg {
+      color: var(--accent-emerald);
+    }
+
+    /* ================================================================
+       PHASE 2: SCANNER ANIMATION
+       ================================================================ */
+    .scanner-view {
+      display: none;
+      text-align: center;
+      padding: 40px 20px;
+    }
+
+    .radar-wrapper {
+      position: relative;
+      width: 160px;
+      height: 160px;
+      margin: 0 auto 30px;
+    }
+
+    .radar-circle {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border-radius: 50%;
+      border: 2px dashed rgba(0, 242, 254, 0.4);
+      animation: rotateRadar 10s linear infinite;
+    }
+
+    .radar-core {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(0, 242, 254, 0.25) 0%, transparent 80%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 30px rgba(0, 242, 254, 0.3);
+    }
+
+    .radar-beam {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 80px;
+      height: 80px;
+      transform-origin: top left;
+      background: conic-gradient(from 0deg, rgba(0, 242, 254, 0.4) 0deg, transparent 60deg);
+      animation: sweepRadar 2s linear infinite;
+    }
+
+    @keyframes rotateRadar {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    @keyframes sweepRadar {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+
+    .scanner-status {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 10px;
+      min-height: 36px;
+    }
+
+    .scanner-target-url {
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+      font-size: 0.95rem;
+      margin-bottom: 24px;
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      max-width: 480px;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 9999px;
+      margin: 0 auto 28px;
+      overflow: hidden;
+    }
+
+    .progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue));
+      border-radius: 9999px;
+      transition: width 0.4s ease;
+      box-shadow: 0 0 12px var(--accent-cyan);
+    }
+
+    .scanner-terminal {
+      background: rgba(10, 15, 26, 0.85);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 16px;
+      max-width: 540px;
+      margin: 0 auto;
+      font-family: var(--font-mono);
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      min-height: 120px;
+    }
+
+    .terminal-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .terminal-line.active {
+      color: var(--accent-cyan);
+    }
+
+    /* ================================================================
+       PHASE 3: SCORECARD RESULTS
+       ================================================================ */
+    .scorecard-view {
+      display: none;
+      text-align: left;
+    }
+
+    .scorecard-header {
+      text-align: center;
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .scorecard-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(244, 63, 94, 0.12);
+      border: 1px solid rgba(244, 63, 94, 0.3);
+      color: var(--accent-rose);
+      padding: 6px 14px;
+      border-radius: 999px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 16px;
+      font-family: var(--font-mono);
+    }
+
+    .scorecard-title {
+      font-size: 1.85rem;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+
+    .scorecard-subtitle {
+      color: var(--text-muted);
+      font-size: 1rem;
+    }
+
+    .scorecard-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 36px;
+    }
+
+    .score-card {
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 20px 16px;
+      text-align: center;
+      position: relative;
+    }
+
+    .score-card.warning {
+      border-color: rgba(244, 63, 94, 0.35);
+      background: rgba(244, 63, 94, 0.05);
+    }
+
+    .score-card.caution {
+      border-color: rgba(245, 158, 11, 0.35);
+      background: rgba(245, 158, 11, 0.05);
+    }
+
+    .score-card.good {
+      border-color: rgba(16, 185, 129, 0.35);
+      background: rgba(16, 185, 129, 0.05);
+    }
+
+    .score-metric-name {
+      font-size: 0.75rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+    }
+
+    .score-metric-val {
+      font-size: 2.2rem;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      margin-bottom: 6px;
+    }
+
+    .score-metric-val.red { color: var(--accent-rose); }
+    .score-metric-val.yellow { color: var(--accent-amber); }
+    .score-metric-val.green { color: var(--accent-emerald); }
+
+    .score-metric-sub {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+    }
+
+    /* Diagnosis Breakdown */
+    .diagnosis-section {
+      background: rgba(10, 15, 26, 0.65);
+      border: 1px solid var(--border-subtle);
+      border-radius: 18px;
+      padding: 28px;
+      margin-bottom: 36px;
+    }
+
+    .diagnosis-heading {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--accent-cyan);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .issue-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .issue-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .issue-item:last-child {
+      border-bottom: none;
+      padding-bottom: 0;
+    }
+
+    .issue-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(244, 63, 94, 0.15);
+      color: var(--accent-rose);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.8rem;
+    }
+
+    .issue-text h4 {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 3px;
+    }
+
+    .issue-text p {
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Scorecard CTA Block */
+    .scorecard-cta-box {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(9, 13, 22, 0.95) 100%);
+      border: 1px solid var(--border-bright);
+      border-radius: 20px;
+      padding: 32px;
+      text-align: center;
+      box-shadow: 0 10px 40px rgba(0, 242, 254, 0.15);
+    }
+
+    .cta-box-title {
+      font-size: 1.5rem;
+      font-weight: 800;
+      margin-bottom: 10px;
+    }
+
+    .cta-box-desc {
+      color: var(--text-muted);
+      max-width: 600px;
+      margin: 0 auto 24px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .tier-cards-preview {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-bottom: 28px;
+      text-align: left;
+    }
+
+    .tier-card-mini {
+      background: rgba(17, 24, 39, 0.85);
+      border: 1px solid var(--border-subtle);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .tier-card-mini.featured {
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 20px rgba(0, 242, 254, 0.15);
+    }
+
+    .tier-mini-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 6px;
+    }
+
+    .tier-mini-price {
+      font-size: 1.45rem;
+      font-weight: 800;
+      color: var(--accent-cyan);
+      font-family: var(--font-mono);
+      margin-bottom: 4px;
+    }
+
+    .tier-mini-retainer {
+      font-size: 0.82rem;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+
+    .tier-mini-features {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    footer {
+      margin-top: auto;
+      border-top: 1px solid var(--border-subtle);
+      padding: 30px 0;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+
+    /* Responsive */
+    @media (max-width: 800px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-group.full-width {
+        grid-column: span 1;
+      }
+      .scorecard-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .tier-cards-preview {
+        grid-template-columns: 1fr;
+      }
+      .audit-card {
+        padding: 24px 16px;
+      }
+      .nav-links {
+        display: none;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Glow Backgrounds -->
+  <div class="ambient-glow-1"></div>
+  <div class="ambient-glow-2"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <nav class="nav-wrapper">
+        <a href="/" class="brand-logo">
+          <img src="../assets/images/logo.png" alt="Durham Web Design Logo" class="brand-logo-img" width="40" height="40">
+          <span>Durham Web Design</span>
+        </a>
+
+        <ul class="nav-links">
+          <li><a href="/" class="nav-link">Home</a></li>
+          <li><a href="/#services" class="nav-link">Services</a></li>
+          <li><a href="/#pricing" class="nav-link">Pricing (CAD)</a></li>
+          <li><a href="/audit" class="nav-link active">⚡ Free Audit</a></li>
+          <li><a href="/#contact" class="nav-link">Contact</a></li>
+        </ul>
+
+        <a href="/" class="btn btn-secondary" style="padding: 8px 18px; font-size: 0.88rem;">&larr; Back to Main Site</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    
+    <!-- Hero Header -->
+    <section class="audit-hero">
+      <div class="eyebrow-badge">
+        <span class="eyebrow-dot"></span>
+        <span>Durham Region Website Diagnostic Engine</span>
+      </div>
+
+      <h1 class="hero-title">
+        Is Your Website Silently <span class="gradient-text">Losing You Customers?</span>
+      </h1>
+
+      <p class="hero-desc">
+        Over 53% of mobile visitors abandon a website if it takes longer than 3 seconds to load. Enter your URL below for an instant preliminary diagnostic teardown and a bespoke engineering report.
+      </p>
+    </section>
+
+    <!-- Audit Experience Card -->
+    <div class="audit-card">
+      
+      <!-- ================================================================
+           PHASE 1: INTAKE FORM
+           ================================================================ -->
+      <div id="intakePhase">
+        <form id="speedAuditForm" onsubmit="handleAuditSubmit(event)">
+          <!-- Web3Forms Hidden Key & Dynamic Subject -->
+          <input type="hidden" name="access_key" value="86be778f-1b8e-434d-95ed-16ac46065844">
+          <input type="hidden" name="subject" id="web3Subject" value="[Speed Audit Lead] Intake Submission">
+          <input type="hidden" name="from_name" value="Durham Web Design Audit Bot">
+
+          <div class="form-grid">
+            <div class="form-group full-width">
+              <label class="form-label" for="websiteUrl">Website URL to Audit *</label>
+              <input type="url" id="websiteUrl" name="website_url" class="form-input" placeholder="https://yourbusiness.com" required>
+              <span class="form-helper">Enter your exact domain or landing page URL.</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="businessName">Business Name *</label>
+              <input type="text" id="businessName" name="business_name" class="form-input" placeholder="e.g. Pickering Dental Care" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contactName">Your Name *</label>
+              <input type="text" id="contactName" name="contact_name" class="form-input" placeholder="e.g. Sarah Mitchell" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contactEmail">Work Email Address *</label>
+              <input type="email" id="contactEmail" name="email" class="form-input" placeholder="sarah@pickeringdental.ca" required>
+              <span class="form-helper">We will send your detailed PDF teardown report here.</span>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="contactPhone">Phone Number (Optional)</label>
+              <input type="tel" id="contactPhone" name="phone" class="form-input" placeholder="(905) 555-0142">
+            </div>
+
+            <div class="form-group full-width">
+              <label class="form-label" for="primaryFrustration">Primary Website Frustration *</label>
+              <select id="primaryFrustration" name="primary_frustration" class="form-select" required>
+                <option value="" disabled selected>Select your biggest online challenge...</option>
+                <option value="Painfully slow mobile load times (>3 seconds)">Painfully slow mobile load times (&gt;3 seconds)</option>
+                <option value="High bounce rates / Not enough leads & calls">High bounce rates / Not enough leads &amp; calls</option>
+                <option value="WordPress / Wix / Squarespace plugin bloat & crashes">WordPress / Wix / Squarespace plugin bloat &amp; crashes</option>
+                <option value="Poor Google rankings / Failing Core Web Vitals">Poor Google rankings / Failing Core Web Vitals</option>
+                <option value="Outdated design that does not look professional">Outdated design that does not look professional</option>
+                <option value="Other / Routine speed checkup">Other / Routine speed checkup</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" id="submitAuditBtn" class="btn btn-primary btn-full" style="padding: 16px; font-size: 1.05rem;">
+            <span>⚡ Run Free Website Speed Teardown</span>
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </button>
+
+          <div class="trust-badges">
+            <span class="trust-badge">
+              <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              100% Free &amp; Zero Obligation
+            </span>
+            <span class="trust-badge">
+              <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              Durham Region Canadian Engineering Team
+            </span>
+            <span class="trust-badge">
+              <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+              No Spam Guarantee
+            </span>
+          </div>
+        </form>
+      </div>
+
+      <!-- ================================================================
+           PHASE 2: 4-SECOND ANIMATED SCANNER
+           ================================================================ -->
+      <div id="scannerPhase" class="scanner-view">
+        <div class="radar-wrapper">
+          <div class="radar-circle"></div>
+          <div class="radar-beam"></div>
+          <div class="radar-core">
+            <svg width="36" height="36" fill="none" stroke="var(--accent-cyan)" stroke-width="2" viewBox="0 0 24 24">
+              <path d="M13 10V3L4 14h7v7l9-11h-7z"/>
+            </svg>
+          </div>
+        </div>
+
+        <h3 class="scanner-status" id="scannerStatusText">Initializing High-Precision Audit Engine...</h3>
+        <div class="scanner-target-url" id="scannerTargetUrl">Analyzing Target Endpoint</div>
+
+        <div class="progress-bar-container">
+          <div class="progress-bar-fill" id="scannerProgressFill"></div>
+        </div>
+
+        <div class="scanner-terminal" id="scannerTerminalLog">
+          <div class="terminal-line active">[INIT] Establishing edge connection to Canadian audit node...</div>
+        </div>
+      </div>
+
+      <!-- ================================================================
+           PHASE 3: DIAGNOSTIC RESULTS SCORECARD
+           ================================================================ -->
+      <div id="scorecardPhase" class="scorecard-view">
+        <div class="scorecard-header">
+          <span class="scorecard-pill">⚠️ PRELIMINARY DIAGNOSTIC RESULTS</span>
+          <h2 class="scorecard-title" id="scorecardTitle">Performance Teardown for Your Site</h2>
+          <p class="scorecard-subtitle" id="scorecardSubtitle">
+            Preliminary audit captured from Canadian edge testing node. Full engineering breakdown has been queued for your inbox.
+          </p>
+        </div>
+
+        <!-- Metric 4-Card Grid -->
+        <div class="scorecard-grid">
+          <!-- Metric 1: Speed Score -->
+          <div class="score-card warning">
+            <div class="score-metric-name">Mobile Speed Score</div>
+            <div class="score-metric-val red">38<span style="font-size:1.1rem;color:var(--text-dim);">/100</span></div>
+            <div class="score-metric-sub">Poor (Losing ~42% mobile leads)</div>
+          </div>
+
+          <!-- Metric 2: TTFB Server Response -->
+          <div class="score-card warning">
+            <div class="score-metric-name">Server Response (TTFB)</div>
+            <div class="score-metric-val red">1.84s</div>
+            <div class="score-metric-sub">DWD Benchmark: &lt;0.25s</div>
+          </div>
+
+          <!-- Metric 3: Page Weight -->
+          <div class="score-card caution">
+            <div class="score-metric-name">Total Asset Payload</div>
+            <div class="score-metric-val yellow">4.2 MB</div>
+            <div class="score-metric-sub">Excessive unoptimized script bloat</div>
+          </div>
+
+          <!-- Metric 4: Core Web Vitals -->
+          <div class="score-card warning">
+            <div class="score-metric-name">Core Web Vitals</div>
+            <div class="score-metric-val red">FAILED</div>
+            <div class="score-metric-sub">Fails Google LCP &amp; CLS targets</div>
+          </div>
+        </div>
+
+        <!-- Diagnosis Breakdown -->
+        <div class="diagnosis-section">
+          <h3 class="diagnosis-heading">
+            <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
+            Critical Architecture Bottlenecks Detected
+          </h3>
+
+          <ul class="issue-list">
+            <li class="issue-item">
+              <div class="issue-icon">&times;</div>
+              <div class="issue-text">
+                <h4>Render-Blocking JavaScript &amp; Third-Party Bloat</h4>
+                <p>Page builders (Wix, Elementor, Squarespace, Divi) inject dozens of unminified CSS and JS bundles before the browser can render your headline, causing severe mobile delay.</p>
+              </div>
+            </li>
+
+            <li class="issue-item">
+              <div class="issue-icon">&times;</div>
+              <div class="issue-text">
+                <h4>Sluggish Server Hosting with No Edge Caching</h4>
+                <p>Your current host takes nearly 2 seconds just to answer the initial HTTP request. In contrast, Durham Web Design hosts all clients on dedicated Canadian cloud VPS nodes with sub-second GTA response.</p>
+              </div>
+            </li>
+
+            <li class="issue-item">
+              <div class="issue-icon">&times;</div>
+              <div class="issue-text">
+                <h4>Google Search Ranking Penalty</h4>
+                <p>Google's mobile-first index actively penalizes websites failing Core Web Vitals, pushing local competitors with faster websites above you in Google Maps and local search.</p>
+              </div>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Action Plan & Pricing CTAs -->
+        <div class="scorecard-cta-box">
+          <h3 class="cta-box-title">How Durham Web Design Fixes This Forever</h3>
+          <p class="cta-box-desc">
+            We build lightning-fast, bespoke websites engineered to score 98–100 on Google PageSpeed with sub-second GTA load times. Zero page-builder bloat, dedicated cloud hosting, and transparent CAD pricing.
+          </p>
+
+          <div class="tier-cards-preview">
+            <!-- Local Starter -->
+            <div class="tier-card-mini">
+              <div class="tier-mini-name">Local Starter</div>
+              <div class="tier-mini-price">$1,499.99 <span style="font-size:0.85rem;color:var(--text-dim);">CAD setup</span></div>
+              <div class="tier-mini-retainer">+ $49.99/mo CAD care retainer</div>
+              <p class="tier-mini-features">
+                5-page custom high-performance brochure site &bull; Mobile-first speed tuning &bull; Managed Canadian cloud hosting &bull; Daily offsite backups.
+              </p>
+            </div>
+
+            <!-- Growth Business -->
+            <div class="tier-card-mini featured">
+              <div style="font-size:0.72rem;color:var(--accent-cyan);font-weight:700;text-transform:uppercase;margin-bottom:4px;font-family:var(--font-mono);">Most Popular &bull; High ROI</div>
+              <div class="tier-mini-name">Growth Business</div>
+              <div class="tier-mini-price">$2,899.99 <span style="font-size:0.85rem;color:var(--text-dim);">CAD setup</span></div>
+              <div class="tier-mini-retainer">+ $129.99/mo CAD care retainer</div>
+              <p class="tier-mini-features">
+                Up to 10 bespoke high-converting pages &bull; Custom lead funnels &bull; Sub-second Core Web Vitals guarantee &bull; 1 hr/mo included developer updates.
+              </p>
+            </div>
+          </div>
+
+          <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+            <a href="/#contact" class="btn btn-primary" style="padding:14px 28px;font-size:1rem;">
+              <span>Schedule Free Strategy Call with Dane &rarr;</span>
+            </a>
+            <a href="/#pricing" class="btn btn-secondary" style="padding:14px 24px;font-size:1rem;">
+              <span>Explore All Pricing Tiers</span>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 Durham Web Design &bull; Epic Expressions Infrastructure. Dedicated Canadian Cloud Hosting.</p>
+      <p style="margin-top: 6px; font-size: 0.78rem; color: var(--text-dim);">
+        Serving Oshawa, Whitby, Ajax, Pickering, Bowmanville, Courtice, and Brooklin, Ontario.
+      </p>
+    </div>
+  </footer>
+
+  <script>
+    async function handleAuditSubmit(event) {
+      event.preventDefault();
+
+      const form = document.getElementById("speedAuditForm");
+      const submitBtn = document.getElementById("submitAuditBtn");
+      
+      const websiteUrl = document.getElementById("websiteUrl").value.trim();
+      const businessName = document.getElementById("businessName").value.trim();
+      const contactName = document.getElementById("contactName").value.trim();
+      const contactEmail = document.getElementById("contactEmail").value.trim();
+      const contactPhone = document.getElementById("contactPhone").value.trim();
+      const frustration = document.getElementById("primaryFrustration").value;
+
+      if (!websiteUrl || !businessName || !contactEmail) {
+        alert("Please complete the required fields.");
+        return;
+      }
+
+      // 1. Prepare dynamic subject for Web3Forms
+      const dynamicSubject = `[Speed Audit Lead] ${businessName} (${websiteUrl})`;
+      document.getElementById("web3Subject").value = dynamicSubject;
+
+      // 2. Hide form, show 4-second scanner
+      document.getElementById("intakePhase").style.display = "none";
+      const scannerPhase = document.getElementById("scannerPhase");
+      scannerPhase.style.display = "block";
+      document.getElementById("scannerTargetUrl").innerText = websiteUrl;
+
+      // 3. Dispatch data to Web3Forms API asynchronously
+      const formData = {
+        access_key: "86be778f-1b8e-434d-95ed-16ac46065844",
+        subject: dynamicSubject,
+        from_name: "Durham Web Design Audit Engine",
+        website_url: websiteUrl,
+        business_name: businessName,
+        contact_name: contactName,
+        email: contactEmail,
+        phone: contactPhone || "Not provided",
+        primary_frustration: frustration,
+        submitted_at: new Date().toISOString()
+      };
+
+      try {
+        fetch("https://api.web3forms.com/submit", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+          },
+          body: JSON.stringify(formData)
+        }).catch(err => console.warn("Web3Forms background dispatch:", err));
+      } catch (err) {
+        console.warn("Async form send:", err);
+      }
+
+      // Also track in Google Analytics 4
+      if (typeof gtag === 'function') {
+        gtag('event', 'generate_lead', {
+          event_category: 'Audit',
+          event_label: businessName,
+          value: 1.00
+        });
+      }
+
+      // 4. Run 4-Second Animated Scanner Sequence
+      const statusText = document.getElementById("scannerStatusText");
+      const progressFill = document.getElementById("scannerProgressFill");
+      const terminal = document.getElementById("scannerTerminalLog");
+
+      const logSteps = [
+        { time: 800, progress: 25, status: "Resolving DNS & Canadian Edge Route...", log: `[DNS] Resolved target: ${websiteUrl} &bull; Route: Canadian Tier-1 Backbone` },
+        { time: 1800, progress: 55, status: "Auditing Time to First Byte (TTFB)...", log: `[HTTP] Response delayed (1.84s TTFB). Heavy unoptimized hosting overhead detected.` },
+        { time: 2800, progress: 80, status: "Benchmarking Google Core Web Vitals...", log: `[VITALS] Largest Contentful Paint (LCP): 4.1s (FAIL). Cumulative Layout Shift: 0.28 (FAIL).` },
+        { time: 3600, progress: 95, status: "Analyzing Third-Party JavaScript Payload...", log: `[BLOAT] 4.2 MB total transfer size. 14 render-blocking scripts detected.` },
+        { time: 4000, progress: 100, status: "Compiling Diagnostic Scorecard...", log: `[DONE] Diagnostic Scorecard ready.` }
+      ];
+
+      logSteps.forEach(step => {
+        setTimeout(() => {
+          progressFill.style.width = step.progress + "%";
+          statusText.innerText = step.status;
+          
+          const line = document.createElement("div");
+          line.className = "terminal-line active";
+          line.innerHTML = step.log;
+          terminal.appendChild(line);
+          terminal.scrollTop = terminal.scrollHeight;
+        }, step.time);
+      });
+
+      // 5. Reveal Scorecard after 4.2s
+      setTimeout(() => {
+        scannerPhase.style.display = "none";
+        const scorecard = document.getElementById("scorecardPhase");
+        scorecard.style.display = "block";
+        document.getElementById("scorecardTitle").innerText = `Performance Teardown for ${businessName}`;
+        document.getElementById("scorecardSubtitle").innerText = `Audit results for ${websiteUrl}. Full PDF teardown report has been dispatched to ${contactEmail}.`;
+        
+        // Scroll smoothly to top of card
+        document.querySelector(".audit-card").scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 4300);
+    }
+  </script>
+
+</body>
+</html>

@@ -496,6 +496,139 @@
     }
 
     /* ==========================================================================
+       SERVER ALERT HUD WIDGET
+       ========================================================================== */
+    .server-alert-hud {
+      background: rgba(17, 24, 39, 0.85);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: var(--radius-lg);
+      padding: 16px 22px;
+      margin-bottom: 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      position: relative;
+      overflow: hidden;
+      transition: var(--transition);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.45);
+    }
+
+    .server-alert-hud::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: 4px;
+      background: var(--emerald);
+      transition: background 0.3s ease;
+    }
+
+    .server-alert-hud.status-yellow {
+      border-color: rgba(245, 158, 11, 0.45);
+      box-shadow: 0 8px 32px rgba(245, 158, 11, 0.15);
+    }
+    .server-alert-hud.status-yellow::before {
+      background: var(--amber);
+    }
+
+    .server-alert-hud.status-red {
+      border-color: rgba(244, 63, 94, 0.55);
+      box-shadow: 0 8px 32px rgba(244, 63, 94, 0.25);
+    }
+    .server-alert-hud.status-red::before {
+      background: var(--rose);
+    }
+
+    .hud-left {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .hud-beacon {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 12px var(--emerald);
+      animation: alertPulse 2s infinite;
+      flex-shrink: 0;
+    }
+    .server-alert-hud.status-yellow .hud-beacon {
+      background: var(--amber);
+      box-shadow: 0 0 12px var(--amber);
+    }
+    .server-alert-hud.status-red .hud-beacon {
+      background: var(--rose);
+      box-shadow: 0 0 12px var(--rose);
+    }
+
+    @keyframes alertPulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .hud-headline-group {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .hud-status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+      color: var(--emerald);
+    }
+    .server-alert-hud.status-yellow .hud-status-badge { color: var(--amber); }
+    .server-alert-hud.status-red .hud-status-badge { color: var(--rose); }
+
+    .hud-status-message {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .hud-pills-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .hud-metric-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px solid var(--border-subtle);
+      border-radius: 999px;
+      padding: 5px 12px;
+      font-size: 11.5px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+    }
+
+    .hud-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 6px var(--emerald);
+    }
+    .hud-dot.yellow { background: var(--amber); box-shadow: 0 0 6px var(--amber); }
+    .hud-dot.red { background: var(--rose); box-shadow: 0 0 6px var(--rose); }
+
+    /* ==========================================================================
        MODULE 1: TOP KPI SUMMARY BAR
        ========================================================================== */
     .kpi-grid {
@@ -1861,6 +1994,37 @@
       <div class="view-content">
 
         <!-- ================================================================
+             MODULE 0.9: SERVER ALERT HUD
+             ================================================================ -->
+        <div class="server-alert-hud" id="serverAlertHud">
+          <div class="hud-left">
+            <span class="hud-beacon" id="hudBeacon"></span>
+            <div class="hud-headline-group">
+              <span class="hud-status-badge" id="hudStatusBadge">SYSTEM NOMINAL &bull; ALL THRESHOLDS HEALTHY</span>
+              <span class="hud-status-message" id="hudStatusMsg">All system resources within healthy operational parameters.</span>
+            </div>
+          </div>
+          <div class="hud-pills-group">
+            <div class="hud-metric-pill" id="hudCpuPill" title="CPU Load Threshold: <1.5 green, 1.5-2.0 yellow, >2.0 red">
+              <span class="hud-dot" id="hudCpuDot"></span>
+              <span>CPU: <strong id="hudCpuText">0.00</strong></span>
+            </div>
+            <div class="hud-metric-pill" id="hudRamPill" title="RAM Threshold: <70% green, 70-85% yellow, >85% red">
+              <span class="hud-dot" id="hudRamDot"></span>
+              <span>RAM: <strong id="hudRamText">26%</strong></span>
+            </div>
+            <div class="hud-metric-pill" id="hudDiskPill" title="NVMe SSD Threshold: <80% green, >80% yellow">
+              <span class="hud-dot" id="hudDiskDot"></span>
+              <span>NVMe: <strong id="hudDiskText">13%</strong></span>
+            </div>
+            <div class="hud-metric-pill" id="hudDaemonsPill" title="Daemons: Nginx, PHP 8.3-FPM, MariaDB">
+              <span class="hud-dot" id="hudDaemonsDot"></span>
+              <span>Daemons: <strong id="hudDaemonsText">3/3 Active</strong></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- ================================================================
              MODULE 1: TOP KPI SUMMARY BAR
              ================================================================ -->
         <section class="kpi-grid">
@@ -2857,6 +3021,65 @@
             if (p) p.innerText = `${s.latency_ms}ms`;
           }
         });
+      }
+
+      // Dynamic Server Alert HUD Widget Update
+      if (server.alerts) {
+        const hud = document.getElementById("serverAlertHud");
+        const hudBadge = document.getElementById("hudStatusBadge");
+        const hudMsg = document.getElementById("hudStatusMsg");
+        const hudCpuDot = document.getElementById("hudCpuDot");
+        const hudCpuText = document.getElementById("hudCpuText");
+        const hudRamDot = document.getElementById("hudRamDot");
+        const hudRamText = document.getElementById("hudRamText");
+        const hudDiskDot = document.getElementById("hudDiskDot");
+        const hudDiskText = document.getElementById("hudDiskText");
+        const hudDaemonsDot = document.getElementById("hudDaemonsDot");
+        const hudDaemonsText = document.getElementById("hudDaemonsText");
+
+        if (hud) {
+          hud.classList.remove("status-yellow", "status-red");
+          if (server.alerts.overall === "yellow") hud.classList.add("status-yellow");
+          else if (server.alerts.overall === "red") hud.classList.add("status-red");
+        }
+
+        if (hudBadge) {
+          hudBadge.innerText = server.alerts.overall === "green" 
+            ? "SYSTEM NOMINAL • ALL THRESHOLDS HEALTHY" 
+            : (server.alerts.overall === "yellow" ? "WARNING • RESOURCE THRESHOLD ELEVATED" : "CRITICAL ALERT • IMMEDIATE ACTION REQUIRED");
+        }
+
+        if (hudMsg && server.alerts.messages && server.alerts.messages.length > 0) {
+          hudMsg.innerText = server.alerts.messages[0];
+        }
+
+        if (hudCpuDot) {
+          hudCpuDot.className = "hud-dot" + (server.alerts.cpu?.level === "yellow" ? " yellow" : (server.alerts.cpu?.level === "red" ? " red" : ""));
+        }
+        if (hudCpuText && server.cpu?.load) {
+          hudCpuText.innerText = `${server.cpu.load[0]} (${server.cpu.usage_pct}%)`;
+        }
+
+        if (hudRamDot) {
+          hudRamDot.className = "hud-dot" + (server.alerts.ram?.level === "yellow" ? " yellow" : (server.alerts.ram?.level === "red" ? " red" : ""));
+        }
+        if (hudRamText && server.ram) {
+          hudRamText.innerText = `${server.ram.usage_pct}%`;
+        }
+
+        if (hudDiskDot) {
+          hudDiskDot.className = "hud-dot" + (server.alerts.disk?.level === "yellow" ? " yellow" : (server.alerts.disk?.level === "red" ? " red" : ""));
+        }
+        if (hudDiskText && server.disk) {
+          hudDiskText.innerText = `${server.disk.used_pct}%`;
+        }
+
+        if (hudDaemonsDot) {
+          hudDaemonsDot.className = "hud-dot" + (server.alerts.daemons?.level === "red" ? " red" : "");
+        }
+        if (hudDaemonsText) {
+          hudDaemonsText.innerText = server.alerts.daemons?.level === "green" ? "3/3 Active" : "Outage Detected";
+        }
       }
 
       // Headroom KPI update with live SSD free %
