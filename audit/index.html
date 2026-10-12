@@ -1081,6 +1081,36 @@
         console.warn("Async form send:", err);
       }
 
+      // Dispatch lead alert to internal Operations Engine & Telegram Bot
+      const leadAlertPayload = {
+        business_name: businessName,
+        website_url: websiteUrl,
+        contact_name: contactName,
+        email: contactEmail,
+        phone: contactPhone || "Not provided",
+        primary_frustration: frustration,
+        score: "38/100",
+        ttfb: "1.84s",
+        payload_mb: "4.2 MB",
+        vitals: "Failed"
+      };
+
+      try {
+        fetch("/dashboard/api.php?action=lead_alert", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(leadAlertPayload)
+        }).catch(() => {
+          fetch("https://ops.durhamweb.design/api.php?action=lead_alert", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(leadAlertPayload)
+          }).catch(e => console.warn("Lead alert fallback dispatch:", e));
+        });
+      } catch (err) {
+        console.warn("Lead alert dispatch failed:", err);
+      }
+
       // Also track in Google Analytics 4
       if (typeof gtag === 'function') {
         gtag('event', 'generate_lead', {

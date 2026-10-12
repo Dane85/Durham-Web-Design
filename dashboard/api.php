@@ -290,6 +290,97 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $rawInput = file_get_contents('php://input');
     $input = json_decode($rawInput, true);
 
+    // ACTION: Inbound Speed Audit Lead -> Record & Instant Telegram Alert
+    if (isset($_GET['action']) && $_GET['action'] === 'lead_alert') {
+        $lead = is_array($input) ? $input : [];
+        $biz = htmlspecialchars($lead['business_name'] ?? 'Unknown Business', ENT_QUOTES, 'UTF-8');
+        $url = htmlspecialchars($lead['website_url'] ?? 'Not provided', ENT_QUOTES, 'UTF-8');
+        $name = htmlspecialchars($lead['contact_name'] ?? 'Not provided', ENT_QUOTES, 'UTF-8');
+        $email = htmlspecialchars($lead['email'] ?? 'Not provided', ENT_QUOTES, 'UTF-8');
+        $phone = htmlspecialchars($lead['phone'] ?? 'Not provided', ENT_QUOTES, 'UTF-8');
+        $frustration = htmlspecialchars($lead['primary_frustration'] ?? 'None specified', ENT_QUOTES, 'UTF-8');
+        $score = htmlspecialchars($lead['score'] ?? '38/100', ENT_QUOTES, 'UTF-8');
+        $ttfb = htmlspecialchars($lead['ttfb'] ?? '1.84s', ENT_QUOTES, 'UTF-8');
+        $payload = htmlspecialchars($lead['payload_mb'] ?? '4.2 MB', ENT_QUOTES, 'UTF-8');
+        $timestamp = date('Y-m-d H:i:s T');
+
+        $telegramMsg = "⚡ <b>NEW SPEED AUDIT LEAD INBOUND</b>\n\n"
+            . "🏢 <b>Business:</b> {$biz}\n"
+            . "🌐 <b>Website:</b> {$url}\n"
+            . "👤 <b>Contact:</b> {$name}\n"
+            . "📧 <b>Email:</b> {$email}\n"
+            . "📞 <b>Phone:</b> {$phone}\n"
+            . "🎯 <b>Frustration:</b> {$frustration}\n\n"
+            . "📊 <b>Benchmark Score:</b> {$score} (Failing Core Web Vitals)\n"
+            . "⏱️ <b>TTFB:</b> {$ttfb} | <b>Payload:</b> {$payload}\n\n"
+            . "⏱️ <i>Received: {$timestamp}</i>";
+
+        $sent = false;
+        if (file_exists('/usr/local/bin/send-telegram')) {
+            $escapedMsg = escapeshellarg($telegramMsg);
+            @exec("/usr/local/bin/send-telegram {$escapedMsg} 2>&1", $out, $ret);
+            $sent = ($ret === 0);
+        } else {
+            $envFile = '/etc/epic-ops.env';
+            if (file_exists($envFile)) {
+                $env = @parse_ini_file($envFile);
+                if (!empty($env['TELEGRAM_BOT_TOKEN']) && !empty($env['TELEGRAM_CHAT_ID'])) {
+                    $tgUrl = "https://api.telegram.org/bot" . $env['TELEGRAM_BOT_TOKEN'] . "/sendMessage";
+                    $postData = http_build_query([
+                        'chat_id' => $env['TELEGRAM_CHAT_ID'],
+                        'text' => $telegramMsg,
+                        'parse_mode' => 'HTML'
+                    ]);
+                    $ctx = stream_context_create([
+                        'http' => [
+                            'method' => 'POST',
+                            'header' => "Content-Type: application/x-www-form-urlencoded\r\n",
+                            'content' => $postData,
+                            'timeout' => 5
+                        ]
+                    ]);
+                    @file_get_contents($tgUrl, false, $ctx);
+                    $sent = true;
+                }
+            }
+        }
+
+        // Persist to store.json
+        $existing = [];
+        if (file_exists($storeFile)) {
+            $existing = json_decode(file_get_contents($storeFile), true) ?: [];
+        }
+        if (!isset($existing['leads']) || !is_array($existing['leads'])) {
+            $existing['leads'] = [];
+        }
+        $newLeadEntry = [
+            'id' => 'lead-' . time(),
+            'business' => $biz,
+            'contact' => $name,
+            'email' => $email,
+            'phone' => $phone,
+            'url' => $url,
+            'frustration' => $frustration,
+            'source' => 'Free Speed Audit (/audit)',
+            'score' => $score,
+            'status' => 'new',
+            'date' => date('Y-m-d'),
+            'value' => '$1,499.99'
+        ];
+        array_unshift($existing['leads'], $newLeadEntry);
+        $existing['last_updated'] = date('Y-m-d H:i:s T');
+        $existing['updated_by'] = 'audit-intake';
+        @file_put_contents($storeFile, json_encode($existing, JSON_PRETTY_PRINT), LOCK_EX);
+
+        echo json_encode([
+            'success' => true,
+            'telegram_dispatched' => $sent,
+            'message' => 'Speed audit lead recorded and alert queued',
+            'lead_id' => $newLeadEntry['id']
+        ]);
+        exit;
+    }
+
     if (isset($_GET['action']) && $_GET['action'] === 'reset_defaults') {
         if (file_exists($defaultsFile)) {
             $defaults = json_decode(file_get_contents($defaultsFile), true);
