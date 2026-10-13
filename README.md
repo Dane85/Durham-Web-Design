@@ -1,12 +1,14 @@
-# Durham Web Design — Official Agency Flagship
+# Durham Web Design - Official Agency Flagship
 
 > Ultra-fast, bespoke web development and managed Canadian cloud hosting engineered for businesses across Durham Region, Ontario.
 
-🌐 **Live Website**: [https://durhamweb.design](https://durhamweb.design) (also [https://www.durhamweb.design](https://www.durhamweb.design))  
-📊 **Operations HUD**: [https://ops.durhamweb.design](https://ops.durhamweb.design)
+- 🚀 **Live Website**: [https://durhamweb.design](https://durhamweb.design) (also [https://www.durhamweb.design](https://www.durhamweb.design))
+- 📜 **Proposal Closer**: [https://durhamweb.design/proposal/](https://durhamweb.design/proposal/)
+- ⚡ **Free Speed Audit**: [https://durhamweb.design/audit](https://durhamweb.design/audit)
+- 📊 **Teardown PDF Engine**: [https://durhamweb.design/teardowns/](https://durhamweb.design/teardowns/)
+- 🖥️ **Operations HUD**: [https://ops.durhamweb.design](https://ops.durhamweb.design)
 
 ---
-
 ## ⚡ Overview
 
 **Durham Web Design** is a high-converting digital agency landing page tailored for small and medium businesses in Durham Region (Oshawa, Whitby, Ajax, Pickering, Bowmanville, Courtice, and Brooklin).
@@ -29,9 +31,9 @@ Built on dedicated **Epic Expressions** cloud infrastructure (Hetzner Ashburn No
 
 ## 💰 Commercial Pricing Tiers (CAD + Ontario HST)
 
-- **Local Starter:** $1,450 CAD setup + $49/mo CAD care
-- **Growth Business:** $2,850 CAD setup + $129/mo CAD care *(Featured)*
-- **Custom App / E-Commerce:** $4,950+ CAD setup + $249+/mo CAD care
+- **Local Starter:** $1,499.99 CAD setup + $49.99/mo CAD care
+- **Growth Business:** $2,899.99 CAD setup + $129.99/mo CAD care *(Featured)*
+- **Custom App / E-Commerce:** $4,999.99+ CAD setup + $249.99+/mo CAD care
 
 ---
 
