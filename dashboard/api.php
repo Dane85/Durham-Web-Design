@@ -425,6 +425,375 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+    // ACTION: Save Generated Proposal & Log onto Lead
+    if (isset($_GET['action']) && $_GET['action'] === 'save_proposal') {
+        $pInput = is_array($input) ? $input : [];
+        $propId = trim($pInput['id'] ?? ('prop-' . time()));
+        $contact = trim($pInput['contact'] ?? $pInput['client'] ?? 'Valued Client');
+        $business = trim($pInput['business'] ?? $pInput['biz'] ?? 'Prospect Business');
+        $tier = strtolower(trim($pInput['tier'] ?? 'starter'));
+        $phone = trim($pInput['phone'] ?? '');
+        $status = trim($pInput['status'] ?? 'active');
+        $createdAt = $pInput['created_at'] ?? (gmdate('Y-m-d H:i:s') . ' UTC');
+        
+        $tierCatalog = [
+            'starter' => [
+                'title' => 'Starter Launch',
+                'total_price' => 1499.99,
+                'deposit' => 749.99,
+                'monthly' => 49.99
+            ],
+            'growth' => [
+                'title' => 'Growth & Conversion Engine',
+                'total_price' => 2899.99,
+                'deposit' => 1449.99,
+                'monthly' => 129.99
+            ],
+            'custom' => [
+                'title' => 'Custom Enterprise Architecture',
+                'total_price' => 4999.99,
+                'deposit' => 2499.99,
+                'monthly' => 249.99
+            ]
+        ];
+        $matchedTier = $tierCatalog[$tier] ?? $tierCatalog['starter'];
+        
+        $proposalUrl = trim($pInput['proposal_url'] ?? $pInput['url'] ?? '');
+        if (empty($proposalUrl)) {
+            $proposalUrl = 'https://durhamweb.design/proposal/?' . http_build_query([
+                'id' => $propId,
+                'client' => $contact,
+                'biz' => $business,
+                'tier' => $tier,
+                'phone' => $phone
+            ]);
+        }
+        
+        $proposalEntry = [
+            'id' => $propId,
+            'created_at' => $createdAt,
+            'contact' => $contact,
+            'business' => $business,
+            'tier' => $tier,
+            'tier_title' => $matchedTier['title'],
+            'total_price' => $matchedTier['total_price'],
+            'deposit' => $matchedTier['deposit'],
+            'monthly' => $matchedTier['monthly'],
+            'phone' => $phone,
+            'status' => $status,
+            'proposal_url' => $proposalUrl
+        ];
+        
+        // 1. Update data/proposals.json
+        $proposalsFile = $dataDir . '/proposals.json';
+        $proposals = [];
+        if (file_exists($proposalsFile)) {
+            $proposals = json_decode(file_get_contents($proposalsFile), true) ?: [];
+        }
+        $updatedExisting = false;
+        foreach ($proposals as &$exProp) {
+            if (strcasecmp($exProp['id'] ?? '', $propId) === 0) {
+                $exProp = array_merge($exProp, $proposalEntry);
+                $updatedExisting = true;
+                break;
+            }
+        }
+        unset($exProp);
+        if (!$updatedExisting) {
+            array_unshift($proposals, $proposalEntry);
+        }
+        @file_put_contents($proposalsFile, json_encode($proposals, JSON_PRETTY_PRINT), LOCK_EX);
+        
+        // 2. Append history log entry onto lead in data/leads.json
+        $leadsFile = $dataDir . '/leads.json';
+        $leadsList = [];
+        if (file_exists($leadsFile)) {
+            $leadsList = json_decode(file_get_contents($leadsFile), true) ?: [];
+        } elseif (file_exists($storeFile)) {
+            $storeData = json_decode(file_get_contents($storeFile), true) ?: [];
+            $leadsList = $storeData['leads'] ?? [];
+        }
+        
+        $logEntry = [
+            'timestamp' => date('Y-m-d H:i:s T'),
+            'action' => 'proposal_generated',
+            'proposal_id' => $propId,
+            'proposal_url' => $proposalUrl,
+            'tier' => $matchedTier['title'],
+            'deposit' => '$' . number_format($matchedTier['deposit'], 2) . ' CAD',
+            'details' => "Generated proposal closer link for {$business} ({$matchedTier['title']})"
+        ];
+        
+        $leadFound = false;
+        foreach ($leadsList as &$lItem) {
+            $nameMatch = !empty($contact) && (stripos($lItem['name'] ?? '', $contact) !== false || stripos($lItem['contact'] ?? '', $contact) !== false);
+            $bizMatch = !empty($business) && stripos($lItem['business'] ?? '', $business) !== false;
+            $phoneMatch = !empty($phone) && !empty($lItem['phone'] ?? '') && preg_replace('/[^0-9]/', '', $lItem['phone']) === preg_replace('/[^0-9]/', '', $phone);
+            
+            if ($nameMatch || $bizMatch || $phoneMatch) {
+                if (!isset($lItem['history']) || !is_array($lItem['history'])) {
+                    $lItem['history'] = [];
+                }
+                $lItem['history'][] = $logEntry;
+                $lItem['last_proposal_id'] = $propId;
+                $lItem['last_proposal_url'] = $proposalUrl;
+                $lItem['status'] = 'proposal_sent';
+                $leadFound = true;
+                break;
+            }
+        }
+        unset($lItem);
+        
+        if (!$leadFound) {
+            $newLead = [
+                'id' => 'lead-' . time(),
+                'name' => $contact,
+                'business' => $business,
+                'email' => '',
+                'phone' => $phone,
+                'pkg' => $matchedTier['title'] . ' ($' . number_format($matchedTier['total_price'], 2) . ' CAD)',
+                'notes' => "Proposal closer link generated for {$business}.",
+                'status' => 'proposal_sent',
+                'timestamp' => date('Y-m-d H:i:s T'),
+                'channel' => 'Command Center Proposal Generator',
+                'last_proposal_id' => $propId,
+                'last_proposal_url' => $proposalUrl,
+                'history' => [$logEntry]
+            ];
+            array_unshift($leadsList, $newLead);
+        }
+        @file_put_contents($leadsFile, json_encode($leadsList, JSON_PRETTY_PRINT), LOCK_EX);
+        
+        // Also sync leads array into store.json
+        if (file_exists($storeFile)) {
+            $storeData = json_decode(file_get_contents($storeFile), true) ?: [];
+            $storeData['leads'] = $leadsList;
+            $storeData['last_updated'] = date('Y-m-d H:i:s T');
+            $storeData['updated_by'] = 'proposal-generator';
+            @file_put_contents($storeFile, json_encode($storeData, JSON_PRETTY_PRINT), LOCK_EX);
+        }
+        
+        echo json_encode([
+            'success' => true,
+            'message' => 'Proposal saved and lead history updated',
+            'proposal' => $proposalEntry,
+            'lead_updated' => $leadFound
+        ]);
+        exit;
+    }
+
+    // ACTION: Public Proposal Acceptance Webhook -> Rate-Limited by IP, Logs Agreement & Sends Telegram Alert
+    if (isset($_GET['action']) && $_GET['action'] === 'accept_proposal') {
+        // IP Rate Limiting: max 15 requests per 10 minutes
+        $clientIp = $_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['HTTP_X_FORWARDED_FOR'] ?? $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+        if (strpos($clientIp, ',') !== false) {
+            $clientIp = trim(explode(',', $clientIp)[0]);
+        }
+        $rateLimitFile = $dataDir . '/rate_limit_accept.json';
+        $limits = file_exists($rateLimitFile) ? (json_decode(file_get_contents($rateLimitFile), true) ?: []) : [];
+        $now = time();
+        foreach ($limits as $ip => $data) {
+            if ($now - ($data['start_time'] ?? 0) > 600) {
+                unset($limits[$ip]);
+            }
+        }
+        if (!isset($limits[$clientIp])) {
+            $limits[$clientIp] = ['count' => 1, 'start_time' => $now];
+        } else {
+            $limits[$clientIp]['count']++;
+            if ($limits[$clientIp]['count'] > 15) {
+                http_response_code(429);
+                echo json_encode([
+                    'success' => false,
+                    'error' => 'Rate limit exceeded. Please wait a few minutes before submitting again.'
+                ]);
+                exit;
+            }
+        }
+        @file_put_contents($rateLimitFile, json_encode($limits), LOCK_EX);
+
+        $aInput = is_array($input) ? $input : [];
+        $propId = trim($aInput['id'] ?? $aInput['proposal_id'] ?? ('prop-' . time()));
+        $clientName = htmlspecialchars(trim($aInput['client_name'] ?? $aInput['client'] ?? $aInput['name'] ?? 'Client Representative'), ENT_QUOTES, 'UTF-8');
+        $business = htmlspecialchars(trim($aInput['business'] ?? $aInput['biz'] ?? 'Valued Business'), ENT_QUOTES, 'UTF-8');
+        $signature = htmlspecialchars(trim($aInput['signature'] ?? $clientName), ENT_QUOTES, 'UTF-8');
+        $buildTier = htmlspecialchars(trim($aInput['build_tier'] ?? $aInput['tier'] ?? 'Starter Launch ($1,499.99 CAD)'), ENT_QUOTES, 'UTF-8');
+        $careTier = htmlspecialchars(trim($aInput['care_tier'] ?? 'Standard Cloud Care ($49.99/mo)'), ENT_QUOTES, 'UTF-8');
+        $deposit = htmlspecialchars(trim($aInput['deposit'] ?? '$749.99 CAD'), ENT_QUOTES, 'UTF-8');
+        $signedAt = $aInput['timestamp'] ?? (gmdate('Y-m-d H:i:s') . ' UTC');
+        $phone = htmlspecialchars(trim($aInput['phone'] ?? ''), ENT_QUOTES, 'UTF-8');
+
+        // 1. Update data/proposals.json
+        $proposalsFile = $dataDir . '/proposals.json';
+        $proposals = file_exists($proposalsFile) ? (json_decode(file_get_contents($proposalsFile), true) ?: []) : [];
+        $foundProp = false;
+        foreach ($proposals as &$pr) {
+            if (strcasecmp($pr['id'] ?? '', $propId) === 0 || (!empty($business) && strcasecmp($pr['business'] ?? '', $business) === 0)) {
+                $pr['status'] = 'accepted';
+                $pr['signature'] = $signature;
+                $pr['accepted_by'] = $clientName;
+                $pr['accepted_at'] = $signedAt;
+                $pr['build_tier'] = $buildTier;
+                $pr['care_tier'] = $careTier;
+                $pr['deposit_amount'] = $deposit;
+                $pr['client_ip'] = $clientIp;
+                $foundProp = true;
+                break;
+            }
+        }
+        unset($pr);
+        if (!$foundProp) {
+            array_unshift($proposals, [
+                'id' => $propId,
+                'created_at' => $signedAt,
+                'accepted_at' => $signedAt,
+                'contact' => $clientName,
+                'business' => $business,
+                'tier' => $buildTier,
+                'build_tier' => $buildTier,
+                'care_tier' => $careTier,
+                'deposit' => $deposit,
+                'deposit_amount' => $deposit,
+                'phone' => $phone,
+                'signature' => $signature,
+                'status' => 'accepted',
+                'client_ip' => $clientIp
+            ]);
+        }
+        @file_put_contents($proposalsFile, json_encode($proposals, JSON_PRETTY_PRINT), LOCK_EX);
+
+        // 2. Append history entry in data/leads.json & data/store.json
+        $leadsFile = $dataDir . '/leads.json';
+        $leadsList = [];
+        if (file_exists($leadsFile)) {
+            $leadsList = json_decode(file_get_contents($leadsFile), true) ?: [];
+        } elseif (file_exists($storeFile)) {
+            $sData = json_decode(file_get_contents($storeFile), true) ?: [];
+            $leadsList = $sData['leads'] ?? [];
+        }
+
+        $acceptLogEntry = [
+            'timestamp' => $signedAt,
+            'action' => 'proposal_accepted',
+            'proposal_id' => $propId,
+            'signature' => $signature,
+            'accepted_by' => $clientName,
+            'build_tier' => $buildTier,
+            'care_tier' => $careTier,
+            'deposit' => $deposit,
+            'ip' => $clientIp,
+            'details' => "🎉 Proposal signed and accepted by {$clientName}. Proceeding to Stripe 50% deposit payment."
+        ];
+
+        $matchedLead = false;
+        foreach ($leadsList as &$ld) {
+            $nameMatch = !empty($clientName) && (stripos($ld['name'] ?? '', $clientName) !== false || stripos($ld['contact'] ?? '', $clientName) !== false);
+            $bizMatch = !empty($business) && stripos($ld['business'] ?? '', $business) !== false;
+            $idMatch = !empty($ld['last_proposal_id'] ?? '') && strcasecmp($ld['last_proposal_id'], $propId) === 0;
+
+            if ($idMatch || $bizMatch || $nameMatch) {
+                if (!isset($ld['history']) || !is_array($ld['history'])) {
+                    $ld['history'] = [];
+                }
+                $ld['history'][] = $acceptLogEntry;
+                $ld['status'] = 'accepted_pending_deposit';
+                $ld['signature'] = $signature;
+                $ld['accepted_at'] = $signedAt;
+                $matchedLead = true;
+                break;
+            }
+        }
+        unset($ld);
+
+        if (!$matchedLead) {
+            array_unshift($leadsList, [
+                'id' => 'lead-' . time(),
+                'name' => $clientName,
+                'business' => $business,
+                'email' => '',
+                'phone' => $phone,
+                'pkg' => $buildTier,
+                'status' => 'accepted_pending_deposit',
+                'timestamp' => $signedAt,
+                'channel' => 'Digital Proposal Acceptance',
+                'history' => [$acceptLogEntry]
+            ]);
+        }
+        @file_put_contents($leadsFile, json_encode($leadsList, JSON_PRETTY_PRINT), LOCK_EX);
+
+        if (file_exists($storeFile)) {
+            $sData = json_decode(file_get_contents($storeFile), true) ?: [];
+            $sData['leads'] = $leadsList;
+            $sData['last_updated'] = date('Y-m-d H:i:s T');
+            $sData['updated_by'] = 'proposal-accept-webhook';
+            @file_put_contents($storeFile, json_encode($sData, JSON_PRETTY_PRINT), LOCK_EX);
+        }
+
+        // 3. Send instant Telegram notification via @Epicexx_bot
+        $telegramMsg = "🎉 <b>PROPOSAL ACCEPTED & SIGNED!</b>
+
+"
+            . "👤 <b>Client:</b> {$clientName}
+"
+            . "🏢 <b>Business:</b> {$business}
+"
+            . "✍️ <b>Digital Signature:</b> <i>{$signature}</i>
+"
+            . "🚀 <b>Build Tier:</b> {$buildTier}
+"
+            . "🛡️ <b>Care Tier:</b> {$careTier}
+"
+            . "💵 <b>50% Deposit Due:</b> {$deposit}
+"
+            . "🆔 <b>Proposal ID:</b> {$propId}
+"
+            . "🕒 <b>Signed At:</b> {$signedAt}
+"
+            . "🌐 <b>IP Address:</b> {$clientIp}
+
+"
+            . "⚡ <i>Client is proceeding to Stripe deposit checkout. Prepare sprint kickoff!</i>";
+
+        $sent = false;
+        if (file_exists('/usr/local/bin/send-telegram')) {
+            $escapedMsg = escapeshellarg($telegramMsg);
+            @exec("/usr/local/bin/send-telegram {$escapedMsg} 2>&1", $out, $ret);
+            $sent = ($ret === 0);
+        } else {
+            $envFile = '/etc/epic-ops.env';
+            if (file_exists($envFile)) {
+                $env = @parse_ini_file($envFile);
+                if (!empty($env['TELEGRAM_BOT_TOKEN']) && !empty($env['TELEGRAM_CHAT_ID'])) {
+                    $tgUrl = "https://api.telegram.org/bot" . $env['TELEGRAM_BOT_TOKEN'] . "/sendMessage";
+                    $postData = http_build_query([
+                        'chat_id' => $env['TELEGRAM_CHAT_ID'],
+                        'text' => $telegramMsg,
+                        'parse_mode' => 'HTML'
+                    ]);
+                    $ctx = stream_context_create([
+                        'http' => [
+                            'method' => 'POST',
+                            'header' => "Content-Type: application/x-www-form-urlencoded
+",
+                            'content' => $postData,
+                            'timeout' => 5
+                        ]
+                    ]);
+                    @file_get_contents($tgUrl, false, $ctx);
+                    $sent = true;
+                }
+            }
+        }
+
+        echo json_encode([
+            'success' => true,
+            'message' => 'Proposal accepted and recorded',
+            'telegram_dispatched' => $sent,
+            'proposal_id' => $propId
+        ]);
+        exit;
+    }
+
     if (!is_array($input)) {
         http_response_code(400);
         echo json_encode(['error' => 'Invalid JSON payload']);

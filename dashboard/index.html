@@ -3325,14 +3325,14 @@
         name: "GMSRA",
         niche: "General Motors Salaried Retirees",
         location: "Oshawa, ON",
-        stage: 4, // Staging & Review
-        targetUrl: "https://gmsra.durhamweb.design",
+        stage: 5, // Live & Care Plan
+        targetUrl: "https://gmsalariedretirees.com",
         directPort: "http://5.161.161.222:8080",
         repo: "Dane85/gmsra",
         localPath: "C:\\Repos\\Epic Expressions\\GMSRA",
         pkg: "Custom Bespoke WordPress",
         retainer: 39.00,
-        statusNote: "Verified HTTP 200, awaiting DNS cutover. Database connected (20 records).",
+        statusNote: "Live production cutover complete. Verified HTTP 200 on gmsalariedretirees.com with Let's Encrypt SSL. Staging mirror: gmsra.durhamweb.design.",
         depositStatus: "Paid (100%)",
         auditScore: 98,
         sslStatus: "Let's Encrypt ECDSA"
@@ -4378,7 +4378,8 @@
       }
 
       // Also record in proposals.json via API
-      fetch('/api.php?action=save_proposal', {
+      const apiEndpoint = window.location.pathname.startsWith('/dashboard') ? '/dashboard/api.php' : 'api.php';
+      fetch(apiEndpoint + '?action=save_proposal', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -4388,7 +4389,8 @@
           business: biz,
           tier: tier,
           phone: phone,
-          status: 'active'
+          status: 'active',
+          proposal_url: url
         })
       }).catch(e => console.warn('Saved locally, API offline:', e));
 
