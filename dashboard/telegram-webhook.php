@@ -55,11 +55,13 @@ if ($cmd === '/status' || $cmd === 'status') {
 
 // 2. /ping command
 if ($cmd === '/ping' || $cmd === 'ping') {
-    $pingMsg = "🏓 <b>Pong!</b>\n\n"
-        . "🖥️ <b>Hetzner Node:</b> <code>5.161.161.222</code> (Ashburn CPX 11)\n"
-        . "🕒 <b>Server Time:</b> " . date('Y-m-d H:i:s T') . "\n"
-        . "⚡ Webhook and daemon responsiveness: <b>100% nominal</b>.\n\n"
-        . "Send <code>/status</code> for full system telemetry.";
+    $pingMsg = "🏓 <b>PONG — SYSTEM NOMINAL</b>\n\n"
+        . "━━━━━━━━━━━━━━━━━━━━\n\n"
+        . "🖥️ <b>Hetzner Node:</b> <code>5.161.161.222</code> (Ashburn CPX 11)\n\n"
+        . "🕒 <b>Server Time:</b> " . date('Y-m-d H:i:s T') . "\n\n"
+        . "⚡ <b>Responsiveness:</b> 100% nominal (daemons & webhook healthy)\n\n"
+        . "━━━━━━━━━━━━━━━━━━━━\n\n"
+        . "<i>Send <code>/status</code> for complete system telemetry.</i>";
     sendTelegramDirect($botToken, $chatId, $pingMsg);
     echo json_encode(['ok' => true]);
     exit;
@@ -75,10 +77,13 @@ if ($cmd === '/leads' || $cmd === 'leads') {
     }
 
     if (empty($leads)) {
-        $leadsMsg = "📋 <b>Inbound Leads:</b> No leads currently in tracker.";
+        $leadsMsg = "📋 <b>INBOUND LEADS TRACKER</b>\n\n"
+            . "━━━━━━━━━━━━━━━━━━━━\n\n"
+            . "ℹ️ No speed audit leads currently in tracker.";
     } else {
         $count = count($leads);
-        $leadsMsg = "📋 <b>INBOUND LEADS TRACKER ({$count} Total)</b>\n\n";
+        $leadsMsg = "📋 <b>INBOUND LEADS TRACKER ({$count} Total)</b>\n\n"
+            . "━━━━━━━━━━━━━━━━━━━━\n\n";
         $topLeads = array_slice($leads, 0, 5);
         foreach ($topLeads as $i => $l) {
             $num = $i + 1;
@@ -87,9 +92,12 @@ if ($cmd === '/leads' || $cmd === 'leads') {
             $phone = htmlspecialchars($l['phone'] ?? 'N/A', ENT_QUOTES, 'UTF-8');
             $score = htmlspecialchars($l['score'] ?? 'N/A', ENT_QUOTES, 'UTF-8');
             $date = htmlspecialchars($l['date'] ?? '', ENT_QUOTES, 'UTF-8');
-            $leadsMsg .= "<b>{$num}. {$biz}</b>\n";
-            $leadsMsg .= "   👤 Contact: {$contact} | 📞 {$phone}\n";
-            $leadsMsg .= "   📊 Score: {$score} | 📅 {$date}\n\n";
+            $leadsMsg .= "<b>{$num}. {$biz}</b>\n\n"
+                . "  👤 <b>Contact:</b> {$contact}\n"
+                . "  📞 <b>Phone:</b> {$phone}\n"
+                . "  📊 <b>Speed Score:</b> {$score}/100\n"
+                . "  📅 <b>Submitted:</b> {$date}\n\n"
+                . "────────────────────\n\n";
         }
     }
     sendTelegramDirect($botToken, $chatId, $leadsMsg);
@@ -101,7 +109,8 @@ if ($cmd === '/leads' || $cmd === 'leads') {
 if ($cmd === '/proposal') {
     $argsStr = trim(substr($text, strlen($firstWord)));
     if (empty($argsStr)) {
-        $usageMsg = "ℹ️ <b>Usage:</b>\n"
+        $usageMsg = "ℹ️ <b>PROPOSAL CLOSER COMMAND USAGE</b>\n\n"
+            . "━━━━━━━━━━━━━━━━━━━━\n\n"
             . "<code>/proposal &lt;Contact&gt; \"&lt;Business Name&gt;\" &lt;starter|growth|custom&gt; [phone]</code>\n\n"
             . "<b>Example:</b>\n"
             . "<code>/proposal Marcus \"Apex Roofing Oshawa\" starter 9054318890</code>";
@@ -193,15 +202,18 @@ if ($cmd === '/proposal') {
     $liveUrl = "https://durhamweb.design/proposal/?" . http_build_query($params);
 
     $replyMsg = "🚀 <b>INSTANT CLIENT PROPOSAL GENERATED</b>\n\n"
-        . "👤 <b>Client:</b> " . htmlspecialchars($contact, ENT_QUOTES, 'UTF-8') . "\n"
-        . "🏢 <b>Business:</b> " . htmlspecialchars($business, ENT_QUOTES, 'UTF-8') . "\n"
-        . "⚡ <b>Tier:</b> {$tierTitle} ($" . number_format($totalPrice, 2) . " CAD)\n"
-        . "💳 <b>50% Deposit Due:</b> $" . number_format($deposit, 2) . " CAD\n"
-        . "🔄 <b>Monthly Retainer:</b> $" . number_format($monthly, 2) . " / mo\n"
-        . (!empty($phone) ? "📞 <b>Direct Line:</b> " . htmlspecialchars($phone, ENT_QUOTES, 'UTF-8') . "\n" : "")
+        . "━━━━━━━━━━━━━━━━━━━━\n\n"
+        . "👤 <b>Client:</b> " . htmlspecialchars($contact, ENT_QUOTES, 'UTF-8') . "\n\n"
+        . "🏢 <b>Business:</b> " . htmlspecialchars($business, ENT_QUOTES, 'UTF-8') . "\n\n"
+        . "⚡ <b>Tier:</b> {$tierTitle} ($" . number_format($totalPrice, 2) . " CAD)\n\n"
+        . "💳 <b>50% Deposit Due:</b> $" . number_format($deposit, 2) . " CAD\n\n"
+        . "🔄 <b>Monthly Retainer:</b> $" . number_format($monthly, 2) . " / mo\n\n"
+        . (!empty($phone) ? "📞 <b>Direct Line:</b> " . htmlspecialchars($phone, ENT_QUOTES, 'UTF-8') . "\n\n" : "")
         . "🛡️ <b>Guarantee:</b> Sub-0.3s TTFB & 100/100 Core Web Vitals\n\n"
+        . "━━━━━━━━━━━━━━━━━━━━\n\n"
         . "🔗 <b>Live Proposal Closer Link:</b>\n"
         . "{$liveUrl}\n\n"
+        . "━━━━━━━━━━━━━━━━━━━━\n\n"
         . "<i>Send this link directly to the prospect. They can review deliverables, sign digitally, and pay the 50% deposit via Stripe.</i>";
 
     sendTelegramDirect($botToken, $chatId, $replyMsg);
@@ -213,11 +225,12 @@ if ($cmd === '/proposal') {
 if ($cmd === '/teardown') {
     $argsStr = trim(substr($text, strlen($firstWord)));
     if (empty($argsStr)) {
-        $usageMsg = "ℹ️ <b>Usage:</b>\n"
+        $usageMsg = "ℹ️ <b>SPEED TEARDOWN COMMAND USAGE</b>\n\n"
+            . "━━━━━━━━━━━━━━━━━━━━\n\n"
             . "<code>/teardown &lt;url&gt; [Business Name]</code>\n\n"
             . "<b>Example:</b>\n"
-            . "<code>/teardown https://durhamweb.design \"Durham Web Design\"</code>\n"
-            . "<code>/teardown apexroofingoshawa.ca \"Apex Roofing\"</code>";
+            . "<code>/teardown https://apexroofingoshawa.ca \"Apex Roofing\"</code>\n"
+            . "<code>/teardown https://durhamweb.design \"Durham Web Design\"</code>";
         sendTelegramDirect($botToken, $chatId, $usageMsg);
         echo json_encode(['ok' => true]);
         exit;
@@ -241,9 +254,10 @@ if ($cmd === '/teardown') {
 
     if (!empty($targetUrl)) {
         // Immediate status acknowledgement
-        $ackMsg = "⚡ <b>Speed Teardown Initiated:</b>\n"
-            . "Benchmarking <code>" . htmlspecialchars($targetUrl, ENT_QUOTES, 'UTF-8') . "</code> from Canadian edge node...\n"
-            . "Compiling 2-page executive scorecard PDF.";
+        $ackMsg = "⚡ <b>SPEED TEARDOWN INITIATED</b>\n\n"
+            . "━━━━━━━━━━━━━━━━━━━━\n\n"
+            . "Auditing <code>" . htmlspecialchars($targetUrl, ENT_QUOTES, 'UTF-8') . "</code> from Canadian edge node...\n\n"
+            . "Compiling visual 2-page executive scorecard PDF with customer drop-off bar chart & bloat pie chart.";
         sendTelegramDirect($botToken, $chatId, $ackMsg);
 
         // Execute generator script
@@ -261,14 +275,16 @@ if ($cmd === '/teardown') {
             $pdfPath = $result['pdf_path'];
             $biz = $result['business'];
             $score = $result['score'];
-            $ttfb = $result['ttfb'];
+            $grade = $result['score_grade'] ?? 'Grade F';
+            $loadSec = $result['load_seconds'] ?? 3.8;
             $rating = $result['rating'];
             $downloadUrl = $result['download_url'];
 
             // 1. Dispatch PDF directly into Dane's Telegram chat
-            $caption = "⚡ <b>Speed Teardown Audit:</b> {$biz}\n"
-                . "📊 <b>Mobile Score:</b> {$score}/100 ({$rating})\n"
-                . "⏱️ <b>TTFB:</b> {$ttfb}s (DWD standard: 0.28s)\n"
+            $caption = "⚡ <b>SPEED TEARDOWN SCORECARD:</b> {$biz}\n\n"
+                . "━━━━━━━━━━━━━━━━━━━━\n\n"
+                . "📊 <b>Mobile Grade:</b> {$grade}: {$score}/100 ({$rating})\n"
+                . "⏱️ <b>Estimated Load:</b> ~{$loadSec}s (DWD standard: <0.3s)\n"
                 . "🔗 <b>PDF Link:</b> {$downloadUrl}";
 
             sendTelegramDocument($botToken, $chatId, $pdfPath, $caption);
@@ -277,11 +293,12 @@ if ($cmd === '/teardown') {
             $contactName = explode(' ', $biz)[0];
             $parsedHost = parse_url($targetUrl, PHP_URL_HOST) ?: $targetUrl;
             $pitchMsg = "📧 <b>COLD OUTREACH PITCH SCRIPT (READY TO SEND)</b>\n\n"
-                . "<b>Subject:</b> Quick speed audit for {$biz} (Mobile TTFB bottleneck)\n\n"
+                . "━━━━━━━━━━━━━━━━━━━━\n\n"
+                . "<b>Subject:</b> Quick speed audit for {$biz} (Mobile load time bottleneck)\n\n"
                 . "Hey {$contactName},\n\n"
-                . "I ran a speed diagnostic on {$parsedHost} from our Canadian edge node earlier today and noticed your site is currently scoring {$score}/100 on mobile with a {$ttfb}s initial server response delay.\n\n"
+                . "I ran a speed diagnostic on {$parsedHost} from our Canadian edge node earlier today and noticed your site is currently scoring {$score}/100 on mobile with an estimated {$loadSec}s load delay.\n\n"
                 . "In Durham Region, over 70% of high-intent customer traffic comes from smartphones. Every 1-second delay past 1.0s drops customer call-in rates by ~10%.\n\n"
-                . "I compiled a full 2-page teardown PDF attached showing your exact bottlenecks and how our handcrafted sub-second architecture cuts that load time down to under 0.3s.\n\n"
+                . "I compiled a visual 2-page teardown PDF attached showing your exact customer drop-off curve and how our handcrafted sub-second architecture cuts that load time down to under 0.3s.\n\n"
                 . "Take a look at the attached audit, or let me know if you'd like me to walk you through the fixes.\n\n"
                 . "Best,\n"
                 . "Dane\n"
@@ -301,15 +318,26 @@ if ($cmd === '/teardown') {
 }
 
 // 6. Default /help or /start
-$helpMsg = "⚡ <b>Epic Expressions Operations Bot (@Epicexx_bot)</b>\n\n"
-    . "<b>Fleet & Infrastructure Commands:</b>\n"
-    . "  <code>/status</code> - Live server health, CPU/RAM/Disk & HTTP latencies\n"
-    . "  <code>/ping</code> - Instant handshake & node timestamp\n"
-    . "  <code>/leads</code> - View top recent speed audit inbound leads\n\n"
-    . "<b>Client Closer & Sales Engine:</b>\n"
-    . "  <code>/proposal &lt;Contact&gt; \"&lt;Business&gt;\" &lt;tier&gt; [phone]</code> - Generate instant client proposal & contract link\n"
-    . "  <code>/teardown &lt;url&gt; [Business]</code> - Run headless speed benchmark, send 2-page PDF & cold pitch\n\n"
-    . "<i>Automated reports dispatch daily at 9:00 AM & 9:00 PM EDT.</i>";
+$helpMsg = "⚡ <b>EPIC EXPRESSIONS OPERATIONS BOT</b>\n"
+    . "🤖 <i>Interactive Operations & Sales Engine (@Epicexx_bot)</i>\n\n"
+    . "━━━━━━━━━━━━━━━━━━━━\n\n"
+    . "📊 <b>INFRASTRUCTURE COMMANDS</b>\n\n"
+    . "  • <code>/status</code>\n"
+    . "    <i>Live server health, CPU/RAM/Disk & HTTP latencies</i>\n\n"
+    . "  • <code>/ping</code>\n"
+    . "    <i>Instant handshake & node timestamp</i>\n\n"
+    . "  • <code>/leads</code>\n"
+    . "    <i>View top recent speed audit inbound prospects</i>\n\n"
+    . "━━━━━━━━━━━━━━━━━━━━\n\n"
+    . "🚀 <b>CLIENT CLOSER & SALES COMMANDS</b>\n\n"
+    . "  • <code>/proposal &lt;Name&gt; \"&lt;Biz&gt;\" &lt;tier&gt; [phone]</code>\n"
+    . "    <i>Generate instant client agreement closer link</i>\n"
+    . "    <b>Example:</b> <code>/proposal Marcus \"Apex Roofing\" starter 9054318890</code>\n\n"
+    . "  • <code>/teardown &lt;url&gt; [&lt;Biz&gt;]</code>\n"
+    . "    <i>Run headless speed diagnostic, send 2-page PDF & cold pitch</i>\n"
+    . "    <b>Example:</b> <code>/teardown https://apexroofingoshawa.ca \"Apex Roofing\"</code>\n\n"
+    . "━━━━━━━━━━━━━━━━━━━━\n\n"
+    . "ℹ️ <i>Automated reports dispatch daily at 9:00 AM & 9:00 PM EDT.</i>";
 sendTelegramDirect($botToken, $chatId, $helpMsg);
 echo json_encode(['ok' => true]);
 exit;

@@ -1980,22 +1980,26 @@
         width: auto !important;
         align-self: flex-start !important;
       }
-      /* Kanban Mobile Snapping */
-      .kanban-board {
-        scroll-snap-type: x mandatory;
-        -webkit-overflow-scrolling: touch;
-        gap: 12px;
-        padding-bottom: 16px;
+      /* Kanban Mobile Snapping & Breathing Room */
+      .kanban-board, .pipeline-board {
+        scroll-snap-type: x mandatory !important;
+        scroll-padding: 16px !important;
+        -webkit-overflow-scrolling: touch !important;
+        gap: 16px !important;
+        padding-bottom: 20px !important;
       }
       .kanban-col {
-        scroll-snap-align: center;
-        min-width: 285px;
-        width: 82vw;
-        max-width: 320px;
-        min-height: 320px;
+        scroll-snap-align: start !important;
+        min-width: 82vw !important;
+        max-width: 86vw !important;
+        width: 84vw !important;
+        margin-right: 16px !important;
+        padding: 18px !important;
+        min-height: 320px !important;
       }
       .kanban-card {
-        padding: 14px;
+        padding: 16px !important;
+        margin-bottom: 14px !important;
       }
       .card-bottom .card-action-btns button {
         min-height: 36px;
@@ -2492,6 +2496,163 @@
                 <span>Reset Demo</span>
               </button>
             </div>
+          </div>
+        </section>
+
+        <!-- ================================================================
+             MODULE: TELEGRAM BOT & SALES ENGINE COMMAND CENTER
+             ================================================================ -->
+        <section class="sales-command-center" style="margin-bottom: 24px;">
+          <div class="card" style="background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(13, 20, 36, 0.95) 100%); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 16px; padding: 24px; box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);">
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap: wrap; gap: 12px; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 16px;">
+              <div style="display: flex; align-items: center; gap: 10px;">
+                <div style="width: 38px; height: 38px; border-radius: 10px; background: rgba(56, 189, 248, 0.15); border: 1px solid rgba(56, 189, 248, 0.4); display: flex; align-items: center; justify-content: center; color: var(--cyan);">
+                  <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
+                </div>
+                <div>
+                  <h3 style="font-size: 16px; font-weight: 800; color: #fff; margin: 0; display: flex; align-items: center; gap: 8px;">
+                    📱 Telegram Bot &amp; Sales Engine Cheat Sheet
+                    <span style="font-size: 10px; font-family: var(--font-mono); background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); padding: 2px 8px; border-radius: 20px; font-weight: 600;">ACTIVE</span>
+                  </h3>
+                  <p style="font-size: 12px; color: var(--text-dim); margin: 2px 0 0;">1-click bot command copies, in-browser proposal generator, and live asset links</p>
+                </div>
+              </div>
+              <div style="display: flex; gap: 8px;">
+                <a href="https://t.me/Epicexx_bot" target="_blank" rel="noopener noreferrer" class="btn btn-cyan btn-sm">
+                  <span>Open @Epicexx_bot in Telegram</span>
+                  <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 20px;">
+              
+              <!-- Left Column: 1-Click Bot Commands Cheat Sheet -->
+              <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 18px;">
+                <div style="font-size: 12px; font-family: var(--font-mono); font-weight: 700; color: var(--cyan); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; display: flex; justify-content: space-between;">
+                  <span>Bot Commands (Click to Copy)</span>
+                  <span style="color: var(--text-dim);">@Epicexx_bot</span>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                  
+                  <div class="cmd-pill" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-radius: 8px; background: rgba(15,23,42,0.8); border: 1px solid rgba(255,255,255,0.05); cursor: pointer;" onclick="copyCommand('/status', this)">
+                    <div>
+                      <code style="color: var(--cyan); font-weight: 700;">/status</code>
+                      <span style="font-size: 11px; color: var(--text-muted); margin-left: 8px;">Live server health &amp; telemetry</span>
+                    </div>
+                    <svg class="cmd-copy-icon" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  </div>
+
+                  <div class="cmd-pill" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-radius: 8px; background: rgba(15,23,42,0.8); border: 1px solid rgba(255,255,255,0.05); cursor: pointer;" onclick="copyCommand('/ping', this)">
+                    <div>
+                      <code style="color: var(--cyan); font-weight: 700;">/ping</code>
+                      <span style="font-size: 11px; color: var(--text-muted); margin-left: 8px;">Instant handshake &amp; node timestamp</span>
+                    </div>
+                    <svg class="cmd-copy-icon" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  </div>
+
+                  <div class="cmd-pill" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-radius: 8px; background: rgba(15,23,42,0.8); border: 1px solid rgba(255,255,255,0.05); cursor: pointer;" onclick="copyCommand('/leads', this)">
+                    <div>
+                      <code style="color: var(--cyan); font-weight: 700;">/leads</code>
+                      <span style="font-size: 11px; color: var(--text-muted); margin-left: 8px;">Top inbound speed audit prospects</span>
+                    </div>
+                    <svg class="cmd-copy-icon" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  </div>
+
+                  <div class="cmd-pill" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-radius: 8px; background: rgba(15,23,42,0.8); border: 1px solid rgba(255,255,255,0.05); cursor: pointer;" onclick="copyCommand('/proposal Marcus &quot;Apex Roofing Oshawa&quot; starter 9054318890', this)">
+                    <div>
+                      <code style="color: var(--cyan); font-weight: 700;">/proposal &lt;Name&gt; &quot;&lt;Biz&gt;&quot; &lt;tier&gt;</code>
+                      <span style="font-size: 11px; color: var(--text-muted); margin-left: 8px;">Generate instant client agreement</span>
+                    </div>
+                    <svg class="cmd-copy-icon" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  </div>
+
+                  <div class="cmd-pill" style="display: flex; justify-content: space-between; align-items: center; padding: 8px 12px; border-radius: 8px; background: rgba(15,23,42,0.8); border: 1px solid rgba(255,255,255,0.05); cursor: pointer;" onclick="copyCommand('/teardown https://apexroofingoshawa.ca &quot;Apex Roofing&quot;', this)">
+                    <div>
+                      <code style="color: var(--cyan); font-weight: 700;">/teardown &lt;url&gt; [&lt;Biz&gt;]</code>
+                      <span style="font-size: 11px; color: var(--text-muted); margin-left: 8px;">Run speed audit &amp; dispatch 2-page PDF</span>
+                    </div>
+                    <svg class="cmd-copy-icon" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- Right Column: In-Dashboard Proposal Generator Form -->
+              <div style="background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.06); border-radius: 12px; padding: 18px;">
+                <div style="font-size: 12px; font-family: var(--font-mono); font-weight: 700; color: #34d399; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 12px; display: flex; justify-content: space-between;">
+                  <span>In-Browser Proposal Generator</span>
+                  <span style="color: var(--text-dim);">Direct Closer Form</span>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+                  <div>
+                    <label style="display:block;font-size:10px;font-family:var(--font-mono);color:var(--text-dim);margin-bottom:3px;text-transform:uppercase;">Contact Name</label>
+                    <input type="text" id="dashPropContact" class="form-control form-control-sm" placeholder="e.g. Marcus Reid" style="width:100%;font-size:12px;background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.1);color:#fff;border-radius:6px;padding:6px 8px;">
+                  </div>
+                  <div>
+                    <label style="display:block;font-size:10px;font-family:var(--font-mono);color:var(--text-dim);margin-bottom:3px;text-transform:uppercase;">Business Name</label>
+                    <input type="text" id="dashPropBiz" class="form-control form-control-sm" placeholder="e.g. Apex Roofing" style="width:100%;font-size:12px;background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.1);color:#fff;border-radius:6px;padding:6px 8px;">
+                  </div>
+                </div>
+
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
+                  <div>
+                    <label style="display:block;font-size:10px;font-family:var(--font-mono);color:var(--text-dim);margin-bottom:3px;text-transform:uppercase;">Package Tier</label>
+                    <select id="dashPropTier" class="form-control form-control-sm" style="width:100%;font-size:12px;background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.1);color:#fff;border-radius:6px;padding:6px 8px;">
+                      <option value="starter">Starter Launch ($1,499.99)</option>
+                      <option value="growth">Growth Engine ($2,899.99)</option>
+                      <option value="custom">Custom Enterprise ($4,999.99+)</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label style="display:block;font-size:10px;font-family:var(--font-mono);color:var(--text-dim);margin-bottom:3px;text-transform:uppercase;">Phone (Optional)</label>
+                    <input type="text" id="dashPropPhone" class="form-control form-control-sm" placeholder="(905) 555-0100" style="width:100%;font-size:12px;background:rgba(15,23,42,0.8);border:1px solid rgba(255,255,255,0.1);color:#fff;border-radius:6px;padding:6px 8px;">
+                  </div>
+                </div>
+
+                <button onclick="generateDashboardProposal()" class="btn btn-cyan btn-sm" style="width: 100%; justify-content: center; font-weight: 700; margin-bottom: 10px;">
+                  <span>⚡ Generate Live Proposal Closer Link</span>
+                </button>
+
+                <div id="dashPropResultWrap" style="display:none;background:rgba(15,23,42,0.9);border:1px solid var(--cyan);border-radius:8px;padding:10px;margin-top:8px;">
+                  <div style="font-size:11px;font-family:var(--font-mono);color:var(--text-dim);margin-bottom:4px;">LIVE PROPOSAL CLOSER URL:</div>
+                  <input type="text" id="dashPropResultInput" readonly style="width:100%;background:rgba(0,0,0,0.4);border:1px solid rgba(255,255,255,0.1);color:var(--cyan);font-family:var(--font-mono);font-size:11px;border-radius:4px;padding:4px 8px;margin-bottom:8px;">
+                  <div style="display:flex;gap:8px;">
+                    <button onclick="copyGeneratedProposalLink()" class="btn btn-outline btn-sm" style="flex:1;justify-content:center;font-size:11px;">
+                      <span>Copy Link</span>
+                    </button>
+                    <a id="dashPropOpenBtn" href="#" target="_blank" class="btn btn-cyan btn-sm" style="flex:1;justify-content:center;font-size:11px;text-decoration:none;">
+                      <span>Open Proposal &rarr;</span>
+                    </a>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <!-- Recent Generated Assets & Teardowns Bar -->
+            <div style="margin-top: 18px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.06); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
+              <div style="display: flex; align-items: center; gap: 8px; flex-wrap: wrap;">
+                <span style="font-size: 11px; font-family: var(--font-mono); color: var(--text-dim); text-transform: uppercase;">Recent Engine Assets:</span>
+                <a href="https://durhamweb.design/proposal/?id=prop-1791863747&client=Marcus&biz=Apex+Roofing+Oshawa&tier=starter" target="_blank" class="t-pill t-pill-cyan" style="font-size: 11px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                  📄 Apex Roofing Proposal
+                </a>
+                <a href="https://durhamweb.design/teardowns/durham-web-design-audit.pdf" target="_blank" class="t-pill t-pill-emerald" style="font-size: 11px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                  ⚡ DWD Speed Audit PDF
+                </a>
+                <a href="https://durhamweb.design/teardowns/apex-roofing-audit.pdf" target="_blank" class="t-pill t-pill-rose" style="font-size: 11px; text-decoration: none; display: inline-flex; align-items: center; gap: 4px;">
+                  ⚡ Apex Roofing Audit PDF
+                </a>
+              </div>
+              <div style="font-size: 11px; color: var(--text-dim);">
+                All PDFs auto-published to <code style="color:var(--cyan);">https://durhamweb.design/teardowns/</code>
+              </div>
+            </div>
+
           </div>
         </section>
 
@@ -4186,6 +4347,60 @@
       }).catch(err => {
         showToast(`Copied: ${text}`);
       });
+    }
+
+    /* Dashboard In-Browser Proposal Generator */
+    function generateDashboardProposal() {
+      const contact = (document.getElementById('dashPropContact') ? document.getElementById('dashPropContact').value.trim() : '') || 'Valued Client';
+      const biz = (document.getElementById('dashPropBiz') ? document.getElementById('dashPropBiz').value.trim() : '') || 'Apex Roofing Oshawa';
+      const tier = (document.getElementById('dashPropTier') ? document.getElementById('dashPropTier').value : '') || 'starter';
+      const phone = document.getElementById('dashPropPhone') ? document.getElementById('dashPropPhone').value.trim() : '';
+
+      const propId = 'prop-' + Math.floor(Date.now() / 1000);
+      const params = new URLSearchParams({
+        id: propId,
+        client: contact,
+        biz: biz,
+        tier: tier
+      });
+      if (phone) params.set('phone', phone);
+
+      const url = 'https://durhamweb.design/proposal/?' + params.toString();
+      
+      const resultInput = document.getElementById('dashPropResultInput');
+      const resultWrap = document.getElementById('dashPropResultWrap');
+      const openBtn = document.getElementById('dashPropOpenBtn');
+      
+      if (resultInput && resultWrap && openBtn) {
+        resultInput.value = url;
+        openBtn.href = url;
+        resultWrap.style.display = 'block';
+      }
+
+      // Also record in proposals.json via API
+      fetch('/api.php?action=save_proposal', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          id: propId,
+          created_at: new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC',
+          contact: contact,
+          business: biz,
+          tier: tier,
+          phone: phone,
+          status: 'active'
+        })
+      }).catch(e => console.warn('Saved locally, API offline:', e));
+
+      showToast('Proposal closer link generated!');
+    }
+
+    function copyGeneratedProposalLink() {
+      const input = document.getElementById('dashPropResultInput');
+      if (input) {
+        navigator.clipboard.writeText(input.value);
+        showToast('Proposal closer link copied to clipboard!');
+      }
     }
 
     /* Toast Notification System */

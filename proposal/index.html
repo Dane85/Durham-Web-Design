@@ -753,6 +753,62 @@
       .closer-card {
         padding: 24px 20px;
       }
+      .investment-card {
+        padding: 24px 16px;
+      }
+
+      /* Proposal Mobile Table Stacked Cards */
+      .pricing-table thead {
+        display: none !important;
+      }
+      .pricing-table,
+      .pricing-table tbody,
+      .pricing-table tr,
+      .pricing-table td {
+        display: block !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .pricing-table tr {
+        border-radius: 12px;
+        padding: 18px;
+        margin-bottom: 16px;
+        background: rgba(15, 23, 42, 0.7);
+        border: 1px solid var(--border-subtle);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+      .pricing-table td {
+        padding: 6px 0 !important;
+        border-bottom: none !important;
+        font-size: 14px;
+      }
+      .pricing-table td:first-child {
+        padding-top: 0 !important;
+      }
+      .pricing-table td:nth-child(2) {
+        color: var(--text-muted);
+        font-size: 13px;
+        padding-top: 2px !important;
+      }
+      .pricing-table td.price-num {
+        border-top: 1px dashed rgba(255, 255, 255, 0.12) !important;
+        margin-top: 10px;
+        padding-top: 10px !important;
+        padding-bottom: 0 !important;
+        font-size: 1.25rem !important;
+        text-align: left !important;
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: baseline !important;
+      }
+      .pricing-table td.price-num::before {
+        content: 'Amount (CAD):';
+        font-size: 11px;
+        font-family: var(--font-mono);
+        color: var(--text-dim);
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
     }
   </style>
 </head>
