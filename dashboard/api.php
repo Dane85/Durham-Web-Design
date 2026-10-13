@@ -285,6 +285,29 @@ if (isset($_GET['action']) && $_GET['action'] === 'server_only') {
     exit;
 }
 
+// ACTION: Get Proposal by ID or List Proposals
+if (isset($_GET['action']) && $_GET['action'] === 'get_proposal') {
+    $propId = trim($_GET['id'] ?? '');
+    $proposalsFile = $dataDir . '/proposals.json';
+    if (!file_exists($proposalsFile)) {
+        echo json_encode(['success' => false, 'error' => 'No proposals file found']);
+        exit;
+    }
+    $proposals = json_decode(file_get_contents($proposalsFile), true) ?: [];
+    if (!empty($propId)) {
+        foreach ($proposals as $p) {
+            if (strcasecmp($p['id'] ?? '', $propId) === 0) {
+                echo json_encode(['success' => true, 'proposal' => $p]);
+                exit;
+            }
+        }
+        echo json_encode(['success' => false, 'error' => 'Proposal ID not found']);
+        exit;
+    }
+    echo json_encode(['success' => true, 'proposals' => $proposals]);
+    exit;
+}
+
 // POST: Save State from Client (Phone or PC)
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $rawInput = file_get_contents('php://input');

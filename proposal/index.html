@@ -1,0 +1,1295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title id="pageTitle">Client Proposal & Engineering Agreement | Durham Web Design</title>
+  <meta name="description" content="Official client proposal, technical deliverables, and sub-second performance agreement from Durham Web Design.">
+
+  <!-- Google tag (gtag.js) -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-33S0Z7WYRG"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-33S0Z7WYRG');
+  </script>
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Brand Favicon -->
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png">
+  <link rel="apple-touch-icon" href="/assets/images/logo.png">
+
+  <style>
+    :root {
+      --bg-primary: #090d16;
+      --bg-secondary: #0d1322;
+      --bg-card: rgba(15, 23, 42, 0.75);
+      --bg-card-hover: rgba(26, 37, 58, 0.88);
+      --accent-cyan: #38bdf8;
+      --accent-cyan-dim: rgba(56, 189, 248, 0.15);
+      --accent-cyan-glow: rgba(56, 189, 248, 0.4);
+      --accent-blue: #0284c7;
+      --accent-emerald: #10b981;
+      --accent-emerald-dim: rgba(16, 185, 129, 0.15);
+      --accent-gold: #f59e0b;
+      --text-main: #f8fafc;
+      --text-muted: #94a3b8;
+      --text-dim: #64748b;
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-bright: rgba(56, 189, 248, 0.35);
+      --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-sig: 'Caveat', cursive;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      font-family: var(--font-sans);
+      min-height: 100vh;
+      line-height: 1.6;
+      background-image: 
+        radial-gradient(circle at 15% 10%, rgba(56, 189, 248, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 85% 30%, rgba(2, 132, 199, 0.06) 0%, transparent 45%),
+        radial-gradient(circle at 50% 80%, rgba(16, 185, 129, 0.04) 0%, transparent 50%);
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: var(--accent-cyan);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    a:hover {
+      color: #7dd3fc;
+    }
+
+    /* Container */
+    .proposal-wrap {
+      max-width: 1080px;
+      margin: 0 auto;
+      padding: 24px 20px 80px;
+    }
+
+    /* Top Utility Bar */
+    .top-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 16px;
+      background: rgba(15, 23, 42, 0.6);
+      backdrop-filter: blur(12px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      margin-bottom: 24px;
+      font-size: 12px;
+      font-family: var(--font-mono);
+    }
+    .top-bar-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--text-muted);
+    }
+    .live-dot {
+      width: 8px;
+      height: 8px;
+      background-color: var(--accent-emerald);
+      border-radius: 50%;
+      box-shadow: 0 0 10px var(--accent-emerald);
+      animation: pulseDot 2s infinite ease-in-out;
+    }
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+    .top-bar-actions {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .btn-top-util {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 12px;
+      font-family: var(--font-sans);
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.2s;
+    }
+    .btn-top-util:hover {
+      background: rgba(56, 189, 248, 0.15);
+      border-color: var(--accent-cyan);
+      color: #fff;
+    }
+
+    /* Brand Header */
+    .proposal-header {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 32px 36px;
+      margin-bottom: 24px;
+      box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+    }
+    .proposal-header::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #0284c7, #38bdf8, #10b981);
+    }
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+    .brand-title {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .brand-gradient {
+      background: linear-gradient(135deg, #ffffff 40%, var(--accent-cyan) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .brand-tag {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+      background: var(--accent-cyan-dim);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .status-badge {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      background: var(--accent-emerald-dim);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #34d399;
+      padding: 6px 14px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 600;
+    }
+
+    .proposal-intro {
+      margin-bottom: 28px;
+    }
+    .proposal-intro h1 {
+      font-size: 32px;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 8px;
+      letter-spacing: -0.5px;
+    }
+    .proposal-intro p {
+      color: var(--text-muted);
+      font-size: 16px;
+      max-width: 780px;
+    }
+
+    /* Meta Grid */
+    .meta-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      padding-top: 20px;
+      border-top: 1px solid var(--border-subtle);
+    }
+    .meta-item {
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 12px 16px;
+      border-radius: 10px;
+    }
+    .meta-label {
+      font-size: 11px;
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+    .meta-val {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+    .meta-val.cyan {
+      color: var(--accent-cyan);
+    }
+
+    /* Performance Guarantee Card */
+    .guarantee-card {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.85) 0%, rgba(6, 78, 107, 0.3) 100%);
+      border: 1px solid var(--border-bright);
+      border-radius: 16px;
+      padding: 28px 32px;
+      margin-bottom: 28px;
+      position: relative;
+      box-shadow: 0 10px 30px -10px var(--accent-cyan-glow);
+    }
+    .guarantee-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent-cyan-dim);
+      color: var(--accent-cyan);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      padding: 4px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      font-weight: 600;
+      margin-bottom: 14px;
+      text-transform: uppercase;
+    }
+    .guarantee-card h2 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 10px;
+    }
+    .guarantee-card p {
+      color: #cbd5e1;
+      font-size: 15px;
+      margin-bottom: 20px;
+      line-height: 1.6;
+    }
+    .benchmark-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .benchmark-box {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 16px;
+      border-radius: 10px;
+    }
+    .benchmark-box .title {
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: var(--text-muted);
+      margin-bottom: 6px;
+    }
+    .benchmark-box .stat-highlight {
+      font-size: 24px;
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: var(--accent-cyan);
+      margin-bottom: 4px;
+    }
+    .benchmark-box .stat-compare {
+      font-size: 12px;
+      color: #94a3b8;
+    }
+    .badge-pass {
+      color: #34d399;
+      font-weight: 600;
+    }
+
+    /* Tier Selector & Details */
+    .section-title {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .section-sub {
+      color: var(--text-muted);
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    /* Tier Tabs */
+    .tier-tabs {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+    .tier-tab-btn {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 18px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s ease;
+      color: var(--text-main);
+      position: relative;
+    }
+    .tier-tab-btn:hover {
+      background: var(--bg-card-hover);
+      border-color: rgba(56, 189, 248, 0.3);
+    }
+    .tier-tab-btn.active {
+      background: rgba(15, 23, 42, 0.95);
+      border-color: var(--accent-cyan);
+      box-shadow: 0 0 25px -5px var(--accent-cyan-glow);
+    }
+    .tier-tab-btn.active::after {
+      content: 'SELECTED';
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      font-size: 10px;
+      font-family: var(--font-mono);
+      background: var(--accent-cyan);
+      color: #04101e;
+      font-weight: 700;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .tier-tab-title {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+    .tier-tab-price {
+      font-family: var(--font-mono);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--accent-cyan);
+    }
+    .tier-tab-retainer {
+      font-size: 12px;
+      color: var(--text-dim);
+    }
+
+    /* Active Scope Card */
+    .scope-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 28px;
+    }
+    .deliverables-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+    .deliverable-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      background: rgba(0, 0, 0, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.04);
+      padding: 16px;
+      border-radius: 10px;
+    }
+    .check-icon {
+      color: var(--accent-cyan);
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .deliverable-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+      color: var(--text-main);
+    }
+    .deliverable-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.4;
+    }
+
+    /* Investment Summary Table */
+    .investment-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-subtle);
+      border-radius: 16px;
+      padding: 32px;
+      margin-bottom: 28px;
+    }
+    .pricing-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+    }
+    .pricing-table th {
+      text-align: left;
+      padding: 12px 16px;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+      border-bottom: 1px solid var(--border-subtle);
+      text-transform: uppercase;
+    }
+    .pricing-table td {
+      padding: 18px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      font-size: 15px;
+    }
+    .pricing-table tr:last-child td {
+      border-bottom: none;
+    }
+    .price-num {
+      font-family: var(--font-mono);
+      font-weight: 700;
+      text-align: right;
+    }
+    .price-deposit {
+      color: var(--accent-emerald);
+      font-size: 18px;
+    }
+
+    /* Milestone Schedule */
+    .milestone-schedule {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .milestone-box {
+      background: rgba(0, 0, 0, 0.25);
+      border-left: 3px solid var(--accent-cyan);
+      border-radius: 0 10px 10px 0;
+      padding: 16px 20px;
+    }
+    .milestone-box.done {
+      border-left-color: var(--accent-emerald);
+    }
+    .milestone-title {
+      font-size: 14px;
+      font-weight: 700;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+    }
+    .milestone-desc {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* Acceptance & Closer Card */
+    .closer-card {
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.95) 0%, rgba(13, 20, 36, 0.95) 100%);
+      border: 1px solid var(--accent-cyan);
+      box-shadow: 0 0 40px -10px var(--accent-cyan-glow);
+      border-radius: 16px;
+      padding: 36px;
+      margin-bottom: 28px;
+    }
+    .closer-header {
+      text-align: center;
+      margin-bottom: 28px;
+    }
+    .closer-header h2 {
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 8px;
+    }
+    .closer-header p {
+      color: var(--text-muted);
+      font-size: 15px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    /* Digital Sign-Off */
+    .sig-container {
+      background: rgba(0, 0, 0, 0.35);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 24px;
+      margin-bottom: 24px;
+    }
+    .sig-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+    .sig-input-wrap label {
+      display: block;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      color: var(--text-dim);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+    .sig-input {
+      width: 100%;
+      background: rgba(15, 23, 42, 0.8);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-family: var(--font-sans);
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .sig-input:focus {
+      border-color: var(--accent-cyan);
+    }
+    .sig-preview {
+      background: rgba(0, 0, 0, 0.4);
+      border: 1px dashed rgba(255, 255, 255, 0.15);
+      border-radius: 8px;
+      height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-sig);
+      font-size: 32px;
+      color: var(--accent-cyan);
+      padding: 0 16px;
+    }
+
+    /* Action Buttons Row */
+    .action-row {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .btn-stripe-pay {
+      background: linear-gradient(135deg, #0284c7 0%, #38bdf8 100%);
+      color: #04101e;
+      font-weight: 800;
+      font-size: 18px;
+      padding: 20px 28px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      box-shadow: 0 10px 25px -5px var(--accent-cyan-glow);
+      transition: all 0.25s ease;
+      text-decoration: none;
+    }
+    .btn-stripe-pay:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 15px 35px -5px rgba(56, 189, 248, 0.6);
+      color: #000;
+    }
+    .secondary-action-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 12px;
+      margin-top: 8px;
+    }
+    .btn-secondary-act {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 14px 18px;
+      border-radius: 10px;
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      text-decoration: none;
+    }
+    .btn-secondary-act:hover {
+      background: rgba(56, 189, 248, 0.12);
+      border-color: var(--accent-cyan);
+      color: #fff;
+    }
+
+    /* Footer */
+    .proposal-footer {
+      text-align: center;
+      padding: 40px 20px 20px;
+      color: var(--text-dim);
+      font-size: 13px;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      margin-top: 12px;
+      font-size: 12px;
+    }
+
+    /* Print-Only Elements (Hidden on screen) */
+    .print-only {
+      display: none;
+    }
+
+    /* Print Stylesheet */
+    @media print {
+      body {
+        background: #ffffff !important;
+        color: #0f172a !important;
+        background-image: none !important;
+        font-size: 12pt;
+      }
+      .proposal-wrap {
+        max-width: 100% !important;
+        padding: 0 !important;
+      }
+      .top-bar, .tier-tabs, .action-row, .btn-top-util, .footer-links {
+        display: none !important;
+      }
+      .proposal-header, .guarantee-card, .scope-card, .investment-card, .closer-card {
+        background: #ffffff !important;
+        border: 1px solid #cbd5e1 !important;
+        box-shadow: none !important;
+        color: #0f172a !important;
+        page-break-inside: avoid;
+        margin-bottom: 20px !important;
+        padding: 20px !important;
+      }
+      .proposal-header::before {
+        display: none;
+      }
+      .brand-gradient {
+        background: none !important;
+        -webkit-text-fill-color: #0f172a !important;
+        color: #0f172a !important;
+      }
+      .meta-item, .benchmark-box, .deliverable-item, .milestone-box, .sig-container {
+        background: #f8fafc !important;
+        border: 1px solid #e2e8f0 !important;
+        color: #0f172a !important;
+      }
+      .meta-val, .deliverable-title, .pricing-table td, .guarantee-card h2, .section-title {
+        color: #0f172a !important;
+      }
+      .pricing-table th {
+        color: #64748b !important;
+        border-color: #cbd5e1 !important;
+      }
+      .pricing-table td {
+        border-color: #e2e8f0 !important;
+      }
+      .price-deposit {
+        color: #047857 !important;
+      }
+      .benchmark-box .stat-highlight, .tier-tab-price {
+        color: #0369a1 !important;
+      }
+      .print-only {
+        display: block !important;
+      }
+      .print-signatures {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 40px;
+        margin-top: 30px;
+        page-break-inside: avoid;
+      }
+      .sig-line-box {
+        border-top: 1px solid #0f172a;
+        padding-top: 8px;
+        margin-top: 50px;
+        font-size: 11pt;
+      }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .proposal-wrap {
+        padding: 16px 12px 60px;
+      }
+      .proposal-header {
+        padding: 24px 20px;
+      }
+      .proposal-intro h1 {
+        font-size: 24px;
+      }
+      .tier-tabs {
+        grid-template-columns: 1fr;
+      }
+      .sig-grid {
+        grid-template-columns: 1fr;
+      }
+      .milestone-schedule {
+        grid-template-columns: 1fr;
+      }
+      .closer-card {
+        padding: 24px 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="proposal-wrap">
+
+    <!-- Top Utility Bar -->
+    <div class="top-bar">
+      <div class="top-bar-left">
+        <span class="live-dot"></span>
+        <span>CONFIDENTIAL CLIENT PROPOSAL & PERFORMANCE SLA</span>
+      </div>
+      <div class="top-bar-actions">
+        <span id="proposalIdBadge" style="color: var(--accent-cyan);">#PROP-ACTIVE</span>
+        <button class="btn-top-util" onclick="window.print()">
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg>
+          Print / PDF
+        </button>
+      </div>
+    </div>
+
+    <!-- Brand & Executive Header -->
+    <header class="proposal-header">
+      <div class="header-top">
+        <div class="brand-title">
+          <span class="brand-gradient">DURHAM WEB DESIGN</span>
+          <span class="brand-tag">HETZNER VPS CLOUD</span>
+        </div>
+        <div class="status-badge">
+          <svg width="12" height="12" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
+          <span id="proposalStatusText">SPRINT SLOT RESERVED</span>
+        </div>
+      </div>
+
+      <div class="proposal-intro">
+        <h1 id="heroHeading">Website Engineering Proposal for Apex Roofing Oshawa</h1>
+        <p id="heroSubheading">Prepared exclusively for Marcus Reid. Engineered for instant sub-second page loads, maximum local Google rankings, and high-margin client conversions across Durham Region.</p>
+      </div>
+
+      <!-- Metadata Grid -->
+      <div class="meta-grid">
+        <div class="meta-item">
+          <div class="meta-label">Client Contact</div>
+          <div class="meta-val" id="clientNameVal">Marcus Reid</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Business Entity</div>
+          <div class="meta-val" id="businessNameVal">Apex Roofing Oshawa</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Proposal Reference</div>
+          <div class="meta-val cyan" id="metaRefVal">PROP-2026-001</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Date Issued</div>
+          <div class="meta-val" id="dateIssuedVal">October 12, 2026</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Valid Until</div>
+          <div class="meta-val" id="dateExpiryVal">October 26, 2026 (14 Days)</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-label">Direct Phone Line</div>
+          <div class="meta-val" id="phoneVal">(905) 431-8890</div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Sub-Second Performance Guarantee -->
+    <section class="guarantee-card">
+      <div class="guarantee-badge">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+        SUB-SECOND CORE WEB VITALS GUARANTEE
+      </div>
+      <h2>Engineered for Raw Speed & Conversion Dominance</h2>
+      <p>Most local agencies deploy bloated WordPress themes with 40+ plugins that take 3 to 6 seconds to load on mobile. Durham Web Design builds handcrafted, zero-bloat code hosted on dedicated Ashburn/Toronto edge nodes. If your new production website fails to pass Google Core Web Vitals with sub-second speeds, we optimize at zero charge.</p>
+      
+      <div class="benchmark-grid">
+        <div class="benchmark-box">
+          <div class="title">TIME TO FIRST BYTE (TTFB)</div>
+          <div class="stat-highlight">0.28s</div>
+          <div class="stat-compare"><span class="badge-pass">✓ 5x Faster</span> vs 1.84s competitor avg</div>
+        </div>
+        <div class="benchmark-box">
+          <div class="title">MOBILE SPEED SCORE</div>
+          <div class="stat-highlight">98 - 100</div>
+          <div class="stat-compare"><span class="badge-pass">✓ Grade A+</span> vs 38/100 industry avg</div>
+        </div>
+        <div class="benchmark-box">
+          <div class="title">TRANSFER PAYLOAD</div>
+          <div class="stat-highlight">&lt; 650 KB</div>
+          <div class="stat-compare"><span class="badge-pass">✓ Lightweight</span> vs 4.8MB bloated sites</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Scope of Work & Packages -->
+    <section>
+      <div class="section-title">
+        <span>Select Engineering Tier</span>
+      </div>
+      <div class="section-sub">Click a package to review technical deliverables and update payment schedule.</div>
+
+      <!-- Tier Tabs -->
+      <div class="tier-tabs">
+        <div class="tier-tab-btn active" id="tabStarter" onclick="selectTier('starter')">
+          <div class="tier-tab-title">Starter Launch</div>
+          <div class="tier-tab-price">$1,499.99 CAD</div>
+          <div class="tier-tab-retainer">50% Deposit ($749.99) &middot; $49.99/mo</div>
+        </div>
+        <div class="tier-tab-btn" id="tabGrowth" onclick="selectTier('growth')">
+          <div class="tier-tab-title">Growth Engine</div>
+          <div class="tier-tab-price">$2,899.99 CAD</div>
+          <div class="tier-tab-retainer">50% Deposit ($1,449.99) &middot; $129.99/mo</div>
+        </div>
+        <div class="tier-tab-btn" id="tabCustom" onclick="selectTier('custom')">
+          <div class="tier-tab-title">Custom Enterprise</div>
+          <div class="tier-tab-price">$4,999.99+ CAD</div>
+          <div class="tier-tab-retainer">50% Deposit ($2,499.99) &middot; $249.99+/mo</div>
+        </div>
+      </div>
+
+      <!-- Scope Deliverables Box -->
+      <div class="scope-card">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 8px;">
+          <h3 style="font-size: 20px; font-weight: 700;" id="activeTierTitle">Starter Launch Package Deliverables</h3>
+          <span style="font-family: var(--font-mono); font-size: 13px; color: var(--accent-cyan);" id="activeTierScopeLabel">Complete 5-Page High-Performance Website</span>
+        </div>
+
+        <div class="deliverables-grid" id="deliverablesContainer">
+          <!-- Populated dynamically via JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Investment & Milestone Terms -->
+    <section class="investment-card">
+      <h3 style="font-size: 20px; font-weight: 700;">Investment Schedule & Payment Terms</h3>
+      <div style="color: var(--text-muted); font-size: 14px; margin-top: 4px;">Transparent, predictable milestone billing with zero hidden fees.</div>
+
+      <table class="pricing-table">
+        <thead>
+          <tr>
+            <th>Milestone Description</th>
+            <th>Terms & Timing</th>
+            <th style="text-align: right;">Amount (CAD)</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <strong>Milestone 1: 50% Initial Sprint Deposit</strong>
+              <div style="font-size: 13px; color: var(--text-muted);">Initiates bespoke architecture, wireframing, and staging environment setup.</div>
+            </td>
+            <td>Due upon proposal acceptance today</td>
+            <td class="price-num price-deposit" id="tableDepositAmount">$749.99</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Milestone 2: 50% Final Launch Balance</strong>
+              <div style="font-size: 13px; color: var(--text-muted);">Payable following staging preview sign-off prior to live production DNS cutover.</div>
+            </td>
+            <td>Due upon completed staging approval</td>
+            <td class="price-num" id="tableFinalAmount">$749.99</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Total Engineering Investment</strong>
+              <div style="font-size: 13px; color: var(--text-muted);">One-time development, design, and performance optimization contract.</div>
+            </td>
+            <td>Fixed sprint pricing guarantee</td>
+            <td class="price-num" style="color: var(--accent-cyan); font-size: 17px;" id="tableTotalAmount">$1,499.99</td>
+          </tr>
+          <tr>
+            <td>
+              <strong>Ongoing Cloud Hosting & Maintenance Retainer</strong>
+              <div style="font-size: 13px; color: var(--text-muted);">High-frequency NVMe hosting, automated backups, SSL certificates & 24/7 uptime monitoring.</div>
+            </td>
+            <td>Billed monthly starting 30 days post-launch</td>
+            <td class="price-num" style="color: var(--accent-gold);" id="tableMonthlyAmount">$49.99 / mo</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div class="milestone-schedule">
+        <div class="milestone-box done">
+          <div class="milestone-title">
+            <span>1. SPRINT INITIATION (TODAY)</span>
+            <span style="color: var(--accent-emerald);">50% Deposit</span>
+          </div>
+          <div class="milestone-desc">Deposit locks engineering calendar slot. DNS audit, brand assets gathering, and clean-code development begin immediately.</div>
+        </div>
+        <div class="milestone-box">
+          <div class="milestone-title">
+            <span>2. CLIENT STAGING APPROVAL</span>
+            <span style="color: var(--accent-cyan);">50% Balance</span>
+          </div>
+          <div class="milestone-desc">Private staging review on Hetzner VPS. Live testing, feedback revisions, domain cutover, and final Google indexing.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Closer & Digital Acceptance Box -->
+    <section class="closer-card">
+      <div class="closer-header">
+        <h2>Accept Proposal & Secure Sprint Slot</h2>
+        <p>Authorize this proposal to reserve your build slot in this week's production queue. Review the terms, add your digital sign-off, and proceed with the initial 50% deposit.</p>
+      </div>
+
+      <!-- Signature Area -->
+      <div class="sig-container">
+        <div class="sig-grid">
+          <div class="sig-input-wrap">
+            <label for="sigInput">Authorized Client Representative Signature</label>
+            <input type="text" id="sigInput" class="sig-input" placeholder="Type your full legal name" value="Marcus Reid" oninput="updateSignature(this.value)">
+            <div style="font-size: 12px; color: var(--text-dim); margin-top: 6px;">
+              By typing your name, you acknowledge acceptance of the deliverables and 50% deposit terms.
+            </div>
+          </div>
+          <div>
+            <label style="display: block; font-size: 12px; font-family: var(--font-mono); color: var(--text-dim); margin-bottom: 6px; text-transform: uppercase;">
+              Digital Signature Preview
+            </label>
+            <div class="sig-preview" id="sigPreview">Marcus Reid</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Buttons Row -->
+      <div class="action-row">
+        <a id="stripeDepositBtn" href="https://billing.stripe.com/p/login/dRm3cveMn0wIfMi17rd7q00" target="_blank" rel="noopener noreferrer" class="btn-stripe-pay">
+          <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+          <span id="stripeBtnText">Accept & Pay 50% Deposit ($749.99 CAD)</span>
+        </a>
+
+        <div class="secondary-action-row">
+          <a id="callBtn" href="tel:9054318890" class="btn-secondary-act">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+            <span id="callBtnLabel">1-Tap Direct Call</span>
+          </a>
+
+          <a id="smsBtn" href="sms:9054318890" class="btn-secondary-act">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            <span id="smsBtnLabel">1-Tap SMS Text</span>
+          </a>
+
+          <button onclick="window.print()" class="btn-secondary-act">
+            <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M6 9V2h12v7M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2M6 14h12v8H6z"/></svg>
+            <span>Print Contract (PDF)</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Print Only Formal Agreement Signatures -->
+    <div class="print-only print-signatures">
+      <div>
+        <div style="font-size: 11pt; color: #64748b; margin-bottom: 4px;">CLIENT ACCEPTANCE</div>
+        <div style="font-size: 14pt; font-weight: 700;" id="printClientName">Marcus Reid</div>
+        <div style="font-size: 11pt; color: #475569;" id="printBusinessName">Apex Roofing Oshawa</div>
+        <div class="sig-line-box">
+          Authorized Signature &amp; Date
+        </div>
+      </div>
+      <div>
+        <div style="font-size: 11pt; color: #64748b; margin-bottom: 4px;">ENGINEERING ARCHITECT</div>
+        <div style="font-size: 14pt; font-weight: 700;">Dane / Durham Web Design</div>
+        <div style="font-size: 11pt; color: #475569;">Hetzner Cloud Infrastructure Node</div>
+        <div class="sig-line-box">
+          Lead Engineer Signature &amp; Date
+        </div>
+      </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="proposal-footer">
+      <div>&copy; 2026 Durham Web Design &middot; Built with pride in Durham Region, Ontario.</div>
+      <div style="margin-top: 4px;">Direct Inquiries: <a href="https://durhamweb.design">durhamweb.design</a> &middot; Client Billing: <a href="https://billing.stripe.com/p/login/dRm3cveMn0wIfMi17rd7q00" target="_blank">Stripe Portal</a></div>
+      <div class="footer-links">
+        <a href="/audit">Free Speed Teardown</a>
+        <a href="/review">Google Reviews</a>
+        <a href="/coffee">Coffee</a>
+      </div>
+    </footer>
+
+  </div>
+
+  <script>
+    // Tier Data Dictionary
+    const TIERS = {
+      starter: {
+        id: 'starter',
+        name: 'Starter Launch',
+        totalPrice: 1499.99,
+        depositPrice: 749.99,
+        monthlyPrice: 49.99,
+        scopeLabel: 'Complete 5-Page High-Performance Website',
+        stripeUrl: 'https://billing.stripe.com/p/login/dRm3cveMn0wIfMi17rd7q00',
+        deliverables: [
+          {
+            title: 'Up to 5 Handcrafted Custom Pages',
+            desc: 'Home, Services, About, Projects/Gallery, and Contact. Handcrafted with semantic HTML5 & modern CSS (Zero WordPress or Elementor bloat).'
+          },
+          {
+            title: 'Sub-0.3s TTFB & 100/100 Core Web Vitals',
+            desc: 'Guaranteed sub-second mobile page loads backed by dedicated Canadian edge node caching and optimized NVMe hosting.'
+          },
+          {
+            title: 'Local SEO & Schema Markup',
+            desc: 'Structured JSON-LD LocalBusiness schema, geo-coordinates, and meta tags aligned for Oshawa & Durham Region rankings.'
+          },
+          {
+            title: 'High-Converting Inquiry System',
+            desc: 'Lead capture forms with instant Telegram, SMS, and Email alert dispatch directly to your smartphone.'
+          },
+          {
+            title: 'Mobile-First Glassmorphic Design',
+            desc: 'Modern AMOLED dark aesthetic with responsive fluid typography, tailored brand colors, and micro-animations.'
+          },
+          {
+            title: '14-Day Post-Launch Warranty',
+            desc: 'Full bug fixes, performance monitoring, and content adjustments included post-deployment.'
+          }
+        ]
+      },
+      growth: {
+        id: 'growth',
+        name: 'Growth & Conversion Engine',
+        totalPrice: 2899.99,
+        depositPrice: 1449.99,
+        monthlyPrice: 129.99,
+        scopeLabel: 'Up to 10 Custom Pages + Regional Service Silos',
+        stripeUrl: 'https://billing.stripe.com/p/login/dRm3cveMn0wIfMi17rd7q00',
+        deliverables: [
+          {
+            title: 'Up to 10 Custom Pages & City Silos',
+            desc: 'Dedicated high-ranking landing pages for Oshawa, Whitby, Ajax, Pickering, and Clarington to dominate local search.'
+          },
+          {
+            title: 'Interactive Estimator / Project Calculator',
+            desc: 'Interactive instant price calculator or custom booking flow to qualify prospects and 3x form conversions.'
+          },
+          {
+            title: 'Sub-0.3s TTFB Speed Guarantee',
+            desc: 'Engineered for instant rendering on mobile LTE/5G with zero layout shift and flawless Google PageSpeed metrics.'
+          },
+          {
+            title: 'Automated Review & Testimonial Feed',
+            desc: 'Live Google Reviews widget and verified badge integration to maximize prospect trust and social proof.'
+          },
+          {
+            title: 'Priority Lead Tracker Integration',
+            desc: 'Ops dashboard connection with real-time webhook telemetry and conversion event tracking in GA4.'
+          },
+          {
+            title: '30-Day Priority Support & CRO',
+            desc: 'Comprehensive post-launch conversion rate optimization and ongoing weekly speed watchdog monitoring.'
+          }
+        ]
+      },
+      custom: {
+        id: 'custom',
+        name: 'Custom Enterprise Architecture',
+        totalPrice: 4999.99,
+        depositPrice: 2499.99,
+        monthlyPrice: 249.99,
+        scopeLabel: 'Full-Stack Web App & Dedicated Cloud Cluster',
+        stripeUrl: 'https://billing.stripe.com/p/login/dRm3cveMn0wIfMi17rd7q00',
+        deliverables: [
+          {
+            title: 'Bespoke Full-Stack Web Application',
+            desc: 'Custom database architecture, secure client portal, authenticated logins, and customized back-office workflows.'
+          },
+          {
+            title: 'REST API & Webhook Pipelines',
+            desc: 'Direct integration with CRM (HubSpot, Jobber, QuickBooks, or custom) and automated dispatch notifications.'
+          },
+          {
+            title: 'Dedicated Hetzner Cloud Cluster',
+            desc: 'Isolated VPS cloud node with NVMe SSDs, custom Nginx caching layer, and automatic hourly offsite backups.'
+          },
+          {
+            title: 'Real-Time Telemetry Dashboard',
+            desc: 'Custom metrics portal showing active leads, server health, visitor geographic clusters, and conversion analytics.'
+          },
+          {
+            title: 'VIP SLA & 2-Hour Response Time',
+            desc: 'Direct priority phone and Telegram access to lead engineer for immediate updates and feature rollouts.'
+          },
+          {
+            title: 'Quarterly Speed & SEO Re-Engineering',
+            desc: 'Continuous performance optimization to guarantee top 1% speed metrics as your business scales.'
+          }
+        ]
+      }
+    };
+
+    let currentTier = 'starter';
+    let proposalData = {
+      client: 'Marcus Reid',
+      business: 'Apex Roofing Oshawa',
+      tier: 'starter',
+      phone: '(905) 431-8890',
+      id: 'PROP-' + Math.floor(Date.now() / 1000).toString().slice(-6)
+    };
+
+    // Format Currency
+    function formatCAD(num) {
+      return '$' + num.toLocaleString('en-CA', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + ' CAD';
+    }
+
+    // Update Digital Signature
+    function updateSignature(name) {
+      const clean = name.trim() || 'Client Signature';
+      document.getElementById('sigPreview').innerText = clean;
+    }
+
+    // Tier Selection Logic
+    function selectTier(tierKey) {
+      if (!TIERS[tierKey]) tierKey = 'starter';
+      currentTier = tierKey;
+
+      // Update Tabs
+      document.querySelectorAll('.tier-tab-btn').forEach(btn => btn.classList.remove('active'));
+      const activeTab = document.getElementById('tab' + tierKey.charAt(0).toUpperCase() + tierKey.slice(1));
+      if (activeTab) activeTab.classList.add('active');
+
+      const tier = TIERS[tierKey];
+
+      // Update Scope Header
+      document.getElementById('activeTierTitle').innerText = tier.name + ' Deliverables';
+      document.getElementById('activeTierScopeLabel').innerText = tier.scopeLabel;
+
+      // Render Deliverables
+      const container = document.getElementById('deliverablesContainer');
+      container.innerHTML = tier.deliverables.map(d => `
+        <div class="deliverable-item">
+          <svg class="check-icon" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
+          <div>
+            <div class="deliverable-title">${d.title}</div>
+            <div class="deliverable-desc">${d.desc}</div>
+          </div>
+        </div>
+      `).join('');
+
+      // Update Investment Table
+      document.getElementById('tableDepositAmount').innerText = '$' + tier.depositPrice.toLocaleString('en-CA', { minimumFractionDigits: 2 });
+      document.getElementById('tableFinalAmount').innerText = '$' + tier.depositPrice.toLocaleString('en-CA', { minimumFractionDigits: 2 });
+      document.getElementById('tableTotalAmount').innerText = '$' + tier.totalPrice.toLocaleString('en-CA', { minimumFractionDigits: 2 }) + (tierKey === 'custom' ? '+' : '');
+      document.getElementById('tableMonthlyAmount').innerText = '$' + tier.monthlyPrice.toLocaleString('en-CA', { minimumFractionDigits: 2 }) + ' / mo' + (tierKey === 'custom' ? '+' : '');
+
+      // Update Closer Button
+      const formattedDeposit = '$' + tier.depositPrice.toLocaleString('en-CA', { minimumFractionDigits: 2 });
+      document.getElementById('stripeBtnText').innerText = `Accept & Pay 50% Deposit (${formattedDeposit} CAD)`;
+      document.getElementById('stripeDepositBtn').href = tier.stripeUrl;
+    }
+
+    // Load from URL and/or JSON
+    async function initProposal() {
+      const params = new URLSearchParams(window.location.search);
+      
+      const paramId = params.get('id');
+      const paramClient = params.get('client') || params.get('name') || params.get('contact');
+      const paramBiz = params.get('biz') || params.get('business');
+      const paramTier = params.get('tier');
+      const paramPhone = params.get('phone');
+
+      // 1. If ID provided, attempt to load from proposals API
+      if (paramId) {
+        try {
+          const res = await fetch('/dashboard/api.php?action=get_proposal&id=' + encodeURIComponent(paramId));
+          if (res.ok) {
+            const json = await res.json();
+            if (json.success && json.proposal) {
+              const p = json.proposal;
+              if (p.contact) proposalData.client = p.contact;
+              if (p.business) proposalData.business = p.business;
+              if (p.tier && TIERS[p.tier.toLowerCase()]) proposalData.tier = p.tier.toLowerCase();
+              if (p.phone) proposalData.phone = p.phone;
+              if (p.id) proposalData.id = p.id;
+            }
+          }
+        } catch (e) {
+          console.warn('Could not fetch proposal by ID from API, falling back to params:', e);
+        }
+      }
+
+      // 2. Query params override / fallback
+      if (paramClient) proposalData.client = paramClient;
+      if (paramBiz) proposalData.business = paramBiz;
+      if (paramTier && TIERS[paramTier.toLowerCase()]) proposalData.tier = paramTier.toLowerCase();
+      if (paramPhone) proposalData.phone = paramPhone;
+      if (paramId) proposalData.id = paramId;
+
+      // 3. Render client fields
+      document.getElementById('clientNameVal').innerText = proposalData.client;
+      document.getElementById('businessNameVal').innerText = proposalData.business;
+      document.getElementById('heroHeading').innerText = `Website Engineering Proposal for ${proposalData.business}`;
+      document.getElementById('heroSubheading').innerText = `Prepared exclusively for ${proposalData.client}. Engineered for instant sub-second page loads, maximum local Google rankings, and high-margin client conversions across Durham Region.`;
+      document.getElementById('pageTitle').innerText = `${proposalData.business} Proposal | Durham Web Design`;
+
+      document.getElementById('metaRefVal').innerText = proposalData.id.toUpperCase();
+      document.getElementById('proposalIdBadge').innerText = '#' + proposalData.id.toUpperCase();
+      document.getElementById('sigInput').value = proposalData.client;
+      document.getElementById('sigPreview').innerText = proposalData.client;
+
+      document.getElementById('printClientName').innerText = proposalData.client;
+      document.getElementById('printBusinessName').innerText = proposalData.business;
+
+      // Phone formatting & action triggers
+      const rawPhone = proposalData.phone.replace(/[^0-9]/g, '');
+      const displayPhone = rawPhone.length === 10 ? `(${rawPhone.slice(0,3)}) ${rawPhone.slice(3,6)}-${rawPhone.slice(6)}` : proposalData.phone;
+      document.getElementById('phoneVal').innerText = displayPhone;
+
+      if (rawPhone) {
+        document.getElementById('callBtn').href = `tel:${rawPhone}`;
+        document.getElementById('callBtnLabel').innerText = `Call ${proposalData.client.split(' ')[0]}`;
+        document.getElementById('smsBtn').href = `sms:${rawPhone}`;
+        document.getElementById('smsBtnLabel').innerText = `Text ${proposalData.client.split(' ')[0]}`;
+      }
+
+      // Dates
+      const today = new Date();
+      const options = { year: 'numeric', month: 'long', day: 'numeric' };
+      document.getElementById('dateIssuedVal').innerText = today.toLocaleDateString('en-US', options);
+      
+      const expiry = new Date();
+      expiry.setDate(today.getDate() + 14);
+      document.getElementById('dateExpiryVal').innerText = `${expiry.toLocaleDateString('en-US', options)} (14 Days)`;
+
+      // Activate Selected Tier
+      selectTier(proposalData.tier);
+    }
+
+    // Initialize on DOM load
+    document.addEventListener('DOMContentLoaded', initProposal);
+  </script>
+</body>
+</html>
