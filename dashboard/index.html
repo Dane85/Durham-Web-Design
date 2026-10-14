@@ -1201,6 +1201,28 @@
       gap: 8px;
       overflow-x: auto;
       padding-bottom: 4px;
+      scrollbar-width: none !important;
+      -ms-overflow-style: none !important;
+    }
+    .stage-filter-tabs::-webkit-scrollbar {
+      display: none !important;
+    }
+
+    .mobile-view-tabs {
+      scrollbar-width: none !important;
+      -ms-overflow-style: none !important;
+    }
+    .mobile-view-tabs::-webkit-scrollbar {
+      display: none !important;
+    }
+
+    .lead-notes-text {
+      font-size: 11.5px;
+      color: var(--text-dim);
+      max-width: 280px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .stage-tab {
@@ -1917,8 +1939,99 @@
         display: none !important;
       }
       .top-header {
-        height: 64px;
-        padding: 0 14px;
+        height: 60px !important;
+        min-height: 60px !important;
+        padding: 0 14px !important;
+      }
+      .mobile-view-tabs {
+        top: 60px !important;
+      }
+      .view-content {
+        padding: 20px 12px 32px !important;
+      }
+
+      /* Server Telemetry View Mobile Overhaul */
+      .telemetry-section {
+        padding: 16px 12px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+      }
+      .telemetry-grid,
+      .git-commits-grid {
+        grid-template-columns: 1fr !important;
+        width: 100% !important;
+        min-width: 0 !important;
+      }
+      .telemetry-metric-card,
+      .telemetry-card-wide,
+      .telemetry-card-full,
+      .git-commit-box {
+        grid-column: 1 / -1 !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+      }
+
+      /* Leads View Stats 2x2 Grid & Table-to-Cards */
+      .lead-stats-bar {
+        grid-template-columns: repeat(2, 1fr) !important;
+        gap: 10px !important;
+      }
+      .lead-stat-card {
+        padding: 12px !important;
+        min-width: 0 !important;
+      }
+      .lead-stat-val {
+        font-size: 20px !important;
+        white-space: nowrap !important;
+      }
+      .lead-notes-text {
+        max-width: 100% !important;
+        white-space: normal !important;
+        overflow: visible !important;
+        text-overflow: clip !important;
+        margin-top: 4px !important;
+        line-height: 1.4 !important;
+      }
+
+      .lead-table-wrap,
+      .table-view-container {
+        overflow-x: visible !important;
+        background: transparent !important;
+        border: none !important;
+      }
+      .data-table thead {
+        display: none !important;
+      }
+      .data-table,
+      .data-table tbody,
+      .data-table tr,
+      .data-table td {
+        display: block !important;
+        width: 100% !important;
+        box-sizing: border-box !important;
+      }
+      .data-table tr {
+        background: rgba(15, 23, 42, 0.85) !important;
+        border: 1px solid var(--border-subtle) !important;
+        border-radius: 12px !important;
+        padding: 14px !important;
+        margin-bottom: 12px !important;
+      }
+      .data-table td {
+        padding: 6px 0 !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+        text-align: left !important;
+        white-space: normal !important;
+      }
+      .data-table td:last-child {
+        border-bottom: none !important;
+        padding-top: 10px !important;
+        display: flex !important;
+        gap: 8px !important;
       }
       .header-breadcrumb {
         font-size: 12.5px;
@@ -1980,22 +2093,23 @@
         width: auto !important;
         align-self: flex-start !important;
       }
-      /* Kanban Mobile Snapping & Breathing Room */
+      /* Kanban Mobile Vertical Stacked Layout */
       .kanban-board, .pipeline-board {
-        scroll-snap-type: x mandatory !important;
-        scroll-padding: 16px !important;
-        -webkit-overflow-scrolling: touch !important;
-        gap: 16px !important;
-        padding-bottom: 20px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        overflow-x: visible !important;
+        gap: 14px !important;
+        padding-bottom: 12px !important;
+        scroll-snap-type: none !important;
       }
       .kanban-col {
-        scroll-snap-align: start !important;
-        min-width: 82vw !important;
-        max-width: 86vw !important;
-        width: 84vw !important;
-        margin-right: 16px !important;
-        padding: 18px !important;
-        min-height: 320px !important;
+        width: 100% !important;
+        min-width: 0 !important;
+        max-width: 100% !important;
+        margin-right: 0 !important;
+        min-height: auto !important;
+        padding: 14px !important;
+        scroll-snap-align: none !important;
       }
       .kanban-card {
         padding: 16px !important;
@@ -2013,9 +2127,9 @@
 
     @media (max-width: 600px) {
       .top-header {
-        height: auto;
-        min-height: 60px;
-        padding: 8px 12px;
+        height: 60px !important;
+        min-height: 60px !important;
+        padding: 0 10px !important;
       }
       .header-right {
         gap: 6px;
@@ -3059,7 +3173,7 @@
                   <span class="t-ping-time" id="pingDwd">5ms</span>
                 </div>
                 <div class="t-ping-item">
-                  <span><span class="t-ping-dot"></span><span class="t-ping-name">gmsra.durhamweb.design:</span></span>
+                  <span><span class="t-ping-dot"></span><span class="t-ping-name">gmsalariedretirees.com:</span></span>
                   <span class="t-ping-time" id="pingGmsra">29ms</span>
                 </div>
                 <div class="t-ping-item">
@@ -3135,7 +3249,7 @@
             <span>Epic Expressions Cloud Infrastructure &bull; Durham Web Design &bull; Hetzner Ashburn Node</span>
           </div>
           <div style="font-family:var(--font-mono);">
-            <span>Last Sync: 10/7/2026 17:20:23 EDT &bull; Nginx 1.24 &bull; PHP 8.3-FPM</span>
+            <span>Last Sync: <span id="footerSyncTime">Live</span> &bull; Nginx 1.24 &bull; PHP 8.3-FPM</span>
           </div>
         </footer>
 
@@ -3522,6 +3636,14 @@
             syncTag.innerText = `Sync: ${timeStr}`;
           }
 
+          const footerSync = document.getElementById("footerSyncTime");
+          if (footerSync) {
+            const now = new Date();
+            const dateStr = now.toLocaleDateString('en-CA', { year: 'numeric', month: '2-digit', day: '2-digit' });
+            const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+            footerSync.innerText = `${dateStr} ${timeStr} EDT`;
+          }
+
           if (syncBadge) syncBadge.classList.remove("syncing");
           if (syncText) syncText.innerText = "Cloud Live";
           if (manual) showToast("Synced with Hetzner cloud node!");
@@ -3855,6 +3977,11 @@
         const container = document.getElementById(`cardsCol${s}`);
         if (!container) continue;
 
+        const colEl = container.closest('.kanban-col');
+        if (colEl) {
+          colEl.style.display = (activeStageFilter === 'all' || activeStageFilter === String(s)) ? 'flex' : 'none';
+        }
+
         const stageProjects = filtered.filter(p => p.stage === s);
         
         if (stageProjects.length === 0) {
@@ -4072,7 +4199,7 @@
           </td>
           <td>
             <div style="font-weight:600;color:#FFF;">${l.pkg}</div>
-            <div style="font-size:11.5px;color:var(--text-dim);max-width:280px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">${l.notes}</div>
+            <div class="lead-notes-text">${l.notes}</div>
           </td>
           <td>
             <span style="font-family:var(--font-mono);font-size:11.5px;color:var(--text-muted);">${l.timestamp}</span>
@@ -4081,7 +4208,7 @@
             <span class="lead-badge">${l.channel}</span>
           </td>
           <td style="text-align:right;">
-            <button class="btn btn-cyan btn-sm" onclick="convertLeadToProject('${l.id}')">
+            <button class="btn btn-cyan btn-sm" onclick="convertLeadToProject('${l.id}')" style="flex:1;">
               <span>Convert to Project</span>
             </button>
             <button class="btn btn-outline btn-sm" style="color:var(--rose);margin-left:6px;" onclick="deleteLead('${l.id}')">&times;</button>
@@ -4506,6 +4633,11 @@
       const formatted = now.toLocaleDateString('en-CA', options).replace(',', '') + " EDT";
       const tsEl = document.getElementById("liveTimestamp");
       if (tsEl) tsEl.innerText = formatted;
+
+      const footerSync = document.getElementById("footerSyncTime");
+      if (footerSync && footerSync.innerText === "Live") {
+        footerSync.innerText = formatted;
+      }
     }
 
     // Run on startup
