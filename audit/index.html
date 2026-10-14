@@ -280,6 +280,13 @@
     }
 
     /* Form Styles */
+    #intakePhase,
+    #speedAuditForm {
+      width: 100%;
+      max-width: 100%;
+      box-sizing: border-box;
+    }
+
     .form-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -328,9 +335,17 @@
     }
 
     .form-select {
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%2394a3b8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-size: 16px;
+      padding-right: 40px !important;
       text-overflow: ellipsis;
-      overflow: hidden;
       white-space: nowrap;
+      overflow: hidden;
     }
 
     .form-input:focus, .form-select:focus {
@@ -738,23 +753,59 @@
 
     /* Responsive */
     @media (max-width: 800px) {
+      .audit-shell {
+        padding: 20px 0 56px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        overflow-x: hidden !important;
+      }
+      .audit-card {
+        padding: 22px 16px !important;
+        border-radius: 16px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+      }
+      #intakePhase,
+      #speedAuditForm {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+      }
       .form-grid {
-        grid-template-columns: minmax(0, 1fr);
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 16px !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
       }
       .form-group,
       .form-group.full-width {
-        grid-column: 1 / -1;
-        min-width: 0;
-        width: 100%;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        margin: 0 !important;
+      }
+      .form-input,
+      .form-select {
+        display: block !important;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        box-sizing: border-box !important;
+        font-size: 16px !important;
       }
       .scorecard-grid {
         grid-template-columns: repeat(2, 1fr);
       }
       .tier-cards-preview {
         grid-template-columns: 1fr;
-      }
-      .audit-card {
-        padding: 24px 16px;
       }
       .nav-links {
         display: none;
@@ -814,7 +865,7 @@
     </div>
   </header>
 
-  <main class="container">
+  <main class="container audit-shell">
     
     <!-- Hero Header -->
     <section class="audit-hero">
@@ -876,13 +927,12 @@
             <div class="form-group full-width">
               <label class="form-label" for="primaryFrustration">Primary Website Frustration *</label>
               <select id="primaryFrustration" name="primary_frustration" class="form-select" required>
-                <option value="" disabled selected>Select your biggest online challenge...</option>
-                <option value="Painfully slow mobile load times (>3 seconds)">Painfully slow mobile load times (&gt;3 seconds)</option>
-                <option value="High bounce rates / Not enough leads & calls">High bounce rates / Not enough leads &amp; calls</option>
-                <option value="WordPress / Wix / Squarespace plugin bloat & crashes">WordPress / Wix / Squarespace plugin bloat &amp; crashes</option>
-                <option value="Poor Google rankings / Failing Core Web Vitals">Poor Google rankings / Failing Core Web Vitals</option>
-                <option value="Outdated design that does not look professional">Outdated design that does not look professional</option>
-                <option value="Other / Routine speed checkup">Other / Routine speed checkup</option>
+                <option value="" disabled selected>Select your biggest challenge...</option>
+                <option value="Slow load speed / Poor Google PageSpeed score">Slow load speed / Poor Google PageSpeed</option>
+                <option value="Not getting enough local phone calls or quote requests">Not enough local calls or quote requests</option>
+                <option value="Outdated design / Looks broken on mobile phones">Outdated design / Broken on mobile</option>
+                <option value="Paying too much for WordPress / agency maintenance">Paying too much for agency maintenance</option>
+                <option value="Need a brand new website or custom portal built">Need a brand new website or custom portal</option>
               </select>
             </div>
           </div>
