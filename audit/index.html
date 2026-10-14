@@ -1100,13 +1100,7 @@
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(leadAlertPayload)
-        }).catch(() => {
-          fetch("https://ops.durhamweb.design/api.php?action=lead_alert", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(leadAlertPayload)
-          }).catch(e => console.warn("Lead alert fallback dispatch:", e));
-        });
+        }).catch(e => console.warn("Lead alert dispatch failed:", e));
       } catch (err) {
         console.warn("Lead alert dispatch failed:", err);
       }
