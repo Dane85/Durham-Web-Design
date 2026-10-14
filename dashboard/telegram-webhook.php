@@ -317,11 +317,50 @@ if ($cmd === '/teardown') {
     exit;
 }
 
+// 6. /daily and /report command: Print and dispatch The Epic Expressions Dispatch PDF
+if ($cmd === '/daily' || $cmd === '/report' || $cmd === 'daily' || $cmd === 'report') {
+    $ackMsg = "🗞️ <b>PRINTING THE EPIC EXPRESSIONS DISPATCH...</b>\n\n"
+        . "━━━━━━━━━━━━━━━━━━━━\n\n"
+        . "Benchmarking live fleet endpoints from Canadian edge...\n"
+        . "Compiling 2-page newspaper PDF with latency bar chart, memory pie chart, Co-Founder's daily growth idea & CS history nugget.";
+    sendTelegramDirect($botToken, $chatId, $ackMsg);
+
+    $scriptPath = '/usr/local/bin/generate-daily-fleet-pdf.py';
+    $cmdExec = "python3 " . escapeshellarg($scriptPath) . " 2>&1";
+    $output = @shell_exec($cmdExec);
+    $result = json_decode($output, true);
+
+    $todayStr = date('Y-m-d');
+    $archivePdf = "/var/backups/epic-fleet/daily-reports/Epic-Dispatch-{$todayStr}.pdf";
+    $latestPdf = "/var/www/durhamwebdesign/teardowns/daily-fleet-latest.pdf";
+    $pdfPath = file_exists($archivePdf) ? $archivePdf : $latestPdf;
+
+    if (file_exists($pdfPath)) {
+        $issue = $result['issue'] ?? 8;
+        $caption = "🗞️ <b>THE EPIC EXPRESSIONS DISPATCH (Vol. I, Issue #{$issue})</b>\n\n"
+            . "━━━━━━━━━━━━━━━━━━━━\n\n"
+            . "📊 <b>Morning Executive Gazette:</b> {$todayStr}\n"
+            . "📈 <b>Live Fleet Scorecard:</b> 100% Nominal\n"
+            . "💡 <b>Includes:</b> Co-Founder's Play of the Day & Nerd Corner CS Heritage\n"
+            . "🔗 <b>Web Link:</b> https://durhamweb.design/teardowns/daily-fleet-latest.pdf";
+
+        sendTelegramDocument($botToken, $chatId, $pdfPath, $caption);
+    } else {
+        $failMsg = "❌ <b>Dispatch Error:</b> Could not compile Daily Dispatch PDF.\n<pre>" . htmlspecialchars(substr($output, 0, 500), ENT_QUOTES, 'UTF-8') . "</pre>";
+        sendTelegramDirect($botToken, $chatId, $failMsg);
+    }
+
+    echo json_encode(['ok' => true]);
+    exit;
+}
+
 // 6. Default /help or /start
 $helpMsg = "⚡ <b>EPIC EXPRESSIONS OPERATIONS BOT</b>\n"
     . "🤖 <i>Interactive Operations & Sales Engine (@Epicexx_bot)</i>\n\n"
     . "━━━━━━━━━━━━━━━━━━━━\n\n"
     . "📊 <b>INFRASTRUCTURE COMMANDS</b>\n\n"
+    . "  • <code>/daily</code> (or <code>/report</code>)\n"
+    . "    <i>Print &amp; dispatch 2-page Daily Dispatch Newspaper PDF</i>\n\n"
     . "  • <code>/status</code>\n"
     . "    <i>Live server health, CPU/RAM/Disk & HTTP latencies</i>\n\n"
     . "  • <code>/ping</code>\n"
@@ -337,7 +376,7 @@ $helpMsg = "⚡ <b>EPIC EXPRESSIONS OPERATIONS BOT</b>\n"
     . "    <i>Run headless speed diagnostic, send 2-page PDF & cold pitch</i>\n"
     . "    <b>Example:</b> <code>/teardown https://apexroofingoshawa.ca \"Apex Roofing\"</code>\n\n"
     . "━━━━━━━━━━━━━━━━━━━━\n\n"
-    . "ℹ️ <i>Automated reports dispatch daily at 9:00 AM & 9:00 PM EDT.</i>";
+    . "ℹ️ <i>Automated morning dispatch at 8:00 AM & evening report at 9:00 PM EDT.</i>";
 sendTelegramDirect($botToken, $chatId, $helpMsg);
 echo json_encode(['ok' => true]);
 exit;
