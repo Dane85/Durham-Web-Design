@@ -17,6 +17,99 @@ if (!is_dir($dataDir)) {
 $storeFile = $dataDir . '/store.json';
 $defaultsFile = __DIR__ . '/defaults.json';
 
+// Helper: Read GitGuardian Security Incidents & Health
+function getGitGuardianStats() {
+    $cacheFile = __DIR__ . '/data/gitguardian_cache.json';
+    if (file_exists($cacheFile) && (time() - filemtime($cacheFile) < 120)) {
+        $cached = @json_decode(file_get_contents($cacheFile), true);
+        if ($cached) return $cached;
+    }
+
+    $token = '';
+    $envFile = '/etc/epic-ops.env';
+    if (file_exists($envFile)) {
+        $env = @parse_ini_file($envFile);
+        $token = $env['GITGUARDIAN_API_TOKEN'] ?? '';
+    }
+    if (!$token) {
+        $token = getenv('GITGUARDIAN_API_TOKEN') ?: '';
+    }
+
+    if (!$token) {
+        return [
+            'configured' => false,
+            'status' => 'Not Configured',
+            'message' => 'No GitGuardian token provided'
+        ];
+    }
+
+    $ch = curl_init('https://api.gitguardian.com/v1/incidents/secrets?per_page=15');
+    curl_setopt_array($ch, [
+        CURLOPT_HTTPHEADER => [
+            'Authorization: Token ' . $token,
+            'Accept: application/json'
+        ],
+        CURLOPT_RETURNTRANSFER => true,
+        CURLOPT_TIMEOUT => 4,
+        CURLOPT_SSL_VERIFYPEER => false
+    ]);
+    $resp = curl_exec($ch);
+    $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+
+    if ($code !== 200 || !$resp) {
+        return [
+            'configured' => true,
+            'status' => 'Error',
+            'http_code' => $code,
+            'message' => 'Could not connect to GitGuardian API'
+        ];
+    }
+
+    $incidents = @json_decode($resp, true) ?: [];
+    $totalIncidents = count($incidents);
+    $resolvedCount = 0;
+    $triggeredCount = 0;
+    $ignoredCount = 0;
+    $recentIncidents = [];
+
+    foreach ($incidents as $inc) {
+        $st = strtoupper($inc['status'] ?? '');
+        if ($st === 'RESOLVED') {
+            $resolvedCount++;
+        } elseif ($st === 'TRIGGERED') {
+            $triggeredCount++;
+        } elseif ($st === 'IGNORED') {
+            $ignoredCount++;
+        }
+
+        $recentIncidents[] = [
+            'id' => $inc['id'] ?? '',
+            'name' => $inc['detector']['display_name'] ?? ($inc['incident_name'] ?? 'Generic Secret'),
+            'status' => $inc['status'] ?? 'UNKNOWN',
+            'date' => $inc['date'] ?? '',
+            'url' => $inc['gitguardian_url'] ?? 'https://dashboard.gitguardian.com',
+            'severity' => $inc['severity'] ?? 'unknown'
+        ];
+    }
+
+    $result = [
+        'configured' => true,
+        'status' => 'Active Monitoring',
+        'health' => $triggeredCount === 0 ? 'NOMINAL' : 'ATTENTION',
+        'open_alerts' => $triggeredCount,
+        'resolved_alerts' => $resolvedCount,
+        'ignored_alerts' => $ignoredCount,
+        'total_scanned' => $totalIncidents,
+        'workspace_url' => 'https://dashboard.gitguardian.com/workspace/937684/',
+        'recent' => array_slice($recentIncidents, 0, 5),
+        'last_checked' => date('Y-m-d H:i:s T')
+    ];
+
+    @file_put_contents($cacheFile, json_encode($result, JSON_PRETTY_PRINT), LOCK_EX);
+    return $result;
+}
+
 // Helper: Read Server Telemetry
 function getServerStats() {
     // 1. CPU Load
@@ -272,6 +365,7 @@ function getServerStats() {
             }
             return $gitInfo;
         })(),
+        'gitguardian' => getGitGuardianStats(),
         'timestamp' => date('Y-m-d H:i:s T')
     ];
 }

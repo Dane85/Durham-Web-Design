@@ -2343,6 +2343,13 @@
           </span>
           <span>GitHub Repositories</span>
         </a>
+        <a class="nav-item" href="https://dashboard.gitguardian.com/workspace/937684/" target="_blank" rel="noopener">
+          <span class="nav-icon" style="color:var(--emerald);">
+            <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+          </span>
+          <span>GitGuardian Security</span>
+          <span class="badge" id="sidebarGgCount" style="background:rgba(245,158,11,0.2);color:#f59e0b;border:1px solid rgba(245,158,11,0.3);display:none;">3</span>
+        </a>
       </nav>
 
       <!-- Server HUD in Sidebar -->
@@ -3251,6 +3258,41 @@
                 </div>
               </div>
             </div>
+
+            <!-- 7. GitGuardian Security & Secret Vulnerability Radar -->
+            <div class="telemetry-metric-card telemetry-card-full" id="gitguardianCard" style="margin-top:16px;">
+              <div class="t-metric-top">
+                <span class="t-label">
+                  <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" style="vertical-align:-2px;margin-right:6px;color:var(--emerald);"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                  GitGuardian Code Security &bull; Active Secrets Radar
+                </span>
+                <span class="t-pill t-pill-emerald" id="ggStatusPill">Active Monitoring</span>
+              </div>
+              <div class="gg-radar-grid" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:12px;">
+                <div style="background:rgba(15,23,42,0.6);padding:12px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);">
+                  <div style="font-size:11px;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.5px;">Monitored Repos</div>
+                  <div style="font-size:18px;font-weight:700;color:#fff;margin-top:4px;">3 Repositories</div>
+                  <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">gmsra &bull; DWD &bull; Portfolio</div>
+                </div>
+                <div style="background:rgba(15,23,42,0.6);padding:12px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);">
+                  <div style="font-size:11px;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.5px;">Resolved Incidents</div>
+                  <div style="font-size:18px;font-weight:700;color:var(--emerald);margin-top:4px;" id="ggResolvedCount">1 Resolved</div>
+                  <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">wp-config.php secret neutralized</div>
+                </div>
+                <div style="background:rgba(15,23,42,0.6);padding:12px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);">
+                  <div style="font-size:11px;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.5px;">Open Incidents</div>
+                  <div style="font-size:18px;font-weight:700;color:#f59e0b;margin-top:4px;" id="ggOpenCount">3 Historical</div>
+                  <div style="font-size:11px;color:var(--text-muted);margin-top:2px;">Core WP script-loader flags</div>
+                </div>
+                <div style="background:rgba(15,23,42,0.6);padding:12px 14px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);display:flex;flex-direction:column;justify-content:center;align-items:flex-start;">
+                  <div style="font-size:11px;color:var(--text-subtle);text-transform:uppercase;letter-spacing:0.5px;">GitGuardian Console</div>
+                  <a href="https://dashboard.gitguardian.com/workspace/937684/" target="_blank" rel="noopener" style="display:inline-flex;align-items:center;gap:6px;margin-top:6px;background:rgba(16,185,129,0.15);color:var(--emerald);padding:6px 12px;border-radius:6px;font-size:12px;font-weight:600;text-decoration:none;border:1px solid rgba(16,185,129,0.3);">
+                    <span>Open Workspace</span>
+                    <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3"/></svg>
+                  </a>
+                </div>
+              </div>
+            </div>
           </div>
         </section>
         </div>
@@ -3872,6 +3914,38 @@
           if (ovMsg) ovMsg.innerText = g.message;
           const ovMeta = document.getElementById("overviewGmsraMeta");
           if (ovMeta) ovMeta.innerText = `👤 ${g.author} • ${g.relative_time || g.date} • ✓ Deployed`;
+        }
+      }
+
+      // GitGuardian Security Telemetry
+      if (server.gitguardian) {
+        const gg = server.gitguardian;
+        const pill = document.getElementById("ggStatusPill");
+        if (pill) {
+          if (gg.health === "NOMINAL") {
+            pill.className = "t-pill t-pill-emerald";
+            pill.innerText = "✓ Active • All Clean";
+          } else {
+            pill.className = "t-pill t-pill-amber";
+            pill.innerText = `Active Monitoring • ${gg.open_alerts || 0} Alerts`;
+          }
+        }
+        const resEl = document.getElementById("ggResolvedCount");
+        if (resEl && gg.resolved_alerts !== undefined) {
+          resEl.innerText = `${gg.resolved_alerts} Resolved`;
+        }
+        const openEl = document.getElementById("ggOpenCount");
+        if (openEl && gg.open_alerts !== undefined) {
+          openEl.innerText = `${gg.open_alerts} Open / Historic`;
+        }
+        const badge = document.getElementById("sidebarGgCount");
+        if (badge) {
+          if (gg.open_alerts > 0) {
+            badge.innerText = gg.open_alerts;
+            badge.style.display = "inline-flex";
+          } else {
+            badge.style.display = "none";
+          }
         }
       }
     }
