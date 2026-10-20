@@ -930,6 +930,11 @@
           <div class="tier-tab-price">$4,999.99+ CAD</div>
           <div class="tier-tab-retainer">50% Deposit ($2,499.99) &middot; $249.99+/mo</div>
         </div>
+        <div class="tier-tab-btn" id="tabDraa" onclick="selectTier('draa')" style="display: none;">
+          <div class="tier-tab-title">DRAA Non-Profit</div>
+          <div class="tier-tab-price">$700.00 CAD</div>
+          <div class="tier-tab-retainer">50% Deposit ($350.00) &middot; $50.00/mo</div>
+        </div>
       </div>
 
       <!-- Scope Deliverables Box -->
@@ -1213,6 +1218,43 @@
             desc: 'Continuous performance optimization to guarantee top 1% speed metrics as your business scales.'
           }
         ]
+      },
+      draa: {
+        id: 'draa',
+        name: 'DRAA Non-Profit Architecture',
+        totalPrice: 700.00,
+        depositPrice: 350.00,
+        monthlyPrice: 50.00,
+        scopeLabel: 'Non-Profit Astronomical Society Web Platform',
+        stripeUrl: 'https://buy.stripe.com/aFaeVc8nQ0SzgDN8OYbZe0a',
+        stripeFullUrl: 'https://buy.stripe.com/bJe3cu33wat973d5CMbZe0b',
+        stripeCareUrl: 'https://buy.stripe.com/3cIeVcdIaat91IT5CMbZe0c',
+        deliverables: [
+          {
+            title: 'Bespoke Non-Profit Astronomical Platform',
+            desc: 'Modern dark-sky AMOLED aesthetic, observatory session showcase, upcoming dark-sky star parties, and public astronomy outreach calendar.'
+          },
+          {
+            title: 'Sub-0.3s TTFB & 100/100 Core Web Vitals',
+            desc: 'Guaranteed ultra-fast rendering on mobile LTE/5G with optimized high-resolution astrophotography galleries and zero layout shifts.'
+          },
+          {
+            title: 'Local Community SEO & Schema Markup',
+            desc: 'Structured EducationalOrganization & Event schema tailored for Oshawa, Whitby, and Durham Region stargazing enthusiasts.'
+          },
+          {
+            title: 'Interactive Membership & Meeting Inquiries',
+            desc: 'Lead intake forms routing instant email and Telegram alerts to Brian Boddy and the executive committee.'
+          },
+          {
+            title: 'Dedicated Canadian Cloud NVMe Hosting',
+            desc: 'High-speed edge caching, automated SSL encryption, and daily offsite cloud backups.'
+          },
+          {
+            title: '14-Day Post-Launch Polish & Support',
+            desc: 'Complete post-launch content adjustments, member verification testing, and executive committee handover.'
+          }
+        ]
       }
     };
 
@@ -1244,7 +1286,10 @@
       // Update Tabs
       document.querySelectorAll('.tier-tab-btn').forEach(btn => btn.classList.remove('active'));
       const activeTab = document.getElementById('tab' + tierKey.charAt(0).toUpperCase() + tierKey.slice(1));
-      if (activeTab) activeTab.classList.add('active');
+      if (activeTab) {
+        activeTab.style.display = 'block';
+        activeTab.classList.add('active');
+      }
 
       const tier = TIERS[tierKey];
 
@@ -1353,6 +1398,13 @@
       if (paramTier && TIERS[paramTier.toLowerCase()]) proposalData.tier = paramTier.toLowerCase();
       if (paramPhone) proposalData.phone = paramPhone;
       if (paramId) proposalData.id = paramId;
+
+      // Special handling for DRAA custom tier
+      if (proposalData.tier === 'draa' || (paramTier && paramTier.toLowerCase() === 'draa') || (proposalData.business && proposalData.business.toLowerCase().includes('astronomical'))) {
+        proposalData.tier = 'draa';
+        const draaTab = document.getElementById('tabDraa');
+        if (draaTab) draaTab.style.display = 'block';
+      }
 
       // 3. Render client fields
       document.getElementById('clientNameVal').innerText = proposalData.client;
