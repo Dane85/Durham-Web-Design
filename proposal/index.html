@@ -989,7 +989,10 @@
               <div style="font-size: 13px; color: var(--text-muted);">High-frequency NVMe hosting, automated backups, SSL certificates & 24/7 uptime monitoring.</div>
             </td>
             <td>Billed monthly starting 30 days post-launch</td>
-            <td class="price-num" style="color: var(--accent-gold);" id="tableMonthlyAmount">$49.99 / mo</td>
+            <td class="price-num" style="color: var(--accent-gold);">
+              <span id="tableMonthlyAmount">$49.99 / mo</span>
+              <div style="margin-top: 4px;"><a id="tableCareLink" href="https://buy.stripe.com/7sY8wOcE66cT0EPd5ebZe06" target="_blank" rel="noopener noreferrer" style="font-size: 11px; color: var(--accent-cyan); text-decoration: none; border: 1px solid rgba(56,189,248,0.3); padding: 2px 8px; border-radius: 9999px; display: inline-block;">Setup Retainer &rarr;</a></div>
+            </td>
           </tr>
         </tbody>
       </table>
@@ -1109,6 +1112,7 @@
         scopeLabel: 'Complete 5-Page High-Performance Website',
         stripeUrl: 'https://buy.stripe.com/aFacN4cE6eJp2MXd5ebZe00',
         stripeFullUrl: 'https://buy.stripe.com/bJe28q33wdFlcnx7KUbZe03',
+        stripeCareUrl: 'https://buy.stripe.com/7sY8wOcE66cT0EPd5ebZe06',
         deliverables: [
           {
             title: 'Up to 5 Handcrafted Custom Pages',
@@ -1145,6 +1149,7 @@
         scopeLabel: 'Up to 10 Custom Pages + Regional Service Silos',
         stripeUrl: 'https://buy.stripe.com/6oU4gy8nQ8l19blghqbZe01',
         stripeFullUrl: 'https://buy.stripe.com/5kQ7sKfQi44Lbjt3uEbZe04',
+        stripeCareUrl: 'https://buy.stripe.com/4gM5kC0VobxdevF1mwbZe07',
         deliverables: [
           {
             title: 'Up to 10 Custom Pages & City Silos',
@@ -1181,6 +1186,7 @@
         scopeLabel: 'Full-Stack Web App & Dedicated Cloud Cluster',
         stripeUrl: 'https://buy.stripe.com/7sY4gy33w6cTafpfdmbZe02',
         stripeFullUrl: 'https://buy.stripe.com/7sYaEWeMe9p54V51mwbZe05',
+        stripeCareUrl: 'https://buy.stripe.com/3cIfZgavY30H9bl1mwbZe08',
         deliverables: [
           {
             title: 'Bespoke Full-Stack Web Application',
@@ -1263,6 +1269,10 @@
       document.getElementById('tableFinalAmount').innerText = '$' + tier.depositPrice.toLocaleString('en-CA', { minimumFractionDigits: 2 });
       document.getElementById('tableTotalAmount').innerText = '$' + tier.totalPrice.toLocaleString('en-CA', { minimumFractionDigits: 2 }) + (tierKey === 'custom' ? '+' : '');
       document.getElementById('tableMonthlyAmount').innerText = '$' + tier.monthlyPrice.toLocaleString('en-CA', { minimumFractionDigits: 2 }) + ' / mo' + (tierKey === 'custom' ? '+' : '');
+      const careLink = document.getElementById('tableCareLink');
+      if (careLink && tier.stripeCareUrl) {
+        careLink.href = tier.stripeCareUrl;
+      }
 
       // Update Closer Button
       const formattedDeposit = '$' + tier.depositPrice.toLocaleString('en-CA', { minimumFractionDigits: 2 });
