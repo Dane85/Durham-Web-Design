@@ -1107,7 +1107,8 @@
         depositPrice: 749.99,
         monthlyPrice: 49.99,
         scopeLabel: 'Complete 5-Page High-Performance Website',
-        stripeUrl: 'https://billing.stripe.com/p/login/dRm3cveMn0wIfMi17rd7q00',
+        stripeUrl: 'https://buy.stripe.com/aFacN4cE6eJp2MXd5ebZe00',
+        stripeFullUrl: 'https://buy.stripe.com/bJe28q33wdFlcnx7KUbZe03',
         deliverables: [
           {
             title: 'Up to 5 Handcrafted Custom Pages',
@@ -1142,7 +1143,8 @@
         depositPrice: 1449.99,
         monthlyPrice: 129.99,
         scopeLabel: 'Up to 10 Custom Pages + Regional Service Silos',
-        stripeUrl: 'https://billing.stripe.com/p/login/dRm3cveMn0wIfMi17rd7q00',
+        stripeUrl: 'https://buy.stripe.com/6oU4gy8nQ8l19blghqbZe01',
+        stripeFullUrl: 'https://buy.stripe.com/5kQ7sKfQi44Lbjt3uEbZe04',
         deliverables: [
           {
             title: 'Up to 10 Custom Pages & City Silos',
@@ -1177,7 +1179,8 @@
         depositPrice: 2499.99,
         monthlyPrice: 249.99,
         scopeLabel: 'Full-Stack Web App & Dedicated Cloud Cluster',
-        stripeUrl: 'https://billing.stripe.com/p/login/dRm3cveMn0wIfMi17rd7q00',
+        stripeUrl: 'https://buy.stripe.com/7sY4gy33w6cTafpfdmbZe02',
+        stripeFullUrl: 'https://buy.stripe.com/7sYaEWeMe9p54V51mwbZe05',
         deliverables: [
           {
             title: 'Bespoke Full-Stack Web Application',
@@ -1393,6 +1396,23 @@
 
       // Activate Selected Tier
       selectTier(proposalData.tier);
+
+      // Custom Stripe Checkout URL override (if passed in URL)
+      const paramDepositUrl = params.get('deposit_url') || params.get('stripe_url') || params.get('checkout');
+      if (paramDepositUrl) {
+        document.getElementById('stripeDepositBtn').href = decodeURIComponent(paramDepositUrl);
+      }
+
+      // Check if client returned from successful Stripe deposit checkout
+      if (params.get('deposit_paid') === '1') {
+        const signSection = document.querySelector('.section-sign') || document.querySelector('.closer-card');
+        if (signSection) {
+          const banner = document.createElement('div');
+          banner.style.cssText = 'margin-bottom: 24px; padding: 20px; border-radius: 16px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399; text-align: center;';
+          banner.innerHTML = '<div style="font-size: 22px; font-weight: 800; color: #10b981; margin-bottom: 6px;">🎉 50% Deposit Received via Stripe!</div><p style="color: #e2e8f0; font-size: 14px; margin: 0; line-height: 1.5;">Thank you! Your project agreement is officially active and queued for development. Our lead engineering team will reach out within 1 business day.</p>';
+          signSection.insertBefore(banner, signSection.firstChild);
+        }
+      }
     }
 
     // Initialize on DOM load
