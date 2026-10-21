@@ -156,10 +156,28 @@ if ($cmd === '/proposal') {
         $totalPrice = 4999.99;
         $deposit = 2499.99;
         $monthly = 249.99;
+    } elseif ($tierRaw === 'draa') {
+        $tier = 'draa';
+        $tierTitle = 'DRAA Non-Profit Architecture';
+        $totalPrice = 700.00;
+        $deposit = 350.00;
+        $monthly = 50.00;
     }
 
     $propId = 'prop-' . time();
     $nowStr = date('Y-m-d H:i:s T');
+
+    // Build Live URL
+    $params = [
+        'id' => $propId,
+        'client' => $contact,
+        'biz' => $business,
+        'tier' => $tier
+    ];
+    if (!empty($phone)) {
+        $params['phone'] = $phone;
+    }
+    $liveUrl = "https://durhamweb.design/proposal/?" . http_build_query($params);
 
     // Build Proposal Record
     $record = [
@@ -173,7 +191,8 @@ if ($cmd === '/proposal') {
         'deposit' => $deposit,
         'monthly' => $monthly,
         'phone' => $phone,
-        'status' => 'active'
+        'status' => 'active',
+        'proposal_url' => $liveUrl
     ];
 
     // Save to proposals.json
@@ -189,17 +208,6 @@ if ($cmd === '/proposal') {
     $proposals[] = $record;
     file_put_contents($proposalsFile, json_encode($proposals, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES));
 
-    // Build Live URL
-    $params = [
-        'id' => $propId,
-        'client' => $contact,
-        'biz' => $business,
-        'tier' => $tier
-    ];
-    if (!empty($phone)) {
-        $params['phone'] = $phone;
-    }
-    $liveUrl = "https://durhamweb.design/proposal/?" . http_build_query($params);
 
     $replyMsg = "🚀 <b>INSTANT CLIENT PROPOSAL GENERATED</b>\n\n"
         . "━━━━━━━━━━━━━━━━━━━━\n\n"

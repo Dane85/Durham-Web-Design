@@ -519,6 +519,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 
+require_once __DIR__ . '/proposals-vault-helper.php';
+
     // ACTION: Save Generated Proposal & Log onto Lead
     if (isset($_GET['action']) && $_GET['action'] === 'save_proposal') {
         $pInput = is_array($input) ? $input : [];
@@ -535,19 +537,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'title' => 'Starter Launch',
                 'total_price' => 1499.99,
                 'deposit' => 749.99,
-                'monthly' => 49.99
+                'monthly' => 49.99,
+                'deposit_link' => 'https://buy.stripe.com/aFacN4cE6eJp2MXd5ebZe00',
+                'full_link' => 'https://buy.stripe.com/bJe28q33wdFlcnx7KUbZe03',
+                'care_link' => 'https://buy.stripe.com/7sY8wOcE66cT0EPd5ebZe06'
             ],
             'growth' => [
                 'title' => 'Growth & Conversion Engine',
                 'total_price' => 2899.99,
                 'deposit' => 1449.99,
-                'monthly' => 129.99
+                'monthly' => 129.99,
+                'deposit_link' => 'https://buy.stripe.com/6oU4gy8nQ8l19blghqbZe01',
+                'full_link' => 'https://buy.stripe.com/5kQ7sKfQi44Lbjt3uEbZe04',
+                'care_link' => 'https://buy.stripe.com/4gM5kC0VobxdevF1mwbZe07'
             ],
             'custom' => [
                 'title' => 'Custom Enterprise Architecture',
                 'total_price' => 4999.99,
                 'deposit' => 2499.99,
-                'monthly' => 249.99
+                'monthly' => 249.99,
+                'deposit_link' => 'https://buy.stripe.com/7sY4gy33w6cTafpfdmbZe02',
+                'full_link' => 'https://buy.stripe.com/7sYaEWeMe9p54V51mwbZe05',
+                'care_link' => 'https://buy.stripe.com/3cIfZgavY30H9bl1mwbZe08'
+            ],
+            'draa' => [
+                'title' => 'DRAA Non-Profit Architecture',
+                'total_price' => 700.00,
+                'deposit' => 350.00,
+                'monthly' => 50.00,
+                'deposit_link' => 'https://buy.stripe.com/aFaeVc8nQ0SzgDN8OYbZe0a',
+                'full_link' => 'https://buy.stripe.com/bJe3cu33wat973d5CMbZe0b',
+                'care_link' => 'https://buy.stripe.com/3cIeVcdIaat91IT5CMbZe0c'
             ]
         ];
         $matchedTier = $tierCatalog[$tier] ?? $tierCatalog['starter'];
@@ -575,7 +595,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'monthly' => $matchedTier['monthly'],
             'phone' => $phone,
             'status' => $status,
-            'proposal_url' => $proposalUrl
+            'proposal_url' => $proposalUrl,
+            'stripe_deposit_url' => $matchedTier['deposit_link'],
+            'stripe_full_url' => $matchedTier['full_link'],
+            'stripe_care_url' => $matchedTier['care_link']
         ];
         
         // 1. Update data/proposals.json
@@ -755,6 +778,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ]);
         }
         @file_put_contents($proposalsFile, json_encode($proposals, JSON_PRETTY_PRINT), LOCK_EX);
+
+        // 1b. Automatically sync accepted status to Proposals/ directory vault
+        foreach ($proposals as $propCheck) {
+            if (strcasecmp($propCheck['id'] ?? '', $propId) === 0 || (!empty($business) && strcasecmp($propCheck['business'] ?? '', $business) === 0)) {
+                syncProposalToVault($propCheck);
+                break;
+            }
+        }
 
         // 2. Append history entry in data/leads.json & data/store.json
         $leadsFile = $dataDir . '/leads.json';
