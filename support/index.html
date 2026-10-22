@@ -496,9 +496,7 @@
             <label class="field-label" for="propertySelect">Select Property / Organization <span class="req">*</span></label>
             <select id="propertySelect" required class="field-select" style="width:100%">
               <option value="proj_gmsra|General Motors Salaried Retirees (GMSRA)">General Motors Salaried Retirees (GMSRA)</option>
-              <option value="proj_apex_fab|Apex Precision Fabrication">Apex Precision Fabrication</option>
-              <option value="proj_physio|Brooklin Health & Physio">Brooklin Health &amp; Physio</option>
-              <option value="proj_prestige|Prestige Automotive Detailing">Prestige Automotive Detailing</option>
+              <option value="proj_draa|Durham Region Astronomical Association (DRAA)">Durham Region Astronomical Association (DRAA)</option>
               <option value="proj_dwd|Durham Web Design Flagship">Durham Web Design Flagship</option>
               <option value="other|Other Commercial Retainer">Other Commercial Retainer</option>
             </select>
@@ -619,14 +617,12 @@
       if (client) {
         if (client.includes('gmsra') || client.includes('gm')) {
           propSelect.value = 'proj_gmsra|General Motors Salaried Retirees (GMSRA)';
-        } else if (client.includes('apex')) {
-          propSelect.value = 'proj_apex_fab|Apex Precision Fabrication';
-        } else if (client.includes('physio') || client.includes('brooklin')) {
-          propSelect.value = 'proj_physio|Brooklin Health & Physio';
-        } else if (client.includes('prestige') || client.includes('auto')) {
-          propSelect.value = 'proj_prestige|Prestige Automotive Detailing';
+        } else if (client.includes('draa') || client.includes('astro')) {
+          propSelect.value = 'proj_draa|Durham Region Astronomical Association (DRAA)';
         } else if (client.includes('dwd') || client.includes('durham')) {
           propSelect.value = 'proj_dwd|Durham Web Design Flagship';
+        } else {
+          propSelect.value = 'other|Other Commercial Retainer';
         }
       }
 

@@ -845,19 +845,19 @@
       </div>
 
       <div class="proposal-intro">
-        <h1 id="heroHeading">Website Engineering Proposal for Apex Roofing Oshawa</h1>
-        <p id="heroSubheading">Prepared exclusively for Marcus Reid. Engineered for instant sub-second page loads, maximum local Google rankings, and high-margin client conversions across Durham Region.</p>
+        <h1 id="heroHeading">Website Engineering Proposal for Valued Client</h1>
+        <p id="heroSubheading">Prepared exclusively for Client Organization. Engineered for instant sub-second page loads, maximum local Google rankings, and high-margin client conversions across Durham Region.</p>
       </div>
 
       <!-- Metadata Grid -->
       <div class="meta-grid">
         <div class="meta-item">
           <div class="meta-label">Client Contact</div>
-          <div class="meta-val" id="clientNameVal">Marcus Reid</div>
+          <div class="meta-val" id="clientNameVal">Valued Client</div>
         </div>
         <div class="meta-item">
           <div class="meta-label">Business Entity</div>
-          <div class="meta-val" id="businessNameVal">Apex Roofing Oshawa</div>
+          <div class="meta-val" id="businessNameVal">Client Organization</div>
         </div>
         <div class="meta-item">
           <div class="meta-label">Proposal Reference</div>
@@ -1032,7 +1032,7 @@
         <div class="sig-grid">
           <div class="sig-input-wrap">
             <label for="sigInput">Authorized Client Representative Signature</label>
-            <input type="text" id="sigInput" class="sig-input" placeholder="Type your full legal name" value="Marcus Reid" oninput="updateSignature(this.value)">
+            <input type="text" id="sigInput" class="sig-input" placeholder="Type your full legal name" value="" oninput="updateSignature(this.value)">
             <div style="font-size: 12px; color: var(--text-dim); margin-top: 6px;">
               By typing your name, you acknowledge acceptance of the deliverables and 50% deposit terms.
             </div>
@@ -1041,7 +1041,7 @@
             <label style="display: block; font-size: 12px; font-family: var(--font-mono); color: var(--text-dim); margin-bottom: 6px; text-transform: uppercase;">
               Digital Signature Preview
             </label>
-            <div class="sig-preview" id="sigPreview">Marcus Reid</div>
+            <div class="sig-preview" id="sigPreview">Signature Required</div>
           </div>
         </div>
       </div>
@@ -1076,8 +1076,8 @@
     <div class="print-only print-signatures">
       <div>
         <div style="font-size: 11pt; color: #64748b; margin-bottom: 4px;">CLIENT ACCEPTANCE</div>
-        <div style="font-size: 14pt; font-weight: 700;" id="printClientName">Marcus Reid</div>
-        <div style="font-size: 11pt; color: #475569;" id="printBusinessName">Apex Roofing Oshawa</div>
+        <div style="font-size: 14pt; font-weight: 700;" id="printClientName">Valued Client</div>
+        <div style="font-size: 11pt; color: #475569;" id="printBusinessName">Client Organization</div>
         <div class="sig-line-box">
           Authorized Signature &amp; Date
         </div>
@@ -1260,10 +1260,10 @@
 
     let currentTier = 'starter';
     let proposalData = {
-      client: 'Marcus Reid',
-      business: 'Apex Roofing Oshawa',
+      client: 'Valued Client',
+      business: 'Client Organization',
       tier: 'starter',
-      phone: '(905) 431-8890',
+      phone: '',
       id: 'PROP-' + Math.floor(Date.now() / 1000).toString().slice(-6)
     };
 
@@ -1337,7 +1337,11 @@
       const timestamp = new Date().toISOString().replace('T', ' ').slice(0, 19) + ' UTC';
 
       const payload = {
+        action: 'accept_proposal',
         id: proposalData.id,
+        proposal_id: proposalData.id,
+        name: signature,
+        signature_name: signature,
         client_name: clientName,
         business: businessName,
         signature: signature,
@@ -1350,13 +1354,20 @@
       };
 
       try {
-        // Fire async acceptance webhook to dashboard API
-        fetch('/dashboard/api.php?action=accept_proposal', {
+        // Fire async acceptance webhook to Epic Expressions OS proposals API (with fallback to /dashboard/api.php)
+        fetch('https://os.durhamweb.design/api/proposals', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
           keepalive: true
-        }).catch(err => console.warn('Acceptance webhook background error:', err));
+        }).catch(() => {
+          fetch('/dashboard/api.php?action=accept_proposal', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+            keepalive: true
+          }).catch(() => {});
+        });
       } catch (e) {
         console.warn('Acceptance dispatch caught:', e);
       }
@@ -1375,16 +1386,35 @@
       // 1. If ID provided, attempt to load from proposals API
       if (paramId) {
         try {
-          const res = await fetch('/dashboard/api.php?action=get_proposal&id=' + encodeURIComponent(paramId));
-          if (res.ok) {
-            const json = await res.json();
-            if (json.success && json.proposal) {
-              const p = json.proposal;
-              if (p.contact) proposalData.client = p.contact;
-              if (p.business) proposalData.business = p.business;
-              if (p.tier && TIERS[p.tier.toLowerCase()]) proposalData.tier = p.tier.toLowerCase();
-              if (p.phone) proposalData.phone = p.phone;
-              if (p.id) proposalData.id = p.id;
+          let loaded = false;
+          try {
+            const osRes = await fetch('https://os.durhamweb.design/api/proposals?id=' + encodeURIComponent(paramId));
+            if (osRes.ok) {
+              const osJson = await osRes.json();
+              if (osJson.success && osJson.proposal) {
+                const p = osJson.proposal;
+                if (p.contact) proposalData.client = p.contact;
+                if (p.business) proposalData.business = p.business;
+                if (p.tier && TIERS[p.tier.toLowerCase()]) proposalData.tier = p.tier.toLowerCase();
+                if (p.phone) proposalData.phone = p.phone;
+                if (p.id) proposalData.id = p.id;
+                loaded = true;
+              }
+            }
+          } catch (err) {}
+
+          if (!loaded) {
+            const res = await fetch('/dashboard/api.php?action=get_proposal&id=' + encodeURIComponent(paramId));
+            if (res.ok) {
+              const json = await res.json();
+              if (json.success && json.proposal) {
+                const p = json.proposal;
+                if (p.contact) proposalData.client = p.contact;
+                if (p.business) proposalData.business = p.business;
+                if (p.tier && TIERS[p.tier.toLowerCase()]) proposalData.tier = p.tier.toLowerCase();
+                if (p.phone) proposalData.phone = p.phone;
+                if (p.id) proposalData.id = p.id;
+              }
             }
           }
         } catch (e) {
