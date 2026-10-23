@@ -1172,22 +1172,20 @@
         console.warn("Async form send:", err);
       }
 
-      // Dispatch lead alert to internal Operations Engine & Telegram Bot
+      // Dispatch lead alert to internal Operations Engine (MariaDB + Slack + Telegram)
       const leadAlertPayload = {
-        business_name: businessName,
-        website_url: websiteUrl,
-        contact_name: contactName,
+        name: contactName,
+        business: businessName,
         email: contactEmail,
         phone: contactPhone || "Not provided",
-        primary_frustration: frustration,
-        score: "38/100",
-        ttfb: "1.84s",
-        payload_mb: "4.2 MB",
-        vitals: "Failed"
+        website: websiteUrl,
+        pkg: "Free Speed Audit (" + websiteUrl + ")",
+        notes: "Primary Frustration: " + frustration,
+        channel: "DWD Speed Audit Engine"
       };
 
       try {
-        fetch("/dashboard/api.php?action=lead_alert", {
+        fetch("https://os.durhamweb.design/api/leads", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(leadAlertPayload)

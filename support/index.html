@@ -698,7 +698,7 @@
       };
 
       try {
-        const response = await fetch('/api/tickets', {
+        const response = await fetch('https://os.durhamweb.design/api/tickets', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload)

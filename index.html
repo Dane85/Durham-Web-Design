@@ -2536,22 +2536,42 @@
 
       const formData = new FormData(form);
 
+      const leadPayload = {
+        name: formData.get('name') || '',
+        business: formData.get('businessName') || '',
+        email: formData.get('email') || '',
+        phone: formData.get('phone') || '',
+        website: formData.get('website') || '',
+        pkg: [formData.get('projectGoal'), formData.get('budget'), formData.get('timeline')].filter(Boolean).join(' • '),
+        notes: [formData.get('website') ? `Site: ${formData.get('website')}` : '', formData.get('projectDetails')].filter(Boolean).join(' | '),
+        channel: 'Durham Web Design Lead Form'
+      };
+
       try {
-        const response = await fetch('https://api.web3forms.com/submit', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json'
-          },
-          body: formData
-        });
+        const results = await Promise.allSettled([
+          fetch('https://api.web3forms.com/submit', {
+            method: 'POST',
+            headers: {
+              'Accept': 'application/json'
+            },
+            body: formData
+          }),
+          fetch('https://os.durhamweb.design/api/leads', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(leadPayload)
+          })
+        ]);
 
-        const data = await response.json();
+        const anySuccess = results.some(r => r.status === 'fulfilled' && (r.value.ok || r.value.status === 200));
 
-        if (response.status === 200 && data.success) {
+        if (anySuccess) {
           form.style.display = 'none';
           successBlock.style.display = 'block';
         } else {
-          throw new Error(data.message || 'Submission failed. Please try again.');
+          throw new Error('Submission failed. Please check your connection and try again.');
         }
       } catch (err) {
         console.error('Submission error:', err);
