@@ -496,9 +496,6 @@
             <label class="field-label" for="propertySelect">Select Property / Organization <span class="req">*</span></label>
             <select id="propertySelect" required class="field-select" style="width:100%">
               <option value="proj_gmsra|General Motors Salaried Retirees (GMSRA)">General Motors Salaried Retirees (GMSRA)</option>
-              <option value="proj_draa|Durham Region Astronomical Association (DRAA)">Durham Region Astronomical Association (DRAA)</option>
-              <option value="proj_dwd|Durham Web Design Flagship">Durham Web Design Flagship</option>
-              <option value="other|Other Commercial Retainer">Other Commercial Retainer</option>
             </select>
           </div>
           <div>
@@ -614,17 +611,10 @@
       if (email) document.getElementById('clientEmail').value = email;
 
       const propSelect = document.getElementById('propertySelect');
-      if (client) {
-        if (client.includes('gmsra') || client.includes('gm')) {
-          propSelect.value = 'proj_gmsra|General Motors Salaried Retirees (GMSRA)';
-        } else if (client.includes('draa') || client.includes('astro')) {
-          propSelect.value = 'proj_draa|Durham Region Astronomical Association (DRAA)';
-        } else if (client.includes('dwd') || client.includes('durham')) {
-          propSelect.value = 'proj_dwd|Durham Web Design Flagship';
-        } else {
-          propSelect.value = 'other|Other Commercial Retainer';
-        }
+      if (propSelect) {
+        propSelect.value = 'proj_gmsra|General Motors Salaried Retirees (GMSRA)';
       }
+
 
       // Check for category preselect
       const catParam = params.get('cat') || params.get('category');
