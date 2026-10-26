@@ -493,10 +493,8 @@
         <!-- Row 2: Property & Priority -->
         <div class="form-grid">
           <div>
-            <label class="field-label" for="propertySelect">Select Property / Organization <span class="req">*</span></label>
-            <select id="propertySelect" required class="field-select" style="width:100%">
-              <option value="proj_gmsra|General Motors Salaried Retirees (GMSRA)">General Motors Salaried Retirees (GMSRA)</option>
-            </select>
+            <label class="field-label" for="propertyInput">Organization / Property Name <span class="req">*</span></label>
+            <input type="text" id="propertyInput" required class="field-input" placeholder="e.g. General Motors Salaried Retirees (GMSRA)" style="width:100%">
           </div>
           <div>
             <label class="field-label" for="prioritySelect">Urgency / Priority</label>
@@ -610,9 +608,8 @@
       if (name) document.getElementById('clientName').value = name;
       if (email) document.getElementById('clientEmail').value = email;
 
-      const propSelect = document.getElementById('propertySelect');
-      if (propSelect) {
-        propSelect.value = 'proj_gmsra|General Motors Salaried Retirees (GMSRA)';
+      if (client) {
+        document.getElementById('propertyInput').value = client;
       }
 
 
@@ -672,8 +669,16 @@
       submitBtn.disabled = true;
       submitBtn.innerHTML = 'Logging Ticket & Notifying Dane...';
 
-      const propVal = document.getElementById('propertySelect').value;
-      const [projId, propName] = propVal.split('|');
+      const propName = document.getElementById('propertyInput').value.trim();
+      let projId = 'pending';
+      const lower = propName.toLowerCase();
+      if (lower.includes('gmsra') || lower.includes('general motors')) {
+        projId = 'proj_gmsra';
+      } else if (lower.includes('durham web') || lower.includes('dwd')) {
+        projId = 'proj_dwd';
+      } else if (lower.includes('command os') || lower.includes('epic os')) {
+        projId = 'proj_os';
+      }
 
       const payload = {
         project_id: projId,
