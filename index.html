@@ -2547,7 +2547,9 @@
         website: formData.get('website') || '',
         pkg: [formData.get('projectGoal'), formData.get('budget'), formData.get('timeline')].filter(Boolean).join(' • '),
         notes: [formData.get('website') ? `Site: ${formData.get('website')}` : '', formData.get('projectDetails')].filter(Boolean).join(' | '),
-        channel: 'Durham Web Design Lead Form'
+        channel: 'Durham Web Design Lead Form',
+        // Hidden honeypot: real visitors leave it empty, bots fill it, and the OS then drops the lead
+        botcheck: formData.get('botcheck') ? 'on' : ''
       };
 
       try {
