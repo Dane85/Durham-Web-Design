@@ -1,2652 +1,673 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en-CA">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-  <meta http-equiv="Pragma" content="no-cache">
-  <meta http-equiv="Expires" content="0">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Durham Web Design | High-Performance Websites for Durham Region Businesses</title>
-  <meta name="description" content="Ultra-fast, modern websites engineered to grow businesses across Oshawa, Whitby, Ajax, Pickering, and Bowmanville. Dedicated Canadian cloud hosting with transparent CAD pricing.">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Durham Web Design | Custom Websites for Durham Region Businesses</title>
+  <meta name="description" content="Fast, hand-built websites for small businesses in Oshawa, Whitby, Ajax, Pickering and across Durham Region. Fixed CAD pricing, hosting and care included, and you deal directly with the developer.">
+  <link rel="canonical" href="https://durhamweb.design/">
+  <meta name="theme-color" content="#f5f7fa" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#070b14" media="(prefers-color-scheme: dark)">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Durham Web Design | Custom Websites for Durham Region Businesses">
+  <meta property="og:description" content="Fast, hand-built websites for Durham Region businesses. Fixed CAD pricing, hosting and care included.">
+  <meta property="og:url" content="https://durhamweb.design/">
+  <meta property="og:image" content="https://durhamweb.design/assets/images/logo.png">
+  <link rel="icon" type="image/png" href="/assets/images/favicon-64.png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
 
-  <!-- Google tag (gtag.js) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Google Analytics. NOTE: the server CSP must allow googletagmanager.com / google-analytics.com for this to load. -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-33S0Z7WYRG"></script>
   <script>
     window.dataLayer = window.dataLayer || [];
     function gtag(){dataLayer.push(arguments);}
     gtag('js', new Date());
-
     gtag('config', 'G-33S0Z7WYRG');
   </script>
-  
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 
-  <!-- Brand Favicon -->
-  <link rel="icon" type="image/png" href="assets/images/favicon.png">
-  <link rel="apple-touch-icon" href="assets/images/logo.png">
-
-  <style>
-    /* ==========================================================================
-       CSS VARIABLES & THEME SETUP
-       ========================================================================== */
-    :root {
-      --bg-primary: #090d16;
-      --bg-secondary: #0f172a;
-      --bg-card: rgba(17, 24, 39, 0.75);
-      --bg-card-hover: rgba(26, 37, 58, 0.85);
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-bright: rgba(56, 189, 248, 0.35);
-      --text-main: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-dim: #64748b;
-      --accent-cyan: #00f2fe;
-      --accent-blue: #38bdf8;
-      --accent-emerald: #10b981;
-      --accent-emerald-glow: rgba(16, 185, 129, 0.2);
-      --danger: #f43f5e;
-      --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-      --font-mono: 'JetBrains Mono', monospace;
-      --glass-filter: blur(16px);
-      --transition-smooth: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      scroll-behavior: smooth;
-    }
-
-    html, body {
-      overflow-x: hidden;
-      max-width: 100vw;
-      width: 100%;
-    }
-
-    body {
-      background-color: var(--bg-primary);
-      color: var(--text-main);
-      font-family: var(--font-sans);
-      line-height: 1.6;
-      -webkit-font-smoothing: antialiased;
-      position: relative;
-    }
-
-    /* Ambient Background Glow */
-    .ambient-glow-wrapper {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      overflow: hidden;
-      pointer-events: none;
-      z-index: -1;
-    }
-
-    .ambient-glow-1 {
-      position: absolute;
-      top: -150px;
-      left: 50%;
-      transform: translateX(-50%);
-      width: min(850px, 100vw);
-      height: 600px;
-      background: radial-gradient(circle, rgba(56, 189, 248, 0.12) 0%, rgba(16, 185, 129, 0.05) 50%, transparent 75%);
-      filter: blur(80px);
-      pointer-events: none;
-    }
-
-    .ambient-glow-2 {
-      position: absolute;
-      top: 1800px;
-      right: 0;
-      width: min(700px, 100vw);
-      height: 700px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, transparent 70%);
-      filter: blur(90px);
-      pointer-events: none;
-    }
-
-    .container {
-      width: 100%;
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
-
-    /* ==========================================================================
-       1. STICKY HEADER / NAVIGATION
-       ========================================================================== */
-    header {
-      position: sticky;
-      top: 0;
-      z-index: 10000;
-      background: rgba(9, 13, 22, 0.95);
-      backdrop-filter: var(--glass-filter);
-      -webkit-backdrop-filter: var(--glass-filter);
-      border-bottom: 1px solid var(--border-subtle);
-      transition: var(--transition-smooth);
-    }
-
-    .nav-wrapper {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      height: 76px;
-    }
-
-    .brand-logo {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      text-decoration: none;
-      color: var(--text-main);
-      font-weight: 800;
-      font-size: 1.25rem;
-      letter-spacing: -0.02em;
-    }
-
-        .brand-logo-img {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      object-fit: cover;
-      box-shadow: 0 0 16px rgba(0, 242, 254, 0.45);
-      border: 1.5px solid rgba(56, 189, 248, 0.4);
-      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease;
-      display: block;
-      background: #090d16;
-    }
-
-    .brand-logo:hover .brand-logo-img {
-      transform: scale(1.08) rotate(2deg);
-      box-shadow: 0 0 24px rgba(0, 242, 254, 0.7), 0 0 8px rgba(56, 189, 248, 0.5);
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 32px;
-      list-style: none;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: var(--text-muted);
-      font-size: 0.95rem;
-      font-weight: 600;
-      transition: var(--transition-smooth);
-    }
-
-    .nav-links a:hover {
-      color: var(--text-main);
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-family: var(--font-sans);
-      font-weight: 700;
-      font-size: 0.95rem;
-      padding: 12px 24px;
-      border-radius: 10px;
-      cursor: pointer;
-      text-decoration: none;
-      transition: var(--transition-smooth);
-      border: 1px solid transparent;
-    }
-
-    .btn-header {
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text-main);
-      border-color: var(--border-subtle);
-    }
-
-    .btn-header:hover {
-      background: rgba(255, 255, 255, 0.12);
-      border-color: rgba(255, 255, 255, 0.25);
-      transform: translateY(-1px);
-    }
-
-    .btn-primary {
-      background: linear-gradient(135deg, #0284c7 0%, #0ea5e9 50%, #10b981 100%);
-      color: #ffffff;
-      box-shadow: 0 4px 25px rgba(14, 165, 233, 0.35);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(16, 185, 129, 0.45);
-      filter: brightness(1.08);
-    }
-
-    .btn-secondary {
-      background: rgba(17, 24, 39, 0.85);
-      color: var(--text-main);
-      border: 1px solid var(--border-subtle);
-      backdrop-filter: var(--glass-filter);
-    }
-
-    .btn-secondary:hover {
-      background: rgba(30, 41, 59, 0.9);
-      border-color: var(--accent-blue);
-      transform: translateY(-2px);
-    }
-
-    .btn-full {
-      width: 100%;
-    }
-
-    /* Mobile Nav Toggle */
-    .menu-toggle {
-      display: none;
-      background: none;
-      border: none;
-      color: var(--text-main);
-      font-size: 1.5rem;
-      cursor: pointer;
-    }
-
-    /* ==========================================================================
-       2. HERO SECTION
-       ========================================================================== */
-    .hero {
-      padding: 90px 0 70px;
-      text-align: center;
-      position: relative;
-    }
-
-    .eyebrow-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 6px 16px;
-      border-radius: 9999px;
-      background: rgba(56, 189, 248, 0.08);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      color: var(--accent-blue);
-      font-size: 0.85rem;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      text-transform: uppercase;
-      margin-bottom: 24px;
-    }
-
-    .eyebrow-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent-emerald);
-      box-shadow: 0 0 10px var(--accent-emerald);
-      animation: pulse 2s infinite;
-    }
-
-    @keyframes pulse {
-      0% { opacity: 0.6; transform: scale(0.9); }
-      50% { opacity: 1; transform: scale(1.2); }
-      100% { opacity: 0.6; transform: scale(0.9); }
-    }
-
-    .hero-title {
-      font-size: clamp(2.3rem, 5.2vw, 3.8rem);
-      font-weight: 800;
-      line-height: 1.15;
-      letter-spacing: -0.03em;
-      max-width: 940px;
-      margin: 0 auto 20px;
-      color: #ffffff;
-    }
-
-    .hero-title .gradient-text {
-      background: linear-gradient(135deg, #ffffff 30%, var(--accent-blue) 75%, var(--accent-emerald) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero-subtitle {
-      font-size: 1.15rem;
-      color: var(--text-muted);
-      max-width: 780px;
-      margin: 0 auto 36px;
-      line-height: 1.7;
-    }
-
-    .hero-actions {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-      margin-bottom: 48px;
-    }
-
-    .trust-badges {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 28px;
-      flex-wrap: wrap;
-      padding-top: 24px;
-      border-top: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .trust-item {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 0.9rem;
-      font-weight: 600;
-      color: #cbd5e1;
-    }
-
-    /* Live Performance Preview Card */
-    .hero-preview {
-      margin-top: 50px;
-      border-radius: 16px;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7);
-      backdrop-filter: var(--glass-filter);
-      overflow: hidden;
-      max-width: 900px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .browser-header {
-      background: rgba(15, 23, 42, 0.95);
-      padding: 12px 20px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid var(--border-subtle);
-    }
-
-    .window-dots {
-      display: flex;
-      gap: 6px;
-    }
-
-    .window-dot {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-    }
-
-    .dot-red { background: #ef4444; }
-    .dot-yellow { background: #f59e0b; }
-    .dot-green { background: #10b981; }
-
-    .browser-url {
-      font-family: var(--font-mono);
-      font-size: 0.75rem;
-      color: var(--text-muted);
-      background: rgba(0, 0, 0, 0.4);
-      padding: 4px 14px;
-      border-radius: 6px;
-      border: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .browser-content {
-      padding: 24px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      background: linear-gradient(180deg, rgba(15, 23, 42, 0.4) 0%, rgba(9, 13, 22, 0.8) 100%);
-    }
-
-    .metric-pill {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 12px;
-      padding: 16px;
-      text-align: center;
-      transition: var(--transition-smooth);
-    }
-
-    .metric-pill:hover {
-      border-color: var(--accent-blue);
-      transform: translateY(-2px);
-    }
-
-    .metric-pill .score {
-      font-size: 1.8rem;
-      font-weight: 800;
-      color: var(--accent-emerald);
-      font-family: var(--font-mono);
-      line-height: 1;
-      margin-bottom: 6px;
-    }
-
-    .metric-pill .label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-    }
-
-    /* ==========================================================================
-       SECTION HEADERS
-       ========================================================================== */
-    .section-spacing {
-      padding: 100px 0;
-    }
-
-    .section-header {
-      text-align: center;
-      max-width: 720px;
-      margin: 0 auto 54px;
-    }
-
-    .section-eyebrow {
-      color: var(--accent-emerald);
-      font-weight: 700;
-      font-size: 0.85rem;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      margin-bottom: 12px;
-      display: block;
-    }
-
-    .section-title {
-      font-size: clamp(1.9rem, 3.5vw, 2.7rem);
-      font-weight: 800;
-      letter-spacing: -0.025em;
-      margin-bottom: 16px;
-      line-height: 1.25;
-    }
-
-    .section-desc {
-      color: var(--text-muted);
-      font-size: 1.05rem;
-    }
-
-    /* ==========================================================================
-       3. COMPARISON TABLE: LEGACY VS DURHAM WEB DESIGN
-       ========================================================================== */
-    .comparison-table-desktop {
-      display: block;
-      width: 100%;
-    }
-
-    .table-container {
-      background: var(--bg-card);
-      border-radius: 18px;
-      border: 1px solid var(--border-subtle);
-      overflow-x: auto;
-      backdrop-filter: var(--glass-filter);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-    }
-
-    .comparison-table {
-      width: 100%;
-      border-collapse: collapse;
-      text-align: left;
-    }
-
-    @media (min-width: 769px) {
-      .comparison-table {
-        min-width: 650px;
-      }
-    }
-
-    .comparison-table th, 
-    .comparison-table td {
-      padding: 18px 24px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .comparison-table th {
-      font-size: 0.95rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-      background: rgba(15, 23, 42, 0.9);
-    }
-
-    .comparison-table th.highlight-col {
-      background: rgba(14, 165, 233, 0.12);
-      color: var(--accent-blue);
-      border-left: 1px solid var(--border-bright);
-      border-right: 1px solid var(--border-bright);
-    }
-
-    .comparison-table td.highlight-col {
-      background: rgba(14, 165, 233, 0.04);
-      border-left: 1px solid var(--border-bright);
-      border-right: 1px solid var(--border-bright);
-      font-weight: 600;
-      color: #ffffff;
-    }
-
-    .comparison-table tr:last-child td {
-      border-bottom: none;
-    }
-
-    .tag-bad {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--danger);
-      font-weight: 500;
-      font-size: 0.9rem;
-    }
-
-    .tag-good {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--accent-emerald);
-      font-weight: 600;
-      font-size: 0.9rem;
-    }
-
-    /* Mobile Comparison Cards Stack */
-    .comparison-cards-mobile {
-      display: none;
-    }
-
-    .comp-card-mobile {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 16px;
-      padding: 20px 18px;
-      backdrop-filter: var(--glass-filter);
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      transition: var(--transition-smooth);
-    }
-
-    .comp-card-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-      padding-bottom: 10px;
-    }
-
-    .comp-feature-name {
-      font-size: 1.05rem;
-      font-weight: 800;
-      color: #ffffff;
-      letter-spacing: -0.01em;
-    }
-
-    .comp-feature-badge {
-      font-size: 0.72rem;
-      font-family: var(--font-mono);
-      font-weight: 600;
-      color: var(--accent-blue);
-      background: rgba(56, 189, 248, 0.1);
-      padding: 3px 9px;
-      border-radius: 6px;
-      border: 1px solid rgba(56, 189, 248, 0.2);
-    }
-
-    .comp-row {
-      border-radius: 12px;
-      padding: 12px 14px;
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
-    }
-
-    .comp-row-legacy {
-      background: rgba(244, 63, 94, 0.05);
-      border: 1px solid rgba(244, 63, 94, 0.18);
-    }
-
-    .comp-row-dwd {
-      background: linear-gradient(135deg, rgba(14, 165, 233, 0.1) 0%, rgba(16, 185, 129, 0.08) 100%);
-      border: 1px solid var(--border-bright);
-      box-shadow: 0 0 18px rgba(56, 189, 248, 0.08);
-    }
-
-    .comp-label-bad {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--danger);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .comp-text-bad {
-      font-size: 0.88rem;
-      color: #cbd5e1;
-      line-height: 1.45;
-    }
-
-    .comp-label-good {
-      font-size: 0.75rem;
-      font-weight: 700;
-      color: var(--accent-emerald);
-      text-transform: uppercase;
-      letter-spacing: 0.04em;
-      display: flex;
-      align-items: center;
-      gap: 5px;
-    }
-
-    .comp-text-good {
-      font-size: 0.92rem;
-      font-weight: 600;
-      color: #ffffff;
-      line-height: 1.45;
-    }
-
-    /* ==========================================================================
-       4. TRANSPARENT PRICING GRID
-       ========================================================================== */
-    .pricing-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 28px;
-      align-items: stretch;
-    }
-
-    .pricing-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 36px 30px;
-      backdrop-filter: var(--glass-filter);
-      display: flex;
-      flex-direction: column;
-      position: relative;
-      transition: var(--transition-smooth);
-    }
-
-    .pricing-card:hover {
-      transform: translateY(-4px);
-      border-color: rgba(255, 255, 255, 0.2);
-      box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.5);
-    }
-
-    .pricing-card.featured {
-      background: linear-gradient(180deg, rgba(15, 23, 42, 0.95) 0%, rgba(13, 30, 48, 0.85) 100%);
-      border: 1.5px solid var(--accent-blue);
-      box-shadow: 0 0 35px rgba(56, 189, 248, 0.2);
-    }
-
-    .featured-badge {
-      position: absolute;
-      top: -14px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: linear-gradient(135deg, #0284c7, #10b981);
-      color: #ffffff;
-      font-size: 0.75rem;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
-      padding: 4px 16px;
-      border-radius: 9999px;
-      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
-    }
-
-    .plan-name {
-      font-size: 1.45rem;
-      font-weight: 800;
-      margin-bottom: 8px;
-    }
-
-    .plan-desc {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-      min-height: 44px;
-      margin-bottom: 24px;
-    }
-
-    .price-block {
-      border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
-      padding: 20px 0;
-      margin-bottom: 24px;
-    }
-
-    .price-setup {
-      display: flex;
-      align-items: baseline;
-      gap: 6px;
-    }
-
-    .price-currency {
-      font-size: 1.1rem;
-      font-weight: 700;
-      color: var(--text-muted);
-    }
-
-    .price-amount {
-      font-size: 2.5rem;
-      font-weight: 800;
-      color: #ffffff;
-      font-family: var(--font-mono);
-      line-height: 1;
-    }
-
-    .price-unit {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      font-weight: 600;
-    }
-
-    .price-retainer {
-      margin-top: 8px;
-      font-size: 0.95rem;
-      color: var(--accent-emerald);
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .tax-notice {
-      font-size: 0.75rem;
-      color: var(--text-dim);
-      margin-top: 4px;
-    }
-
-    .plan-features {
-      list-style: none;
-      margin-bottom: 32px;
-      flex-grow: 1;
-    }
-
-    .plan-features li {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      font-size: 0.92rem;
-      color: #cbd5e1;
-      margin-bottom: 12px;
-    }
-
-    .plan-features li svg {
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
-      color: var(--accent-emerald);
-      margin-top: 2px;
-    }
-
-    .stripe-deposit-link {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 100%;
-      box-sizing: border-box;
-      gap: 6px;
-      margin-top: 10px;
-      padding: 10px 14px;
-      border-radius: 12px;
-      font-size: 0.85rem;
-      font-weight: 700;
-      text-decoration: none;
-      color: #38bdf8;
-      background: rgba(56, 189, 248, 0.08);
-      border: 1px solid rgba(56, 189, 248, 0.25);
-      transition: var(--transition-smooth);
-      text-align: center;
-    }
-
-    .stripe-deposit-link:hover {
-      background: rgba(56, 189, 248, 0.16);
-      border-color: rgba(56, 189, 248, 0.5);
-      color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 14px rgba(56, 189, 248, 0.25);
-    }
-
-    .pricing-card.featured .stripe-deposit-link {
-      color: #34d399;
-      background: rgba(16, 185, 129, 0.1);
-      border-color: rgba(16, 185, 129, 0.35);
-    }
-
-    .pricing-card.featured .stripe-deposit-link:hover {
-      background: rgba(16, 185, 129, 0.2);
-      border-color: rgba(16, 185, 129, 0.6);
-      color: #ffffff;
-      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.3);
-    }
-
-    /* ==========================================================================
-       5. REGIONAL SERVICE FOOTPRINT
-       ========================================================================== */
-    .footprint-section {
-      background: linear-gradient(180deg, rgba(15, 23, 42, 0.4) 0%, rgba(9, 13, 22, 0.9) 100%);
-      border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
-      padding: 90px 0;
-    }
-
-    .town-pills {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 14px;
-      margin-top: 36px;
-    }
-
-    .town-pill {
-      background: rgba(17, 24, 39, 0.9);
-      border: 1px solid var(--border-subtle);
-      padding: 10px 22px;
-      border-radius: 9999px;
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: #f1f5f9;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: var(--transition-smooth);
-    }
-
-    .town-pill:hover {
-      border-color: var(--accent-emerald);
-      color: #ffffff;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 20px var(--accent-emerald-glow);
-    }
-
-    .local-guarantee-box {
-      margin-top: 50px;
-      padding: 30px;
-      border-radius: 16px;
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid var(--border-subtle);
-      display: flex;
-      align-items: center;
-      gap: 24px;
-      max-width: 860px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .local-guarantee-icon {
-      font-size: 2.4rem;
-      line-height: 1;
-    }
-
-    .local-guarantee-text h4 {
-      font-size: 1.15rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-      color: #ffffff;
-    }
-
-    .local-guarantee-text p {
-      font-size: 0.92rem;
-      color: var(--text-muted);
-    }
-
-    /* ==========================================================================
-       6. HIGH-CONVERSION LEAD INTAKE FORM
-       ========================================================================== */
-    .form-wrapper {
-      max-width: 780px;
-      margin: 0 auto;
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 24px;
-      padding: 44px;
-      backdrop-filter: var(--glass-filter);
-      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
-      position: relative;
-    }
-
-    .form-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .form-full {
-      grid-column: span 2;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-    }
-
-    .form-group label {
-      font-size: 0.85rem;
-      font-weight: 700;
-      color: #e2e8f0;
-      letter-spacing: 0.02em;
-    }
-
-    .form-group input,
-    .form-group select,
-    .form-group textarea {
-      background: rgba(15, 23, 42, 0.8);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 10px;
-      padding: 14px 16px;
-      color: var(--text-main);
-      font-family: var(--font-sans);
-      font-size: 0.95rem;
-      transition: var(--transition-smooth);
-      outline: none;
-    }
-
-    .form-group input:focus,
-    .form-group select:focus,
-    .form-group textarea:focus {
-      border-color: var(--accent-blue);
-      box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
-      background: rgba(15, 23, 42, 1);
-    }
-
-    .form-group select option {
-      background: #0f172a;
-      color: #ffffff;
-    }
-
-    .form-disclaimer {
-      font-size: 0.8rem;
-      color: var(--text-dim);
-      text-align: center;
-      margin-top: 16px;
-    }
-
-    .form-success {
-      display: none;
-      text-align: center;
-      padding: 40px 20px;
-    }
-
-    .form-success-icon {
-      font-size: 3rem;
-      color: var(--accent-emerald);
-      margin-bottom: 16px;
-    }
-
-    /* ==========================================================================
-       7. FOOTER
-       ========================================================================== */
-    footer {
-      border-top: 1px solid var(--border-subtle);
-      background: #06090f;
-      padding: 50px 0 30px;
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
-    .footer-top {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 24px;
-      padding-bottom: 30px;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    .footer-links {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 24px;
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .footer-links li {
-      margin: 0;
-      padding: 0;
-    }
-
-    .footer-links a {
-      color: #94A3B8;
-      text-decoration: none;
-      font-size: 0.9rem;
-      font-weight: 500;
-      transition: color 0.2s ease, text-shadow 0.2s ease;
-    }
-
-    .footer-links a:hover {
-      color: #00D2FF;
-      text-shadow: 0 0 10px rgba(0, 210, 255, 0.45);
-    }
-
-    .footer-appreciation {
-      margin: 28px 0 24px;
-      padding: 18px 22px;
-      border: 1px solid var(--border-subtle);
-      border-radius: 14px;
-      background: rgba(15, 23, 42, 0.45);
-      backdrop-filter: var(--glass-filter);
-      -webkit-backdrop-filter: var(--glass-filter);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 16px;
-    }
-
-    .appreciation-text {
-      color: var(--text-muted);
-      font-size: 0.92rem;
-      font-weight: 500;
-    }
-
-    .coffee-pill-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 18px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      border-radius: 9999px;
-      background: rgba(30, 41, 59, 0.8);
-      color: #e2e8f0;
-      border: 1px solid rgba(51, 65, 85, 0.85);
-      text-decoration: none;
-      transition: all 0.2s ease;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
-    }
-
-    .coffee-pill-btn:hover {
-      background: rgba(51, 65, 85, 0.9);
-      color: #22d3ee;
-      border-color: rgba(6, 182, 212, 0.45);
-      box-shadow: 0 0 15px rgba(6, 182, 212, 0.25);
-      transform: translateY(-1px);
-    }
-
-    .appreciation-actions {
-      display: flex;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .google-review-pill-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 18px;
-      font-size: 0.875rem;
-      font-weight: 500;
-      border-radius: 9999px;
-      background: rgba(30, 41, 59, 0.8);
-      color: #e2e8f0;
-      border: 1px solid rgba(51, 65, 85, 0.85);
-      text-decoration: none;
-      transition: all 0.2s ease;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
-    }
-
-    .google-review-pill-btn:hover {
-      background: rgba(51, 65, 85, 0.9);
-      color: #fbbc04;
-      border-color: rgba(251, 188, 4, 0.45);
-      box-shadow: 0 0 15px rgba(251, 188, 4, 0.25);
-      transform: translateY(-1px);
-    }
-
-    .footer-bottom {
-      padding-top: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 16px;
-      font-size: 0.85rem;
-      color: var(--text-dim);
-    }
-
-    .cloud-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--accent-blue);
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-    }
-
-       /* ==========================================================================
-       MOBILE DRAWER & NAVIGATION ENHANCEMENTS
-       ========================================================================== */
-    .menu-toggle {
-      display: none;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--border-subtle);
-      border-radius: 10px;
-      width: 44px;
-      height: 44px;
-      padding: 11px 9px;
-      cursor: pointer;
-      flex-direction: column;
-      justify-content: space-around;
-      align-items: center;
-      transition: var(--transition-smooth);
-      z-index: 102;
-    }
-
-    .menu-toggle:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: var(--border-bright);
-    }
-
-    .hamburger-bar {
-      width: 22px;
-      height: 2px;
-      background: #ffffff;
-      border-radius: 99px;
-      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      transform-origin: center;
-    }
-
-    .menu-toggle.active .hamburger-bar:nth-child(1) {
-      transform: translateY(7px) rotate(45deg);
-      background: var(--accent-blue);
-    }
-    .menu-toggle.active .hamburger-bar:nth-child(2) {
-      opacity: 0;
-      transform: scaleX(0);
-    }
-    .menu-toggle.active .hamburger-bar:nth-child(3) {
-      transform: translateY(-7px) rotate(-45deg);
-      background: var(--accent-blue);
-    }
-
-    /* Mobile Navigation Drawer */
-    .mobile-drawer {
-      position: fixed;
-      top: 76px;
-      left: 0;
-      right: 0;
-      background: rgba(9, 13, 22, 0.98);
-      backdrop-filter: blur(24px);
-      -webkit-backdrop-filter: blur(24px);
-      border-bottom: 1px solid var(--border-bright);
-      padding: 24px 20px 32px;
-      display: flex;
-      flex-direction: column;
-      gap: 20px;
-      transform: translateY(-120%);
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-      z-index: 9999;
-      box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(56, 189, 248, 0.15);
-      max-height: calc(100vh - 76px);
-      overflow-y: auto;
-    }
-
-    .mobile-drawer.active {
-      transform: translateY(0);
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    .mobile-nav-links {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .mobile-nav-links a {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 18px;
-      border-radius: 12px;
-      color: var(--text-main);
-      text-decoration: none;
-      font-size: 1.05rem;
-      font-weight: 700;
-      letter-spacing: -0.01em;
-      transition: var(--transition-smooth);
-      background: rgba(255, 255, 255, 0.02);
-      border: 1px solid transparent;
-      min-height: 48px;
-    }
-
-    .mobile-nav-links a:hover,
-    .mobile-nav-links a:active {
-      background: rgba(56, 189, 248, 0.1);
-      border-color: var(--border-bright);
-      color: var(--accent-blue);
-      padding-left: 22px;
-    }
-
-    .mobile-drawer-footer {
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      padding-top: 14px;
-      border-top: 1px solid var(--border-subtle);
-    }
-
-    .mobile-backdrop {
-      position: fixed;
-      inset: 0;
-      top: 76px;
-      background: rgba(0, 0, 0, 0.7);
-      backdrop-filter: blur(4px);
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.3s ease;
-      z-index: 9998;
-    }
-
-    .mobile-backdrop.active {
-      opacity: 1;
-      pointer-events: auto;
-    }
-
-    body.no-scroll {
-      overflow: hidden;
-    }
-
-    .table-scroll-hint {
-      display: none;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.8rem;
-      color: var(--accent-blue);
-      margin-bottom: 10px;
-      font-family: var(--font-mono);
-    }
-
-    /* ==========================================================================
-       RESPONSIVE BREAKPOINTS (Fluid Typography & Mobile-First Tuning)
-       ========================================================================== */
-    @media (max-width: 992px) {
-      .container {
-        padding: 0 20px;
-      }
-      .section-spacing {
-        padding: 70px 0;
-      }
-      .pricing-grid {
-        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-        gap: 22px;
-      }
-      .local-guarantee-box {
-        flex-direction: column;
-        text-align: center;
-        padding: 24px 20px;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .nav-links {
-        display: none !important;
-      }
-      .btn-header {
-        display: none !important;
-      }
-      .menu-toggle {
-        display: flex !important;
-      }
-      .hero {
-        padding: 50px 0 35px;
-      }
-      .hero-title {
-        font-size: clamp(2rem, 7vw, 2.9rem);
-        margin-bottom: 16px;
-      }
-      .hero-subtitle {
-        font-size: 1rem;
-        margin-bottom: 28px;
-      }
-      .trust-badges {
-        gap: 16px;
-      }
-      .form-grid {
-        grid-template-columns: 1fr;
-      }
-      .form-full {
-        grid-column: span 1;
-      }
-      .form-wrapper {
-        padding: 30px 20px;
-      }
-      .comparison-table-desktop {
-        display: none !important;
-      }
-      .comparison-cards-mobile {
-        display: flex !important;
-        flex-direction: column;
-        gap: 16px;
-        width: 100%;
-      }
-      .ambient-glow-1 {
-        width: 100vw;
-        height: 350px;
-        filter: blur(60px);
-      }
-      .ambient-glow-2 {
-        display: none !important;
-      }
-    }
-
-        @media (max-width: 600px) {
-      .container {
-        padding: 0 16px;
-      }
-      .nav-wrapper {
-        height: 68px;
-      }
-      .mobile-drawer,
-      .mobile-backdrop {
-        top: 68px;
-      }
-      .brand-logo {
-        gap: 10px;
-      }
-      .brand-logo span {
-        font-size: 1.1rem;
-        font-weight: 800;
-      }
-      .brand-logo-img {
-        width: 40px;
-        height: 40px;
-      }
-      .hero {
-        padding: 36px 0 30px;
-      }
-      .eyebrow-badge {
-        font-size: 0.74rem;
-        padding: 5px 14px;
-        letter-spacing: 0.02em;
-        margin-bottom: 18px;
-        max-width: 100%;
-        text-align: center;
-      }
-      .hero-title {
-        font-size: clamp(2rem, 7.8vw, 2.7rem);
-        line-height: 1.15;
-        margin-bottom: 16px;
-      }
-      .hero-subtitle {
-        font-size: 0.98rem;
-        line-height: 1.6;
-        color: #cbd5e1;
-        margin-bottom: 24px;
-      }
-      .hero-actions {
-        flex-direction: column;
-        width: 100%;
-        max-width: 360px;
-        margin: 0 auto 24px;
-        gap: 11px;
-      }
-      .hero-actions .btn {
-        width: 100%;
-        justify-content: center;
-        min-height: 50px;
-        font-size: 0.95rem;
-        border-radius: 12px;
-      }
-      .trust-badges {
-        flex-direction: row;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: center;
-        gap: 8px 10px;
-        margin: 0 auto 32px;
-        padding: 0;
-      }
-      .trust-item {
-        font-size: 0.78rem;
-        padding: 5px 12px;
-      }
-      .hero-preview {
-        margin-top: 10px;
-        border-radius: 14px;
-      }
-      .browser-header {
-        padding: 10px 14px;
-        flex-direction: column;
-        align-items: center;
-        gap: 6px;
-      }
-      .browser-url {
-        font-size: 0.68rem;
-        width: 100%;
-        padding: 5px 12px;
-        border-radius: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 6px;
-      }
-      .browser-content {
-        grid-template-columns: repeat(2, 1fr);
-        gap: 10px;
-        padding: 14px;
-      }
-      .metric-pill {
-        padding: 12px 8px;
-        border-radius: 10px;
-      }
-      .metric-pill .score {
-        font-size: 1.5rem;
-      }
-      .metric-pill .label {
-        font-size: 0.7rem;
-      }
-      .pricing-grid {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-      .pricing-card {
-        padding: 26px 18px;
-        border-radius: 16px;
-      }
-      .price-amount {
-        font-size: 2.1rem;
-      }
-      .town-pills {
-        gap: 8px;
-      }
-      .town-pill {
-        padding: 7px 13px;
-        font-size: 0.8rem;
-      }
-      .form-wrapper {
-        padding: 24px 16px;
-        border-radius: 18px;
-      }
-      .form-group input,
-      .form-group select,
-      .form-group textarea {
-        font-size: 16px !important;
-        min-height: 48px;
-        padding: 12px 14px;
-      }
-      .footer-top {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 16px;
-      }
-      .footer-links {
-        gap: 12px 18px;
-      }
-      .footer-appreciation {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 14px;
-        padding: 16px;
-      }
-      .appreciation-actions {
-        width: 100%;
-        flex-direction: column;
-        align-items: stretch;
-      }
-      .appreciation-actions a {
-        justify-content: center;
-        width: 100%;
-      }
-      .footer-bottom {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 12px;
-      }
-    }
-
-    @media (max-width: 480px) {
-      .hero-actions {
-        flex-direction: column;
-        width: 100%;
-        gap: 12px;
-      }
-      .hero-actions .btn {
-        width: 100%;
-        justify-content: center;
-        min-height: 48px;
-      }
-      /* trust badges centered */
-      .trust-item {
-        font-size: 0.85rem;
-      }
-      .brand-logo span {
-        font-size: 1.02rem;
-      }
-    }
-
-    /* Refined Trust Pills & Browser HUD */
-    .trust-badges {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px 14px;
-      flex-wrap: wrap;
-      padding: 0;
-      margin: 0 auto 40px;
-      border: none;
-      max-width: 720px;
-    }
-
-    .trust-item {
-      background: rgba(17, 24, 39, 0.7);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 9999px;
-      padding: 6px 14px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      color: #e2e8f0;
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
-      backdrop-filter: blur(8px);
-    }
-
-    .trust-item-link {
-      text-decoration: none;
-      transition: all 0.2s ease;
-      cursor: pointer;
-    }
-
-    .trust-item-link:hover {
-      border-color: rgba(251, 188, 4, 0.45);
-      background: rgba(30, 41, 59, 0.9);
-      color: #fff;
-      transform: translateY(-1px);
-      box-shadow: 0 0 15px rgba(251, 188, 4, 0.25);
-    }
-
-    .browser-header-top {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      margin-bottom: 8px;
-    }
-
-    .browser-status-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 0.72rem;
-      font-weight: 700;
-      color: var(--accent-emerald);
-      background: rgba(16, 185, 129, 0.1);
-      border: 1px solid rgba(16, 185, 129, 0.25);
-      padding: 3px 9px;
-      border-radius: 999px;
-      font-family: var(--font-mono);
-    }
-
-    .status-pulse-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--accent-emerald);
-      box-shadow: 0 0 8px var(--accent-emerald);
-      animation: pulse 2s infinite;
-    }
-
-    .hero-subtitle {
-      color: #cbd5e1;
-      font-size: 1.05rem;
-      line-height: 1.65;
-    }
-
-
-    /* ==========================================================================
-       CASE STUDIES & PORTFOLIO SECTION
-       ========================================================================== */
-    .portfolio-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 36px;
-      margin-top: 20px;
-    }
-    .portfolio-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border-subtle);
-      border-radius: 20px;
-      padding: 40px;
-      position: relative;
-      overflow: hidden;
-      backdrop-filter: var(--glass-filter);
-      transition: var(--transition-smooth);
-    }
-    .portfolio-card:hover {
-      border-color: var(--border-bright);
-      transform: translateY(-4px);
-      box-shadow: 0 20px 40px -15px rgba(0, 242, 254, 0.15);
-    }
-    .portfolio-card::before {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--accent-cyan), var(--accent-blue), var(--accent-emerald));
-    }
-    .portfolio-badge-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 20px;
-      align-items: center;
-    }
-    .portfolio-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: 100px;
-      font-size: 0.78rem;
-      font-family: var(--font-mono);
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .badge-live {
-      background: rgba(16, 185, 129, 0.15);
-      border: 1px solid rgba(16, 185, 129, 0.4);
-      color: #34d399;
-    }
-    .badge-metric {
-      background: rgba(56, 189, 248, 0.12);
-      border: 1px solid rgba(56, 189, 248, 0.3);
-      color: var(--accent-blue);
-    }
-    .badge-a11y {
-      background: rgba(245, 158, 11, 0.15);
-      border: 1px solid rgba(245, 158, 11, 0.4);
-      color: #fbbf24;
-    }
-    .portfolio-metrics-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      margin: 28px 0;
-    }
-    .portfolio-metric-box {
-      background: rgba(15, 23, 42, 0.6);
-      border: 1px solid rgba(255, 255, 255, 0.06);
-      border-radius: 12px;
-      padding: 16px 20px;
-    }
-    .portfolio-metric-val {
-      font-family: var(--font-mono);
-      font-size: 1.6rem;
-      font-weight: 800;
-      color: var(--text-main);
-      display: flex;
-      align-items: baseline;
-      gap: 4px;
-    }
-    .portfolio-metric-label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    .portfolio-features-list {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin-bottom: 30px;
-    }
-    .portfolio-feat-item {
-      display: flex;
-      gap: 14px;
-      align-items: flex-start;
-    }
-    .portfolio-feat-icon {
-      flex-shrink: 0;
-      width: 32px;
-      height: 32px;
-      border-radius: 8px;
-      background: rgba(0, 242, 254, 0.1);
-      border: 1px solid rgba(0, 242, 254, 0.25);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--accent-cyan);
-      margin-top: 2px;
-    }
-    .portfolio-feat-title {
-      font-weight: 700;
-      font-size: 0.95rem;
-      color: var(--text-main);
-      margin-bottom: 4px;
-    }
-    .portfolio-feat-desc {
-      font-size: 0.85rem;
-      color: var(--text-muted);
-      line-height: 1.5;
-    }
-    @media (max-width: 768px) {
-      .portfolio-card {
-        padding: 24px 18px;
-      }
-      .portfolio-metrics-grid {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "name": "Durham Web Design",
+    "url": "https://durhamweb.design/",
+    "logo": "https://durhamweb.design/assets/images/logo.png",
+    "email": "epicexpressions2021@gmail.com",
+    "priceRange": "$$",
+    "currenciesAccepted": "CAD",
+    "areaServed": ["Oshawa","Whitby","Ajax","Pickering","Bowmanville","Courtice","Brooklin","Durham Region"],
+    "address": { "@type": "PostalAddress", "addressRegion": "ON", "addressCountry": "CA" }
+  }
+  </script>
+
+  <script>
+    // Apply saved theme before paint (avoids a flash). Storage can be unavailable, so guard it.
+    (function () {
+      try {
+        var t = localStorage.getItem('dwd-theme');
+        if (t === 'light' || t === 'dark') document.documentElement.setAttribute('data-theme', t);
+      } catch (e) {}
+    })();
+  </script>
+
+    <link rel="stylesheet" href="/assets/css/site.css">
 </head>
-<body>
+<body class="no-js">
+  <a class="skip" href="#main">Skip to content</a>
 
-  <!-- Ambient Glow Backgrounds -->
-  <div class="ambient-glow-wrapper">
-    <div class="ambient-glow-1"></div>
-    <div class="ambient-glow-2"></div>
-  </div>
+  <!-- SVG icon sprite -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <defs>
+      <symbol id="i-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></symbol>
+      <symbol id="i-x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+      <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7l1-8Z"/></symbol>
+      <symbol id="i-code" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m8 7-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/></symbol>
+      <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 3 4 6v6c0 4.5 3.4 8.3 8 9 4.6-.7 8-4.5 8-9V6l-8-3Z"/><path d="m9 12 2 2 4-4"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M12 22s7-6.1 7-12a7 7 0 1 0-14 0c0 5.9 7 12 7 12Z"/><circle cx="12" cy="10" r="2.5"/></symbol>
+      <symbol id="i-dollar" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 2v20M17 6.5C16 5 14.2 4.5 12 4.5c-2.8 0-5 1.3-5 3.7 0 5.3 10 2.7 10 8 0 2.4-2.2 3.8-5 3.8-2.4 0-4.4-.8-5.3-2.5"/></symbol>
+      <symbol id="i-layout" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2.5"/><path d="M3 9h18M9 9v11"/></symbol>
+      <symbol id="i-server" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="4" width="18" height="7" rx="2"/><rect x="3" y="13" width="18" height="7" rx="2"/><path d="M7 7.5h.01M7 16.5h.01" stroke-linecap="round" stroke-width="3"/></symbol>
+      <symbol id="i-gauge" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 18a8 8 0 1 1 16 0"/><path d="m12 18 4-6"/></symbol>
+      <symbol id="i-card" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="2.5" y="5" width="19" height="14" rx="2.5"/><path d="M2.5 10h19M6.5 15h4" stroke-linecap="round"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="m4 7 8 6 8-6"/></symbol>
+      <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><rect x="3" y="5" width="18" height="16" rx="2.5"/><path d="M3 10h18M8 3v4M16 3v4" stroke-linecap="round"/></symbol>
+      <symbol id="i-star" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="m12 3 2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+      <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    </defs>
+  </svg>
 
-  <!-- 1. STICKY HEADER -->
-  <header>
-    <div class="container">
-      <nav class="nav-wrapper">
-        <a href="#" class="brand-logo">
-          <img src="assets/images/logo.png" alt="Durham Web Design Logo" class="brand-logo-img" width="44" height="44">
-          <span>Durham Web Design</span>
-        </a>
+  <header class="site-header" id="top">
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Durham Web Design home">
+        <img src="/assets/images/logo-160.png" alt="" width="40" height="40">
+        <span>Durham Web Design</span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#pricing">Pricing</a></li>
+        <li><a href="#process">How it works</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch colour theme">
+          <svg class="theme-moon"><use href="#i-moon"/></svg>
+          <svg class="theme-sun"><use href="#i-sun"/></svg>
+        </button>
+        <a class="btn btn-primary btn-cta" href="#contact">Get a free quote</a>
+        <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileNav">
+          <svg><use href="#i-menu"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav class="mobile-nav" id="mobileNav" data-open="false" aria-label="Mobile">
+      <a href="#services">Services <span>&rarr;</span></a>
+      <a href="#work">Work <span>&rarr;</span></a>
+      <a href="#pricing">Pricing <span>&rarr;</span></a>
+      <a href="#process">How it works <span>&rarr;</span></a>
+      <a href="#faq">FAQ <span>&rarr;</span></a>
+      <a href="/audit/">Free website check <span>&rarr;</span></a>
+      <a href="/support/">Client support <span>&rarr;</span></a>
+      <a class="btn btn-primary" href="#contact">Get a free quote</a>
+    </nav>
+  </header>
 
-        <ul class="nav-links">
-          <li><a href="#comparison">Why Us</a></li>
-          <li><a href="#portfolio">Case Studies</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="/audit" class="nav-link">⚡ Free Audit</a></li>
-          <li><a href="/support" class="nav-link" style="color: var(--accent-cyan);">🎫 Support</a></li>
-          <li><a href="#regional">Durham Footprint</a></li>
-          <li><a href="#contact">Contact</a></li>
+  <main id="main">
+
+    <!-- HERO -->
+    <section class="hero">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Web design &middot; Durham Region, Ontario</div>
+          <h1>Websites that load fast and bring in <span class="grad">local customers.</span></h1>
+          <p class="lead">I build custom websites for small businesses in Oshawa, Whitby, Ajax, Pickering and across Durham Region, then look after them once they're live. You deal with the developer directly, from the first coffee to launch day and beyond.</p>
+          <div class="hero-ctas">
+            <a class="btn btn-primary" href="#contact">Get a free quote <svg class="arrow" width="18" height="18"><use href="#i-arrow"/></svg></a>
+            <a class="btn btn-ghost" href="#pricing">See pricing</a>
+          </div>
+          <ul class="hero-points">
+            <li><svg><use href="#i-check"/></svg>Fixed prices in CAD</li>
+            <li><svg><use href="#i-check"/></svg>Hosting &amp; care included</li>
+            <li><svg><use href="#i-check"/></svg>No page-builder bloat</li>
+          </ul>
+        </div>
+
+        <aside class="proof reveal" aria-label="Recent project at a glance">
+          <div class="proof-bar">
+            <i></i><i></i><i></i>
+            <div class="proof-url">gmsalariedretirees.com</div>
+          </div>
+          <div class="proof-body">
+            <div class="proof-label">Recent project</div>
+            <div class="proof-title">GM Salaried Retirees Association</div>
+            <div class="proof-stats">
+              <div class="stat"><b>~0.3s</b><span>Page response time</span></div>
+              <div class="stat"><b>5</b><span>Custom-built pages</span></div>
+              <div class="stat"><b>18px</b><span>Desktop body text, sized for older readers</span></div>
+              <div class="stat"><b>0</b><span>Plugins to patch</span></div>
+            </div>
+            <div class="proof-foot"><span class="pulse" aria-hidden="true"></span>Live, and maintained by Durham Web Design</div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <!-- STRIP -->
+    <div class="strip">
+      <div class="wrap">
+        <ul>
+          <li><svg><use href="#i-code"/></svg><div><b>Hand-built code</b>No templates or heavy page builders</div></li>
+          <li><svg><use href="#i-server"/></svg><div><b>Managed hosting</b>On a dedicated cloud server, not shared hosting</div></li>
+          <li><svg><use href="#i-dollar"/></svg><div><b>Clear CAD pricing</b>Fixed setup price + monthly care, plus HST</div></li>
+          <li><svg><use href="#i-pin"/></svg><div><b>Local &amp; direct</b>Based in Durham Region, no ticket queues</div></li>
         </ul>
-
-        <div style="display: flex; gap: 12px; align-items: center;">
-          <a href="#contact" class="btn btn-primary btn-header" style="padding: 10px 20px; font-size: 0.88rem;">Get a Proposal</a>
-          
-          <!-- Accessible Mobile Hamburger Button -->
-          <button class="menu-toggle" id="menuToggle" aria-label="Toggle Navigation" onclick="toggleMobileNav()">
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-            <span class="hamburger-bar"></span>
-          </button>
-        </div>
-      </nav>
-    </div>
-
-    </header>
-
-  <!-- Mobile Navigation Drawer (Moved outside header for position:fixed accuracy) -->
-  <div class="mobile-drawer" id="mobileDrawer">
-    <ul class="mobile-nav-links">
-      <li><a href="/audit" onclick="closeMobileNav()"><span style="color:var(--accent-cyan);">⚡ Free Speed Audit</span> <span>&rarr;</span></a></li>
-      <li><a href="/support" onclick="closeMobileNav()"><span style="color:#a855f7;">🎫 Client Support Portal</span> <span>&rarr;</span></a></li>
-      <li><a href="#comparison" onclick="closeMobileNav()"><span>Why Us</span> <span>&rarr;</span></a></li>
-      <li><a href="#portfolio" onclick="closeMobileNav()"><span>Featured Work</span> <span>&rarr;</span></a></li>
-      <li><a href="#pricing" onclick="closeMobileNav()"><span>Pricing (CAD)</span> <span>&rarr;</span></a></li>
-      <li><a href="#regional" onclick="closeMobileNav()"><span>Durham Footprint</span> <span>&rarr;</span></a></li>
-      <li><a href="#contact" onclick="closeMobileNav()"><span>Contact &amp; Proposals</span> <span>&rarr;</span></a></li>
-      <li><a href="https://billing.stripe.com/p/login/dRm3cveMn0wIfMi17rd7q00" target="_blank" rel="noopener noreferrer" onclick="closeMobileNav()"><span>Client Billing Portal</span> <span>&rarr;</span></a></li>
-      <li><a href="https://g.page/r/CSfgP1VMcxkOEBM/review" target="_blank" rel="noopener noreferrer" onclick="closeMobileNav()"><span>⭐ Google Reviews</span> <span>&rarr;</span></a></li>
-      <li><a href="https://buy.stripe.com/aFa7sK6fI0Sz9bl8OYbZe09" target="_blank" rel="noopener noreferrer" onclick="closeMobileNav()"><span>☕ Buy the Engineer a Coffee</span> <span>&rarr;</span></a></li>
-    </ul>
-    <div class="mobile-drawer-footer">
-      <a href="#contact" class="btn btn-primary btn-full" onclick="closeMobileNav()">Request a Custom Proposal &rarr;</a>
-      <div style="font-size: 0.78rem; color: var(--accent-blue); text-align: center; font-family: var(--font-mono);">
-        ⚡ Dedicated Canadian Cloud Hosting &bull; Sub-Second GTA Ping
       </div>
     </div>
-  </div>
-  <div class="mobile-backdrop" id="mobileBackdrop" onclick="closeMobileNav()"></div>
 
-  <!-- 2. HERO SECTION -->
-  <section class="hero">
-    <div class="container">
-      <div class="eyebrow-badge">
-        <span class="eyebrow-dot"></span>
-        <span>Local Web Design &bull; Dedicated Cloud Hosting</span>
-      </div>
-
-      <h1 class="hero-title">
-        Fast, Modern Websites Built to Grow <span class="gradient-text">Durham Region Businesses.</span>
-      </h1>
-
-      <p class="hero-subtitle">
-        We design high-converting websites for businesses across Oshawa, Whitby, Ajax, Pickering, and Bowmanville. No bloated templates, no slow shared hosting—just bespoke design and dedicated Canadian cloud performance.
-      </p>
-
-      <div class="hero-actions">
-        <a href="#contact" class="btn btn-primary">
-          <span>Get a Free Proposal</span>
-          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"/></svg>
-        </a>
-        <a href="#pricing" class="btn btn-secondary">View Pricing (CAD)</a>
-      </div>
-
-      <!-- Centered Sleek Trust Badges -->
-      <div class="trust-badges">
-        <a href="https://g.page/r/CSfgP1VMcxkOEBM/review" target="_blank" rel="noopener noreferrer" class="trust-item trust-item-link" title="Review Durham Web Design on Google">
-          <span style="color: #fbbc04; letter-spacing: 1px;">★★★★★</span>
-          <span>5.0 Google Reviews</span>
-        </a>
-        <div class="trust-item">
-          <span>🍁</span>
-          <span>100% Canadian Operated</span>
+    <!-- SERVICES -->
+    <section id="services">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow">What I do</div>
+          <h2>Everything your business needs to look good online, and stay that way.</h2>
+          <p class="lead">One person, start to finish: design, build, hosting and the small fixes that come up after launch.</p>
         </div>
-        <div class="trust-item">
-          <span>⚡</span>
-          <span>Sub-Second Page Loads</span>
-        </div>
-        <div class="trust-item">
-          <span>🔒</span>
-          <span>Fully Managed Cloud</span>
+        <div class="cards">
+          <article class="card reveal">
+            <div class="ico"><svg><use href="#i-layout"/></svg></div>
+            <h3>New websites</h3>
+            <p>A custom design built around your business, not a template. Mobile-first, quick to load, and written so customers understand what you do and how to reach you.</p>
+          </article>
+          <article class="card reveal">
+            <div class="ico"><svg><use href="#i-gauge"/></svg></div>
+            <h3>Redesigns &amp; speed fixes</h3>
+            <p>Old, slow or broken site? I'll rebuild it or move it to faster hosting, keep what's working, and fix what isn't. Start with a <a href="/audit/">free website check</a>.</p>
+          </article>
+          <article class="card reveal">
+            <div class="ico"><svg><use href="#i-card"/></svg></div>
+            <h3>Payments, bookings &amp; forms</h3>
+            <p>Quote request forms that land in your inbox, online booking, and card payments through Stripe, for deposits, memberships or a small online store.</p>
+          </article>
+          <article class="card reveal">
+            <div class="ico"><svg><use href="#i-shield"/></svg></div>
+            <h3>Hosting &amp; ongoing care</h3>
+            <p>Your monthly care plan covers hosting, the SSL certificate, security updates, nightly backups and fixes. When something needs changing, you message me directly.</p>
+          </article>
         </div>
       </div>
+    </section>
 
-      <!-- Real-Time Performance Preview (Cockpit HUD) -->
-      <div class="hero-preview">
-        <div class="browser-header">
-          <div class="browser-header-top">
-            <div class="window-dots">
-              <div class="window-dot dot-red"></div>
-              <div class="window-dot dot-yellow"></div>
-              <div class="window-dot dot-green"></div>
-            </div>
-            <div class="browser-status-badge">
-              <span class="status-pulse-dot"></span>
-              <span>Online 99.99%</span>
-            </div>
-          </div>
-          <div class="browser-url">
-            <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-            <span>durhamweb.design &bull; Toronto Cloud Edge</span>
-          </div>
+    <!-- COMPARE -->
+    <section class="compare-wrap" id="why">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow">Why it's different</div>
+          <h2>Built properly, then looked after.</h2>
+          <p class="lead">DIY builders and cheap shared hosting are fine to get started. Here's what you get when someone builds and runs the site for you.</p>
         </div>
-        <div class="browser-content">
-          <div class="metric-pill">
-            <div class="score">100</div>
-            <div class="label">Google Speed</div>
+        <div class="compare">
+          <div class="compare-col them reveal">
+            <h3><span class="tag">Typical DIY / shared hosting</span></h3>
+            <ul>
+              <li><svg><use href="#i-x"/></svg>Template look shared with thousands of other sites</li>
+              <li><svg><use href="#i-x"/></svg>Plugins and page builders that slow pages down and need constant updates</li>
+              <li><svg><use href="#i-x"/></svg>Crowded shared servers, where someone else's busy site slows yours</li>
+              <li><svg><use href="#i-x"/></svg>Support through a ticket queue, often overseas</li>
+              <li><svg><use href="#i-x"/></svg>Low intro prices in USD that jump at renewal</li>
+            </ul>
           </div>
-          <div class="metric-pill">
-            <div class="score">&lt;0.6s</div>
-            <div class="label">Toronto / GTA Ping</div>
-          </div>
-          <div class="metric-pill">
-            <div class="score">100%</div>
-            <div class="label">Mobile Responsive</div>
-          </div>
-          <div class="metric-pill">
-            <div class="score">0</div>
-            <div class="label">Bloated Plugins</div>
+          <div class="compare-col us reveal">
+            <h3><span class="tag">Durham Web Design</span></h3>
+            <ul>
+              <li><svg><use href="#i-check"/></svg>A custom design made for your business and your customers</li>
+              <li><svg><use href="#i-check"/></svg>Lean, hand-written code: fast pages and less to break</li>
+              <li><svg><use href="#i-check"/></svg>Hosted on a dedicated cloud server that I manage</li>
+              <li><svg><use href="#i-check"/></svg>You talk to the person who built your site, by email, call or in person</li>
+              <li><svg><use href="#i-check"/></svg>Fixed prices in Canadian dollars, with HST shown up front</li>
+            </ul>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 3. PROBLEM VS. SOLUTION COMPARISON -->
-  <section id="comparison" class="section-spacing">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-eyebrow">The Engineering Difference</span>
-        <h2 class="section-title">Why Durham Businesses Leave Legacy Hosting</h2>
-        <p class="section-desc">
-          Compare traditional cheap shared hosting with our custom, enterprise-grade cloud architecture built for conversion.
-        </p>
-      </div>
-
-      <!-- Desktop Comparison Table (Visible >= 769px) -->
-      <div class="comparison-table-desktop">
-        <div class="table-container">
-          <table class="comparison-table">
-            <thead>
-              <tr>
-                <th>Feature / Standard</th>
-                <th>Typical Legacy / Shared Hosting</th>
-                <th class="highlight-col">The Durham Web Design Standard</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td><strong>Page Load Velocity</strong></td>
-                <td><span class="tag-bad">✕ Sluggish 4+ second loads</span> (losing 40% of mobile visitors)</td>
-                <td class="highlight-col"><span class="tag-good">✓ Sub-second load times</span> (Google Core Web Vitals optimized)</td>
-              </tr>
-              <tr>
-                <td><strong>Server Infrastructure</strong></td>
-                <td><span class="tag-bad">✕ Crowded shared servers</span> (noisy neighbors & slow CPU)</td>
-                <td class="highlight-col"><span class="tag-good">✓ Dedicated Cloud VPS</span> with NVMe drives & Toronto CDN edge</td>
-              </tr>
-              <tr>
-                <td><strong>Code & CMS Architecture</strong></td>
-                <td><span class="tag-bad">✕ 35+ unvetted WordPress plugins</span> prone to conflicts & hacks</td>
-                <td class="highlight-col"><span class="tag-good">✓ Custom lightweight code</span>, zero bloat, ironclad security</td>
-              </tr>
-              <tr>
-                <td><strong>Backups & Disaster Recovery</strong></td>
-                <td><span class="tag-bad">✕ No automatic backups</span> or steep restoration fees</td>
-                <td class="highlight-col"><span class="tag-good">✓ Automated daily offsite backups</span> & point-in-time recovery</td>
-              </tr>
-              <tr>
-                <td><strong>Support & Accountability</strong></td>
-                <td><span class="tag-bad">✕ Overseas tier-1 support</span> with 48-hour ticket queues</td>
-                <td class="highlight-col"><span class="tag-good">✓ Direct Durham-based engineers</span>, local phone & email support</td>
-              </tr>
-              <tr>
-                <td><strong>Pricing Transparency</strong></td>
-                <td><span class="tag-bad">✕ US Dollar conversion surprises</span> & 300% renewal spikes</td>
-                <td class="highlight-col"><span class="tag-good">✓ Fixed Canadian Dollars (CAD)</span> + clear Ontario HST breakdown</td>
-              </tr>
-            </tbody>
-          </table>
+    <!-- CASE STUDY -->
+    <section id="work">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow">Recent work</div>
+          <h2>A website built for its members.</h2>
         </div>
-      </div>
-
-      <!-- Mobile Comparison Cards Stack (Visible <= 768px) -->
-      <div class="comparison-cards-mobile">
-        <!-- 1. Page Load Velocity -->
-        <div class="comp-card-mobile">
-          <div class="comp-card-header">
-            <span class="comp-feature-name">Page Load Velocity</span>
-            <span class="comp-feature-badge">SPEED</span>
-          </div>
-          <div class="comp-row comp-row-legacy">
-            <div class="comp-label-bad">✕ Typical Shared Hosting</div>
-            <div class="comp-text-bad">Sluggish 4+ second loads (losing 40% of mobile visitors)</div>
-          </div>
-          <div class="comp-row comp-row-dwd">
-            <div class="comp-label-good">✓ The Durham Web Design Standard</div>
-            <div class="comp-text-good">Sub-second load times (Google Core Web Vitals optimized)</div>
-          </div>
-        </div>
-
-        <!-- 2. Server Infrastructure -->
-        <div class="comp-card-mobile">
-          <div class="comp-card-header">
-            <span class="comp-feature-name">Server Infrastructure</span>
-            <span class="comp-feature-badge">HOSTING</span>
-          </div>
-          <div class="comp-row comp-row-legacy">
-            <div class="comp-label-bad">✕ Typical Shared Hosting</div>
-            <div class="comp-text-bad">Crowded shared servers (noisy neighbors & slow CPU)</div>
-          </div>
-          <div class="comp-row comp-row-dwd">
-            <div class="comp-label-good">✓ The Durham Web Design Standard</div>
-            <div class="comp-text-good">Dedicated Cloud VPS with NVMe drives & Toronto CDN edge</div>
-          </div>
-        </div>
-
-        <!-- 3. Code & CMS Architecture -->
-        <div class="comp-card-mobile">
-          <div class="comp-card-header">
-            <span class="comp-feature-name">Code & CMS Architecture</span>
-            <span class="comp-feature-badge">CODEBASE</span>
-          </div>
-          <div class="comp-row comp-row-legacy">
-            <div class="comp-label-bad">✕ Typical Shared Hosting</div>
-            <div class="comp-text-bad">35+ unvetted WordPress plugins prone to conflicts & hacks</div>
-          </div>
-          <div class="comp-row comp-row-dwd">
-            <div class="comp-label-good">✓ The Durham Web Design Standard</div>
-            <div class="comp-text-good">Custom lightweight code, zero bloat, ironclad security</div>
-          </div>
-        </div>
-
-        <!-- 4. Backups & Disaster Recovery -->
-        <div class="comp-card-mobile">
-          <div class="comp-card-header">
-            <span class="comp-feature-name">Backups & Disaster Recovery</span>
-            <span class="comp-feature-badge">SECURITY</span>
-          </div>
-          <div class="comp-row comp-row-legacy">
-            <div class="comp-label-bad">✕ Typical Shared Hosting</div>
-            <div class="comp-text-bad">No automatic backups or steep restoration fees</div>
-          </div>
-          <div class="comp-row comp-row-dwd">
-            <div class="comp-label-good">✓ The Durham Web Design Standard</div>
-            <div class="comp-text-good">Automated daily offsite backups & point-in-time recovery</div>
-          </div>
-        </div>
-
-        <!-- 5. Support & Accountability -->
-        <div class="comp-card-mobile">
-          <div class="comp-card-header">
-            <span class="comp-feature-name">Support & Accountability</span>
-            <span class="comp-feature-badge">SUPPORT</span>
-          </div>
-          <div class="comp-row comp-row-legacy">
-            <div class="comp-label-bad">✕ Typical Shared Hosting</div>
-            <div class="comp-text-bad">Overseas tier-1 support with 48-hour ticket queues</div>
-          </div>
-          <div class="comp-row comp-row-dwd">
-            <div class="comp-label-good">✓ The Durham Web Design Standard</div>
-            <div class="comp-text-good">Direct Durham-based engineers, local phone & email support</div>
-          </div>
-        </div>
-
-        <!-- 6. Pricing Transparency -->
-        <div class="comp-card-mobile">
-          <div class="comp-card-header">
-            <span class="comp-feature-name">Pricing Transparency</span>
-            <span class="comp-feature-badge">PRICING</span>
-          </div>
-          <div class="comp-row comp-row-legacy">
-            <div class="comp-label-bad">✕ Typical Shared Hosting</div>
-            <div class="comp-text-bad">US Dollar conversion surprises & 300% renewal spikes</div>
-          </div>
-          <div class="comp-row comp-row-dwd">
-            <div class="comp-label-good">✓ The Durham Web Design Standard</div>
-            <div class="comp-text-good">Fixed Canadian Dollars (CAD) + clear Ontario HST breakdown</div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 3.5 FEATURED ENGINEERING & LIVE CASE STUDIES -->
-  <section id="portfolio" class="section-spacing">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-eyebrow">Proven in Production</span>
-        <h2 class="section-title">Featured Engineering &amp; Live Case Studies</h2>
-        <p class="section-desc">
-          Real-world digital infrastructure engineered right here in Ontario. See how our high-performance architecture delivers sub-second speeds, senior-accessible readability, and seamless member operations for leading Canadian organizations.
-        </p>
-      </div>
-
-      <div class="portfolio-grid">
-        <!-- Flagship Live Case Study: GMSRA -->
-        <article class="portfolio-card">
-          <div class="portfolio-badge-row">
-            <span class="portfolio-badge badge-live">
-              <span class="pulse-dot" style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#34d399;margin-right:2px;box-shadow:0 0 8px #34d399;"></span>
-              Live Production
-            </span>
-            <span class="portfolio-badge badge-metric">⚡ Sub-Second Load Speed</span>
-            <span class="portfolio-badge badge-a11y">♿ WCAG AAA Accessible</span>
-            <span class="portfolio-badge badge-metric">📰 Automated PDF Archives</span>
-          </div>
-
-          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 16px; margin-bottom: 12px;">
+        <article class="case reveal">
+          <div class="case-visual">
             <div>
-              <div style="font-size: 0.88rem; font-family: var(--font-mono); color: var(--accent-cyan); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px;">
-                Automotive Retiree Association &amp; Non-Profit Advocacy &bull; Oshawa, ON
-              </div>
-              <h3 style="font-size: clamp(1.4rem, 2.5vw, 1.85rem); font-weight: 800; color: var(--text-main); margin: 0;">
-                General Motors Salaried Retirees Association (GMSRA)
-              </h3>
+              <div class="kicker">Non-profit association &middot; Oshawa, ON</div>
+              <h3>General Motors Salaried Retirees Association</h3>
             </div>
-            <a href="https://gmsalariedretirees.com" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-sm" style="font-size: 0.88rem; padding: 10px 18px; text-decoration: none;">
-              <span>Explore Live Production Site &rarr;</span>
-            </a>
-          </div>
-
-          <p style="color: var(--text-muted); font-size: 0.98rem; line-height: 1.6; max-width: 900px; margin-top: 12px;">
-            The General Motors Salaried Retirees Association represents thousands of retired automotive professionals across Canada. Their legacy web presence suffered from sluggish load times, low visual contrast on mobile screens, and disjointed PDF distribution. Durham Web Design engineered a bespoke, secure web portal deployed on high-frequency Canadian cloud nodes—delivering instant page loads, crystal-clear readability for senior members, and automated digital newsletter delivery.
-          </p>
-
-          <!-- Core Production Benchmarks -->
-          <div class="portfolio-metrics-grid">
-            <div class="portfolio-metric-box">
-              <div class="portfolio-metric-val" style="color: #34d399;">0.28s</div>
-              <div class="portfolio-metric-label">TTFB GTA Edge Speed</div>
-            </div>
-            <div class="portfolio-metric-box">
-              <div class="portfolio-metric-val" style="color: var(--accent-cyan);">100/100</div>
-              <div class="portfolio-metric-label">Core Web Vitals</div>
-            </div>
-            <div class="portfolio-metric-box">
-              <div class="portfolio-metric-val" style="color: #fbbf24;">WCAG AAA</div>
-              <div class="portfolio-metric-label">Retiree Readability</div>
-            </div>
-            <div class="portfolio-metric-box">
-              <div class="portfolio-metric-val" style="color: var(--accent-blue);">100%</div>
-              <div class="portfolio-metric-label">Production Uptime</div>
+            <div class="case-metrics">
+              <div><b>~0.3s</b><span>Page response</span></div>
+              <div><b>Large</b><span>High-contrast, readable text</span></div>
+              <div><b>Auto</b><span>Events synced from their calendar</span></div>
+              <div><b>Online</b><span>Membership applications</span></div>
             </div>
           </div>
-
-          <!-- Technical Architecture Highlights -->
-          <div class="portfolio-features-list">
-            <div class="portfolio-feat-item">
-              <div class="portfolio-feat-icon">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-              </div>
-              <div>
-                <div class="portfolio-feat-title">Sub-Second NVMe Architecture</div>
-                <div class="portfolio-feat-desc">FastCGI-cached PHP 8.3 &amp; MariaDB stack on dedicated enterprise cloud compute, delivering sub-300ms responses across Ontario LTE/5G and broadband networks.</div>
-              </div>
-            </div>
-
-            <div class="portfolio-feat-item">
-              <div class="portfolio-feat-icon">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/><path d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-2.458-7z"/></svg>
-              </div>
-              <div>
-                <div class="portfolio-feat-title">Senior-Accessible WCAG AAA Interface</div>
-                <div class="portfolio-feat-desc">High-contrast GM blue and deep neutral palette with 18px+ base typography and generous touch hitboxes, specifically optimized for older eyes and accessibility tools.</div>
-              </div>
-            </div>
-
-            <div class="portfolio-feat-item">
-              <div class="portfolio-feat-icon">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
-              </div>
-              <div>
-                <div class="portfolio-feat-title">Automated PDF Newsletter Archives</div>
-                <div class="portfolio-feat-desc">Dedicated digital repository allowing members to search, preview, and download quarterly newsletters and AGM meeting notices without bandwidth throttling.</div>
-              </div>
-            </div>
-
-            <div class="portfolio-feat-item">
-              <div class="portfolio-feat-icon">
-                <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
-              </div>
-              <div>
-                <div class="portfolio-feat-title">Custom Member Portal Architecture</div>
-                <div class="portfolio-feat-desc">Streamlined membership applications and annual dues workflows with direct Interac e-Transfer instructions and automated confirmation telemetry.</div>
-              </div>
-            </div>
-          </div>
-
-          <div style="padding-top: 18px; border-top: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
-            <div style="font-family: var(--font-mono); font-size: 0.85rem; color: var(--text-dim); display: flex; align-items: center; gap: 8px;">
-              <span style="color: #34d399;">●</span> Official Domain: <a href="https://gmsalariedretirees.com" target="_blank" rel="noopener noreferrer" style="color: var(--accent-cyan); text-decoration: none;">gmsalariedretirees.com</a> &middot; Staging Mirror: gmsra.durhamweb.design
-            </div>
-            <a href="https://gmsalariedretirees.com" target="_blank" rel="noopener noreferrer" style="font-size: 0.9rem; font-weight: 700; color: var(--accent-cyan); text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-              Explore Live Production Site &rarr;
-            </a>
+          <div class="case-body">
+            <p class="lead">GMSRA's members are GM retirees, so the site had to be easy to read and easy to use on any device. I designed and built a custom site with large, high-contrast text and a simple layout.</p>
+            <ul>
+              <li><svg><use href="#i-check"/></svg>Online membership application, with each submission stored securely for the executive</li>
+              <li><svg><use href="#i-check"/></svg>Meeting and events calendar that updates itself from the association's own calendar</li>
+              <li><svg><use href="#i-check"/></svg>Photo galleries from events like the summer BBQ and the golf tournament</li>
+              <li><svg><use href="#i-check"/></svg>Hosted, monitored and maintained by me, including fixes and new features as the association needs them</li>
+            </ul>
+            <a class="btn btn-ghost" href="https://gmsalariedretirees.com" target="_blank" rel="noopener">Visit the live site <svg class="arrow" width="18" height="18"><use href="#i-arrow"/></svg></a>
           </div>
         </article>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- 4. TRANSPARENT PRICING GRID -->
-  <section id="pricing" class="section-spacing" style="background: rgba(15, 23, 42, 0.25);">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-eyebrow">Predictable Investment</span>
-        <h2 class="section-title">Transparent CAD Pricing. Zero Hidden Fees.</h2>
-        <p class="section-desc">
-          All investments are billed strictly in Canadian Dollars (CAD) + Ontario HST. No surprise exchange rates, no price gouging.
-        </p>
+    <!-- PRICING -->
+    <section class="pricing-wrap" id="pricing">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow">Pricing</div>
+          <h2>Clear prices, in Canadian dollars.</h2>
+          <p class="lead">A one-time setup price to design and build your site, then a monthly care plan for hosting, updates and support. HST is added at 13%.</p>
+        </div>
+        <div class="plans">
+          <article class="plan reveal">
+            <h3>Local Starter</h3>
+            <p class="for">For trades, contractors and local shops that need a solid, professional site.</p>
+            <div class="price"><b>$1,499.99</b><small>setup</small></div>
+            <div class="care">+ $49.99/month care plan</div>
+            <div class="tax">Prices in CAD, plus HST</div>
+            <ul>
+              <li><svg><use href="#i-check"/></svg>Up to 5 custom pages</li>
+              <li><svg><use href="#i-check"/></svg>Mobile-first, fast-loading build</li>
+              <li><svg><use href="#i-check"/></svg>On-page SEO basics &amp; local business details for Google</li>
+              <li><svg><use href="#i-check"/></svg>Hosting, SSL &amp; security updates</li>
+              <li><svg><use href="#i-check"/></svg>Nightly backups</li>
+            </ul>
+            <a class="btn btn-ghost" href="#contact" data-plan="Local Starter">Choose Local Starter</a>
+            <a class="deposit" href="https://buy.stripe.com/aFacN4cE6eJp2MXd5ebZe00" target="_blank" rel="noopener noreferrer">Pay 50% deposit · $749.99 &rarr;</a>
+          </article>
+
+          <article class="plan featured reveal">
+            <span class="badge">Most popular</span>
+            <h3>Growth Business</h3>
+            <p class="for">For busy businesses that want their website to bring in steady enquiries.</p>
+            <div class="price"><b>$2,899.99</b><small>setup</small></div>
+            <div class="care">+ $129.99/month care plan</div>
+            <div class="tax">Prices in CAD, plus HST</div>
+            <ul>
+              <li><svg><use href="#i-check"/></svg>Up to 10 custom pages</li>
+              <li><svg><use href="#i-check"/></svg>Quote and lead forms that go straight to your inbox</li>
+              <li><svg><use href="#i-check"/></svg>Speed tuning for top page-load performance</li>
+              <li><svg><use href="#i-check"/></svg>1 hour of updates every month, included</li>
+              <li><svg><use href="#i-check"/></svg>Priority support</li>
+            </ul>
+            <a class="btn btn-primary" href="#contact" data-plan="Growth Business">Choose Growth Business</a>
+            <a class="deposit" href="https://buy.stripe.com/6oU4gy8nQ8l19blghqbZe01" target="_blank" rel="noopener noreferrer">Pay 50% deposit · $1,449.99 &rarr;</a>
+          </article>
+
+          <article class="plan reveal">
+            <h3>Custom Build</h3>
+            <p class="for">Online stores, member portals, booking systems and other custom features.</p>
+            <div class="price"><b>$4,999.99+</b><small>setup</small></div>
+            <div class="care">+ $249.99+/month care plan</div>
+            <div class="tax">Prices in CAD, plus HST</div>
+            <ul>
+              <li><svg><use href="#i-check"/></svg>Custom features &amp; database built to fit</li>
+              <li><svg><use href="#i-check"/></svg>E-commerce and payments with Stripe</li>
+              <li><svg><use href="#i-check"/></svg>More server resources for heavier sites</li>
+              <li><svg><use href="#i-check"/></svg>Ongoing maintenance &amp; monitoring</li>
+            </ul>
+            <a class="btn btn-ghost" href="#contact" data-plan="Custom Build">Talk about a custom build</a>
+            <a class="deposit" href="https://buy.stripe.com/7sY4gy33w6cTafpfdmbZe02" target="_blank" rel="noopener noreferrer">Pay deposit · $2,499.99 &rarr;</a>
+          </article>
+        </div>
+        <p class="pricing-note">Not sure which fits? <a href="#contact">Tell me about your project</a> and I'll recommend one. There's no obligation.</p>
       </div>
+    </section>
 
-      <div class="pricing-grid">
-        <!-- Card 1: Local Starter -->
-        <div class="pricing-card">
-          <h3 class="plan-name">Local Starter</h3>
-          <p class="plan-desc">Perfect for service contractors and independent local shops establishing a modern online footprint.</p>
-          
-          <div class="price-block">
-            <div class="price-setup">
-              <span class="price-currency">$</span>
-              <span class="price-amount">1,499.99</span>
-              <span class="price-unit">CAD setup</span>
-            </div>
-            <div class="price-retainer">
-              <span>+ $49.99/mo CAD</span> care retainer
-            </div>
-            <div class="tax-notice">+ applicable Ontario HST (13%)</div>
+    <!-- PROCESS -->
+    <section id="process">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow">How it works</div>
+          <h2>From first chat to launch day.</h2>
+        </div>
+        <ol class="steps">
+          <li class="reveal">
+            <h3>Free consult</h3>
+            <p>We talk about your business and goals over the phone, a screen share or a coffee. Then I send a written quote.</p>
+          </li>
+          <li class="reveal">
+            <h3>Design</h3>
+            <p>Once the deposit's paid, I design the key pages. You give feedback and we refine until it feels right.</p>
+          </li>
+          <li class="reveal">
+            <h3>Build &amp; review</h3>
+            <p>I build the full site on a private preview link, so you can click through everything before it goes public.</p>
+          </li>
+          <li class="reveal">
+            <h3>Launch &amp; care</h3>
+            <p>Your site goes live and your care plan starts: hosting, updates, backups and help whenever you need it.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- LOCAL -->
+    <section class="compare-wrap" id="local">
+      <div class="wrap local">
+        <div class="reveal">
+          <div class="eyebrow">Local</div>
+          <h2>Based in Durham Region, working with businesses nearby.</h2>
+          <p class="lead">You won't be handed off to an account manager or a support queue. Meet for a coffee, share a screen or pick up the phone. The person you talk to is the person building your site.</p>
+          <div class="towns" aria-label="Areas served">
+            <span>Oshawa</span><span>Whitby</span><span>Ajax</span><span>Pickering</span><span>Bowmanville</span><span>Courtice</span><span>Brooklin</span>
           </div>
-
-          <ul class="plan-features">
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-              <span>5-Page custom responsive brochure site</span>
-            </li>
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-              <span>Mobile-first UX with speed optimization</span>
-            </li>
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-              <span>Foundational on-page SEO & local schemas</span>
-            </li>
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-              <span>Managed Canadian cloud hosting & SSL</span>
-            </li>
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-              <span>Automated daily offsite cloud backups</span>
-            </li>
-          </ul>
-
-          <a href="#contact" class="btn btn-secondary btn-full">Choose Local Starter</a>
-          <a href="https://buy.stripe.com/aFacN4cE6eJp2MXd5ebZe00" target="_blank" rel="noopener noreferrer" class="stripe-deposit-link">
-            <span>⚡ Lock In with 50% Deposit ($749.99 CAD) &rarr;</span>
-          </a>
         </div>
+        <aside class="quote-card reveal">
+          <p class="big">"Small businesses deserve websites that are fast, honest and looked after, without agency overhead or surprise renewal bills."</p>
+          <div class="who"><img src="/assets/images/logo-160.png" alt="" width="44" height="44"><span>Durham Web Design</span></div>
+        </aside>
+      </div>
+    </section>
 
-        <!-- Card 2: Growth Business (Highlighted) -->
-        <div class="pricing-card featured">
-          <div class="featured-badge">Most Popular • High ROI</div>
-          <h3 class="plan-name">Growth Business</h3>
-          <p class="plan-desc">Our flagship solution engineered for active businesses demanding steady inbound local inquiries.</p>
-          
-          <div class="price-block">
-            <div class="price-setup">
-              <span class="price-currency">$</span>
-              <span class="price-amount">2,899.99</span>
-              <span class="price-unit">CAD setup</span>
-            </div>
-            <div class="price-retainer">
-              <span>+ $129.99/mo CAD</span> care retainer
-            </div>
-            <div class="tax-notice">+ applicable Ontario HST (13%)</div>
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <div class="eyebrow">Questions</div>
+          <h2>Good questions to ask any web designer.</h2>
+        </div>
+        <div class="faq reveal">
+          <details>
+            <summary>How does payment work?</summary>
+            <p>A 50% deposit gets your project started, and the rest is due when your site is ready to launch. You can pay the deposit by card through Stripe. The monthly care plan begins once your site is live. All prices are in Canadian dollars, plus 13% HST.</p>
+          </details>
+          <details>
+            <summary>What does the monthly care plan cover?</summary>
+            <p>Hosting, your SSL certificate (the padlock), security and software updates, nightly backups, and fixing anything that breaks. Growth Business plans also include an hour of content changes every month.</p>
+          </details>
+          <details>
+            <summary>Where is my website hosted?</summary>
+            <p>On a dedicated cloud server, provided by Hetzner and managed by me. It isn't a crowded shared hosting plan. It's located in Virginia, USA, with a fast connection to Ontario. If your business needs data stored in Canada, tell me and we'll plan for it.</p>
+          </details>
+          <details>
+            <summary>Do you use WordPress?</summary>
+            <p>Not by default. I write lean, custom code, which keeps sites fast and leaves very little to break or patch. If you want to edit content yourself, we'll pick a setup that suits you.</p>
+          </details>
+          <details>
+            <summary>Can you fix or speed up my current website?</summary>
+            <p>Usually, yes. Start with the <a href="/audit/">free website check</a>, or send me your address through the form below. I'll tell you honestly whether a fix or a rebuild makes more sense.</p>
+          </details>
+          <details>
+            <summary>How long does a website take?</summary>
+            <p>Most small business sites take a few weeks from deposit to launch. A lot depends on how quickly content and feedback come together. Custom builds take longer, and you'll get a timeline with your quote.</p>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="contact-wrap" id="contact">
+      <div class="wrap contact">
+        <div class="contact-aside reveal">
+          <div class="eyebrow">Get started</div>
+          <h2>Tell me about your project.</h2>
+          <p class="lead">Fill in the form and I'll reply with next steps and a quote, usually within one business day.</p>
+          <div class="contact-options">
+            <a class="contact-option" href="https://calendar.app.google/nbZSc4PuUv6BXNGJ7" target="_blank" rel="noopener noreferrer">
+              <svg><use href="#i-cal"/></svg><div><b>Book a call</b><span>Pick a time that suits you</span></div>
+            </a>
+            <a class="contact-option" href="mailto:epicexpressions2021@gmail.com">
+              <svg><use href="#i-mail"/></svg><div><b>Email me</b><span>epicexpressions2021@gmail.com</span></div>
+            </a>
+            <a class="contact-option" href="https://g.page/r/CSfgP1VMcxkOEBM/review" target="_blank" rel="noopener noreferrer">
+              <svg><use href="#i-star"/></svg><div><b>Worked with me before?</b><span>I'd really appreciate a Google review</span></div>
+            </a>
           </div>
-
-          <ul class="plan-features">
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-              <span><strong>Up to 10 bespoke high-converting pages</strong></span>
-            </li>
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-              <span>Custom lead capture funnels & CRM integration</span>
-            </li>
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-              <span>Sub-second Core Web Vitals speed tuning</span>
-            </li>
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-              <span><strong>1 hr/month inclusive developer updates</strong></span>
-            </li>
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-              <span>Priority 24/7 direct Durham emergency support</span>
-            </li>
-          </ul>
-
-          <a href="#contact" class="btn btn-primary btn-full">Choose Growth Business</a>
-          <a href="https://buy.stripe.com/6oU4gy8nQ8l19blghqbZe01" target="_blank" rel="noopener noreferrer" class="stripe-deposit-link">
-            <span>⚡ Lock In with 50% Deposit ($1,449.99 CAD) &rarr;</span>
-          </a>
         </div>
 
-        <!-- Card 3: Custom App / E-Commerce -->
-        <div class="pricing-card">
-          <h3 class="plan-name">Custom App / E-Commerce</h3>
-          <p class="plan-desc">For specialized platforms, multi-product catalogs, client portals, and bespoke operational workflows.</p>
-          
-          <div class="price-block">
-            <div class="price-setup">
-              <span class="price-currency">$</span>
-              <span class="price-amount">4,999.99+</span>
-              <span class="price-unit">CAD setup</span>
+        <div class="form-card reveal">
+          <form id="leadForm" novalidate>
+            <input type="hidden" name="access_key" value="86be778f-1b8e-434d-95ed-16ac46065844">
+            <input type="hidden" name="subject" value="New Lead Proposal Request - Durham Web Design">
+            <input type="hidden" name="from_name" value="Durham Web Design Lead Form">
+            <div class="hp" aria-hidden="true">
+              <label for="botcheck">Leave this empty</label>
+              <input type="checkbox" id="botcheck" name="botcheck" tabindex="-1" autocomplete="off">
             </div>
-            <div class="price-retainer">
-              <span>+ $249.99+/mo CAD</span> care retainer
+
+            <div class="form-grid">
+              <div class="field">
+                <label for="fullName">Your name</label>
+                <input type="text" id="fullName" name="name" autocomplete="name" required>
+              </div>
+              <div class="field">
+                <label for="businessName">Business name</label>
+                <input type="text" id="businessName" name="businessName" autocomplete="organization" required>
+              </div>
+              <div class="field">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" autocomplete="email" required>
+              </div>
+              <div class="field">
+                <label for="phone">Phone <span class="opt">(optional)</span></label>
+                <input type="tel" id="phone" name="phone" autocomplete="tel">
+              </div>
+              <div class="field full">
+                <label for="website">Current website <span class="opt">(if you have one)</span></label>
+                <input type="text" id="website" name="website" inputmode="url" placeholder="yourbusiness.ca">
+              </div>
+              <div class="field">
+                <label for="projectGoal">What do you need?</label>
+                <select id="projectGoal" name="projectGoal" required>
+                  <option value="" selected disabled>Choose one</option>
+                  <option value="New Website">A new website</option>
+                  <option value="Redesign">A redesign of my current site</option>
+                  <option value="Speed & Hosting">Speed fixes or a hosting move</option>
+                  <option value="Ongoing Maintenance">Ongoing maintenance</option>
+                  <option value="Payments / Custom">Payments, bookings or something custom</option>
+                </select>
+              </div>
+              <div class="field">
+                <label for="timeline">Timeline</label>
+                <select id="timeline" name="timeline" required>
+                  <option value="" selected disabled>Choose one</option>
+                  <option value="ASAP">As soon as possible</option>
+                  <option value="1 Month">Within a month</option>
+                  <option value="2-3 Months">In 2–3 months</option>
+                  <option value="Exploring">Just exploring</option>
+                </select>
+              </div>
+              <div class="field full">
+                <label for="message">Anything else I should know? <span class="opt">(optional)</span></label>
+                <textarea id="message" name="message" placeholder="What your business does, what you'd like the site to do, any sites you like…"></textarea>
+              </div>
             </div>
-            <div class="tax-notice">+ applicable Ontario HST (13%)</div>
+
+            <div class="form-error" id="formError" role="alert"></div>
+            <div class="form-foot">
+              <small>Your details are only used to reply to you. No mailing lists.</small>
+              <button class="btn btn-primary" type="submit" id="submitBtn">Send my request <svg class="arrow" width="18" height="18"><use href="#i-arrow"/></svg></button>
+            </div>
+          </form>
+
+          <div class="form-success" id="formSuccess" role="status" aria-live="polite" tabindex="-1">
+            <div class="check"><svg><use href="#i-check"/></svg></div>
+            <h3>Thanks, your request is in.</h3>
+            <p class="muted">I'll review it and get back to you, usually within one business day.</p>
+            <button class="btn btn-ghost" type="button" id="resetForm">Send another request</button>
           </div>
-
-          <ul class="plan-features">
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-              <span>Custom web app logic & database schema</span>
-            </li>
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-              <span>Seamless E-Commerce, Stripe / Moneris integration</span>
-            </li>
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-              <span>Dedicated VPS compute resources & Redis cache</span>
-            </li>
-            <li>
-              <svg fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg>
-              <span>Continuous API maintenance & uptime SLA guarantee</span>
-            </li>
-          </ul>
-
-          <a href="#contact" class="btn btn-secondary btn-full">Consult on Custom Build</a>
-          <a href="https://buy.stripe.com/7sY4gy33w6cTafpfdmbZe02" target="_blank" rel="noopener noreferrer" class="stripe-deposit-link">
-            <span>⚡ Start Custom Build with Deposit ($2,499.99 CAD) &rarr;</span>
-          </a>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- 5. REGIONAL SERVICE FOOTPRINT -->
-  <section id="regional" class="footprint-section">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-eyebrow">Local Roots • Real People</span>
-        <h2 class="section-title">Serving Businesses Across Durham Region, Ontario</h2>
-        <p class="section-desc">
-          We don't hide behind anonymous overseas ticket queues. We're proud to live, work, and collaborate right here in Durham Region.
-        </p>
-      </div>
-
-      <div class="town-pills">
-        <div class="town-pill"><span>📍</span> Oshawa</div>
-        <div class="town-pill"><span>📍</span> Whitby</div>
-        <div class="town-pill"><span>📍</span> Ajax</div>
-        <div class="town-pill"><span>📍</span> Pickering</div>
-        <div class="town-pill"><span>📍</span> Bowmanville</div>
-        <div class="town-pill"><span>📍</span> Courtice</div>
-        <div class="town-pill"><span>📍</span> Brooklin</div>
-      </div>
-
-      <div class="local-guarantee-box">
-        <div class="local-guarantee-icon">🤝</div>
-        <div class="local-guarantee-text">
-          <h4>In-Person Accountability & Direct Communication</h4>
-          <p>
-            Whether it's sitting down for a coffee in downtown Whitby or doing a collaborative screen share from Oshawa, you deal directly with the engineer building your site. Your business deserves a partner who understands the local Ontario market.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 6. HIGH-CONVERSION LEAD INTAKE FORM -->
-  <section id="contact" class="section-spacing">
-    <div class="container">
-      <div class="section-header">
-        <span class="section-eyebrow">Let's Build Something Exceptional</span>
-        <h2 class="section-title">Request Your Custom Proposal</h2>
-        <p class="section-desc">
-          Tell us about your business goals. We'll audit your existing site or review your specifications and deliver an actionable plan within 24 business hours.
-        </p>
-        <div class="direct-email-banner" style="display: flex; align-items: center; justify-content: center; gap: 12px; margin: 18px auto 0; padding: 10px 20px; border-radius: 100px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.25); max-width: 720px; font-size: 0.92rem; color: var(--text-muted); flex-wrap: wrap; text-align: center;">
-          <span>Prefer a direct email? Contact our lead engineer directly at</span>
-          <a href="mailto:epicexpressions2021@gmail.com" style="color: var(--accent-cyan); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-            <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-            epicexpressions2021@gmail.com
-          </a>
-          <span style="color: rgba(255,255,255,0.2);">|</span>
-          <a href="https://calendar.app.google/nbZSc4PuUv6BXNGJ7" target="_blank" rel="noopener noreferrer" style="color: #34d399; font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px;">
-            <span>📅 Book an Appointment</span> &rarr;
-          </a>
-        </div>
-      </div>
-
-      <div class="form-wrapper">
-        <form id="leadForm" action="https://api.web3forms.com/submit" method="POST" onsubmit="handleFormSubmit(event)">
-          <!-- Web3Forms Configuration -->
-          <input type="hidden" name="access_key" value="86be778f-1b8e-434d-95ed-16ac46065844">
-          <input type="hidden" name="subject" value="New Lead Proposal Request - Durham Web Design">
-          <input type="hidden" name="from_name" value="Durham Web Design Lead Form">
-          <input type="checkbox" name="botcheck" class="hidden" style="display: none;">
-
-          <div class="form-grid">
-            <div class="form-group">
-              <label for="fullName">Full Name *</label>
-              <input type="text" id="fullName" name="name" placeholder="Sarah Jenkins" required>
-            </div>
-
-            <div class="form-group">
-              <label for="businessName">Business Name *</label>
-              <input type="text" id="businessName" name="businessName" placeholder="Durham Orthodontics" required>
-            </div>
-
-            <div class="form-group">
-              <label for="email">Email Address *</label>
-              <input type="email" id="email" name="email" placeholder="sarah@yourbusiness.ca" required>
-            </div>
-
-            <div class="form-group">
-              <label for="phone">Phone Number *</label>
-              <input type="tel" id="phone" name="phone" placeholder="(905) 555-0199" required>
-            </div>
-
-            <div class="form-group form-full">
-              <label for="website">Current Website (Optional)</label>
-              <input type="url" id="website" name="website" placeholder="https://www.yourcurrentsite.ca">
-            </div>
-
-            <div class="form-group">
-              <label for="projectGoal">Primary Project Goal *</label>
-              <select id="projectGoal" name="projectGoal" required>
-                <option value="" disabled selected>Select a goal...</option>
-                <option value="New Website">New Website Build</option>
-                <option value="Redesign">Website Redesign & Modernization</option>
-                <option value="Speed & Hosting">Speed & Cloud Hosting Migration</option>
-                <option value="Ongoing Maintenance">Ongoing Maintenance & Retainer</option>
-              </select>
-            </div>
-
-            <div class="form-group">
-              <label for="timeline">Target Timeline *</label>
-              <select id="timeline" name="timeline" required>
-                <option value="" disabled selected>Select timeline...</option>
-                <option value="ASAP">ASAP (Within 2-3 weeks)</option>
-                <option value="1 Month">Within 1 Month</option>
-                <option value="2-3 Months">2-3 Months</option>
-                <option value="Exploring">Just Exploring / Flexible</option>
-              </select>
-            </div>
-
-            <div class="form-group form-full">
-              <label for="notes">Brief Project Overview or Questions</label>
-              <textarea id="notes" name="message" rows="3" placeholder="Tell us about your target customers, competitors, or specific features you need..."></textarea>
-            </div>
-
-            <div class="form-full" style="margin-top: 10px;">
-              <button type="submit" id="submitBtn" class="btn btn-primary btn-full" style="padding: 16px; font-size: 1.05rem;">
-                Request Your Custom Proposal →
-              </button>
-            </div>
-          </div>
-
-          <div id="formError" style="display: none; margin-top: 16px; padding: 12px 16px; border-radius: 8px; background: rgba(244, 63, 94, 0.15); border: 1px solid rgba(244, 63, 94, 0.4); color: #fda4af; font-size: 0.9rem; text-align: center;"></div>
-
-          <p class="form-disclaimer">
-            🔒 100% Privacy Guaranteed. No spam. Direct response from our Durham Region engineering team.
-          </p>
-        </form>
-
-        <div id="formSuccess" class="form-success">
-          <div class="form-success-icon">✓</div>
-          <h3 style="font-size: 1.6rem; font-weight: 800; margin-bottom: 8px;">Proposal Request Received!</h3>
-          <p style="color: var(--text-muted); max-width: 500px; margin: 0 auto 16px;">
-            Thank you! A senior specialist from Durham Web Design will review your details and send a personalized CAD proposal within 24 business hours.
-          </p>
-          <div style="margin-bottom: 24px; padding: 12px 18px; border-radius: 10px; background: rgba(251, 188, 4, 0.08); border: 1px solid rgba(251, 188, 4, 0.25); display: inline-flex; align-items: center; gap: 10px;">
-            <span style="color: #fbbc04; font-size: 1.1rem;">★★★★★</span>
-            <span style="font-size: 0.9rem; color: #cbd5e1;">Past client? <a href="https://g.page/r/CSfgP1VMcxkOEBM/review" target="_blank" rel="noopener noreferrer" style="color: #fbbc04; font-weight: 600; text-decoration: underline;">Review Durham Web Design on Google &rarr;</a></span>
-          </div>
-          <br>
-          <button class="btn btn-secondary" onclick="resetForm()">Submit Another Inquiry</button>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 7. FOOTER -->
-  <footer>
-    <div class="container">
-      <div class="footer-top">
-        <a href="#" class="brand-logo">
-          <img src="assets/images/logo.png" alt="Durham Web Design Logo" class="brand-logo-img" width="44" height="44">
-          <span>Durham Web Design</span>
-        </a>
-        <ul class="footer-links">
-          <li><a href="#services">Services</a></li>
-          <li><a href="#comparison">Why Us</a></li>
-          <li><a href="#portfolio">Case Studies</a></li>
-          <li><a href="#pricing">Pricing</a></li>
-          <li><a href="/support">🎫 Client Support</a></li>
-          <li><a href="#regional">Footprint</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="https://billing.stripe.com/p/login/dRm3cveMn0wIfMi17rd7q00" target="_blank" rel="noopener noreferrer">Client Billing Portal</a></li>
-          <li><a href="https://g.page/r/CSfgP1VMcxkOEBM/review" target="_blank" rel="noopener noreferrer">⭐ Google Reviews</a></li>
-        </ul>
-        <div style="color: var(--text-muted); font-size: 0.9rem;">
-          Specialized in high-conversion web development & managed cloud infrastructure across Durham Region, ON.
-        </div>
-      </div>
-
-      <div class="footer-appreciation">
-        <span class="appreciation-text">Did our free advice, audit, or bespoke design help your business?</span>
-        <div class="appreciation-actions">
-          <a href="https://g.page/r/CSfgP1VMcxkOEBM/review" target="_blank" rel="noopener noreferrer" class="google-review-pill-btn inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full bg-slate-800/80 hover:bg-slate-700/90 text-slate-200 hover:text-amber-400 border border-slate-700 hover:border-amber-500/40 transition-all duration-200 shadow-sm" title="Leave a 5-star Google Review">
-            <span style="color: #fbbc04;">★</span> <span>Review Us on Google</span>
-          </a>
-          <a href="https://buy.stripe.com/aFa7sK6fI0Sz9bl8OYbZe09" target="_blank" rel="noopener noreferrer" class="coffee-pill-btn inline-flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-full bg-slate-800/80 hover:bg-slate-700/90 text-slate-200 hover:text-cyan-400 border border-slate-700 hover:border-cyan-500/40 transition-all duration-200 shadow-sm" title="Tip the engineer via Stripe">
-            <span>☕</span> <span>Buy the Engineer a Coffee</span>
-          </a>
-        </div>
-      </div>
-
-      <div class="footer-bottom">
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="footer-grid">
         <div>
-          Copyright &copy; 2026 Durham Web Design. All rights reserved.
+          <a class="brand" href="#top"><img src="/assets/images/logo-160.png" alt="" width="40" height="40"><span>Durham Web Design</span></a>
+          <p class="muted" style="margin-top:16px; max-width: 34ch;">Custom websites, hosting and care for small businesses across Durham Region, Ontario.</p>
         </div>
-        <div class="cloud-tag">
-          <span>☁️ Powered by Epic Expressions cloud infrastructure</span>
+        <div>
+          <h4>Explore</h4>
+          <ul>
+            <li><a href="#services">Services</a></li>
+            <li><a href="#work">Work</a></li>
+            <li><a href="#pricing">Pricing</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
         </div>
+        <div>
+          <h4>Clients</h4>
+          <ul>
+            <li><a href="/support/">Support request</a></li>
+            <li><a href="https://billing.stripe.com/p/login/dRm3cveMn0wIfMi17rd7q00" target="_blank" rel="noopener noreferrer">Billing portal</a></li>
+            <li><a href="/audit/">Free website check</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Say thanks</h4>
+          <ul>
+            <li><a href="https://g.page/r/CSfgP1VMcxkOEBM/review" target="_blank" rel="noopener noreferrer">Leave a Google review</a></li>
+            <li><a href="https://buy.stripe.com/aFa7sK6fI0Sz9bl8OYbZe09" target="_blank" rel="noopener noreferrer">Buy me a coffee</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>&copy; <span id="year">2026</span> Durham Web Design &middot; Durham Region, Ontario</span>
+        <span>A service of Epic Expressions</span>
       </div>
     </div>
   </footer>
 
-  <!-- SCRIPT FOR INTERACTIONS -->
   <script>
-    async function handleFormSubmit(e) {
-      e.preventDefault();
-      const form = document.getElementById('leadForm');
-      const submitBtn = document.getElementById('submitBtn');
-      const errorBlock = document.getElementById('formError');
-      const successBlock = document.getElementById('formSuccess');
-      const originalText = submitBtn.innerHTML;
+    (function () {
+      document.body.classList.remove('no-js');
+      var root = document.documentElement;
 
-      // Reset error message if visible
-      if (errorBlock) {
-        errorBlock.style.display = 'none';
-        errorBlock.textContent = '';
+      // Year
+      var y = document.getElementById('year'); if (y) y.textContent = new Date().getFullYear();
+
+      // Theme toggle
+      var tbtn = document.getElementById('themeToggle');
+      function isDark() {
+        var t = root.getAttribute('data-theme');
+        if (t) return t === 'dark';
+        return window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
       }
+      tbtn.addEventListener('click', function () {
+        var next = isDark() ? 'light' : 'dark';
+        root.setAttribute('data-theme', next);
+        try { localStorage.setItem('dwd-theme', next); } catch (e) {}
+      });
 
-      // Indicate loading state
-      submitBtn.disabled = true;
-      submitBtn.innerHTML = 'Sending Proposal Request...';
+      // Header border on scroll
+      var header = document.querySelector('.site-header');
+      function onScroll() { header.classList.toggle('scrolled', window.scrollY > 8); }
+      window.addEventListener('scroll', onScroll, { passive: true }); onScroll();
 
-      const formData = new FormData(form);
+      // Mobile menu
+      var menuBtn = document.getElementById('menuBtn'), nav = document.getElementById('mobileNav');
+      function setMenu(open) {
+        nav.setAttribute('data-open', open ? 'true' : 'false');
+        menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+        menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+        document.body.style.overflow = open ? 'hidden' : '';
+      }
+      menuBtn.addEventListener('click', function () { setMenu(nav.getAttribute('data-open') !== 'true'); });
+      nav.addEventListener('click', function (e) { if (e.target.closest('a')) setMenu(false); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape') setMenu(false); });
 
-      const leadPayload = {
-        name: formData.get('name') || '',
-        business: formData.get('businessName') || '',
-        email: formData.get('email') || '',
-        phone: formData.get('phone') || '',
-        website: formData.get('website') || '',
-        pkg: [formData.get('projectGoal'), formData.get('budget'), formData.get('timeline')].filter(Boolean).join(' • '),
-        notes: [formData.get('website') ? `Site: ${formData.get('website')}` : '', formData.get('projectDetails')].filter(Boolean).join(' | '),
-        channel: 'Durham Web Design Lead Form',
-        // Hidden honeypot: real visitors leave it empty, bots fill it, and the OS then drops the lead
-        botcheck: formData.get('botcheck') ? 'on' : ''
-      };
+      // Reveal on scroll
+      var els = document.querySelectorAll('.reveal');
+      if ('IntersectionObserver' in window) {
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (en) { if (en.isIntersecting) { en.target.classList.add('in'); io.unobserve(en.target); } });
+        }, { rootMargin: '0px 0px -8% 0px', threshold: 0.08 });
+        els.forEach(function (el) { io.observe(el); });
+      } else { els.forEach(function (el) { el.classList.add('in'); }); }
+      // Safety net: never leave content hidden (e.g. print, screenshots, odd browsers).
+      setTimeout(function () { els.forEach(function (el) { el.classList.add('in'); }); }, 2500);
 
-      try {
-        const results = await Promise.allSettled([
-          fetch('https://api.web3forms.com/submit', {
-            method: 'POST',
-            headers: {
-              'Accept': 'application/json'
-            },
-            body: formData
-          }),
-          fetch('https://os.durhamweb.design/api/leads', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(leadPayload)
-          })
-        ]);
+      // Plan buttons pre-fill the message
+      document.querySelectorAll('[data-plan]').forEach(function (a) {
+        a.addEventListener('click', function () {
+          var msg = document.getElementById('message');
+          if (msg && !msg.value) msg.value = "I'm interested in the " + a.getAttribute('data-plan') + " plan.";
+        });
+      });
 
-        const anySuccess = results.some(r => r.status === 'fulfilled' && (r.value.ok || r.value.status === 200));
+      // Lead form: send to Web3Forms (email) and the Epic OS lead inbox in parallel
+      var form = document.getElementById('leadForm');
+      var btn = document.getElementById('submitBtn');
+      var errBox = document.getElementById('formError');
+      var ok = document.getElementById('formSuccess');
 
-        if (anySuccess) {
+      function showError(msg) { errBox.textContent = msg; errBox.style.display = 'block'; }
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        errBox.style.display = 'none';
+
+        if (!form.checkValidity()) {
+          var bad = form.querySelector(':invalid');
+          showError('Please fill in your name, business, email, what you need and a timeline.');
+          if (bad) bad.focus();
+          return;
+        }
+
+        var fd = new FormData(form);
+        var original = btn.innerHTML;
+        btn.disabled = true; btn.textContent = 'Sending…';
+
+        var lead = {
+          name: fd.get('name') || '',
+          business: fd.get('businessName') || '',
+          email: fd.get('email') || '',
+          phone: fd.get('phone') || '',
+          website: fd.get('website') || '',
+          pkg: [fd.get('projectGoal'), fd.get('timeline')].filter(Boolean).join(' • '),
+          notes: [fd.get('website') ? 'Site: ' + fd.get('website') : '', fd.get('message')].filter(Boolean).join(' | '),
+          channel: 'Durham Web Design Lead Form',
+          botcheck: fd.get('botcheck') ? 'on' : ''
+        };
+
+        try {
+          var results = await Promise.allSettled([
+            fetch('https://api.web3forms.com/submit', { method: 'POST', headers: { 'Accept': 'application/json' }, body: fd }),
+            fetch('https://os.durhamweb.design/api/leads', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(lead) })
+          ]);
+          var anyOk = results.some(function (r) { return r.status === 'fulfilled' && r.value.ok; });
+          if (!anyOk) throw new Error('send failed');
+
           form.style.display = 'none';
-          successBlock.style.display = 'block';
-        } else {
-          throw new Error('Submission failed. Please check your connection and try again.');
+          ok.style.display = 'block';
+          ok.focus();
+          if (typeof window.gtag === 'function') window.gtag('event', 'generate_lead', { event_category: 'Lead', event_label: lead.pkg });
+        } catch (err) {
+          showError("Sorry, that didn't send. Please try again, or email epicexpressions2021@gmail.com.");
+        } finally {
+          btn.disabled = false; btn.innerHTML = original;
         }
-      } catch (err) {
-        console.error('Submission error:', err);
-        if (errorBlock) {
-          errorBlock.textContent = err.message || 'Unable to submit form. Please check your connection or try again.';
-          errorBlock.style.display = 'block';
-        } else {
-          alert('Submission error: ' + (err.message || 'Please try again.'));
-        }
-      } finally {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = originalText;
-      }
-    }
+      });
 
-    function resetForm() {
-      const form = document.getElementById('leadForm');
-      const submitBtn = document.getElementById('submitBtn');
-      const successBlock = document.getElementById('formSuccess');
-      const errorBlock = document.getElementById('formError');
-      
-      form.reset();
-      if (errorBlock) {
-        errorBlock.style.display = 'none';
-        errorBlock.textContent = '';
-      }
-      if (submitBtn) {
-        submitBtn.disabled = false;
-        submitBtn.innerHTML = 'Request Your Custom Proposal →';
-      }
-      form.style.display = 'block';
-      successBlock.style.display = 'none';
-    }
-  
-    /* Mobile Navigation Drawer Toggle */
-    function toggleMobileNav() {
-      const drawer = document.getElementById('mobileDrawer');
-      const backdrop = document.getElementById('mobileBackdrop');
-      const toggle = document.getElementById('menuToggle');
-      const isOpen = drawer.classList.contains('active');
-
-      if (isOpen) {
-        closeMobileNav();
-      } else {
-        drawer.classList.add('active');
-        backdrop.classList.add('active');
-        toggle.classList.add('active');
-        toggle.setAttribute('aria-expanded', 'true');
-        document.body.classList.add('no-scroll');
-      }
-    }
-
-    function closeMobileNav() {
-      const drawer = document.getElementById('mobileDrawer');
-      const backdrop = document.getElementById('mobileBackdrop');
-      const toggle = document.getElementById('menuToggle');
-      if (drawer) drawer.classList.remove('active');
-      if (backdrop) backdrop.classList.remove('active');
-      if (toggle) {
-        toggle.classList.remove('active');
-        toggle.setAttribute('aria-expanded', 'false');
-      }
-      document.body.classList.remove('no-scroll');
-    }
-
-    // Close on Escape key
-    document.addEventListener('keydown', function(e) {
-      if (e.key === 'Escape') closeMobileNav();
-    });
-
+      document.getElementById('resetForm').addEventListener('click', function () {
+        form.reset(); ok.style.display = 'none'; form.style.display = 'block';
+        document.getElementById('fullName').focus();
+      });
+    })();
   </script>
 </body>
 </html>

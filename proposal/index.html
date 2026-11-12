@@ -1360,14 +1360,7 @@
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify(payload),
           keepalive: true
-        }).catch(() => {
-          fetch('/dashboard/api.php?action=accept_proposal', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload),
-            keepalive: true
-          }).catch(() => {});
-        });
+        }).catch(() => {});
       } catch (e) {
         console.warn('Acceptance dispatch caught:', e);
       }
