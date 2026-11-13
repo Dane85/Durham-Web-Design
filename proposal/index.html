@@ -198,12 +198,15 @@
     <section class="p-card">
       <div class="eyebrow">Accept</div>
       <h2>Accept this proposal</h2>
-      <p class="sub">Type your name to sign, then pay the 50% deposit to book your project.</p>
+      <p class="sub">Type your name and email to sign, then pay the 50% deposit to book your project. We'll email you a confirmation with a copy of your signed proposal.</p>
       <div class="sig-grid">
         <div class="field">
           <label for="sigInput">Your full name (signature)</label>
           <input type="text" id="sigInput" placeholder="Type your full name" value="" oninput="updateSignature(this.value)" autocomplete="name">
           <div class="sig-note">By typing your name you accept the deliverables and payment terms above.</div>
+          <label for="sigEmail" style="margin-top:14px">Your email (for your signed copy)</label>
+          <input type="email" id="sigEmail" placeholder="you@example.com" value="" autocomplete="email">
+          <div class="sig-note" id="sigError" role="alert" style="color:#ef4444;display:none"></div>
         </div>
         <div class="field">
           <label>Signature preview</label>
@@ -456,7 +459,19 @@
     // Handle Proposal Acceptance Webhook
     async function handleAcceptClick(event) {
       const sigInput = document.getElementById('sigInput');
-      const signature = (sigInput ? sigInput.value.trim() : '') || proposalData.client || 'Client Representative';
+      const emailInput = document.getElementById('sigEmail');
+      const sigError = document.getElementById('sigError');
+      const typedName = sigInput ? sigInput.value.trim() : '';
+      const signerEmail = emailInput ? emailInput.value.trim() : '';
+      const showError = (msg, el) => {
+        event.preventDefault();
+        if (sigError) { sigError.textContent = msg; sigError.style.display = 'block'; }
+        if (el) el.focus();
+      };
+      if (typedName.length < 2) { showError('Please type your full name to sign.', sigInput); return; }
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(signerEmail)) { showError('Please enter a valid email so we can send your signed copy.', emailInput); return; }
+      if (sigError) sigError.style.display = 'none';
+      const signature = typedName;
       const tier = TIERS[currentTier] || TIERS.starter;
       const clientName = proposalData.client || signature || 'Valued Client';
       const businessName = proposalData.business || 'Valued Business';
@@ -478,6 +493,14 @@
         total_deposit: totalDeposit,
         deposit: totalDeposit,
         phone: proposalData.phone || '',
+        email: signerEmail,
+        signer_email: signerEmail,
+        total_price: '$' + tier.totalPrice.toLocaleString('en-CA', { minimumFractionDigits: 2 }) + ' CAD',
+        deliverables: (tier.deliverables || []).map(d => d.title),
+        proposal_url: window.location.href,
+        deposit_url: (document.getElementById('stripeDepositBtn') || {}).href || tier.stripeUrl || '',
+        care_url: tier.stripeCareUrl || '',
+        user_agent: navigator.userAgent,
         timestamp: timestamp
       };
 
