@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en-CA">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Case Study: GM Salaried Retirees Association | Durham Web Design</title>
+  <meta name="description" content="How Durham Web Design built an easy-to-read, fast website for the General Motors Salaried Retirees Association in Oshawa: large text, online membership, automatic events and photo galleries.">
+  <link rel="canonical" href="https://durhamweb.design/work/gmsra/">
+  <meta property="og:title" content="Case Study: GM Salaried Retirees Association | Durham Web Design">
+  <meta property="og:description" content="A custom website built for GM retirees in Oshawa: large, high-contrast text, online membership and events that update themselves.">
+  <meta property="og:url" content="https://durhamweb.design/work/gmsra/">
+  <meta property="og:type" content="article">
+  <link rel="icon" type="image/png" href="/assets/images/favicon-64.png">
+  <link rel="apple-touch-icon" href="/assets/images/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600;12..96,700;12..96,800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/assets/css/site.css">
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-33S0Z7WYRG"></script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-33S0Z7WYRG');</script>
+  <script>(function(){try{var t=localStorage.getItem('dwd-theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}})();</script>
+  <style>
+    .cs-facts { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 28px; }
+    .cs-facts div { padding: 16px 18px; border: 1px solid var(--line); border-radius: var(--radius); background: var(--surface); }
+    .cs-facts dt { font-size: .78rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+    .cs-facts dd { margin: 4px 0 0; color: var(--ink); font-weight: 600; }
+    .cs-section { padding: clamp(48px, 7vw, 88px) 0; }
+    .cs-section.alt { background: var(--bg-alt); }
+    .cs-split { display: grid; grid-template-columns: .9fr 1.1fr; gap: clamp(28px, 5vw, 64px); align-items: start; }
+    .cs-split h2 { margin-bottom: 0; }
+    .cs-prose p { color: var(--ink-2); max-width: 62ch; }
+    .cs-prose p:last-child { margin-bottom: 0; }
+    .cs-cta { text-align: center; max-width: 640px; margin: 0 auto; }
+    .cs-cta .hero-ctas { justify-content: center; margin-top: 24px; }
+    @media (max-width: 860px) { .cs-split, .cs-facts { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body class="no-js">
+  <a class="skip" href="#main">Skip to content</a>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+    <symbol id="i-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-type" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7V5h16v2M9 19h6M12 5v14"/></symbol>
+    <symbol id="i-cal" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+    <symbol id="i-form" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h6"/></symbol>
+    <symbol id="i-photo" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="9" cy="9" r="2"/><path d="m21 15-5-5L5 21"/></symbol>
+    <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol>
+    <symbol id="i-shield" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linejoin="round"><path d="M20 14.5A8 8 0 0 1 9.5 4a8 8 0 1 0 10.5 10.5Z"/></symbol>
+    <symbol id="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
+  </defs></svg>
+
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="/" aria-label="Durham Web Design home"><img src="/assets/images/logo-160.png" alt="" width="40" height="40"><span>Durham Web Design</span></a>
+      <div class="nav-actions">
+        <button class="icon-btn" id="themeToggle" type="button" aria-label="Switch colour theme"><svg class="theme-moon"><use href="#i-moon"/></svg><svg class="theme-sun"><use href="#i-sun"/></svg></button>
+        <a class="btn btn-ghost" href="/#work" style="min-height:44px">Main site</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="main">
+    <section class="page-hero">
+      <div class="wrap">
+        <div class="eyebrow">Case study</div>
+        <h1>A website built for its members.</h1>
+        <p class="lead">The General Motors Salaried Retirees Association has brought GM of Canada salaried retirees and their spouses together in Oshawa since 1982. They needed a website their members could read easily, trust and use without calling anyone for help.</p>
+        <dl class="cs-facts">
+          <div><dt>Client</dt><dd>GM Salaried Retirees Association, Oshawa</dd></div>
+          <div><dt>What I did</dt><dd>Design, build, hosting &amp; ongoing care</dd></div>
+          <div><dt>Built with</dt><dd>A custom WordPress theme, no page builder</dd></div>
+        </dl>
+      </div>
+    </section>
+
+    <section class="cs-section" style="padding-top:0">
+      <div class="wrap">
+        <article class="case">
+          <div class="case-visual">
+            <div>
+              <div class="kicker">Non-profit association &middot; Oshawa, ON</div>
+              <h3>gmsalariedretirees.com</h3>
+            </div>
+            <div class="case-metrics">
+              <div><b>~0.3s</b><span>Page response</span></div>
+              <div><b>18px</b><span>Base text size, larger than most sites</span></div>
+              <div><b>Auto</b><span>Events synced from their calendar</span></div>
+              <div><b>Online</b><span>Membership applications</span></div>
+            </div>
+          </div>
+          <div class="case-body">
+            <p class="lead">The members are retirees and their spouses, reading on everything from desktops to tablets to phones. Every decision on this site starts with one question: can a member read this and do what they came to do, first time, without help?</p>
+            <a class="btn btn-ghost" href="https://gmsalariedretirees.com" target="_blank" rel="noopener">Visit the live site <svg class="arrow" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="cs-section alt">
+      <div class="wrap cs-split">
+        <div>
+          <div class="eyebrow">The challenge</div>
+          <h2>Make it easy to read, easy to join, easy to keep up to date.</h2>
+        </div>
+        <div class="cs-prose">
+          <p>Members mostly want three things: when and where the next gathering is, what's coming up, and how to join or renew. Small grey text, cluttered menus and forms that ask too much get in the way, especially for older readers.</p>
+          <p>The association's volunteers also needed a site they wouldn't have to babysit. Events shouldn't have to be typed in twice, and membership applications shouldn't get lost in someone's inbox.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">What I built</div>
+          <h2>Simple on the outside, looked after on the inside.</h2>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="ico"><svg aria-hidden="true"><use href="#i-type"/></svg></div>
+            <h3>Large, high-contrast text</h3>
+            <p>An 18px base size, strong contrast, clear headings and big buttons. Members can read every page without zooming in.</p>
+          </article>
+          <article class="card">
+            <div class="ico"><svg aria-hidden="true"><use href="#i-cal"/></svg></div>
+            <h3>The next gathering, always in view</h3>
+            <p>The date and place of the next meeting sit at the top of every page, and the events list updates itself from the association's own calendar.</p>
+          </article>
+          <article class="card">
+            <div class="ico"><svg aria-hidden="true"><use href="#i-form"/></svg></div>
+            <h3>Join or renew online</h3>
+            <p>A short membership form, with each application stored securely for the executive. A printable form, mail and e-transfer are still offered for members who prefer them.</p>
+          </article>
+          <article class="card">
+            <div class="ico"><svg aria-hidden="true"><use href="#i-photo"/></svg></div>
+            <h3>Photo galleries</h3>
+            <p>Galleries from the summer BBQ and the Vic Pratt Memorial Golf Tournament, with a viewer that works with a mouse, the keyboard or a swipe.</p>
+          </article>
+          <article class="card">
+            <div class="ico"><svg aria-hidden="true"><use href="#i-bolt"/></svg></div>
+            <h3>Fast and lightweight</h3>
+            <p>A theme written from scratch, with no page builder or plugin bloat, so pages respond in about a third of a second.</p>
+          </article>
+          <article class="card">
+            <div class="ico"><svg aria-hidden="true"><use href="#i-shield"/></svg></div>
+            <h3>Hosted and cared for</h3>
+            <p>I host, monitor and maintain the site. Changes are tried on a private copy of the site first, then go live, and accessibility is reviewed as the site grows.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="cs-section alt">
+      <div class="wrap cs-cta">
+        <div class="eyebrow">Your turn</div>
+        <h2>Want a site your customers find this easy?</h2>
+        <p class="lead">Whether you run a club, a non-profit or a local business, I'll build you something clear, fast and looked after.</p>
+        <div class="hero-ctas">
+          <a class="btn btn-primary" href="/#contact">Get a free quote <svg class="arrow" width="18" height="18" aria-hidden="true"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-ghost" href="/audit/">Free website check</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer" style="padding:32px 0">
+    <div class="wrap footer-bottom" style="margin-top:0;border-top:0;padding-top:0">
+      <span>&copy; <span id="year">2026</span> Durham Web Design &middot; Durham Region, Ontario</span>
+      <span><a href="/#pricing">Pricing</a> &middot; <a href="/#contact">Contact</a></span>
+    </div>
+  </footer>
+
+  <script src="/assets/js/site.js"></script>
+</body>
+</html>

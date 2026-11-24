@@ -7,8 +7,8 @@
   --ink-2: #334155;
   --muted: #5b6577;
   --line: #dde3ec;
-  --accent: #0284c7;        /* links / text accent on light (AA on white) */
-  --accent-strong: #0369a1;
+  --accent: #0369a1;        /* links / text accent on light: 5.9:1 on white, 5.5:1 on --bg (was #0284c7, 4.1:1) */
+  --accent-strong: #075985; /* link hover, 7.6:1 on white */
   --brand-a: #22d3ee;       /* logo cyan */
   --brand-b: #2563eb;       /* logo blue */
   --on-accent: #ffffff;

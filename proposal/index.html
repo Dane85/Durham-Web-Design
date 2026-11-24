@@ -362,28 +362,28 @@
         stripeCareUrl: 'https://buy.stripe.com/3cIeVcdIaat91IT5CMbZe0c',
         deliverables: [
           {
-            title: 'Bespoke Non-Profit Astronomical Platform',
-            desc: 'Modern dark-sky AMOLED aesthetic, observatory session showcase, upcoming dark-sky star parties, and public astronomy outreach calendar.'
+            title: 'A Custom Website for the Association',
+            desc: 'A custom site with a dark, night-sky look that is easy on the eyes at the telescope, with pages for meetings, observing nights, star parties and public outreach events.'
           },
           {
-            title: 'Fast Pages & Core Web Vitals',
-            desc: 'Optimized high-resolution astrophotography galleries that load quickly on mobile, with no layout shift.'
+            title: 'Fast Pages & Astrophotography Galleries',
+            desc: 'Members\' astrophotography shown in sharp galleries that still load quickly on a phone.'
           },
           {
-            title: 'Local Community SEO & Schema Markup',
-            desc: 'Structured EducationalOrganization & Event schema tailored for Oshawa, Whitby, and Durham Region stargazing enthusiasts.'
+            title: 'Easy to Find on Google',
+            desc: 'Set up so people searching for astronomy, stargazing and star parties in Whitby, Oshawa and across Durham Region find the club and its upcoming events.'
           },
           {
-            title: 'Interactive Membership & Meeting Inquiries',
-            desc: 'Lead intake forms routing instant email and Telegram alerts to Brian Boddy and the executive committee.'
+            title: 'Membership & Meeting Enquiries',
+            desc: 'Simple forms for joining, renewing and asking questions, sent straight to Brian Boddy and the executive by email.'
           },
           {
             title: 'Managed Cloud Hosting',
-            desc: 'Fast NVMe-backed hosting, automatic SSL, and nightly encrypted off-site backups.'
+            desc: 'Fast hosting, a security certificate (the padlock in the address bar), and nightly encrypted backups kept off-site.'
           },
           {
             title: '14-Day Post-Launch Polish & Support',
-            desc: 'Complete post-launch content adjustments, member verification testing, and executive committee handover.'
+            desc: 'Two weeks after launch for content tweaks and fixes, plus a walkthrough so the executive can post news and events themselves.'
           }
         ]
       }
@@ -584,7 +584,9 @@
       document.getElementById('clientNameVal').innerText = proposalData.client;
       document.getElementById('businessNameVal').innerText = proposalData.business;
       document.getElementById('heroHeading').innerText = `Website proposal for ${proposalData.business}`;
-      document.getElementById('heroSubheading').innerText = `Prepared exclusively for ${proposalData.client}. A fast, custom website built and looked after by Durham Web Design, so customers across Durham Region can find you and get in touch.`;
+      document.getElementById('heroSubheading').innerText = proposalData.tier === 'draa'
+        ? `Prepared exclusively for ${proposalData.client}. A fast, custom website built and looked after by Durham Web Design, so members and stargazers across Durham Region can find the club, its meetings and its observing nights.`
+        : `Prepared exclusively for ${proposalData.client}. A fast, custom website built and looked after by Durham Web Design, so customers across Durham Region can find you and get in touch.`;
       document.getElementById('pageTitle').innerText = `${proposalData.business} Proposal | Durham Web Design`;
 
       document.getElementById('metaRefVal').innerText = proposalData.id.toUpperCase();

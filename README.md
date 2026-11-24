@@ -5,6 +5,7 @@
 - 🚀 **Live Website**: [https://durhamweb.design](https://durhamweb.design) (also [https://www.durhamweb.design](https://www.durhamweb.design))
 - 📜 **Proposal Closer**: [https://durhamweb.design/proposal/](https://durhamweb.design/proposal/)
 - ⚡ **Free Speed Audit**: [https://durhamweb.design/audit](https://durhamweb.design/audit)
+- 📁 **Case Study (GMSRA)**: [https://durhamweb.design/work/gmsra/](https://durhamweb.design/work/gmsra/)
 - 📊 **Teardown PDF Engine**: [https://durhamweb.design/teardowns/](https://durhamweb.design/teardowns/)
 - 🖥️ **Operations HUD**: [https://ops.durhamweb.design](https://ops.durhamweb.design)
 
@@ -20,8 +21,8 @@ Built on dedicated **Epic Expressions** cloud infrastructure (Hetzner Ashburn No
 ## 🛠️ Tech Stack & Architecture
 
 - **Format:** Zero-dependency, standalone HTML5 / CSS3 / Vanilla JavaScript
-- **Design System:** Obsidian dark theme with electric cyan and emerald accents, optimized for AMOLED screens
-- **Typography:** `Plus Jakarta Sans` & `JetBrains Mono`
+- **Design System:** Light-first with a full dark theme (follows the OS setting, or the header toggle). Ink text on soft grey and white, a blue `--accent` (`#0369a1` light / `#38bdf8` dark) and the logo's cyan `#22d3ee` to blue `#2563eb` as gradient accents. Pill buttons, 22px cards. All tokens live at the top of `assets/css/site.css`; the full brand book is in `Epic Expressions/Design Systems/Durham Web Design`.
+- **Typography:** `Bricolage Grotesque` (headings) & `Inter` (body), from Google Fonts
 - **Branding:** Official circular glowing "DW" emblem (`assets/images/logo.png`) and browser favicon (`assets/images/favicon.png`)
 - **Effects:** High-contrast responsive layout, glassmorphism (`backdrop-filter`), and CSS micro-interactions
 - **Form Handling:** Web3Forms API integration for instant lead capture and proposal intake
