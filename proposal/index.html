@@ -125,7 +125,7 @@
     <section class="p-card">
       <div class="eyebrow">Speed guarantee</div>
       <h2>Built to be fast, and kept that way.</h2>
-      <p class="sub">Your site is written by hand, with no heavy page builder or pile of plugins, and runs on a dedicated cloud server I manage. If your new site doesn't pass Google's Core Web Vitals at launch, I'll keep optimizing it at no charge until it does.</p>
+      <p class="sub">Your site is written by hand, with no heavy page builder or pile of plugins, and runs on a private cloud server I manage. If your new site doesn't pass Google's Core Web Vitals at launch, I'll keep optimizing it at no charge until it does.</p>
       <div class="facts">
         <div><b>~0.3s</b><span>Page response on a recent client site (GMSRA), measured</span></div>
         <div><b>0</b><span>Page-builder plugins to slow it down or patch</span></div>
@@ -195,7 +195,7 @@
       </div>
     </section>
 
-    <section class="p-card">
+    <section class="p-card" id="accept">
       <div class="eyebrow">Accept</div>
       <h2>Accept this proposal</h2>
       <p class="sub">Type your name and email to sign, then pay the 50% deposit to book your project. We'll email you a confirmation with a copy of your signed proposal.</p>
@@ -256,7 +256,7 @@
           },
           {
             title: 'Fast Pages & Core Web Vitals',
-            desc: 'Lean, hand-written code on a dedicated, managed cloud server, tuned to pass Google Core Web Vitals on mobile.'
+            desc: 'Lean, hand-written code on a private cloud server I manage, tuned to pass Google Core Web Vitals on mobile.'
           },
           {
             title: 'Local SEO & Schema Markup',
@@ -264,7 +264,7 @@
           },
           {
             title: 'High-Converting Inquiry System',
-            desc: 'Lead capture forms with instant Telegram, SMS, and Email alert dispatch directly to your smartphone.'
+            desc: 'Lead capture forms that email you the moment someone gets in touch.'
           },
           {
             title: 'Mobile-First Custom Design',
@@ -315,11 +315,11 @@
       },
       custom: {
         id: 'custom',
-        name: 'Custom Enterprise Architecture',
+        name: 'Custom Build',
         totalPrice: 4999.99,
         depositPrice: 2499.99,
         monthlyPrice: 249.99,
-        scopeLabel: 'Full-Stack Web App & Dedicated Cloud Cluster',
+        scopeLabel: 'Full-Stack Web App & Managed Cloud Hosting',
         stripeUrl: 'https://buy.stripe.com/7sY4gy33w6cTafpfdmbZe02',
         stripeFullUrl: 'https://buy.stripe.com/7sYaEWeMe9p54V51mwbZe05',
         stripeCareUrl: 'https://buy.stripe.com/3cIfZgavY30H9bl1mwbZe08',
@@ -333,16 +333,16 @@
             desc: 'Direct integration with CRM (HubSpot, Jobber, QuickBooks, or custom) and automated dispatch notifications.'
           },
           {
-            title: 'Dedicated Cloud Server',
-            desc: 'Your own isolated cloud server with NVMe storage, a tuned Nginx caching layer, and automated encrypted off-site backups.'
+            title: 'Managed Cloud Server',
+            desc: 'Hosted on a fast NVMe cloud server that I run and monitor, with nightly encrypted backups.'
           },
           {
-            title: 'Real-Time Telemetry Dashboard',
-            desc: 'Custom metrics portal showing active leads, server health, visitor geographic clusters, and conversion analytics.'
+            title: 'Custom Business Dashboard',
+            desc: 'A dashboard built for your business, for example new leads, site health and where visitors come from.'
           },
           {
-            title: 'VIP SLA & 2-Hour Response Time',
-            desc: 'Direct priority phone and Telegram access to lead engineer for immediate updates and feature rollouts.'
+            title: 'Priority Support',
+            desc: 'You get my direct phone number, and Custom Build clients get first place in my queue.'
           },
           {
             title: 'Quarterly Speed & SEO Re-Engineering',
@@ -636,18 +636,19 @@
       selectTier(proposalData.tier);
 
       // Custom Stripe Checkout URL override (if passed in URL)
+      // Only Stripe Payment Links are accepted; anything else keeps the tier's default link.
       const paramDepositUrl = params.get('deposit_url') || params.get('stripe_url') || params.get('checkout');
-      if (paramDepositUrl) {
-        document.getElementById('stripeDepositBtn').href = decodeURIComponent(paramDepositUrl);
+      if (paramDepositUrl && paramDepositUrl.startsWith('https://buy.stripe.com/')) {
+        document.getElementById('stripeDepositBtn').href = paramDepositUrl;
       }
 
       // Check if client returned from successful Stripe deposit checkout
       if (params.get('deposit_paid') === '1') {
-        const signSection = document.querySelector('.section-sign') || document.querySelector('.closer-card');
+        const signSection = document.getElementById('accept');
         if (signSection) {
           const banner = document.createElement('div');
           banner.style.cssText = 'margin-bottom: 24px; padding: 20px; border-radius: 16px; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.4); color: #34d399; text-align: center;';
-          banner.innerHTML = '<div style="font-size: 22px; font-weight: 800; color: #10b981; margin-bottom: 6px;">🎉 50% Deposit Received via Stripe!</div><p style="color: #e2e8f0; font-size: 14px; margin: 0; line-height: 1.5;">Thank you! Your project agreement is officially active and queued for development. Our lead engineering team will reach out within 1 business day.</p>';
+          banner.innerHTML = '<div style="font-size: 22px; font-weight: 800; color: #10b981; margin-bottom: 6px;">Deposit received.</div><p style="color: #e2e8f0; font-size: 14px; margin: 0; line-height: 1.5;">Thank you. Your project is booked in, and I\'ll be in touch within one business day to plan the next steps.</p>';
           signSection.insertBefore(banner, signSection.firstChild);
         }
       }
